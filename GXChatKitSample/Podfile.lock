@@ -1,0 +1,20 @@
+PODS:
+  - GXCategories (1.0.4)
+  - GXRefresh (1.0.8)
+
+DEPENDENCIES:
+  - GXCategories
+  - GXRefresh
+
+SPEC REPOS:
+  trunk:
+    - GXCategories
+    - GXRefresh
+
+SPEC CHECKSUMS:
+  GXCategories: 58ebf5844b96352e5b844907cbbda08351197362
+  GXRefresh: 2a59792e1491e45e2e0238759bb05045d032f2c0
+
+PODFILE CHECKSUM: 1f4142af03162bdc7453ea415a574d567250caa6
+
+COCOAPODS: 1.11.3

@@ -1,0 +1,6 @@
+framework module Pods_GXChatUIKit {
+  umbrella header "Pods-GXChatUIKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
