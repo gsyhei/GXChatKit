@@ -11,3 +11,14 @@ pod 'GXCategories'
 pod 'GXRefresh'
 
 end
+
+target 'GXChatKitSample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  inhibit_all_warnings! #抑制所有的警告!
+  # Pods for GXChatUIKit
+
+pod 'GXCategories'
+pod 'GXRefresh'
+
+end

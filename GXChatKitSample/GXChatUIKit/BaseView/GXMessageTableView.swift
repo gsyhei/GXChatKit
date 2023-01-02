@@ -12,9 +12,7 @@ import GXRefresh
 public class GXMessageTableView: UITableView {
     
     public var headerHeight: CGFloat = 40.0
-    
-    public var headerMargin: CGFloat = 5.0
-    
+        
     private var isHeaderLoading: Bool = false
     
     public var backgroundImage: UIImage? {
@@ -34,37 +32,20 @@ public class GXMessageTableView: UITableView {
         }
     }
     
-    private lazy var indicatorView = {
-        let aiView = UIActivityIndicatorView(style: .white)
-        let size: CGFloat  = headerHeight - headerMargin * 2;
-        aiView.frame = CGRect(x: 0, y: 0, width: size, height: size)
-        aiView.color = .gray
-        return aiView
-    }()
-    
-    private lazy var headerView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: headerHeight))
-        view.backgroundColor = .clear
-        view.addSubview(self.indicatorView)
-        self.indicatorView.center = CGPoint(x: view.center.x, y: view.center.y)
-        
-        return view
-    }()
-    
     open override var contentSize: CGSize {
-        willSet {
+        didSet {
             guard self.dataSource != nil else {
                 return
             }
             guard contentSize != .zero else {
                 return
             }
-            guard newValue.height > contentSize.height else {
+            guard contentSize.height > oldValue.height else {
                 return
             }
             var offset = super.contentOffset
             if (self.isHeaderLoading) {
-                offset.y = newValue.height - contentSize.height - contentInset.top
+                offset.y = contentSize.height - oldValue.height + (self.gx_header?.gx_height ?? 0)
                 self.contentOffset = offset
                 self.isHeaderLoading = false
             }
@@ -99,10 +80,31 @@ public class GXMessageTableView: UITableView {
 
 public extension GXMessageTableView {
     
-    func addMessagesHeader() {
-        
-        
-        
+    func addMessagesHeader(callback: @escaping GXRefreshComponent.GXRefreshCallBack) {
+        let header = GXMessagesLoadHeader(completion: {
+            callback()
+        })
+        header.isTextHidden = true
+        header.gx_height = headerHeight;
+        header.beginRefreshingAction = {[weak self] in
+            self?.isHeaderLoading = true
+        }
+        self.gx_header = header;
+    }
+    
+    func endHeaderLoading(isReload: Bool = true) {
+        if isReload {
+            self.reloadData()
+        }
+        self.gx_header?.endRefreshing()
+    }
+    
+    func endHeaderLoadingNoMore(isReload: Bool = true) {
+        if isReload {
+            self.reloadData()
+        }
+        self.gx_header?.endRefreshing()
+        self.gx_header = nil;
     }
     
 }
