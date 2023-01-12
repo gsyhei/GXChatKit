@@ -8,7 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3F0C3FE9B864F211F30B6AC6 /* Pods_GXChatKitSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */; };
+		96184A6F2964223000AFC84B /* GXMessagesTableView+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96184A6E2964223000AFC84B /* GXMessagesTableView+Config.swift */; };
 		9639158D2962796F002974F7 /* Pods_GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */; };
+		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
+		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
+		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
+		965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */; };
 		96D30A912956F4F000AFBB90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A902956F4F000AFBB90 /* AppDelegate.swift */; };
 		96D30A932956F4F000AFBB90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A922956F4F000AFBB90 /* SceneDelegate.swift */; };
 		96D30A952956F4F000AFBB90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A942956F4F000AFBB90 /* ViewController.swift */; };
@@ -24,7 +29,7 @@
 		96D30AE32956F5EE00AFBB90 /* GXChatUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 96D30AD32956F5ED00AFBB90 /* GXChatUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; };
 		96D30AE72956F5EE00AFBB90 /* GXChatUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		96D30AF32956FC9600AFBB90 /* GXMessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AF22956FC9600AFBB90 /* GXMessageTableView.swift */; };
+		96D30AF32956FC9600AFBB90 /* GXMessagesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AF22956FC9600AFBB90 /* GXMessagesTableView.swift */; };
 		96D30AF629585C9800AFBB90 /* GXMessagesLoadHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AF529585C9800AFBB90 /* GXMessagesLoadHeader.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +90,11 @@
 		62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.release.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.debug.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatKitSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96184A6E2964223000AFC84B /* GXMessagesTableView+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GXMessagesTableView+Config.swift"; sourceTree = "<group>"; };
+		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
+		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
+		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
+		965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GXChat.swift"; sourceTree = "<group>"; };
 		96D30A8D2956F4F000AFBB90 /* GXChatKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GXChatKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30A902956F4F000AFBB90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96D30A922956F4F000AFBB90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +113,7 @@
 		96D30AD42956F5ED00AFBB90 /* GXChatUIKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GXChatUIKit.docc; sourceTree = "<group>"; };
 		96D30ADA2956F5ED00AFBB90 /* GXChatUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXChatUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatUIKitTests.swift; sourceTree = "<group>"; };
-		96D30AF22956FC9600AFBB90 /* GXMessageTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessageTableView.swift; sourceTree = "<group>"; };
+		96D30AF22956FC9600AFBB90 /* GXMessagesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTableView.swift; sourceTree = "<group>"; };
 		96D30AF529585C9800AFBB90 /* GXMessagesLoadHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesLoadHeader.swift; sourceTree = "<group>"; };
 		B9131207F5A8F7E5B5C652D9 /* Pods-GXChatKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.release.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.release.xcconfig"; sourceTree = "<group>"; };
 		ED6FFD8355B3816675448810 /* Pods-GXChatKitSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.debug.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,6 +165,7 @@
 		9639158A2962785B002974F7 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -166,11 +177,28 @@
 			path = ToolBar;
 			sourceTree = "<group>";
 		};
-		9639158C2962785B002974F7 /* Cell */ = {
+		965FA5AE296C3AA8001D7633 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		965FA5B12970431D001D7633 /* Factories */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Cell;
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		965FA5B22970439B001D7633 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */,
+				965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		96D30A842956F4F000AFBB90 = {
@@ -233,9 +261,11 @@
 		96D30AD22956F5ED00AFBB90 /* GXChatUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				965FA5B12970431D001D7633 /* Factories */,
+				965FA5B22970439B001D7633 /* Cells */,
+				965FA5AE296C3AA8001D7633 /* Resources */,
 				96D30AF12956FC1800AFBB90 /* BaseView */,
 				9639158A2962785B002974F7 /* Categories */,
-				9639158C2962785B002974F7 /* Cell */,
 				9639158B2962785B002974F7 /* ToolBar */,
 				96D30AD32956F5ED00AFBB90 /* GXChatUIKit.h */,
 				96D30AD42956F5ED00AFBB90 /* GXChatUIKit.docc */,
@@ -254,7 +284,8 @@
 		96D30AF12956FC1800AFBB90 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
-				96D30AF22956FC9600AFBB90 /* GXMessageTableView.swift */,
+				96D30AF22956FC9600AFBB90 /* GXMessagesTableView.swift */,
+				96184A6E2964223000AFC84B /* GXMessagesTableView+Config.swift */,
 				96D30AF529585C9800AFBB90 /* GXMessagesLoadHeader.swift */,
 			);
 			path = BaseView;
@@ -470,6 +501,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,8 +610,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96D30AF32956FC9600AFBB90 /* GXMessageTableView.swift in Sources */,
+				965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */,
+				96D30AF32956FC9600AFBB90 /* GXMessagesTableView.swift in Sources */,
+				96184A6F2964223000AFC84B /* GXMessagesTableView+Config.swift in Sources */,
 				96D30AD52956F5ED00AFBB90 /* GXChatUIKit.docc in Sources */,
+				965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */,
+				965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */,
 				96D30AF629585C9800AFBB90 /* GXMessagesLoadHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

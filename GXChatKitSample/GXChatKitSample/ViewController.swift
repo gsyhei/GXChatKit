@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     
     private var rowCount = 20
     
-    private lazy var tableView: GXMessageTableView = {
-        let tv = GXMessageTableView(frame: self.view.bounds, style: .plain)
+    private lazy var tableView: GXMessagesTableView = {
+        let tv = GXMessagesTableView(frame: self.view.bounds, style: .plain)
         tv.dataSource = self
         tv.delegate = self
         tv.backgroundColor = .white

@@ -1,5 +1,5 @@
 //
-//  GXMessageTableView.swift
+//  GXMessagesTableView.swift
 //  GXChatUIKit
 //
 //  Created by Gin on 2022/12/24.
@@ -9,13 +9,13 @@ import UIKit
 import GXCategories
 import GXRefresh
 
-public class GXMessageTableView: UITableView {
+open class GXMessagesTableView: UITableView {
     
-    public var headerHeight: CGFloat = 40.0
-        
     private var isHeaderLoading: Bool = false
-    
-    public var backgroundImage: UIImage? {
+
+    open var headerHeight: CGFloat = 40.0
+        
+    open var backgroundImage: UIImage? {
         didSet {
             guard let image = backgroundImage else { return }
             let imageView = UIImageView(frame: self.bounds)
@@ -78,7 +78,7 @@ public class GXMessageTableView: UITableView {
     }
 }
 
-public extension GXMessageTableView {
+public extension GXMessagesTableView {
     
     func addMessagesHeader(callback: @escaping GXRefreshComponent.GXRefreshCallBack) {
         let header = GXMessagesLoadHeader(completion: {
