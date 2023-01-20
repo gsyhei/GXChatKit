@@ -32,6 +32,9 @@ class ViewController: UIViewController {
                 self?.tableView.endHeaderLoading()
             }
         }
+        
+//        let data: GXMessagesData? = nil
+//        let item = GXMessageItem(data: data!)
     }
 
 }
@@ -43,12 +46,13 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cellID = "CellID"
+        let cellID = "CellID"
         var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
         }
         cell?.textLabel?.text = "asdkjaksldaskldjkl, asjdkhkajshdkjas hdkajsdhajksdhakjsdhaksjdh"
+        cell?.imageView?.image = UIImage.gx_bundleAssetImage(name: "clip")
         
         return cell!
     }

@@ -8,12 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		3F0C3FE9B864F211F30B6AC6 /* Pods_GXChatKitSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */; };
-		96184A6F2964223000AFC84B /* GXMessagesTableView+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96184A6E2964223000AFC84B /* GXMessagesTableView+Config.swift */; };
 		9639158D2962796F002974F7 /* Pods_GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */; };
 		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
 		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
 		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
 		965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */; };
+		969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957552973BBD4001DCC17 /* GXMessagesData.swift */; };
+		969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957572973C8CE001DCC17 /* GXChatConfiguration.swift */; };
+		9699575A2973E698001DCC17 /* GXMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957592973E698001DCC17 /* GXMessageItem.swift */; };
+		9699575C2974075F001DCC17 /* GXMessagesAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */; };
+		9699575E297407EF001DCC17 /* GXMessagesBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699575D297407EF001DCC17 /* GXMessagesBubble.swift */; };
+		96995760297506B2001DCC17 /* GXMessagesContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699575F297506B2001DCC17 /* GXMessagesContentData.swift */; };
+		9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699576129750CFF001DCC17 /* GXMessagesTextContent.swift */; };
+		9699576429751AFC001DCC17 /* GXMessagesPhotoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699576329751AFC001DCC17 /* GXMessagesPhotoContent.swift */; };
+		9699576629752525001DCC17 /* GXMessagesVideoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699576529752525001DCC17 /* GXMessagesVideoContent.swift */; };
+		969957682975756A001DCC17 /* GXMessagesAvatarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957672975756A001DCC17 /* GXMessagesAvatarFactory.swift */; };
+		9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 9699576B29757C39001DCC17 /* GXChatUIKit.docc */; };
+		9699576E29757CD1001DCC17 /* Bundle+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699576D29757CD1001DCC17 /* Bundle+GXChat.swift */; };
+		9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577129757F2D001DCC17 /* GXMessagesViewController.swift */; };
+		969957762975A9D6001DCC17 /* GXMessagesBubbleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */; };
+		9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577729767567001DCC17 /* UIColor+GXChat.swift */; };
 		96D30A912956F4F000AFBB90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A902956F4F000AFBB90 /* AppDelegate.swift */; };
 		96D30A932956F4F000AFBB90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A922956F4F000AFBB90 /* SceneDelegate.swift */; };
 		96D30A952956F4F000AFBB90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A942956F4F000AFBB90 /* ViewController.swift */; };
@@ -23,10 +37,8 @@
 		96D30AA82956F4F200AFBB90 /* GXChatKitSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AA72956F4F200AFBB90 /* GXChatKitSampleTests.swift */; };
 		96D30AB22956F4F200AFBB90 /* GXChatKitSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AB12956F4F200AFBB90 /* GXChatKitSampleUITests.swift */; };
 		96D30AB42956F4F200AFBB90 /* GXChatKitSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AB32956F4F200AFBB90 /* GXChatKitSampleUITestsLaunchTests.swift */; };
-		96D30AD52956F5ED00AFBB90 /* GXChatUIKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AD42956F5ED00AFBB90 /* GXChatUIKit.docc */; };
 		96D30ADB2956F5ED00AFBB90 /* GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; };
 		96D30AE22956F5EE00AFBB90 /* GXChatUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */; };
-		96D30AE32956F5EE00AFBB90 /* GXChatUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 96D30AD32956F5ED00AFBB90 /* GXChatUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; };
 		96D30AE72956F5EE00AFBB90 /* GXChatUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96D30AF32956FC9600AFBB90 /* GXMessagesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AF22956FC9600AFBB90 /* GXMessagesTableView.swift */; };
@@ -90,11 +102,26 @@
 		62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.release.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.debug.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatKitSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		96184A6E2964223000AFC84B /* GXMessagesTableView+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GXMessagesTableView+Config.swift"; sourceTree = "<group>"; };
 		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
 		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
 		965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GXChat.swift"; sourceTree = "<group>"; };
+		969957552973BBD4001DCC17 /* GXMessagesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesData.swift; sourceTree = "<group>"; };
+		969957572973C8CE001DCC17 /* GXChatConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatConfiguration.swift; sourceTree = "<group>"; };
+		969957592973E698001DCC17 /* GXMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessageItem.swift; sourceTree = "<group>"; };
+		9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAvatar.swift; sourceTree = "<group>"; };
+		9699575D297407EF001DCC17 /* GXMessagesBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesBubble.swift; sourceTree = "<group>"; };
+		9699575F297506B2001DCC17 /* GXMessagesContentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesContentData.swift; sourceTree = "<group>"; };
+		9699576129750CFF001DCC17 /* GXMessagesTextContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTextContent.swift; sourceTree = "<group>"; };
+		9699576329751AFC001DCC17 /* GXMessagesPhotoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesPhotoContent.swift; sourceTree = "<group>"; };
+		9699576529752525001DCC17 /* GXMessagesVideoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesVideoContent.swift; sourceTree = "<group>"; };
+		969957672975756A001DCC17 /* GXMessagesAvatarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAvatarFactory.swift; sourceTree = "<group>"; };
+		9699576B29757C39001DCC17 /* GXChatUIKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GXChatUIKit.docc; sourceTree = "<group>"; };
+		9699576D29757CD1001DCC17 /* Bundle+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+GXChat.swift"; sourceTree = "<group>"; };
+		9699577029757EE8001DCC17 /* GXChatUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXChatUIKit.h; sourceTree = "<group>"; };
+		9699577129757F2D001DCC17 /* GXMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesViewController.swift; sourceTree = "<group>"; };
+		969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesBubbleFactory.swift; sourceTree = "<group>"; };
+		9699577729767567001DCC17 /* UIColor+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GXChat.swift"; sourceTree = "<group>"; };
 		96D30A8D2956F4F000AFBB90 /* GXChatKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GXChatKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30A902956F4F000AFBB90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96D30A922956F4F000AFBB90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,8 +136,6 @@
 		96D30AB12956F4F200AFBB90 /* GXChatKitSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatKitSampleUITests.swift; sourceTree = "<group>"; };
 		96D30AB32956F4F200AFBB90 /* GXChatKitSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatKitSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GXChatUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		96D30AD32956F5ED00AFBB90 /* GXChatUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXChatUIKit.h; sourceTree = "<group>"; };
-		96D30AD42956F5ED00AFBB90 /* GXChatUIKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GXChatUIKit.docc; sourceTree = "<group>"; };
 		96D30ADA2956F5ED00AFBB90 /* GXChatUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXChatUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatUIKitTests.swift; sourceTree = "<group>"; };
 		96D30AF22956FC9600AFBB90 /* GXMessagesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTableView.swift; sourceTree = "<group>"; };
@@ -166,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */,
+				9699576D29757CD1001DCC17 /* Bundle+GXChat.swift */,
+				9699577729767567001DCC17 /* UIColor+GXChat.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -188,6 +215,8 @@
 		965FA5B12970431D001D7633 /* Factories */ = {
 			isa = PBXGroup;
 			children = (
+				969957672975756A001DCC17 /* GXMessagesAvatarFactory.swift */,
+				969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -199,6 +228,30 @@
 				965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		969957522973BB6C001DCC17 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				969957572973C8CE001DCC17 /* GXChatConfiguration.swift */,
+				969957552973BBD4001DCC17 /* GXMessagesData.swift */,
+				9699575F297506B2001DCC17 /* GXMessagesContentData.swift */,
+				9699576129750CFF001DCC17 /* GXMessagesTextContent.swift */,
+				9699576329751AFC001DCC17 /* GXMessagesPhotoContent.swift */,
+				9699576529752525001DCC17 /* GXMessagesVideoContent.swift */,
+				969957592973E698001DCC17 /* GXMessageItem.swift */,
+				9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */,
+				9699575D297407EF001DCC17 /* GXMessagesBubble.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9699576F29757ED9001DCC17 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9699577129757F2D001DCC17 /* GXMessagesViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		96D30A842956F4F000AFBB90 = {
@@ -261,14 +314,16 @@
 		96D30AD22956F5ED00AFBB90 /* GXChatUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				965FA5AE296C3AA8001D7633 /* Resources */,
+				969957522973BB6C001DCC17 /* Models */,
 				965FA5B12970431D001D7633 /* Factories */,
 				965FA5B22970439B001D7633 /* Cells */,
-				965FA5AE296C3AA8001D7633 /* Resources */,
 				96D30AF12956FC1800AFBB90 /* BaseView */,
 				9639158A2962785B002974F7 /* Categories */,
 				9639158B2962785B002974F7 /* ToolBar */,
-				96D30AD32956F5ED00AFBB90 /* GXChatUIKit.h */,
-				96D30AD42956F5ED00AFBB90 /* GXChatUIKit.docc */,
+				9699576F29757ED9001DCC17 /* ViewControllers */,
+				9699577029757EE8001DCC17 /* GXChatUIKit.h */,
+				9699576B29757C39001DCC17 /* GXChatUIKit.docc */,
 			);
 			path = GXChatUIKit;
 			sourceTree = "<group>";
@@ -285,7 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				96D30AF22956FC9600AFBB90 /* GXMessagesTableView.swift */,
-				96184A6E2964223000AFC84B /* GXMessagesTableView+Config.swift */,
 				96D30AF529585C9800AFBB90 /* GXMessagesLoadHeader.swift */,
 			);
 			path = BaseView;
@@ -318,7 +372,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96D30AE32956F5EE00AFBB90 /* GXChatUIKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +496,7 @@
 					};
 					96D30AD02956F5ED00AFBB90 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 					};
 					96D30AD92956F5ED00AFBB90 = {
 						CreatedOnToolsVersion = 14.2;
@@ -610,12 +664,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9699575E297407EF001DCC17 /* GXMessagesBubble.swift in Sources */,
+				9699576629752525001DCC17 /* GXMessagesVideoContent.swift in Sources */,
 				965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */,
+				969957762975A9D6001DCC17 /* GXMessagesBubbleFactory.swift in Sources */,
+				9699575C2974075F001DCC17 /* GXMessagesAvatar.swift in Sources */,
 				96D30AF32956FC9600AFBB90 /* GXMessagesTableView.swift in Sources */,
-				96184A6F2964223000AFC84B /* GXMessagesTableView+Config.swift in Sources */,
-				96D30AD52956F5ED00AFBB90 /* GXChatUIKit.docc in Sources */,
+				9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */,
+				969957682975756A001DCC17 /* GXMessagesAvatarFactory.swift in Sources */,
+				9699575A2973E698001DCC17 /* GXMessageItem.swift in Sources */,
+				9699576429751AFC001DCC17 /* GXMessagesPhotoContent.swift in Sources */,
+				9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */,
+				969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */,
+				9699576E29757CD1001DCC17 /* Bundle+GXChat.swift in Sources */,
+				969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */,
 				965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */,
 				965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */,
+				9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */,
+				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
+				96995760297506B2001DCC17 /* GXMessagesContentData.swift in Sources */,
 				96D30AF629585C9800AFBB90 /* GXMessagesLoadHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -934,6 +1001,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -956,6 +1024,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -967,6 +1036,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
