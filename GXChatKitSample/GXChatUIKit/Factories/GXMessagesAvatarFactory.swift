@@ -18,8 +18,8 @@ public class GXMessagesAvatarFactory {
         let messagesAvatar = GXMessagesAvatar()
         messagesAvatar.avatarPlaceholderImage = GXMessagesAvatarFactory.circularAvatarPlaceholderImage(text: text)
         if let avatarImage = image {
-            messagesAvatar.avatarPlaceholderImage = GXMessagesAvatarFactory.circularAvatarImage(image: avatarImage)
-            messagesAvatar.avatarPlaceholderImage = GXMessagesAvatarFactory.circularAvatarHighlightedImage(image: avatarImage)
+            messagesAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image: avatarImage)
+            messagesAvatar.avatarHighlightedImage = GXMessagesAvatarFactory.circularAvatarHighlightedImage(image: avatarImage)
         }
         return messagesAvatar
     }

@@ -8,7 +8,11 @@
 import UIKit
 
 public class GXMessagesBubbleFactory {
-    
+    /// 得到GXMessagesBubble消息气泡对象
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - status: 消息状态
+    /// - Returns: GXMessagesBubble消息气泡对象
     public class func messagesBubble(status: GXChatConfiguration.MessageStatus) -> GXMessagesBubble {
         return self.gx_messagesBubbleImage(status: status)
     }
@@ -16,11 +20,6 @@ public class GXMessagesBubbleFactory {
 
 public extension GXMessagesBubbleFactory {
     
-    /// 得到GXMessagesBubble消息气泡对象
-    /// - Parameters:
-    ///   - color: 颜色
-    ///   - status: 消息状态
-    /// - Returns: GXMessagesBubble消息气泡对象
     class func gx_messagesBubbleImage(status: GXChatConfiguration.MessageStatus) -> GXMessagesBubble {
         let messagesBubble = GXMessagesBubble()
         if status == .sending {
