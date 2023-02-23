@@ -34,6 +34,10 @@ public extension UITableView {
         if footerZero {
             self.tableFooterView = UIView()
         }
+        if #available(iOS 15.0, *) {
+            self.sectionHeaderTopPadding = 0
+            self.fillerRowHeight = 0
+        }
     }
     
     /// 批量更新

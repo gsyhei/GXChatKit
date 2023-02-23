@@ -21,3 +21,4 @@ public class GXMessagesTextContent: GXMessagesContentData {
         self.text = text
     }
 }
+   
