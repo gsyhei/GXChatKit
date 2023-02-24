@@ -11,6 +11,8 @@ import GXRefresh
 
 @MainActor open class GXMessagesLoadTableView: UITableView {
     
+    public var loadingCompletion: (() -> Void)? = nil
+    
     private var isHeaderLoading: Bool = false
 
     open var headerHeight: CGFloat = 40.0
@@ -48,6 +50,7 @@ import GXRefresh
                 offset.y = contentSize.height - oldValue.height - self.adjustedContentInset.top
                 self.contentOffset = offset
                 self.isHeaderLoading = false
+                self.loadingCompletion?()
             }
             else {
                 self.setContentOffset(offset, animated: true)

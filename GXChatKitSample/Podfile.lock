@@ -1,6 +1,6 @@
 PODS:
-  - GXCategories (1.0.4)
-  - GXRefresh (1.1.0)
+  - GXCategories (1.0.5)
+  - GXRefresh (1.1.1)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
@@ -19,8 +19,8 @@ SPEC REPOS:
     - Reusable
 
 SPEC CHECKSUMS:
-  GXCategories: 58ebf5844b96352e5b844907cbbda08351197362
-  GXRefresh: 302009786fdff0569894c5955b46c8de9ba5e05b
+  GXCategories: 911f8094403c17a8dd2c4f6a1fb87cfc45d39a96
+  GXRefresh: 169350dea83696465d8959249aaecd084179ca35
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
 
 PODFILE CHECKSUM: ec2fa20b8310bd69ea5d8ef53228e2462895e970

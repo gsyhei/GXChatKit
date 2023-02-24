@@ -16,7 +16,14 @@ public extension UITableView {
     ///   - mode: 键盘隐藏模式
     ///   - separatorLeft: 分割线是否居左
     ///   - footerZero: 页脚设置（去掉多余分割线）
-    func configuration(estimated: Bool = false, mode: UIScrollView.KeyboardDismissMode = .onDrag, separatorLeft: Bool = true, footerZero: Bool = true) {
+    ///   - sectionHeaderTopPadding: iOS15 section header上间距
+    ///   - fillerRowHeight: iOS15 底部默认增加的cell高度
+    func configuration(estimated: Bool = false,
+                       mode: UIScrollView.KeyboardDismissMode = .onDrag,
+                       separatorLeft: Bool = true,
+                       footerZero: Bool = true,
+                       sectionHeaderTopPadding: CGFloat = 0,
+                       fillerRowHeight: CGFloat = 0) {
         if !estimated {
             self.estimatedRowHeight = 0
             self.estimatedSectionHeaderHeight = 0
@@ -35,8 +42,8 @@ public extension UITableView {
             self.tableFooterView = UIView()
         }
         if #available(iOS 15.0, *) {
-            self.sectionHeaderTopPadding = 0
-            self.fillerRowHeight = 0
+            self.sectionHeaderTopPadding = sectionHeaderTopPadding
+            self.fillerRowHeight = fillerRowHeight
         }
     }
     
@@ -107,11 +114,35 @@ public extension UITableView {
         self.reloadSections(sections, with: animation)
     }
     
-    func clearSelectedRows(animated: Bool) {
+    func deselectSection(section: Int, animated: Bool) {
+        if let indexs = self.indexPathsForSelectedRows {
+            for indexPath in indexs {
+                guard section == indexPath.section else { continue }
+                self.deselectRow(at: indexPath, animated: animated)
+            }
+        }
+    }
+    
+    func deselectAll(animated: Bool) {
         if let indexs = self.indexPathsForSelectedRows {
             for indexPath in indexs {
                 self.deselectRow(at: indexPath, animated: animated)
             }
+        }
+    }
+    
+    func selectSection(section: Int, animated: Bool) {
+        let rows = self .numberOfRows(inSection: section)
+        for row in 0..<rows {
+            let indexPath = IndexPath(row: row, section: section)
+            self.selectRow(at: indexPath, animated: animated, scrollPosition: .none)
+        }
+    }
+    
+    func selectAll(animated: Bool) {
+        let sections = self.numberOfSections
+        for section in 0..<sections {
+            self.selectSection(section: section, animated: animated)
         }
     }
 

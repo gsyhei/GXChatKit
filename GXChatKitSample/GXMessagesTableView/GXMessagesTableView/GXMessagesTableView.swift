@@ -87,6 +87,11 @@ import GXRefresh
         self.centerTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.centerTableView.dataSource = self
         self.centerTableView.delegate = self
+        self.centerTableView.loadingCompletion = {[weak self] in
+            DispatchQueue.main.async {
+                self?.endScroll()
+            }
+        }
         self.addSubview(self.centerTableView)
         if leftWidth > 0 {
             let rect = CGRect(x: frame.origin.x, y: centerRect.origin.y, width: leftWidth, height: frame.height)
@@ -227,7 +232,8 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == self.centerTableView {
-            return self.dataSource?.gx_tableView(inCenter: tableView, viewForHeaderInSection: section)
+            let header = self.dataSource?.gx_tableView(inCenter: tableView, viewForHeaderInSection: section)
+            return header
         }
         
         guard marginPosition == .top else { return nil }
@@ -274,6 +280,53 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
         else if scrollView == self.rightTableView {
             self.leftTableView?.contentOffset = scrollView.contentOffset
             self.centerTableView.contentOffset = scrollView.contentOffset
+        }
+    }
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.beginScroll()
+    }
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        self.endScroll()
+    }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.endScroll()
+        }
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.endScroll()
+    }
+      
+}
+
+private extension GXMessagesTableView {
+    func beginScroll() {
+        if let fristIndexPath = self.centerTableView.indexPathsForVisibleRows?.first {
+            let header = self.centerTableView.headerView(forSection: fristIndexPath.section)
+            self.scrollHeaderAnimate(header: header, hidden: false)
+        }
+    }
+    func endScroll() {
+        if let fristIndexPath = self.centerTableView.indexPathsForVisibleRows?.first {
+            var cellRect = self.centerTableView.rectForRow(at: fristIndexPath)
+            cellRect = CGRectOffset(cellRect, -self.centerTableView.contentOffset.x, -self.centerTableView.contentOffset.y)
+            let headerHeight = self.delegate?.gx_tableView(inCenter: self.centerTableView, heightForHeaderInSection: fristIndexPath.section) ?? 0
+            if fristIndexPath.row > 0 || cellRect.origin.y - headerHeight/2 < 0 {
+                let header = self.centerTableView.headerView(forSection: fristIndexPath.section)
+                self.scrollHeaderAnimate(header: header, hidden: true)
+            }
+        }
+    }
+    func scrollHeaderAnimate(header: UIView?, hidden: Bool) {
+        if hidden {
+            header?.isHidden = true
+        }
+        else {
+            header?.isHidden = false
         }
     }
 }

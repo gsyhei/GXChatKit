@@ -31,16 +31,16 @@ public class GXMessagesLoadHeader: GXRefreshBaseHeader {
         return view
     }()
     
-    public override var customIndicator: UIView {
-        guard self.offsetWidth > 0 else {
-            return UIView()
-        }
+    public override var customIndicator: UIView? {
+        guard self.offsetWidth > 0 else { return nil }
+        
         return self.headerView
     }
     
     public required init(completion: @escaping GXRefreshCallBack, begin: GXRefreshCallBack? = nil, end: GXRefreshCallBack? = nil, offsetWidth: CGFloat) {
         self.offsetWidth = offsetWidth
         super.init(completion: completion, begin: begin, end: end)
+        self.isPlayImpact = false
     }
     
     required init?(coder: NSCoder) {
