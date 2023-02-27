@@ -11,7 +11,7 @@ import GXRefresh
 public class GXMessagesLoadHeader: GXRefreshBaseHeader {
     
     public var headerMargin: CGFloat = 5.0
-    public var offsetWidth: CGFloat = 0.0
+    public var offsetWidth: CGFloat?
     
     private lazy var indicatorView = {
         let aiView = UIActivityIndicatorView(style: .white)
@@ -22,22 +22,23 @@ public class GXMessagesLoadHeader: GXRefreshBaseHeader {
     }()
     
     private lazy var headerView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.gx_height))
+        let view = UIView()
         view.backgroundColor = .clear
         view.addSubview(self.indicatorView)
-        self.indicatorView.center = CGPoint(x: view.center.x - self.offsetWidth * 1.5, y: view.center.y)
         self.indicatorView.startAnimating()
         
         return view
     }()
     
     public override var customIndicator: UIView? {
-        guard self.offsetWidth > 0 else { return nil }
-        
+        guard let offsetW = self.offsetWidth else { return nil }
+        self.headerView.frame = self.bounds
+        self.indicatorView.center = CGPoint(x: self.headerView.center.x, y: self.headerView.center.y-offsetW)
+
         return self.headerView
     }
     
-    public required init(completion: @escaping GXRefreshCallBack, begin: GXRefreshCallBack? = nil, end: GXRefreshCallBack? = nil, offsetWidth: CGFloat) {
+    public required init(completion: @escaping GXRefreshCallBack, begin: GXRefreshCallBack? = nil, end: GXRefreshCallBack? = nil, offsetWidth: CGFloat? = nil) {
         self.offsetWidth = offsetWidth
         super.init(completion: completion, begin: begin, end: end)
         self.isPlayImpact = false

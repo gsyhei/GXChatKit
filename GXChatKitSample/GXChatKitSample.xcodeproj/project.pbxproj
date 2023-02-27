@@ -22,6 +22,7 @@
 		966C716629A3FEF000E7F91E /* GXMessagesLoadTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C716429A3FEF000E7F91E /* GXMessagesLoadTableView.swift */; };
 		966C716729A3FEF000E7F91E /* GXMessagesLoadHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C716529A3FEF000E7F91E /* GXMessagesLoadHeader.swift */; };
 		966C716929A3FFFA00E7F91E /* GXMessagesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C716829A3FFFA00E7F91E /* GXMessagesTableView.swift */; };
+		9682FAC229AC186E001D50D7 /* GXMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682FAC129AC186E001D50D7 /* GXMessagesOperation.swift */; };
 		969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957552973BBD4001DCC17 /* GXMessagesData.swift */; };
 		969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957572973C8CE001DCC17 /* GXChatConfiguration.swift */; };
 		9699575A2973E698001DCC17 /* GXMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957592973E698001DCC17 /* GXMessageItem.swift */; };
@@ -149,6 +150,7 @@
 		966C716429A3FEF000E7F91E /* GXMessagesLoadTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesLoadTableView.swift; sourceTree = "<group>"; };
 		966C716529A3FEF000E7F91E /* GXMessagesLoadHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesLoadHeader.swift; sourceTree = "<group>"; };
 		966C716829A3FFFA00E7F91E /* GXMessagesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTableView.swift; sourceTree = "<group>"; };
+		9682FAC129AC186E001D50D7 /* GXMessagesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesOperation.swift; sourceTree = "<group>"; };
 		969957552973BBD4001DCC17 /* GXMessagesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesData.swift; sourceTree = "<group>"; };
 		969957572973C8CE001DCC17 /* GXChatConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatConfiguration.swift; sourceTree = "<group>"; };
 		969957592973E698001DCC17 /* GXMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessageItem.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		966C715F29A3FEC300E7F91E /* GXMessagesTableView */ = {
 			isa = PBXGroup;
 			children = (
+				9682FAC129AC186E001D50D7 /* GXMessagesOperation.swift */,
 				966C716529A3FEF000E7F91E /* GXMessagesLoadHeader.swift */,
 				966C716429A3FEF000E7F91E /* GXMessagesLoadTableView.swift */,
 				966C716829A3FFFA00E7F91E /* GXMessagesTableView.swift */,
@@ -627,6 +630,7 @@
 				TargetAttributes = {
 					966C714129A3FDCF00E7F91E = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 					};
 					966C714A29A3FDCF00E7F91E = {
 						CreatedOnToolsVersion = 14.2;
@@ -824,6 +828,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9682FAC229AC186E001D50D7 /* GXMessagesOperation.swift in Sources */,
 				966C716629A3FEF000E7F91E /* GXMessagesLoadTableView.swift in Sources */,
 				966C714629A3FDCF00E7F91E /* GXMessagesTableView.docc in Sources */,
 				966C716929A3FFFA00E7F91E /* GXMessagesTableView.swift in Sources */,
@@ -970,6 +975,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0C4DFB93AB4668590E470782 /* Pods-GXMessagesTableView.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -991,6 +997,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1002,6 +1009,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FAEEC3E597AFF18CABE4A46 /* Pods-GXMessagesTableView.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

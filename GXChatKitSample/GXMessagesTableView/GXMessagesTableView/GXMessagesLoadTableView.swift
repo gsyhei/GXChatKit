@@ -79,7 +79,7 @@ import GXRefresh
 
 public extension GXMessagesLoadTableView {
     
-    func addMessagesHeader(callback: @escaping GXRefreshComponent.GXRefreshCallBack, offsetWidth: Double = 0) {
+    func addMessagesHeader(callback: @escaping GXRefreshComponent.GXRefreshCallBack, offsetWidth: CGFloat? = nil) {
         let header = GXMessagesLoadHeader(completion: {
             callback()
         }, offsetWidth: offsetWidth)

@@ -8,22 +8,26 @@
 import UIKit
 import GXMessagesTableView
 
-class GXTestAvatarsData: NSObject {
-    var direction: GXMessagesTableView.MarginDirection = .none
+class GXTestAvatarsData: GXMessagesMarginSection {
     var height: CGFloat = 0.0
+    var direction: GXMessagesTableView.MarginDirection = .none
+    var list: [any GXMessagesCenterOperation] = []
     var text = "头"
 }
 
-class GXTestGroupsMessageData: NSObject {
-    var headerHeight: CGFloat = 30.0
-    var allHeight: CGFloat = 0.0
+class GXTestGroupsMessageData: GXMessagesCenterSection {
+    var list: [any GXMessagesCenterOperation] = []
     var headerText = "header text"
-    var messages: [GXTestMessageData] = []
 }
 
-class GXTestMessageData: NSObject {
+class GXTestMessageData: NSObject, GXMessagesCenterOperation {
+    var identifier: String = ""
     var height: CGFloat = 60.0
     var text = "测试文本，阿萨德交换空间啊还是打卡机啊三打哈"
+    
+    static func == (lhs: GXTestMessageData, rhs: GXTestMessageData) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
 }
 
 class ViewController: UIViewController {
@@ -40,11 +44,11 @@ class ViewController: UIViewController {
 //                         contentHeight: Double = 0.0)
     
     private lazy var tableView: GXMessagesTableView = {
-        let rect = self.view.frame//CGRect(x: 0, y: 100, width: self.view.width, height: self.view.height - 100)
-        let tv = GXMessagesTableView(frame: rect, marginPosition: .top, marginItemHeight: 50.0, leftWidth: 50.0, rightWidth: 0.0)
+        let rect = CGRect(x: 0, y: 64, width: self.view.width, height: self.view.height - 64)
+        let tv = GXMessagesTableView(frame: rect, leftWidth: 50.0, rightWidth: 50.0)
+        tv.backgroundColor = .white
         tv.dataSource = self
         tv.delegate = self
-        tv.backgroundColor = .white
         
         return tv
     }()
@@ -55,6 +59,9 @@ class ViewController: UIViewController {
         self.title = "GXMessagesTableView"
         
         self.view.addSubview(self.tableView)
+        self.tableView.marginPosition = .bottom
+        self.tableView.marginItemHeight = 50.0
+        self.tableView.centerHeaderHeight = 30.0
         self.loadData()
         self.tableView.reloadData()
         
@@ -69,64 +76,63 @@ class ViewController: UIViewController {
     
     func loadData() {
         let groupCount = self.messageGroups.count
-        for index in (0..<5) {
+        for groupIndex in (0..<5) {
             let group = GXTestGroupsMessageData()
-            group.headerText +=  ": \(index + groupCount)"
+            group.headerText +=  ": \(groupIndex + groupCount)"
+            var avatars: [GXTestAvatarsData] = []
             
             var avatar = GXTestAvatarsData()
-            avatar.height = group.headerHeight
+            avatar.height = 30.0
             avatar.direction = .none
-            self.messageAvatars.append(avatar)
+            avatars.append(avatar)
             
             avatar = GXTestAvatarsData()
             avatar.direction = .left
             for _ in 0..<2 {
                 let message = GXTestMessageData()
-                group.allHeight += message.height
+                message.identifier = "\(groupIndex + groupCount)_\(group.list.count)"
                 avatar.height += message.height
-                group.messages.append(message)
+                avatar.list.append(message)
+                group.list.append(message)
             }
-            self.messageAvatars.append(avatar)
+            avatars.append(avatar)
 
             avatar = GXTestAvatarsData()
-            avatar.direction = .left
+            avatar.direction = .right
             for _ in 0..<2 {
                 let message = GXTestMessageData()
-                group.allHeight += message.height
+                message.identifier = "\(groupIndex + groupCount)_\(group.list.count)"
+
                 avatar.height += message.height
-                group.messages.append(message)
+                avatar.list.append(message)
+                group.list.append(message)
             }
-            self.messageAvatars.append(avatar)
+            avatars.append(avatar)
+
             
+            self.messageAvatars.insert(contentsOf: avatars, at: 0)
             self.messageGroups.insert(group, at: 0)
         }
+        
+        self.tableView.centerDataSections = self.messageGroups
+        self.tableView.marginDataSections = self.messageAvatars
     }
 
 }
 
 extension  ViewController: GXMessagesTableViewDataSource, GXMessagesTableViewDelegate {
     
-    /// 两边tableView的sections
-    func gx_numberOfSections(inMargin tableView: UITableView) -> Int {
-        return self.messageAvatars.count
-    }
-    /// 中间tableView的sections
-    func gx_numberOfSections(inCenter tableView: UITableView) -> Int {
-        return self.messageGroups.count
-    }
-    /// 中间tableView的sections
-    func gx_tableView(inCenter tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messageGroups[section].messages.count
-    }
     /// 中间tableView的header
-    func gx_tableView(inCenter tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func gx_tableView(inCenter tableView: UITableView, viewForHeaderInSection section: Int, data: GXMessagesCenterSection) -> UIView? {
         let view = UITableViewHeaderFooterView(reuseIdentifier: "H")
         view.textLabel?.text = self.messageGroups[section].headerText
+        view.backgroundView = UIView()
+        view.backgroundView?.backgroundColor = .clear
         
         return view
     }
     /// 中间tableView的cell
-    func gx_tableView(inCenter tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func gx_tableView(inCenter tableView: UITableView, cellForRowAt indexPath: IndexPath, data: any GXMessagesCenterOperation) -> UITableViewCell {
         let cellID = "CellID"
         var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         if cell == nil {
@@ -136,12 +142,8 @@ extension  ViewController: GXMessagesTableViewDataSource, GXMessagesTableViewDel
 
         return cell!
     }
-    /// 两边tableView内容具体显示在哪边
-    func gx_tableView(inMargin tableView: UITableView, directionInSection section: Int) -> GXMessagesTableView.MarginDirection {
-        return self.messageAvatars[section].direction
-    }
     /// 两边tableView的具体内容视图
-    func gx_tableView(inMargin tableView: UITableView, viewForContentInSection section: Int) -> UIView? {
+    func gx_tableView(inMargin tableView: UITableView, viewForHeaderFooterInSection section: Int, data: GXMessagesMarginSection) -> UIView? {
         let view = UITableViewHeaderFooterView(reuseIdentifier: "H")
         view.textLabel?.text = self.messageAvatars[section].text
         view.backgroundView = UIView()
@@ -151,19 +153,6 @@ extension  ViewController: GXMessagesTableViewDataSource, GXMessagesTableViewDel
     }
     
     // MARK: GXMessagesTableViewDelegate
-    
-    /// 两边tableView的总体高度
-    func gx_tableView(inMargin tableView: UITableView, heightForAllInSection section: Int) -> CGFloat {
-        return self.messageAvatars[section].height
-    }
-    /// 中间tableView的header高度
-    func gx_tableView(inCenter tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.messageGroups[section].headerHeight
-    }
-    /// 中间tableView的cell高度
-    func gx_tableView(inCenter tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.messageGroups[indexPath.section].messages[indexPath.row].height
-    }
-    
+
 }
 
