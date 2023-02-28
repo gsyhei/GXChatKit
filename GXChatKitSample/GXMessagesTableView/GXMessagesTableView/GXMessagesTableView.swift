@@ -177,7 +177,9 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
             }
         }
         else {
-            return self.centerDataSections[indexPath.section].list[indexPath.row].height
+            let centerData = self.centerDataSections[indexPath.section].list[indexPath.row]
+            centerData.centerIndexPath = indexPath
+            return centerData.height
         }
     }
     
@@ -207,11 +209,17 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
         let direction = self.marginDataSections[section].direction
         if tableView == self.leftTableView {
             if direction == .left {
+                for item in self.marginDataSections[section].list {
+                    item.marginSection = section
+                }
                 return self.marginItemHeight
             }
         }
         else if tableView == self.rightTableView {
             if direction == .right {
+                for item in self.marginDataSections[section].list {
+                    item.marginSection = section
+                }
                 return self.marginItemHeight
             }
         }
@@ -323,6 +331,43 @@ private extension GXMessagesTableView {
             header?.isHidden = false
         }
     }
+    
+}
+
+public extension GXMessagesTableView {
+    
+    func register<T: UITableViewCell>(cellType: T.Type)
+      where T: Reusable & NibLoadable {
+          self.centerTableView.register(cellType: cellType)
+    }
+
+    func register<T: UITableViewCell>(cellType: T.Type)
+      where T: Reusable {
+          self.centerTableView.register(cellType: cellType)
+    }
+    
+    func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type, isCenter: Bool)
+      where T: Reusable & NibLoadable {
+          if isCenter {
+              self.centerTableView.register(headerFooterViewType: headerFooterViewType)
+          }
+          else {
+              self.leftTableView?.register(headerFooterViewType: headerFooterViewType)
+              self.rightTableView?.register(headerFooterViewType: headerFooterViewType)
+          }
+    }
+
+    func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type, isCenter: Bool)
+      where T: Reusable {
+          if isCenter {
+              self.centerTableView.register(headerFooterViewType: headerFooterViewType)
+          }
+          else {
+              self.leftTableView?.register(headerFooterViewType: headerFooterViewType)
+              self.rightTableView?.register(headerFooterViewType: headerFooterViewType)
+          }
+    }
+    
     func isCenterCorrelationMargin(at indexPath: IndexPath) -> Bool {
         let cellData = self.centerDataSections[indexPath.section].list[indexPath.row]
         var marginVisibleSections: [any GXMessagesCenterOperation]? = nil
@@ -387,113 +432,95 @@ private extension GXMessagesTableView {
         return false
     }
     
-}
-
-public extension GXMessagesTableView {
-    
-    func register<T: UITableViewCell>(cellType: T.Type)
-      where T: Reusable & NibLoadable {
-          self.centerTableView.register(cellType: cellType)
-    }
-
-    func register<T: UITableViewCell>(cellType: T.Type)
-      where T: Reusable {
-          self.centerTableView.register(cellType: cellType)
-    }
-    
-    func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type, isCenter: Bool)
-      where T: Reusable & NibLoadable {
-          if isCenter {
-              self.centerTableView.register(headerFooterViewType: headerFooterViewType)
-          }
-          else {
-              self.leftTableView?.register(headerFooterViewType: headerFooterViewType)
-              self.rightTableView?.register(headerFooterViewType: headerFooterViewType)
-          }
-    }
-
-    func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type, isCenter: Bool)
-      where T: Reusable {
-          if isCenter {
-              self.centerTableView.register(headerFooterViewType: headerFooterViewType)
-          }
-          else {
-              self.leftTableView?.register(headerFooterViewType: headerFooterViewType)
-              self.rightTableView?.register(headerFooterViewType: headerFooterViewType)
-          }
-    }
-    
-    func deleteRows(at indexPaths: [IndexPath], deleteMarginSections: IndexSet, updateMarginSections: IndexSet) {
-        self.centerTableView.updateWithBlock({ tableView in
-            tableView?.deleteRows(at: indexPaths, with: .middle)
-        })
-        self.leftTableView?.updateWithBlock({ tableView in
-            if deleteMarginSections.count > 0 {
-                tableView?.deleteSections(deleteMarginSections, with: .middle)
-            }
-            if updateMarginSections.count > 0 {
-                tableView?.reloadSections(updateMarginSections, with: .middle)
-            }
-        })
-        self.rightTableView?.updateWithBlock({ tableView in
-            if deleteMarginSections.count > 0 {
-                tableView?.deleteSections(deleteMarginSections, with: .middle)
-            }
-            if updateMarginSections.count > 0 {
-                tableView?.reloadSections(updateMarginSections, with: .middle)
-            }
-        })
-    }
-    
-    func deleteSections(sections: IndexSet, deleteMarginSections: IndexSet, updateMarginSections: IndexSet) {
-        self.centerTableView.updateWithBlock({ tableView in
-            tableView?.deleteSections(sections, with: .middle)
-        })
-        self.leftTableView?.updateWithBlock({ tableView in
-            if deleteMarginSections.count > 0 {
-                tableView?.deleteSections(deleteMarginSections, with: .middle)
-            }
-            if updateMarginSections.count > 0 {
-                tableView?.reloadSections(updateMarginSections, with: .middle)
-            }
-        })
-        self.rightTableView?.updateWithBlock({ tableView in
-            if deleteMarginSections.count > 0 {
-                tableView?.deleteSections(deleteMarginSections, with: .middle)
-            }
-            if updateMarginSections.count > 0 {
-                tableView?.reloadSections(updateMarginSections, with: .middle)
-            }
-        })
-    }
-    
-    func deleteSectionsAndRows(indexPaths: [IndexPath], sections: IndexSet, deleteMarginSections: IndexSet, updateMarginSections: IndexSet) {
-        self.centerTableView.updateWithBlock({ tableView in
-            tableView?.deleteRows(at: indexPaths, with: .middle)
-            tableView?.deleteSections(sections, with: .middle)
-        })
-        self.leftTableView?.updateWithBlock({ tableView in
-            if deleteMarginSections.count > 0 {
-                tableView?.deleteSections(deleteMarginSections, with: .middle)
-            }
-            if updateMarginSections.count > 0 {
-                tableView?.reloadSections(updateMarginSections, with: .middle)
-            }
-        })
-        self.rightTableView?.updateWithBlock({ tableView in
-            if deleteMarginSections.count > 0 {
-                tableView?.deleteSections(deleteMarginSections, with: .middle)
-            }
-            if updateMarginSections.count > 0 {
-                tableView?.reloadSections(updateMarginSections, with: .middle)
-            }
-        })
-    }
-    
     func reloadData() {
         self.leftTableView?.reloadData()
         self.rightTableView?.reloadData()
         self.centerTableView.reloadData()
+    }
+    
+    func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
+        // update data source
+        var deleteDatas: [any GXMessagesCenterOperation] = []
+        for indexPath in indexPaths {
+            let centerData = self.centerDataSections[indexPath.section].list[indexPath.row]
+            deleteDatas.append(centerData)
+        }
+        var deleteIndexPaths: [IndexPath] = indexPaths
+        var deleteSections: IndexSet = []
+        var deleteMarginSections: IndexSet = []
+        var updateMarginSections: IndexSet = []
+        
+        for data in deleteDatas {
+            var centerDataSection = self.centerDataSections[data.centerIndexPath.section]
+            centerDataSection.list.removeAll(where: {$0 == data})
+            if centerDataSection.list.count == 0 {
+                deleteSections.update(with: data.centerIndexPath.section)
+                deleteIndexPaths.removeAll(where: {$0.section == data.centerIndexPath.section})
+            }
+            var marginDataSection = self.marginDataSections[data.marginSection]
+            if let index = marginDataSection.list.firstIndex(where: {$0 == data}) {
+                marginDataSection.list.remove(at: index)
+                if marginDataSection.list.count == 0 {
+                    deleteMarginSections.update(with: data.marginSection)
+                    updateMarginSections.remove(data.marginSection)
+                    if data.marginSection > 0 && centerDataSection.list.count == 0 {
+                        var lastMarginDataIndex = data.marginSection
+                        while lastMarginDataIndex > 0 {
+                            lastMarginDataIndex = lastMarginDataIndex - 1
+                            let lastMarginDataSection = self.marginDataSections[lastMarginDataIndex]
+                            if lastMarginDataSection.direction == .none {
+                                deleteMarginSections.update(with: lastMarginDataIndex)
+                                updateMarginSections.remove(lastMarginDataIndex)
+                                break
+                            }
+                        }
+                    }
+                }
+                else {
+                    marginDataSection.height -= data.height
+                    updateMarginSections.update(with: data.marginSection)
+                }
+            }
+        }
+        let sortedDeleteSections = deleteSections.reversed()
+        for section in sortedDeleteSections {
+            self.centerDataSections.remove(at: section)
+        }
+        let sortedDeleteMarginSections = deleteMarginSections.reversed()
+        for section in sortedDeleteMarginSections {
+            self.marginDataSections.remove(at: section)
+        }
+
+        // update tableView ui
+        self.centerTableView.updateWithBlock({ tableView in
+            if deleteIndexPaths.count > 0 {
+                tableView?.deleteRows(at: deleteIndexPaths, with: animation)
+            }
+            if deleteSections.count > 0 {
+                tableView?.deleteSections(deleteSections, with: animation)
+            }
+        })
+        self.leftTableView?.updateWithBlock({ tableView in
+            if deleteMarginSections.count > 0 {
+                tableView?.deleteSections(deleteMarginSections, with: animation)
+            }
+            if updateMarginSections.count > 0 {
+                tableView?.reloadSections(updateMarginSections, with: animation)
+            }
+        })
+        self.rightTableView?.updateWithBlock({ tableView in
+            if deleteMarginSections.count > 0 {
+                tableView?.deleteSections(deleteMarginSections, with: animation)
+            }
+            if updateMarginSections.count > 0 {
+                tableView?.reloadSections(updateMarginSections, with: animation)
+            }
+        })
+    }
+    
+    func insertRows(at datas: [GXMessagesCenterSection], with animation: UITableView.RowAnimation) {
+        // 需要能获取到-> 日期分组，发送者分组，头像的方向
+        
     }
     
     func addMessagesHeader(callback: @escaping GXRefreshComponent.GXRefreshCallBack) {

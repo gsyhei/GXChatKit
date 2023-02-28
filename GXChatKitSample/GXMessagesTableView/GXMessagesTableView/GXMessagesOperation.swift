@@ -10,6 +10,12 @@ import Foundation
 public protocol GXMessagesCenterOperation: NSObject, Equatable {
     /// 高度
     var height: CGFloat { set get }
+    /// margin分组识别id（比如发送者ID）
+    var marginIdentifier: String { get }
+    /// margin对应section
+    var marginSection: Int { set get }
+    /// center对应indexPath
+    var centerIndexPath: IndexPath { set get }
 }
 
 public protocol GXMessagesMarginSection {

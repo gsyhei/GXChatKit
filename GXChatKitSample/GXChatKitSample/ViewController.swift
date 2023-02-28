@@ -21,6 +21,12 @@ class GXTestGroupsMessageData: GXMessagesCenterSection {
 }
 
 class GXTestMessageData: NSObject, GXMessagesCenterOperation {
+    var marginSection: Int = 0
+    var centerIndexPath: IndexPath = IndexPath()
+    var marginIdentifier: String {
+        return self.senderId
+    }
+    var senderId: String = ""
     var identifier: String = ""
     var height: CGFloat = 60.0
     var text = "测试文本，阿萨德交换空间啊还是打卡机啊三打哈"
@@ -67,9 +73,26 @@ class ViewController: UIViewController {
         
         self.tableView.addMessagesHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
-                self?.loadData()
-                self?.tableView.reloadData()
+                
+                
+                var indexPats: [IndexPath] = []
+                indexPats.append(IndexPath(row: 0, section: 1))
+                indexPats.append(IndexPath(row: 1, section: 1))
+
+                indexPats.append(IndexPath(row: 0, section: 3))
+                indexPats.append(IndexPath(row: 1, section: 3))
+                indexPats.append(IndexPath(row: 2, section: 3))
+                indexPats.append(IndexPath(row: 3, section: 3))
+
+                indexPats.append(IndexPath(row: 1, section: 2))
+                indexPats.append(IndexPath(row: 2, section: 2))
+
+                self?.tableView.deleteRows(at: indexPats, with: .fade)
+
+//                self?.loadData()
+//                self?.tableView.reloadData()
                 self?.tableView.endHeaderLoading(isReload: false)
+                
             }
         }
     }
