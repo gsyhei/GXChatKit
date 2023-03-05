@@ -8,19 +8,9 @@
 import UIKit
 import GXMessagesTableView
 
-class GXTestAvatarsData: GXMessagesMarginSection {
-    var height: CGFloat = 0.0
-    var direction: GXMessagesTableView.MarginDirection = .none
-    var list: [any GXMessagesCenterOperation] = []
-    var text = "头"
-}
-
-class GXTestGroupsMessageData: GXMessagesCenterSection {
-    var list: [any GXMessagesCenterOperation] = []
-    var headerText = "header text"
-}
-
 class GXTestMessageData: NSObject, GXMessagesCenterOperation {
+    var date: Date = Date()
+    
     var marginSection: Int = 0
     var centerIndexPath: IndexPath = IndexPath()
     var marginIdentifier: String {
@@ -36,10 +26,10 @@ class GXTestMessageData: NSObject, GXMessagesCenterOperation {
     }
 }
 
+fileprivate let GX_USERID: String = "333"
+
 class ViewController: UIViewController {
     
-    private var messageGroups: [GXTestGroupsMessageData] = []
-    private var messageAvatars: [GXTestAvatarsData] = []
     
 //    public required init(frame: CGRect,
 //                         style: UITableView.Style = .plain,
@@ -68,8 +58,8 @@ class ViewController: UIViewController {
         self.tableView.marginPosition = .bottom
         self.tableView.marginItemHeight = 50.0
         self.tableView.centerHeaderHeight = 30.0
+        self.tableView.myUserID = GX_USERID
         self.loadData()
-        self.tableView.reloadData()
         
         self.tableView.addMessagesHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
@@ -87,7 +77,7 @@ class ViewController: UIViewController {
                 indexPats.append(IndexPath(row: 1, section: 2))
                 indexPats.append(IndexPath(row: 2, section: 2))
 
-                self?.tableView.deleteRows(at: indexPats, with: .fade)
+//                self?.tableView.deleteRows(at: indexPats, with: .fade)
 
 //                self?.loadData()
 //                self?.tableView.reloadData()
@@ -98,57 +88,44 @@ class ViewController: UIViewController {
     }
     
     func loadData() {
-        let groupCount = self.messageGroups.count
-        for groupIndex in (0..<5) {
-            let group = GXTestGroupsMessageData()
-            group.headerText +=  ": \(groupIndex + groupCount)"
-            var avatars: [GXTestAvatarsData] = []
-            
-            var avatar = GXTestAvatarsData()
-            avatar.height = 30.0
-            avatar.direction = .none
-            avatars.append(avatar)
-            
-            avatar = GXTestAvatarsData()
-            avatar.direction = .left
-            for _ in 0..<2 {
-                let message = GXTestMessageData()
-                message.identifier = "\(groupIndex + groupCount)_\(group.list.count)"
-                avatar.height += message.height
-                avatar.list.append(message)
-                group.list.append(message)
-            }
-            avatars.append(avatar)
-
-            avatar = GXTestAvatarsData()
-            avatar.direction = .right
-            for _ in 0..<2 {
-                let message = GXTestMessageData()
-                message.identifier = "\(groupIndex + groupCount)_\(group.list.count)"
-
-                avatar.height += message.height
-                avatar.list.append(message)
-                group.list.append(message)
-            }
-            avatars.append(avatar)
-
-            
-            self.messageAvatars.insert(contentsOf: avatars, at: 0)
-            self.messageGroups.insert(group, at: 0)
+        var list: [GXTestMessageData] = []
+        
+        let date = Date().dateByAdding(days: -1)
+        for _ in 0..<3 {
+            let data = GXTestMessageData()
+            data.date = date ?? Date()
+            data.senderId = "111"
+            list.append(data)
         }
         
-        self.tableView.centerDataSections = self.messageGroups
-        self.tableView.marginDataSections = self.messageAvatars
+        let date1 = Date().dateByAdding(days: -2)
+        for _ in 0..<3 {
+            let data = GXTestMessageData()
+            data.date = date1 ?? Date()
+            data.senderId = "333"
+            list.append(data)
+        }
+        
+        let date2 = Date().dateByAdding(days: -3)
+        for _ in 0..<3 {
+            let data = GXTestMessageData()
+            data.date = date2 ?? Date()
+            data.senderId = "222"
+            list.append(data)
+        }
+        
+        self.tableView.reloadDataByAppend(datas: list)
     }
 
 }
 
 extension  ViewController: GXMessagesTableViewDataSource, GXMessagesTableViewDelegate {
     
+    
     /// 中间tableView的header
     func gx_tableView(inCenter tableView: UITableView, viewForHeaderInSection section: Int, data: GXMessagesCenterSection) -> UIView? {
         let view = UITableViewHeaderFooterView(reuseIdentifier: "H")
-        view.textLabel?.text = self.messageGroups[section].headerText
+        view.textLabel?.text = "H(\(section)"
         view.backgroundView = UIView()
         view.backgroundView?.backgroundColor = .clear
         
@@ -165,10 +142,23 @@ extension  ViewController: GXMessagesTableViewDataSource, GXMessagesTableViewDel
 
         return cell!
     }
+    
+    func gx_tableView(inMargin tableView: UITableView, directionInSection section: Int, data: GXMessagesMarginSection) -> GXMessagesTableView.MarginDirection {
+        if data.marginIdentifier == nil {
+            return .none
+        }
+        else if data.marginIdentifier == GX_USERID {
+            return .right
+        }
+        else  {
+            return .left
+        }
+    }
+    
     /// 两边tableView的具体内容视图
     func gx_tableView(inMargin tableView: UITableView, viewForHeaderFooterInSection section: Int, data: GXMessagesMarginSection) -> UIView? {
         let view = UITableViewHeaderFooterView(reuseIdentifier: "H")
-        view.textLabel?.text = self.messageAvatars[section].text
+        view.textLabel?.text = "H"
         view.backgroundView = UIView()
         view.backgroundView?.backgroundColor = .red
         

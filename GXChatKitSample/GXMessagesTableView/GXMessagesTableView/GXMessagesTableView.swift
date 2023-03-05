@@ -14,6 +14,8 @@ import GXRefresh
     func gx_tableView(inCenter tableView: UITableView, viewForHeaderInSection section: Int, data: GXMessagesCenterSection) -> UIView?
     /// 中间tableView的cell
     func gx_tableView(inCenter tableView: UITableView, cellForRowAt indexPath: IndexPath, data: any GXMessagesCenterOperation) -> UITableViewCell
+    /// 两边tableView内容具体显示在哪边
+    func gx_tableView(inMargin tableView: UITableView, directionInSection section: Int, data: GXMessagesMarginSection) -> GXMessagesTableView.MarginDirection
     /// 两边tableView的具体内容视图
     func gx_tableView(inMargin tableView: UITableView, viewForHeaderFooterInSection section: Int, data: GXMessagesMarginSection) -> UIView?
 }
@@ -39,6 +41,8 @@ import GXRefresh
     
     weak public var delegate: GXMessagesTableViewDelegate?
     
+    public var myUserID: String = ""
+
     public var marginItemHeight: CGFloat = 50.0
     
     public var marginPosition: MarginPosition = .bottom
@@ -160,7 +164,8 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == self.leftTableView {
             let marginDataSection = self.marginDataSections[indexPath.section]
-            if marginDataSection.direction == .left {
+            let direction = self.dataSource?.gx_tableView(inMargin: tableView, directionInSection: indexPath.section, data: marginDataSection)
+            if direction == .left {
                 return marginDataSection.height - self.marginItemHeight
             }
             else {
@@ -169,7 +174,8 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
         }
         else if tableView == self.rightTableView {
             let marginDataSection = self.marginDataSections[indexPath.section]
-            if marginDataSection.direction == .right {
+            let direction = self.dataSource?.gx_tableView(inMargin: tableView, directionInSection: indexPath.section, data: marginDataSection)
+            if direction == .right {
                 return marginDataSection.height - self.marginItemHeight
             }
             else {
@@ -189,7 +195,9 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
         }
         
         guard marginPosition == .top else { return CGFloat.leastNormalMagnitude }
-        let direction = self.marginDataSections[section].direction
+        
+        let marginDataSection = self.marginDataSections[section]
+        let direction = self.dataSource?.gx_tableView(inMargin: tableView, directionInSection: section, data: marginDataSection)
         if tableView == self.leftTableView {
             if direction == .left {
                 return self.marginItemHeight
@@ -206,7 +214,8 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard marginPosition == .bottom else { return CGFloat.leastNormalMagnitude }
         
-        let direction = self.marginDataSections[section].direction
+        let marginDataSection = self.marginDataSections[section]
+        let direction = self.dataSource?.gx_tableView(inMargin: tableView, directionInSection: section, data: marginDataSection)
         if tableView == self.leftTableView {
             if direction == .left {
                 for item in self.marginDataSections[section].list {
@@ -235,13 +244,14 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
         guard marginPosition == .top else { return nil }
         
         let marginDataSection = self.marginDataSections[section]
+        let direction = self.dataSource?.gx_tableView(inMargin: tableView, directionInSection: section, data: marginDataSection)
         if tableView == self.leftTableView {
-            if marginDataSection.direction == .left {
+            if direction == .left {
                 return self.dataSource?.gx_tableView(inMargin: tableView, viewForHeaderFooterInSection: section, data: marginDataSection)
             }
         }
         else if tableView == self.rightTableView {
-            if marginDataSection.direction == .right {
+            if direction == .right {
                 return self.dataSource?.gx_tableView(inMargin: tableView, viewForHeaderFooterInSection: section, data: marginDataSection)
             }
         }
@@ -252,13 +262,14 @@ extension GXMessagesTableView: UITableViewDataSource, UITableViewDelegate {
         guard marginPosition == .bottom else { return nil }
         
         let marginDataSection = self.marginDataSections[section]
+        let direction = self.dataSource?.gx_tableView(inMargin: tableView, directionInSection: section, data: marginDataSection)
         if tableView == self.leftTableView {
-            if marginDataSection.direction == .left {
+            if direction == .left {
                 return self.dataSource?.gx_tableView(inMargin: tableView, viewForHeaderFooterInSection: section, data: marginDataSection)
             }
         }
         else if tableView == self.rightTableView {
-            if marginDataSection.direction == .right {
+            if direction == .right {
                 return self.dataSource?.gx_tableView(inMargin: tableView, viewForHeaderFooterInSection: section, data: marginDataSection)
             }
         }
@@ -451,13 +462,13 @@ public extension GXMessagesTableView {
         var updateMarginSections: IndexSet = []
         
         for data in deleteDatas {
-            var centerDataSection = self.centerDataSections[data.centerIndexPath.section]
+            let centerDataSection = self.centerDataSections[data.centerIndexPath.section]
             centerDataSection.list.removeAll(where: {$0 == data})
             if centerDataSection.list.count == 0 {
                 deleteSections.update(with: data.centerIndexPath.section)
                 deleteIndexPaths.removeAll(where: {$0.section == data.centerIndexPath.section})
             }
-            var marginDataSection = self.marginDataSections[data.marginSection]
+            let marginDataSection = self.marginDataSections[data.marginSection]
             if let index = marginDataSection.list.firstIndex(where: {$0 == data}) {
                 marginDataSection.list.remove(at: index)
                 if marginDataSection.list.count == 0 {
@@ -468,7 +479,7 @@ public extension GXMessagesTableView {
                         while lastMarginDataIndex > 0 {
                             lastMarginDataIndex = lastMarginDataIndex - 1
                             let lastMarginDataSection = self.marginDataSections[lastMarginDataIndex]
-                            if lastMarginDataSection.direction == .none {
+                            if lastMarginDataSection.marginIdentifier == nil {
                                 deleteMarginSections.update(with: lastMarginDataIndex)
                                 updateMarginSections.remove(lastMarginDataIndex)
                                 break
@@ -518,9 +529,160 @@ public extension GXMessagesTableView {
         })
     }
     
-    func insertRows(at datas: [GXMessagesCenterSection], with animation: UITableView.RowAnimation) {
+    func reloadDataByAppend(datas: [any GXMessagesCenterOperation], reverse: Bool = false)  {
+        let newDatas = reverse ? datas : datas.reversed()
+        for data in newDatas {
+            let firstCenter = self.centerDataSections.first
+            if let firstDate = firstCenter?.date {
+                if Calendar.current.isDate(data.date, inSameDayAs: firstDate) {
+                    firstCenter?.list.insert(data, at: 0)
+                }
+                else {
+                    let centerSection = GXMessagesCenterSection(date: data.date)
+                    centerSection.list.append(data)
+                    self.centerDataSections.insert(centerSection, at: 0)
+                                        
+                    let marginSection = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                    marginSection.list.append(data)
+                    marginSection.height += data.height
+                    self.marginDataSections.insert(marginSection, at: 0)
+                    
+                    let marginTopSection = GXMessagesMarginSection(marginIdentifier: nil)
+                    marginTopSection.height = self.centerHeaderHeight
+                    self.marginDataSections.insert(marginTopSection, at: 0)
+                }
+            }
+            else {
+                let centerSection = GXMessagesCenterSection(date: data.date)
+                centerSection.list.append(data)
+                self.centerDataSections.insert(centerSection, at: 0)
+                
+                let marginSection = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                marginSection.list.append(data)
+                marginSection.height += data.height
+                self.marginDataSections.insert(marginSection, at: 0)
+                
+                let marginTopSection = GXMessagesMarginSection(marginIdentifier: nil)
+                marginTopSection.height = self.centerHeaderHeight
+                self.marginDataSections.insert(marginTopSection, at: 0)
+            }
+            
+            let firstMargin = self.marginDataSections.first
+            if let marginIdentifier = firstMargin?.marginIdentifier {
+                if marginIdentifier == data.marginIdentifier {
+                    firstMargin?.list.insert(data, at: 0)
+                    firstMargin?.height += data.height
+                }
+                else {
+                    let marginSection = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                    marginSection.list.append(data)
+                    marginSection.height += data.height
+                    self.marginDataSections.insert(marginSection, at: 0)
+                }
+            }
+            else {
+                let marginSection = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                marginSection.list.append(data)
+                marginSection.height += data.height
+                self.marginDataSections.insert(marginSection, at: 0)
+            }
+        }
+        self.reloadData()
+    }
+    
+    func insertRows(at datas: [any GXMessagesCenterOperation], with animation: UITableView.RowAnimation) {
         // 需要能获取到-> 日期分组，发送者分组，头像的方向
-        
+        var insetsCenter: [IndexPath] = []
+        var updateMargin: IndexSet = []
+        var insetsMargin: IndexSet = []
+        for data in datas {
+            let lastCenter = self.centerDataSections.last
+            if let lastDate = lastCenter?.date {
+                if Calendar.current.isDate(data.date, inSameDayAs: lastDate) {
+                    lastCenter?.list.append(data)
+                    insetsCenter.append(IndexPath(row: lastCenter!.list.count, section: self.centerDataSections.count - 1))
+                }
+                else {
+                    let centerSection = GXMessagesCenterSection(date: data.date)
+                    centerSection.list.append(data)
+                    self.centerDataSections.append(centerSection)
+                    insetsCenter.append(IndexPath(row: 0, section: self.centerDataSections.count - 1))
+                    
+                    let marginTopSection = GXMessagesMarginSection(marginIdentifier: nil)
+                    marginTopSection.height = self.centerHeaderHeight
+                    self.marginDataSections.append(marginTopSection)
+                    insetsMargin.update(with: self.marginDataSections.count - 1)
+                    
+                    let marginSection = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                    marginSection.list.append(data)
+                    marginSection.height += data.height
+                    self.marginDataSections.append(marginSection)
+                    insetsMargin.update(with: self.marginDataSections.count - 1)
+                }
+            }
+            else {
+                let centerSection = GXMessagesCenterSection(date: data.date)
+                centerSection.list.append(data)
+                self.centerDataSections.append(centerSection)
+                insetsCenter.append(IndexPath(row: 0, section: self.centerDataSections.count - 1))
+                
+                let marginTopSection = GXMessagesMarginSection(marginIdentifier: nil)
+                marginTopSection.height = self.centerHeaderHeight
+                self.marginDataSections.append(marginTopSection)
+                insetsMargin.update(with: self.marginDataSections.count - 1)
+                
+                let marginSection = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                marginSection.list.append(data)
+                marginSection.height += data.height
+                self.marginDataSections.append(marginSection)
+                insetsMargin.update(with: self.marginDataSections.count - 1)
+            }
+            
+            let lastMargin = self.marginDataSections.last
+            if let marginIdentifier = lastMargin?.marginIdentifier {
+                if marginIdentifier == data.marginIdentifier {
+                    lastMargin?.list.append(data)
+                    lastMargin?.height += data.height
+                    updateMargin.update(with: self.marginDataSections.count - 1)
+                }
+                else {
+                    let section = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                    section.list.append(data)
+                    section.height += data.height
+                    self.marginDataSections.append(section)
+                    insetsMargin.update(with: self.marginDataSections.count - 1)
+                }
+            }
+            else {
+                let section = GXMessagesMarginSection(marginIdentifier: data.marginIdentifier)
+                section.list.append(data)
+                section.height += data.height
+                self.marginDataSections.append(section)
+                insetsMargin.update(with: self.marginDataSections.count - 1)
+            }
+        }
+        // update tableView ui
+        self.centerTableView.updateWithBlock({ tableView in
+            if insetsCenter.count > 0 {
+                tableView?.insertRows(at: insetsCenter, with: animation)
+            }
+        })
+        self.leftTableView?.updateWithBlock({ tableView in
+            if updateMargin.count > 0 {
+                tableView?.reloadSections(updateMargin, with: animation)
+            }
+            if insetsMargin.count > 0 {
+                tableView?.insertSections(insetsMargin, with: animation)
+            }
+        })
+        self.rightTableView?.updateWithBlock({ tableView in
+            if updateMargin.count > 0 {
+                tableView?.reloadSections(updateMargin, with: animation)
+            }
+            if insetsMargin.count > 0 {
+                tableView?.insertSections(insetsMargin, with: animation)
+            }
+        })
     }
     
     func addMessagesHeader(callback: @escaping GXRefreshComponent.GXRefreshCallBack) {
