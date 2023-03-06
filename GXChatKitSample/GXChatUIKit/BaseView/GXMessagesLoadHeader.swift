@@ -38,7 +38,7 @@ public class GXMessagesLoadHeader: GXRefreshBaseHeader {
         super.scrollViewContentOffsetDidChange(change: change)
         guard self.state == .idle else { return }
         
-        if (self.svContentOffset.y < -10) {
+        if (self.svContentOffset.y + self.svAdjustedInset.top < -10) {
             self.beginRefreshing()
         }
     }

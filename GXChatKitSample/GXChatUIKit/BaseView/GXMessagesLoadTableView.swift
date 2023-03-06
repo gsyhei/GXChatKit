@@ -39,12 +39,10 @@ open class GXMessagesLoadTableView: UITableView {
             guard self.contentSize != .zero else { return }
             guard self.contentSize.height > oldValue.height else { return }
             
-            if let header = self.gx_header {
-                self.isHeaderLoading = false
-                var offset = super.contentOffset
-                offset.y = contentSize.height - oldValue.height + header.gx_height
-                self.contentOffset = offset
-            }
+            self.isHeaderLoading = false
+            var offset = super.contentOffset
+            offset.y = contentSize.height - oldValue.height - self.adjustedContentInset.top
+            self.contentOffset = offset
         }
     }
     
