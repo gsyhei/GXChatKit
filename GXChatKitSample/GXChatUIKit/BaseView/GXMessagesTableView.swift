@@ -98,8 +98,7 @@ private extension GXMessagesTableView {
         else {
             if let preCell = self.cellForRow(at: preIndexPath) as? GXMessagesTableViewCell,
                preCell.messageContinuousStatus != .end && preCell.messageContinuousStatus != .beginAndEnd,
-               lastAvatarIndexPath.section == preIndexPath.section
-            {
+               lastAvatarIndexPath.section == preIndexPath.section {
                 self.hoverAvatars.values.forEach {
                     $0.top = tvBottom - $0.height + self.contentOffset.y
                 }
@@ -110,7 +109,6 @@ private extension GXMessagesTableView {
                 }
             }
         }
-        
     }
     
     func gx_resetPreEndAvatar() {
@@ -118,12 +116,10 @@ private extension GXMessagesTableView {
             $0.removeFromSuperview()
         }
         self.hoverAvatars.removeAll()
-        if let preEndIndexPath = self.preEndAvatarIndexPath {
-            if let preEndCell = self.cellForRow(at: preEndIndexPath) as? GXMessagesTableViewCell {
-                if preEndCell.messageContinuousStatus == .end || preEndCell.messageContinuousStatus == .beginAndEnd {
-                    preEndCell.avatar.isHidden = false
-                }
-            }
+        if let preEndIndexPath = self.preEndAvatarIndexPath,
+           let preEndCell = self.cellForRow(at: preEndIndexPath) as? GXMessagesTableViewCell,
+           preEndCell.messageContinuousStatus == .end || preEndCell.messageContinuousStatus == .beginAndEnd {
+            preEndCell.avatar.isHidden = false
         }
     }
     
