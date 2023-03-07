@@ -8,7 +8,8 @@
 import UIKit
 
 public protocol GXMessagesTableViewDatalist: NSObjectProtocol {
-    func tableView(_ tableView: UITableView, avatarIdForRowAt indexPath: IndexPath) -> String
+    func gx_tableView(_ tableView: UITableView, avatarIdForRowAt indexPath: IndexPath) -> String
+    func gx_tableView(_ tableView: UITableView, changeForRowAt indexPath: IndexPath, avatar: UIButton)
 }
 
 public class GXMessagesTableView: GXMessagesLoadTableView {
@@ -16,23 +17,41 @@ public class GXMessagesTableView: GXMessagesLoadTableView {
     private var hoverAvatars: [String: UIView] = [:]
     private var preEndAvatarIndexPath: IndexPath?
     
+    public override init(frame: CGRect, style: UITableView.Style) {
+        super .init(frame: frame, style: style)
+        self.addObserver(self, forKeyPath: "contentOffset", options: [.new], context: nil)
+    }
     
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentOffset" {
+            if let offset = change?[NSKeyValueChangeKey.newKey] as? CGPoint {
+                DispatchQueue.main.async {
+                    self.gx_changeContentOffset(offset)
+                }
+            }
+        }
+    }
 }
 
-public extension GXMessagesTableView {
+private extension GXMessagesTableView {
     
-    func gx_scrollViewChangeContentOffset(_ offset: CGPoint) {
+    func gx_changeContentOffset(_ offset: CGPoint) {
         guard let dataDelegate = self.datalist else { return }
         let lastCell = self.visibleCells.last(where: {$0.isKind(of: GXMessagesTableViewCell.self)})
         guard let lastAvatarCell = lastCell as? GXMessagesTableViewCell else { return }
         guard let lastAvatarIndexPath = self.indexPath(for: lastAvatarCell) else { return }
         guard let preIndexPath = self.indexPathsForVisibleRows?.last(where: {$0 < lastAvatarIndexPath}) else { return }
         
-        let lastAvatarID = dataDelegate.tableView(self, avatarIdForRowAt: lastAvatarIndexPath)
+        let lastAvatarID = dataDelegate.gx_tableView(self, avatarIdForRowAt: lastAvatarIndexPath)
         if !self.hoverAvatars.keys.contains(lastAvatarID) {
             self.gx_resetPreEndAvatar()
             
-            let avatar = GXMessagesTableViewCell.getAvatar()
+            let avatar = lastAvatarCell.getAvatar()
+            dataDelegate.gx_tableView(self, changeForRowAt: lastAvatarIndexPath, avatar: avatar)
             let avatarOrigin = CGPoint(x: lastAvatarCell.left, y: lastAvatarCell.bottom - lastAvatarCell.avatar.height)
             avatar.frame = CGRect(origin: avatarOrigin, size: lastAvatarCell.avatar.size)
             self.addSubview(avatar)
@@ -48,7 +67,8 @@ public extension GXMessagesTableView {
             else {
                 self.gx_resetPreEndAvatar()
                 
-                let avatar = GXMessagesTableViewCell.getAvatar()
+                let avatar = lastAvatarCell.getAvatar()
+                dataDelegate.gx_tableView(self, changeForRowAt: lastAvatarIndexPath, avatar: avatar)
                 let avatarOrigin = CGPoint(x: lastAvatarCell.left, y: lastAvatarCell.bottom - lastAvatarCell.avatar.height)
                 avatar.frame = CGRect(origin: avatarOrigin, size: lastAvatarCell.avatar.size)
                 self.addSubview(avatar)

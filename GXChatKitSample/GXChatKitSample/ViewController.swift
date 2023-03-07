@@ -35,17 +35,22 @@ class ViewController: UIViewController {
         
         self.tableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline:DispatchTime.now()) {
-            self.tableView.gx_scrollViewChangeContentOffset(self.tableView.contentOffset)
+//            self.tableView.gx_changeContentOffset(self.tableView.contentOffset)
         }
     }
 
 }
 
 extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
-    func tableView(_ tableView: UITableView, avatarIdForRowAt indexPath: IndexPath) -> String {
+    
+    func gx_tableView(_ tableView: UITableView, avatarIdForRowAt indexPath: IndexPath) -> String {
         let index = indexPath.row / 4
-        
         return "index\(index)"
+    }
+    
+    func gx_tableView(_ tableView: UITableView, changeForRowAt indexPath: IndexPath, avatar: UIButton) {
+        let index = indexPath.row / 4
+        avatar.setTitle("头\(index)", for: .normal)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,6 +63,7 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
         let index = indexPath.row / 4
         let text = "index\(index)"
         cell.textLabel?.text = "section: \(indexPath.section), row: \(indexPath.row), id: \(text)"
+        cell.avatar.setTitle("头\(index)", for: .normal)
         
         let cuindex = indexPath.row % 4
         if cuindex == 0 {
@@ -76,8 +82,5 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.tableView.gx_scrollViewChangeContentOffset(scrollView.contentOffset)
-    }
+    
 }

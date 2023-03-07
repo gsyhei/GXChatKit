@@ -16,7 +16,7 @@ open class GXMessagesTableViewCell: UITableViewCell, Reusable {
         }
     }
     
-    public static func getAvatar() -> UIButton {
+    public func getAvatar() -> UIButton {
         let button = UIButton(type: .custom)
         button.backgroundColor = .red
 
@@ -24,7 +24,7 @@ open class GXMessagesTableViewCell: UITableViewCell, Reusable {
     }
     
     public lazy var avatar: UIButton = {
-        let button = GXMessagesTableViewCell.getAvatar()
+        let button = self.getAvatar()
 
         return button
     }()
