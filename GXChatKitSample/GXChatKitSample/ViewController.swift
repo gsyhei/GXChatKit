@@ -25,18 +25,20 @@ class ViewController: UIViewController {
         
         self.view.addSubview(self.tableView)
         self.tableView.register(cellType: GXMessagesTableViewCell.self)
-        
+        self.tableView.sectionHeaderHeight = 30.0
         self.tableView.addMessagesHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
-                self?.rowCount += 10
+                self?.rowCount += 20
                 self?.tableView.endHeaderLoading()
             }
         }
-        
         self.tableView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline:DispatchTime.now()) {
-//            self.tableView.gx_changeContentOffset(self.tableView.contentOffset)
-        }
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        let rect = self.view.bounds.insetBy(dx: 0, dy: self.view.safeAreaInsets.bottom)
+        self.tableView.frame = rect
     }
 
 }
@@ -53,8 +55,12 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
         avatar.setTitle("头\(index)", for: .normal)
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.rowCount / 20
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.rowCount
+        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,7 +68,7 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
         
         let index = indexPath.row / 4
         let text = "index\(index)"
-        cell.textLabel?.text = "section: \(indexPath.section), row: \(indexPath.row), id: \(text)"
+        cell.textLabel?.text = "\t\t\t section: \(indexPath.section), row: \(indexPath.row), id: \(text)"
         cell.avatar.setTitle("头\(index)", for: .normal)
         
         let cuindex = indexPath.row % 4
@@ -77,6 +83,17 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewID = "ViewID"
+        var header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "viewID")
+        if header == nil {
+            header = UITableViewHeaderFooterView(reuseIdentifier: viewID)
+        }
+        header?.textLabel?.text = "Section: \(section)"
+        
+        return header
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
