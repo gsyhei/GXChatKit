@@ -12,6 +12,7 @@ class ViewController: UIViewController {
         let tv = GXMessagesTableView(frame: self.view.bounds, style: .plain)
         tv.dataSource = self
         tv.delegate = self
+        tv.datalist = self
         tv.backgroundColor = .white
         tv.rowHeight = 100.0
         
@@ -37,7 +38,12 @@ class ViewController: UIViewController {
 
 }
 
-extension  ViewController: UITableViewDataSource, UITableViewDelegate {
+extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
+    func tableView(_ tableView: UITableView, avatarIdForRowAt indexPath: IndexPath) -> String {
+        let index = indexPath.row / 4
+        
+        return "index\(index)"
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.rowCount
@@ -45,19 +51,11 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GXMessagesTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.textLabel?.text = "section: \(indexPath.section), row: \(indexPath.row)"
         
-        let index = (indexPath.row + 1) % 4
-        if index == 0 {
-            cell.messageContinuousStatus = .begin
-        }
-        else if index == 3 {
-            cell.messageContinuousStatus = .end
-        }
-        else {
-            cell.messageContinuousStatus = .ongoing
-        }
-
+        let index = indexPath.row / 4
+        let text = "index\(index)"
+        cell.textLabel?.text = "section: \(indexPath.section), row: \(indexPath.row), id: \(text)"
+        
         return cell
     }
     
