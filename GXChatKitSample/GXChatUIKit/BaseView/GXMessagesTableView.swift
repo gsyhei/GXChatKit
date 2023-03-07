@@ -7,28 +7,19 @@
 
 import UIKit
 
-public struct GXAvatarData {
-    public var avatar: UIView
-    public var indexPath: IndexPath
-    
-    init(avatar: UIView, indexPath: IndexPath) {
-        self.avatar = avatar
-        self.indexPath = indexPath
-    }
-}
-
 public protocol GXMessagesTableViewDatalist: NSObjectProtocol {
     func tableView(_ tableView: UITableView, avatarIdForRowAt indexPath: IndexPath) -> String
 }
 
 public class GXMessagesTableView: GXMessagesLoadTableView {
     public weak var datalist: GXMessagesTableViewDatalist?
-    private var hoverAvatars: [String: GXAvatarData] = [:]
+    private var hoverAvatars: [String: UIView] = [:]
     private var preEndAvatarIndexPath: IndexPath?
+    
+    
 }
 
 public extension GXMessagesTableView {
-    
     
     func gx_scrollViewChangeContentOffset(_ offset: CGPoint) {
         guard let dataDelegate = self.datalist else { return }
@@ -45,12 +36,11 @@ public extension GXMessagesTableView {
             let avatarOrigin = CGPoint(x: lastAvatarCell.left, y: lastAvatarCell.bottom - lastAvatarCell.avatar.height)
             avatar.frame = CGRect(origin: avatarOrigin, size: lastAvatarCell.avatar.size)
             self.addSubview(avatar)
-            let avatarData = GXAvatarData(avatar: avatar, indexPath: lastAvatarIndexPath)
-            self.hoverAvatars.updateValue(avatarData, forKey: lastAvatarID)
+            self.hoverAvatars.updateValue(avatar, forKey: lastAvatarID)
         }
         else {
             if self.cellForRow(at: preIndexPath) is GXMessagesTableViewCell {
-                if lastAvatarCell.messageContinuousStatus == .end {
+                if lastAvatarCell.messageContinuousStatus == .end || lastAvatarCell.messageContinuousStatus == .beginAndEnd {
                     lastAvatarCell.avatar.isHidden = true
                     self.preEndAvatarIndexPath = lastAvatarIndexPath
                 }
@@ -62,20 +52,55 @@ public extension GXMessagesTableView {
                 let avatarOrigin = CGPoint(x: lastAvatarCell.left, y: lastAvatarCell.bottom - lastAvatarCell.avatar.height)
                 avatar.frame = CGRect(origin: avatarOrigin, size: lastAvatarCell.avatar.size)
                 self.addSubview(avatar)
-                let avatarData = GXAvatarData(avatar: avatar, indexPath: lastAvatarIndexPath)
-                self.hoverAvatars.updateValue(avatarData, forKey: lastAvatarID)
+                self.hoverAvatars.updateValue(avatar, forKey: lastAvatarID)
             }
         }
+    
+        let cellRect = self.rectForRow(at: lastAvatarIndexPath)
+        let cellTop = cellRect.minY - self.contentOffset.y
+        let cellBottom = cellRect.maxY - self.contentOffset.y
+        let tvBottom = self.height - self.adjustedContentInset.bottom
+        let tDifference = tvBottom - cellTop
+        let bDifference = tvBottom - cellBottom
+
+        if tDifference >= lastAvatarCell.avatar.height {
+            if bDifference <= 0 {
+                self.hoverAvatars.values.forEach {
+                    $0.top = tvBottom - $0.height + self.contentOffset.y
+                }
+            }
+            else {
+                self.hoverAvatars.values.forEach {
+                    $0.top = cellRect.maxY - $0.height
+                }
+            }
+        }
+        else {
+            if let preCell = self.cellForRow(at: preIndexPath) as? GXMessagesTableViewCell,
+               preCell.messageContinuousStatus != .end && preCell.messageContinuousStatus != .beginAndEnd,
+               lastAvatarIndexPath.section == preIndexPath.section
+            {
+                self.hoverAvatars.values.forEach {
+                    $0.top = tvBottom - $0.height + self.contentOffset.y
+                }
+            }
+            else {
+                self.hoverAvatars.values.forEach {
+                    $0.top = cellRect.minY
+                }
+            }
+        }
+        
     }
     
     func gx_resetPreEndAvatar() {
         self.hoverAvatars.values.forEach {
-            $0.avatar.removeFromSuperview()
+            $0.removeFromSuperview()
         }
         self.hoverAvatars.removeAll()
         if let preEndIndexPath = self.preEndAvatarIndexPath {
             if let preEndCell = self.cellForRow(at: preEndIndexPath) as? GXMessagesTableViewCell {
-                if preEndCell.messageContinuousStatus == .end {
+                if preEndCell.messageContinuousStatus == .end || preEndCell.messageContinuousStatus == .beginAndEnd {
                     preEndCell.avatar.isHidden = false
                 }
             }

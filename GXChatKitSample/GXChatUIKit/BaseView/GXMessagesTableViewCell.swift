@@ -12,7 +12,7 @@ open class GXMessagesTableViewCell: UITableViewCell, Reusable {
     
     public var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin {
         didSet {
-            self.avatar.isHidden = (messageContinuousStatus != .end)
+            self.avatar.isHidden = (messageContinuousStatus != .end && messageContinuousStatus != .beginAndEnd)
         }
     }
     

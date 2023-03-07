@@ -86,11 +86,13 @@ public extension GXChatConfiguration {
     /// 消息连续状态
     enum MessageContinuousStatus: Int {
         /// 开始
-        case begin   = 0
+        case begin       = 0
         /// 持续中
-        case ongoing = 1
+        case ongoing     = 1
         /// 结束
-        case end     = 2
+        case end         = 2
+        /// 结束
+        case beginAndEnd = 3
     }
     
     /// 消息菜单
