@@ -26,7 +26,6 @@ class ViewController: UIViewController {
         self.view.addSubview(self.tableView)
         self.tableView.register(cellType: GXMessagesTableViewCell.self)
         
-        
         self.tableView.addMessagesHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
                 self?.rowCount += 10
@@ -34,6 +33,10 @@ class ViewController: UIViewController {
             }
         }
         
+        self.tableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline:DispatchTime.now()) {
+            self.tableView.gx_scrollViewChangeContentOffset(self.tableView.contentOffset)
+        }
     }
 
 }
@@ -56,19 +59,25 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
         let text = "index\(index)"
         cell.textLabel?.text = "section: \(indexPath.section), row: \(indexPath.row), id: \(text)"
         
+        let cuindex = indexPath.row % 4
+        if cuindex == 0 {
+            cell.messageContinuousStatus = .begin
+        }
+        else if cuindex == 3 {
+            cell.messageContinuousStatus = .end
+        }
+        else {
+            cell.messageContinuousStatus = .ongoing
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        self.tableView.gx_willDisplay(cell: cell, forRowAt: indexPath)
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.tableView.gx_scrollViewChangeContentOffset(scrollView.contentOffset)
     }
-    
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        self.tableView.gx_didEndDisplaying(cell: cell, forRowAt: indexPath)
-    }
-    
 }

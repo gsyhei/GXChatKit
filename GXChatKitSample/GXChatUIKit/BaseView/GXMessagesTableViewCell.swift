@@ -10,12 +10,22 @@ import Reusable
 
 open class GXMessagesTableViewCell: UITableViewCell, Reusable {
     
-    public var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin
+    public var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin {
+        didSet {
+            self.avatar.isHidden = (messageContinuousStatus != .end)
+        }
+    }
     
-    public lazy var avatar: UIButton = {
+    public static func getAvatar() -> UIButton {
         let button = UIButton(type: .custom)
         button.backgroundColor = .red
-        
+
+        return button
+    }
+    
+    public lazy var avatar: UIButton = {
+        let button = GXMessagesTableViewCell.getAvatar()
+
         return button
     }()
     
@@ -33,12 +43,18 @@ open class GXMessagesTableViewCell: UITableViewCell, Reusable {
         self.setupCell()
     }
     
+    open override func prepareForReuse() {
+        var rect = self.avatar.frame
+        rect.origin.y = self.contentView.height - self.avatar.frame.height
+        self.avatar.frame = rect
+    }
+    
     func setupCell() {
         let size: CGFloat = 60.0
-        let rect = CGRect(x: self.contentView.left, y: self.contentView.height - size, width: size, height: size)
+        let rect = CGRect(x: 0, y: self.contentView.height - size, width: size, height: size)
         self.avatar.frame = rect
         self.avatar.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin]
-//        self.contentView.addSubview(self.avatar)
+        self.contentView.addSubview(self.avatar)
     }
 
     public override func setSelected(_ selected: Bool, animated: Bool) {
