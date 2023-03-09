@@ -1,0 +1,6 @@
+framework module GXMessagesTableView {
+  umbrella header "GXMessagesTableView-umbrella.h"
+
+  export *
+  module * { export * }
+}

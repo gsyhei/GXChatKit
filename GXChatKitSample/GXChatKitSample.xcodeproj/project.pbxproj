@@ -8,23 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3F0C3FE9B864F211F30B6AC6 /* Pods_GXChatKitSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */; };
-		9623D81D29B933BC00BE0BFB /* GXMessagesAvatarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623D81C29B933BC00BE0BFB /* GXMessagesAvatarProtocol.swift */; };
 		9623D81F29B983B300BE0BFB /* GXMessagesTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */; };
 		9639158D2962796F002974F7 /* Pods_GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */; };
 		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
 		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
 		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
 		965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */; };
-		966C714629A3FDCF00E7F91E /* GXMessagesTableView.docc in Sources */ = {isa = PBXBuildFile; fileRef = 966C714529A3FDCF00E7F91E /* GXMessagesTableView.docc */; };
-		966C714C29A3FDCF00E7F91E /* GXMessagesTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966C714229A3FDCF00E7F91E /* GXMessagesTableView.framework */; };
-		966C715329A3FDCF00E7F91E /* GXMessagesTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C715229A3FDCF00E7F91E /* GXMessagesTableViewTests.swift */; };
-		966C715429A3FDCF00E7F91E /* GXMessagesTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 966C714429A3FDCF00E7F91E /* GXMessagesTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		966C715729A3FDCF00E7F91E /* GXMessagesTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966C714229A3FDCF00E7F91E /* GXMessagesTableView.framework */; };
-		966C715829A3FDCF00E7F91E /* GXMessagesTableView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 966C714229A3FDCF00E7F91E /* GXMessagesTableView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		966C716629A3FEF000E7F91E /* GXMessagesLoadTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C716429A3FEF000E7F91E /* GXMessagesLoadTableView.swift */; };
-		966C716729A3FEF000E7F91E /* GXMessagesLoadHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C716529A3FEF000E7F91E /* GXMessagesLoadHeader.swift */; };
-		966C716929A3FFFA00E7F91E /* GXMessagesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966C716829A3FFFA00E7F91E /* GXMessagesTableView.swift */; };
-		9682FAC229AC186E001D50D7 /* GXMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682FAC129AC186E001D50D7 /* GXMessagesOperation.swift */; };
 		969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957552973BBD4001DCC17 /* GXMessagesData.swift */; };
 		969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957572973C8CE001DCC17 /* GXChatConfiguration.swift */; };
 		9699575A2973E698001DCC17 /* GXMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957592973E698001DCC17 /* GXMessageItem.swift */; };
@@ -40,7 +29,6 @@
 		9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577129757F2D001DCC17 /* GXMessagesViewController.swift */; };
 		969957762975A9D6001DCC17 /* GXMessagesBubbleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */; };
 		9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577729767567001DCC17 /* UIColor+GXChat.swift */; };
-		96B7514D29B52C8F0035628A /* GXMessagesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B7514C29B52C8F0035628A /* GXMessagesTableView.swift */; };
 		96D30A912956F4F000AFBB90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A902956F4F000AFBB90 /* AppDelegate.swift */; };
 		96D30A932956F4F000AFBB90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A922956F4F000AFBB90 /* SceneDelegate.swift */; };
 		96D30A952956F4F000AFBB90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A942956F4F000AFBB90 /* ViewController.swift */; };
@@ -54,33 +42,9 @@
 		96D30AE22956F5EE00AFBB90 /* GXChatUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */; };
 		96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; };
 		96D30AE72956F5EE00AFBB90 /* GXChatUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		96D30AF32956FC9600AFBB90 /* GXMessagesLoadTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AF22956FC9600AFBB90 /* GXMessagesLoadTableView.swift */; };
-		96D30AF629585C9800AFBB90 /* GXMessagesLoadHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AF529585C9800AFBB90 /* GXMessagesLoadHeader.swift */; };
-		CC001A5B8E95A1BB9C568BCA /* Pods_GXMessagesTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6D5F89763373089D9C1E97 /* Pods_GXMessagesTableView.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		966C714D29A3FDCF00E7F91E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 96D30A852956F4F000AFBB90 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 966C714129A3FDCF00E7F91E;
-			remoteInfo = GXMessagesTableView;
-		};
-		966C714F29A3FDCF00E7F91E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 96D30A852956F4F000AFBB90 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 96D30A8C2956F4F000AFBB90;
-			remoteInfo = GXChatKitSample;
-		};
-		966C715529A3FDCF00E7F91E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 96D30A852956F4F000AFBB90 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 966C714129A3FDCF00E7F91E;
-			remoteInfo = GXMessagesTableView;
-		};
 		96D30AA42956F4F200AFBB90 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96D30A852956F4F000AFBB90 /* Project object */;
@@ -126,7 +90,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				96D30AE72956F5EE00AFBB90 /* GXChatUIKit.framework in Embed Frameworks */,
-				966C715829A3FDCF00E7F91E /* GXMessagesTableView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,21 +104,11 @@
 		62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.release.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.debug.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatKitSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9623D81C29B933BC00BE0BFB /* GXMessagesAvatarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAvatarProtocol.swift; sourceTree = "<group>"; };
 		9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTestCell.swift; sourceTree = "<group>"; };
 		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
 		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
 		965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GXChat.swift"; sourceTree = "<group>"; };
-		966C714229A3FDCF00E7F91E /* GXMessagesTableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GXMessagesTableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		966C714429A3FDCF00E7F91E /* GXMessagesTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GXMessagesTableView.h; sourceTree = "<group>"; };
-		966C714529A3FDCF00E7F91E /* GXMessagesTableView.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GXMessagesTableView.docc; sourceTree = "<group>"; };
-		966C714B29A3FDCF00E7F91E /* GXMessagesTableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXMessagesTableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		966C715229A3FDCF00E7F91E /* GXMessagesTableViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTableViewTests.swift; sourceTree = "<group>"; };
-		966C716429A3FEF000E7F91E /* GXMessagesLoadTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesLoadTableView.swift; sourceTree = "<group>"; };
-		966C716529A3FEF000E7F91E /* GXMessagesLoadHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesLoadHeader.swift; sourceTree = "<group>"; };
-		966C716829A3FFFA00E7F91E /* GXMessagesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTableView.swift; sourceTree = "<group>"; };
-		9682FAC129AC186E001D50D7 /* GXMessagesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesOperation.swift; sourceTree = "<group>"; };
 		969957552973BBD4001DCC17 /* GXMessagesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesData.swift; sourceTree = "<group>"; };
 		969957572973C8CE001DCC17 /* GXChatConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatConfiguration.swift; sourceTree = "<group>"; };
 		969957592973E698001DCC17 /* GXMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessageItem.swift; sourceTree = "<group>"; };
@@ -172,7 +125,6 @@
 		9699577129757F2D001DCC17 /* GXMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesViewController.swift; sourceTree = "<group>"; };
 		969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesBubbleFactory.swift; sourceTree = "<group>"; };
 		9699577729767567001DCC17 /* UIColor+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GXChat.swift"; sourceTree = "<group>"; };
-		96B7514C29B52C8F0035628A /* GXMessagesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTableView.swift; sourceTree = "<group>"; };
 		96D30A8D2956F4F000AFBB90 /* GXChatKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GXChatKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30A902956F4F000AFBB90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96D30A922956F4F000AFBB90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -189,35 +141,16 @@
 		96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GXChatUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30ADA2956F5ED00AFBB90 /* GXChatUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXChatUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatUIKitTests.swift; sourceTree = "<group>"; };
-		96D30AF22956FC9600AFBB90 /* GXMessagesLoadTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesLoadTableView.swift; sourceTree = "<group>"; };
-		96D30AF529585C9800AFBB90 /* GXMessagesLoadHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesLoadHeader.swift; sourceTree = "<group>"; };
 		B9131207F5A8F7E5B5C652D9 /* Pods-GXChatKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.release.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.release.xcconfig"; sourceTree = "<group>"; };
 		ED6FFD8355B3816675448810 /* Pods-GXChatKitSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.debug.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		966C713F29A3FDCF00E7F91E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CC001A5B8E95A1BB9C568BCA /* Pods_GXMessagesTableView.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		966C714829A3FDCF00E7F91E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				966C714C29A3FDCF00E7F91E /* GXMessagesTableView.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96D30A8A2956F4F000AFBB90 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */,
-				966C715729A3FDCF00E7F91E /* GXMessagesTableView.framework in Frameworks */,
 				3F0C3FE9B864F211F30B6AC6 /* Pods_GXChatKitSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,35 +231,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		966C714329A3FDCF00E7F91E /* GXMessagesTableView */ = {
-			isa = PBXGroup;
-			children = (
-				966C715F29A3FEC300E7F91E /* GXMessagesTableView */,
-				966C714429A3FDCF00E7F91E /* GXMessagesTableView.h */,
-				966C714529A3FDCF00E7F91E /* GXMessagesTableView.docc */,
-			);
-			path = GXMessagesTableView;
-			sourceTree = "<group>";
-		};
-		966C715129A3FDCF00E7F91E /* GXMessagesTableViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				966C715229A3FDCF00E7F91E /* GXMessagesTableViewTests.swift */,
-			);
-			path = GXMessagesTableViewTests;
-			sourceTree = "<group>";
-		};
-		966C715F29A3FEC300E7F91E /* GXMessagesTableView */ = {
-			isa = PBXGroup;
-			children = (
-				9682FAC129AC186E001D50D7 /* GXMessagesOperation.swift */,
-				966C716529A3FEF000E7F91E /* GXMessagesLoadHeader.swift */,
-				966C716429A3FEF000E7F91E /* GXMessagesLoadTableView.swift */,
-				966C716829A3FFFA00E7F91E /* GXMessagesTableView.swift */,
-			);
-			path = GXMessagesTableView;
-			sourceTree = "<group>";
-		};
 		969957522973BB6C001DCC17 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,8 +263,6 @@
 				96D30AB02956F4F200AFBB90 /* GXChatKitSampleUITests */,
 				96D30AD22956F5ED00AFBB90 /* GXChatUIKit */,
 				96D30AE02956F5EE00AFBB90 /* GXChatUIKitTests */,
-				966C714329A3FDCF00E7F91E /* GXMessagesTableView */,
-				966C715129A3FDCF00E7F91E /* GXMessagesTableViewTests */,
 				96D30A8E2956F4F000AFBB90 /* Products */,
 				BD056F6E9D9E8EC329DB42AC /* Pods */,
 				A75D028A4BDE053BE82C2036 /* Frameworks */,
@@ -375,8 +277,6 @@
 				96D30AAD2956F4F200AFBB90 /* GXChatKitSampleUITests.xctest */,
 				96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */,
 				96D30ADA2956F5ED00AFBB90 /* GXChatUIKitTests.xctest */,
-				966C714229A3FDCF00E7F91E /* GXMessagesTableView.framework */,
-				966C714B29A3FDCF00E7F91E /* GXMessagesTableViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -441,10 +341,6 @@
 		96D30AF12956FC1800AFBB90 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
-				96D30AF529585C9800AFBB90 /* GXMessagesLoadHeader.swift */,
-				96D30AF22956FC9600AFBB90 /* GXMessagesLoadTableView.swift */,
-				96B7514C29B52C8F0035628A /* GXMessagesTableView.swift */,
-				9623D81C29B933BC00BE0BFB /* GXMessagesAvatarProtocol.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -475,14 +371,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		966C713D29A3FDCF00E7F91E /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				966C715429A3FDCF00E7F91E /* GXMessagesTableView.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96D30ACC2956F5ED00AFBB90 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,44 +381,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		966C714129A3FDCF00E7F91E /* GXMessagesTableView */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 966C715D29A3FDCF00E7F91E /* Build configuration list for PBXNativeTarget "GXMessagesTableView" */;
-			buildPhases = (
-				31DCDD3460DA186F34418105 /* [CP] Check Pods Manifest.lock */,
-				966C713D29A3FDCF00E7F91E /* Headers */,
-				966C713E29A3FDCF00E7F91E /* Sources */,
-				966C713F29A3FDCF00E7F91E /* Frameworks */,
-				966C714029A3FDCF00E7F91E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = GXMessagesTableView;
-			productName = GXMessagesTableView;
-			productReference = 966C714229A3FDCF00E7F91E /* GXMessagesTableView.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		966C714A29A3FDCF00E7F91E /* GXMessagesTableViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 966C715E29A3FDCF00E7F91E /* Build configuration list for PBXNativeTarget "GXMessagesTableViewTests" */;
-			buildPhases = (
-				966C714729A3FDCF00E7F91E /* Sources */,
-				966C714829A3FDCF00E7F91E /* Frameworks */,
-				966C714929A3FDCF00E7F91E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				966C714E29A3FDCF00E7F91E /* PBXTargetDependency */,
-				966C715029A3FDCF00E7F91E /* PBXTargetDependency */,
-			);
-			name = GXMessagesTableViewTests;
-			productName = GXMessagesTableViewTests;
-			productReference = 966C714B29A3FDCF00E7F91E /* GXMessagesTableViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		96D30A8C2956F4F000AFBB90 /* GXChatKitSample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96D30AB72956F4F200AFBB90 /* Build configuration list for PBXNativeTarget "GXChatKitSample" */;
@@ -546,7 +396,6 @@
 			);
 			dependencies = (
 				96D30AE52956F5EE00AFBB90 /* PBXTargetDependency */,
-				966C715629A3FDCF00E7F91E /* PBXTargetDependency */,
 			);
 			name = GXChatKitSample;
 			productName = GXChatKitSample;
@@ -637,14 +486,6 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					966C714129A3FDCF00E7F91E = {
-						CreatedOnToolsVersion = 14.2;
-						LastSwiftMigration = 1420;
-					};
-					966C714A29A3FDCF00E7F91E = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 96D30A8C2956F4F000AFBB90;
-					};
 					96D30A8C2956F4F000AFBB90 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -684,27 +525,11 @@
 				96D30AAC2956F4F200AFBB90 /* GXChatKitSampleUITests */,
 				96D30AD02956F5ED00AFBB90 /* GXChatUIKit */,
 				96D30AD92956F5ED00AFBB90 /* GXChatUIKitTests */,
-				966C714129A3FDCF00E7F91E /* GXMessagesTableView */,
-				966C714A29A3FDCF00E7F91E /* GXMessagesTableViewTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		966C714029A3FDCF00E7F91E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		966C714929A3FDCF00E7F91E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96D30A8B2956F4F000AFBB90 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -769,28 +594,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		31DCDD3460DA186F34418105 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GXMessagesTableView-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5B6962795790C31A11D988D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -833,26 +636,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		966C713E29A3FDCF00E7F91E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9682FAC229AC186E001D50D7 /* GXMessagesOperation.swift in Sources */,
-				966C716629A3FEF000E7F91E /* GXMessagesLoadTableView.swift in Sources */,
-				966C714629A3FDCF00E7F91E /* GXMessagesTableView.docc in Sources */,
-				966C716929A3FFFA00E7F91E /* GXMessagesTableView.swift in Sources */,
-				966C716729A3FEF000E7F91E /* GXMessagesLoadHeader.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		966C714729A3FDCF00E7F91E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				966C715329A3FDCF00E7F91E /* GXMessagesTableViewTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96D30A892956F4F000AFBB90 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -885,17 +668,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B7514D29B52C8F0035628A /* GXMessagesTableView.swift in Sources */,
 				9699575E297407EF001DCC17 /* GXMessagesBubble.swift in Sources */,
 				9699576629752525001DCC17 /* GXMessagesVideoContent.swift in Sources */,
 				965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */,
 				969957762975A9D6001DCC17 /* GXMessagesBubbleFactory.swift in Sources */,
 				9699575C2974075F001DCC17 /* GXMessagesAvatar.swift in Sources */,
-				96D30AF32956FC9600AFBB90 /* GXMessagesLoadTableView.swift in Sources */,
 				9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */,
 				969957682975756A001DCC17 /* GXMessagesAvatarFactory.swift in Sources */,
 				9699575A2973E698001DCC17 /* GXMessageItem.swift in Sources */,
-				9623D81D29B933BC00BE0BFB /* GXMessagesAvatarProtocol.swift in Sources */,
 				9699576429751AFC001DCC17 /* GXMessagesPhotoContent.swift in Sources */,
 				9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */,
 				969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */,
@@ -906,7 +686,6 @@
 				9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */,
 				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
 				96995760297506B2001DCC17 /* GXMessagesContentData.swift in Sources */,
-				96D30AF629585C9800AFBB90 /* GXMessagesLoadHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,21 +700,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		966C714E29A3FDCF00E7F91E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 966C714129A3FDCF00E7F91E /* GXMessagesTableView */;
-			targetProxy = 966C714D29A3FDCF00E7F91E /* PBXContainerItemProxy */;
-		};
-		966C715029A3FDCF00E7F91E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 96D30A8C2956F4F000AFBB90 /* GXChatKitSample */;
-			targetProxy = 966C714F29A3FDCF00E7F91E /* PBXContainerItemProxy */;
-		};
-		966C715629A3FDCF00E7F91E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 966C714129A3FDCF00E7F91E /* GXMessagesTableView */;
-			targetProxy = 966C715529A3FDCF00E7F91E /* PBXContainerItemProxy */;
-		};
 		96D30AA52956F4F200AFBB90 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 96D30A8C2956F4F000AFBB90 /* GXChatKitSample */;
@@ -983,109 +747,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		966C715929A3FDCF00E7F91E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C4DFB93AB4668590E470782 /* Pods-GXMessagesTableView.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = G8M2K7562P;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gin.GXMessagesTableView;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		966C715A29A3FDCF00E7F91E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FAEEC3E597AFF18CABE4A46 /* Pods-GXMessagesTableView.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = G8M2K7562P;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gin.GXMessagesTableView;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		966C715B29A3FDCF00E7F91E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G8M2K7562P;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gin.GXMessagesTableViewTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GXChatKitSample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GXChatKitSample";
-			};
-			name = Debug;
-		};
-		966C715C29A3FDCF00E7F91E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G8M2K7562P;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gin.GXMessagesTableViewTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GXChatKitSample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GXChatKitSample";
-			};
-			name = Release;
-		};
 		96D30AB52956F4F200AFBB90 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1446,24 +1107,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		966C715D29A3FDCF00E7F91E /* Build configuration list for PBXNativeTarget "GXMessagesTableView" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				966C715929A3FDCF00E7F91E /* Debug */,
-				966C715A29A3FDCF00E7F91E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		966C715E29A3FDCF00E7F91E /* Build configuration list for PBXNativeTarget "GXMessagesTableViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				966C715B29A3FDCF00E7F91E /* Debug */,
-				966C715C29A3FDCF00E7F91E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		96D30A882956F4F000AFBB90 /* Build configuration list for PBXProject "GXChatKitSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

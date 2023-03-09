@@ -2,22 +2,22 @@
 
 import UIKit
 import Reusable
-import GXChatUIKit
+import GXMessagesTableView
 
 public struct TestData: GXMessagesAvatarDataProtocol {
     var avatarID: String = ""
-    var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin
-    var messageStatus: GXChatConfiguration.MessageStatus = .sending
+    var messageContinuousStatus: GXMessageContinuousStatus = .begin
+    var messageStatus: GXMessageStatus = .sending
     var avatarText: String = ""
     var text: String = ""
     
     //MARK: - GXMessagesAvatarDataSource
     
-    public var gx_messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus {
+    public var gx_messageContinuousStatus: GXMessageContinuousStatus {
         return self.messageContinuousStatus
     }
     
-    public var gx_messageStatus: GXChatConfiguration.MessageStatus {
+    public var gx_messageStatus: GXMessageStatus {
         return self.messageStatus
     }
     

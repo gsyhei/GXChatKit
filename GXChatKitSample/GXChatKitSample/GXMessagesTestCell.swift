@@ -7,7 +7,7 @@
 
 import UIKit
 import Reusable
-import GXChatUIKit
+import GXMessagesTableView
 
 class GXMessagesTestCell: GXMessagesAvatarCellProtocol, Reusable {
     

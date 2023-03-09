@@ -13,7 +13,12 @@ public class GXMessagesLoadHeader: GXRefreshBaseHeader {
     public var headerMargin: CGFloat = 5.0
     
     private lazy var indicatorView = {
-        let aiView = UIActivityIndicatorView(style: .white)
+        let aiView: UIActivityIndicatorView
+        if #available(iOS 13.0, *) {
+            aiView = UIActivityIndicatorView(style: .medium)
+        } else {
+            aiView = UIActivityIndicatorView(style: .white)
+        }
         let size: CGFloat  = self.gx_height - headerMargin * 2;
         aiView.frame = CGRect(x: 0, y: 0, width: size, height: size)
         aiView.color = .gray

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_GXMessagesTableViewVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_GXMessagesTableViewVersionString[];
+FOUNDATION_EXPORT double GXMessagesTableViewVersionNumber;
+FOUNDATION_EXPORT const unsigned char GXMessagesTableViewVersionString[];
 
