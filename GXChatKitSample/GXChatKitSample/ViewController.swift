@@ -4,7 +4,7 @@ import UIKit
 import Reusable
 import GXChatUIKit
 
-public struct TestData: GXMessagesAvatarDataSource {
+public struct TestData: GXMessagesAvatarDataProtocol {
     var avatarID: String = ""
     var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin
     var messageStatus: GXChatConfiguration.MessageStatus = .sending
@@ -100,7 +100,7 @@ class ViewController: UIViewController {
 
 extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
     
-    func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataSource {        
+    func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataProtocol {        
         return self.list[indexPath.section][indexPath.row]
     }
     

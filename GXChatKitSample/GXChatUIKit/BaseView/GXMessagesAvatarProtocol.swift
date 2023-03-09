@@ -16,7 +16,7 @@ public protocol GXMessagesAvatarViewProtocol {
     func createAvatarView() -> UIView
 }
 
-public protocol GXMessagesAvatarDataSource {
+public protocol GXMessagesAvatarDataProtocol {
     
     var gx_messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus { get }
     

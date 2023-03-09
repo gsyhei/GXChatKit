@@ -8,14 +8,14 @@
 import UIKit
 
 public protocol GXMessagesTableViewDatalist: NSObjectProtocol {
-    func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataSource
+    func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataProtocol
     func gx_tableView(_ tableView: UITableView, changeForRowAt indexPath: IndexPath, avatar: UIView)
 }
 
 public class GXMessagesTableView: GXMessagesLoadTableView {
     public weak var datalist: GXMessagesTableViewDatalist?
     private var hoverAvatar: UIView?
-    private var hoverAvatarData: GXMessagesAvatarDataSource?
+    private var hoverAvatarData: GXMessagesAvatarDataProtocol?
     private var lastHiddenIndexPath: IndexPath?
     
     public override init(frame: CGRect, style: UITableView.Style) {
