@@ -7,38 +7,16 @@
 
 import UIKit
 import Reusable
+import GXChatUIKit
 
-open class GXMessagesTableViewCell: GXMessagesAvatarDataSource, Reusable {
+class GXMessagesTestCell: GXMessagesAvatarCellProtocol, Reusable {
     
     public var avatar: UIView {
         return self.avatarButton
     }
         
-    public func createAvatarView() -> UIButton {
+    public func createAvatarView() -> UIView {
         return getAvatar()
-    }
-    
-    public var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin {
-        didSet {
-            self.avatarButton.isHidden = (messageContinuousStatus != .end && messageContinuousStatus != .beginAndEnd)
-        }
-    }
-    
-    public var messageStatus: GXChatConfiguration.MessageStatus = .receiving {
-        didSet {
-            if messageStatus == .receiving {
-                let size: CGFloat = 60.0
-                let rect = CGRect(x: 0, y: self.contentView.height - size, width: size, height: size)
-                self.avatarButton.frame = rect
-                self.avatarButton.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin]
-            }
-            else {
-                let size: CGFloat = 60.0
-                let rect = CGRect(x: self.contentView.width - size, y: self.contentView.height - size, width: size, height: size)
-                self.avatarButton.frame = rect
-                self.avatarButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
-            }
-        }
     }
     
     public lazy var avatarButton: UIButton = {
@@ -77,6 +55,23 @@ open class GXMessagesTableViewCell: GXMessagesAvatarDataSource, Reusable {
 
     public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func bindCell(data: TestData) {
+        self.avatarButton.setTitle(data.avatarText, for: .normal)
+        self.avatarButton.isHidden = (data.messageContinuousStatus != .end && data.messageContinuousStatus != .beginAndEnd)
+        if data.messageStatus == .receiving {
+            let size: CGFloat = 60.0
+            let rect = CGRect(x: 0, y: self.contentView.height - size, width: size, height: size)
+            self.avatarButton.frame = rect
+            self.avatarButton.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin]
+        }
+        else {
+            let size: CGFloat = 60.0
+            let rect = CGRect(x: self.contentView.width - size, y: self.contentView.height - size, width: size, height: size)
+            self.avatarButton.frame = rect
+            self.avatarButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
+        }
     }
 
 }

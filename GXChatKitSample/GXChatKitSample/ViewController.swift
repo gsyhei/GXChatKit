@@ -4,12 +4,26 @@ import UIKit
 import Reusable
 import GXChatUIKit
 
-struct TestData {
+public struct TestData: GXMessagesAvatarDataSource {
     var avatarID: String = ""
     var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin
     var messageStatus: GXChatConfiguration.MessageStatus = .sending
     var avatarText: String = ""
     var text: String = ""
+    
+    //MARK: - GXMessagesAvatarDataSource
+    
+    public var gx_messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus {
+        return self.messageContinuousStatus
+    }
+    
+    public var gx_messageStatus: GXChatConfiguration.MessageStatus {
+        return self.messageStatus
+    }
+    
+    public var gx_senderId: String {
+        return self.avatarID
+    }
 }
 
 class ViewController: UIViewController {
@@ -32,7 +46,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.view.addSubview(self.tableView)
-        self.tableView.register(cellType: GXMessagesTableViewCell.self)
+        self.tableView.register(cellType: GXMessagesTestCell.self)
         self.tableView.sectionHeaderHeight = 30.0
         self.tableView.addMessagesHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
@@ -86,10 +100,8 @@ class ViewController: UIViewController {
 
 extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
     
-    func gx_tableView(_ tableView: UITableView, avatarIdForRowAt indexPath: IndexPath) -> String {
-        let data = self.list[indexPath.section][indexPath.row]
-        
-        return data.avatarID
+    func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataSource {        
+        return self.list[indexPath.section][indexPath.row]
     }
     
     func gx_tableView(_ tableView: UITableView, changeForRowAt indexPath: IndexPath, avatar: UIView) {
@@ -109,13 +121,11 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: GXMessagesTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        let data = self.list[indexPath.section][indexPath.row]
+        let cell: GXMessagesTestCell = tableView.dequeueReusableCell(for: indexPath)
         
+        let data = self.list[indexPath.section][indexPath.row]
         cell.textLabel?.text = "\t\t\t section: \(indexPath.section), row: \(indexPath.row), id: \(data.text)"
-        cell.avatarButton.setTitle(data.avatarText, for: .normal)
-        cell.messageContinuousStatus = data.messageContinuousStatus
-        cell.messageStatus = data.messageStatus
+        cell.bindCell(data: data)
         
         return cell
     }
