@@ -11,7 +11,7 @@ import GXRefresh
 
 open class GXMessagesLoadTableView: UITableView {
     
-    private var isHeaderLoading: Bool = false
+    public var isHeaderLoading: Bool = false
 
     open var headerHeight: CGFloat = 40.0
         

@@ -8,26 +8,51 @@
 import UIKit
 import Reusable
 
-open class GXMessagesTableViewCell: UITableViewCell, Reusable {
+open class GXMessagesTableViewCell: GXMessagesAvatarDataSource, Reusable {
+    
+    public var avatar: UIView {
+        return self.avatarButton
+    }
+        
+    public func createAvatarView() -> UIButton {
+        return getAvatar()
+    }
     
     public var messageContinuousStatus: GXChatConfiguration.MessageContinuousStatus = .begin {
         didSet {
-            self.avatar.isHidden = (messageContinuousStatus != .end && messageContinuousStatus != .beginAndEnd)
+            self.avatarButton.isHidden = (messageContinuousStatus != .end && messageContinuousStatus != .beginAndEnd)
         }
     }
     
-    public func getAvatar() -> UIButton {
+    public var messageStatus: GXChatConfiguration.MessageStatus = .receiving {
+        didSet {
+            if messageStatus == .receiving {
+                let size: CGFloat = 60.0
+                let rect = CGRect(x: 0, y: self.contentView.height - size, width: size, height: size)
+                self.avatarButton.frame = rect
+                self.avatarButton.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin]
+            }
+            else {
+                let size: CGFloat = 60.0
+                let rect = CGRect(x: self.contentView.width - size, y: self.contentView.height - size, width: size, height: size)
+                self.avatarButton.frame = rect
+                self.avatarButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
+            }
+        }
+    }
+    
+    public lazy var avatarButton: UIButton = {
+        let button = self.getAvatar()
+
+        return button
+    }()
+    
+    private func getAvatar() -> UIButton {
         let button = UIButton(type: .custom)
         button.backgroundColor = .red
 
         return button
     }
-    
-    public lazy var avatar: UIButton = {
-        let button = self.getAvatar()
-
-        return button
-    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,26 +68,15 @@ open class GXMessagesTableViewCell: UITableViewCell, Reusable {
         self.setupCell()
     }
     
-    open override func prepareForReuse() {
-        var rect = self.avatar.frame
-        rect.origin.y = self.contentView.height - self.avatar.frame.height
-        self.avatar.frame = rect
-    }
-    
     func setupCell() {
         let size: CGFloat = 60.0
         let rect = CGRect(x: 0, y: self.contentView.height - size, width: size, height: size)
-        self.avatar.frame = rect
-        self.avatar.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin]
-        self.contentView.addSubview(self.avatar)
+        self.avatarButton.frame = rect
+        self.contentView.addSubview(self.avatarButton)
     }
 
     public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-        
-        
     }
 
 }
