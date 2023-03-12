@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3F0C3FE9B864F211F30B6AC6 /* Pods_GXChatKitSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */; };
+		96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96198E5D29BAD7AC005C42A2 /* GXDefine.swift */; };
+		96198E6029BD31C1005C42A2 /* GXMessagesMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */; };
+		96198E6229BD5781005C42A2 /* GXTestTextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96198E6129BD5781005C42A2 /* GXTestTextData.swift */; };
 		9623D81F29B983B300BE0BFB /* GXMessagesTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */; };
 		9639158D2962796F002974F7 /* Pods_GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */; };
 		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
@@ -104,6 +107,9 @@
 		62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.release.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.debug.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatKitSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96198E5D29BAD7AC005C42A2 /* GXDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXDefine.swift; sourceTree = "<group>"; };
+		96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesMediaCell.swift; sourceTree = "<group>"; };
+		96198E6129BD5781005C42A2 /* GXTestTextData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXTestTextData.swift; sourceTree = "<group>"; };
 		9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTestCell.swift; sourceTree = "<group>"; };
 		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
@@ -188,6 +194,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96198E5C29BAD7AC005C42A2 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				96198E5D29BAD7AC005C42A2 /* GXDefine.swift */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
 		9639158A2962785B002974F7 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +241,7 @@
 			children = (
 				965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */,
 				965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */,
+				96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -240,9 +255,9 @@
 				9699576129750CFF001DCC17 /* GXMessagesTextContent.swift */,
 				9699576329751AFC001DCC17 /* GXMessagesPhotoContent.swift */,
 				9699576529752525001DCC17 /* GXMessagesVideoContent.swift */,
-				969957592973E698001DCC17 /* GXMessageItem.swift */,
 				9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */,
 				9699575D297407EF001DCC17 /* GXMessagesBubble.swift */,
+				969957592973E698001DCC17 /* GXMessageItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -287,6 +302,7 @@
 				96D30A902956F4F000AFBB90 /* AppDelegate.swift */,
 				96D30A922956F4F000AFBB90 /* SceneDelegate.swift */,
 				96D30A942956F4F000AFBB90 /* ViewController.swift */,
+				96198E6129BD5781005C42A2 /* GXTestTextData.swift */,
 				9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */,
 				96D30A962956F4F000AFBB90 /* Main.storyboard */,
 				96D30A992956F4F100AFBB90 /* Assets.xcassets */,
@@ -317,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				965FA5AE296C3AA8001D7633 /* Resources */,
+				96198E5C29BAD7AC005C42A2 /* Define */,
 				969957522973BB6C001DCC17 /* Models */,
 				965FA5B12970431D001D7633 /* Factories */,
 				965FA5B22970439B001D7633 /* Cells */,
@@ -640,6 +657,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96198E6229BD5781005C42A2 /* GXTestTextData.swift in Sources */,
 				96D30A952956F4F000AFBB90 /* ViewController.swift in Sources */,
 				96D30A912956F4F000AFBB90 /* AppDelegate.swift in Sources */,
 				9623D81F29B983B300BE0BFB /* GXMessagesTestCell.swift in Sources */,
@@ -679,11 +697,13 @@
 				9699576429751AFC001DCC17 /* GXMessagesPhotoContent.swift in Sources */,
 				9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */,
 				969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */,
+				96198E6029BD31C1005C42A2 /* GXMessagesMediaCell.swift in Sources */,
 				9699576E29757CD1001DCC17 /* Bundle+GXChat.swift in Sources */,
 				969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */,
 				965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */,
 				965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */,
 				9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */,
+				96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */,
 				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
 				96995760297506B2001DCC17 /* GXMessagesContentData.swift in Sources */,
 			);

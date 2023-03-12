@@ -16,22 +16,22 @@ class GXMessagesVideoContent: GXMessagesContentData {
     private(set) var fileURL: NSURL?
     /// 缩略图
     private(set) var thumbnailImage: UIImage?
-    
-    public var text: String? = nil
-    
+        
     public var mediaView: UIView?
     
     public var mediaPlaceholderView: UIView?
     
     public var displaySize: CGSize = CGSizeZero
     
-    public required init(thumbnailImageURL: NSURL, videoURL: NSURL) {
+    public required init(thumbnailImageURL: NSURL, videoURL: NSURL? = nil, displaySize: CGSize) {
         self.thumbnailImageURL = thumbnailImageURL
         self.videoURL = videoURL
+        self.displaySize = displaySize
     }
     
-    public required init(thumbnailImage: UIImage, fileURL: NSURL) {
+    public required init(thumbnailImage: UIImage?, fileURL: NSURL? = nil) {
         self.thumbnailImage = thumbnailImage
         self.fileURL = fileURL
+        self.displaySize = thumbnailImage?.size ?? .zero
     }
 }

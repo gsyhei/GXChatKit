@@ -57,7 +57,7 @@ class GXMessagesTestCell: GXMessagesAvatarCellProtocol, Reusable {
         super.setSelected(selected, animated: animated)
     }
     
-    func bindCell(data: TestData) {
+    func bindCell(data: GXTestTextData) {
         self.avatarButton.setTitle(data.avatarText, for: .normal)
         self.avatarButton.isHidden = (data.messageContinuousStatus != .end && data.messageContinuousStatus != .beginAndEnd)
         if data.messageStatus == .receiving {

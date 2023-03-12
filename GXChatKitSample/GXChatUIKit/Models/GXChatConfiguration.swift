@@ -8,11 +8,20 @@
 import UIKit
 
 public class GXChatConfiguration: NSObject {
+    
     /// 会话头像尺寸
-    public var avatarSize: CGSize = CGSize(width: 50.0, height: 50.0)
+    public var avatarSize: CGSize = CGSize(width: 40.0, height: 40.0) {
+        didSet {
+            self.avatarRadius = avatarSize.height * 0.5
+        }
+    }
     /// 会话头像圆角
     public var avatarRadius: CGFloat = 25.0
-    
+    /// 头像在前的气泡inset
+    public var bubbleLeadingInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 10)
+    /// 头像在后的气泡inset
+    public var bubbleTrailingInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 17)
+        
     /// 开始气泡图
     public var bubbleBeginImage: UIImage? = .gx_bundleAssetImage(name: "bubble_min_tailless")
     /// 持续中气泡图
@@ -20,18 +29,44 @@ public class GXChatConfiguration: NSObject {
     /// 结束气泡图
     public var bubbleEndImage: UIImage? = .gx_bundleAssetImage(name: "bubble_min")
     /// 发送方气泡色
-    public var sendingBubbleMaskColor: UIColor = .green
+    public var sendingBubbleMaskColor: UIColor = .systemGreen
     /// 接收方气泡色
     public var receivingBubbleMaskColor: UIColor = .white
 
     /// 单聊发送方是否显示头像
-    public var singleChatSendingShowAvatar: Bool = true
+    public var singleChatSendingShowAvatar: Bool = false
     /// 单聊接收方是否显示头像
     public var singleChatReceivingShowAvatar: Bool = true
     /// 群组发送方是否显示头像
-    public var groupChatSendingShowAvatar: Bool = true
+    public var groupChatSendingShowAvatar: Bool = false
     /// 群组接收方是否显示头像
     public var groupChatReceivingShowAvatar: Bool = true
+    
+    /// 单聊发送方是否显示昵称
+    public var singleChatSendingShowNickname: Bool = true
+    /// 单聊接收方是否显示昵称
+    public var singleChatReceivingShowNickname: Bool = true
+    /// 群组发送方是否显示昵称
+    public var groupChatSendingShowNickname: Bool = true
+    /// 群组接收方是否显示昵称
+    public var groupChatReceivingShowNickname: Bool = true
+    
+    /// 文本字体
+    public var textFont: UIFont = .systemFont(ofSize: 15)
+    /// 文本颜色
+    public var textColor: UIColor = UIColor(hex: 0x333333)
+    /// 昵称字体
+    public var nicknameFont: UIFont = .boldSystemFont(ofSize: 15)
+    /// 发送方昵称颜色
+    public var sendingNicknameColor: UIColor = .systemBlue
+    /// 接收方昵称颜色
+    public var receivingNicknameColor: UIColor = .systemBlue
+    /// 时间字体
+    public var timeFont: UIFont = .systemFont(ofSize: 10)
+    /// 发送方时间颜色
+    public var sendingTimeColor: UIColor = UIColor(hex: 0x009900)
+    /// 接收方时间颜色
+    public var receivingTimeColor: UIColor = .gray
 }
 
 public extension GXChatConfiguration {
@@ -81,18 +116,6 @@ public extension GXChatConfiguration {
         case read    = 1
         /// 全部已读（群消息）
         case allRead = 2
-    }
-    
-    /// 消息连续状态
-    enum MessageContinuousStatus: Int {
-        /// 开始
-        case begin       = 0
-        /// 持续中
-        case ongoing     = 1
-        /// 结束
-        case end         = 2
-        /// 结束
-        case beginAndEnd = 3
     }
     
     /// 消息菜单

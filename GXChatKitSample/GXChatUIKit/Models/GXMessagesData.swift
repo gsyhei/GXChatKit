@@ -6,22 +6,29 @@
 //
 
 import Foundation
+import GXMessagesTableView
+
+public typealias GXMessagesDataProtocol = GXMessagesData & GXMessagesAvatarDataProtocol
 
 public protocol GXMessagesData {
     /// 发送方ID
-    var senderId: String { get }
+    var gx_senderId: String { get }
     /// 发送方显示名称
-    var senderDisplayName: String { get }
+    var gx_senderDisplayName: String { get }
     /// 发送方头像
-    var sendAvatarUrl: NSURL { get }
+    var gx_sendAvatarUrl: NSURL? { get }
     /// 消息日期
-    var messageDate: Date { get }
+    var gx_messageDate: Date { get }
+    /// 消息显示时间
+    var gx_messageTime: String { get }
+    /// 聊天类型
+    var gx_chatType: GXChatConfiguration.ChatType { get }
     /// 消息类型
-    var messageType: GXChatConfiguration.MessageType { get }
-    /// 消息状态
-    var messageStatus: GXChatConfiguration.MessageStatus { get }
+    var gx_messageType: GXChatConfiguration.MessageType { get }
     /// 消息发送状态
-    var messageSendStatus: GXChatConfiguration.MessageSendStatus { get }
+    var gx_messageSendStatus: GXChatConfiguration.MessageSendStatus { get }
     /// 消息读取状态
-    var messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
+    var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
+    /// 消息内容
+    var gx_messagesContentData: GXMessagesContentData { get }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 public class GXMessagesTextContent: GXMessagesContentData {
     
-    public var text: String?
+    public var text: String
     
     public var mediaView: UIView? = nil
     

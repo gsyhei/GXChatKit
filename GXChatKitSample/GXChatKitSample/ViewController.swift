@@ -3,41 +3,21 @@
 import UIKit
 import Reusable
 import GXMessagesTableView
-
-public struct TestData: GXMessagesAvatarDataProtocol {
-    var avatarID: String = ""
-    var messageContinuousStatus: GXMessageContinuousStatus = .begin
-    var messageStatus: GXMessageStatus = .sending
-    var avatarText: String = ""
-    var text: String = ""
-    
-    //MARK: - GXMessagesAvatarDataSource
-    
-    public var gx_messageContinuousStatus: GXMessageContinuousStatus {
-        return self.messageContinuousStatus
-    }
-    
-    public var gx_messageStatus: GXMessageStatus {
-        return self.messageStatus
-    }
-    
-    public var gx_senderId: String {
-        return self.avatarID
-    }
-}
+import GXChatUIKit
 
 class ViewController: UIViewController {
     
-    private var list: [[TestData]] = []
+    private var list: [[GXMessageItem]] = []
     
     private lazy var tableView: GXMessagesTableView = {
         let tv = GXMessagesTableView(frame: self.view.bounds, style: .plain)
         tv.dataSource = self
         tv.delegate = self
         tv.datalist = self
-        tv.backgroundColor = .white
+        tv.backgroundColor = UIColor(hexString: "#333333")
         tv.rowHeight = 100.0
-        
+        tv.separatorStyle = .none
+
         return tv
     }()
 
@@ -46,7 +26,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.view.addSubview(self.tableView)
-        self.tableView.register(cellType: GXMessagesTestCell.self)
+        self.tableView.register(cellType: GXMessagesTextCell.self)
+        self.tableView.register(cellType: GXMessagesMediaCell.self)
+        
         self.tableView.sectionHeaderHeight = 30.0
         self.tableView.addMessagesHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
@@ -60,32 +42,57 @@ class ViewController: UIViewController {
     }
     
     public func updateDatas() {
-        var array: [TestData] = []
+        var array: [GXMessageItem] = []
 
         for index in 0..<40 {
             let column = index / 4
             let cuindex = index % 4
             
-            var data = TestData()
-            data.text = "index\(index)"
-            if cuindex == 0 {
-                data.messageContinuousStatus = .begin
-            } else if cuindex == 3 {
-                data.messageContinuousStatus = .end
-            } else {
-                data.messageContinuousStatus = .ongoing
-            }
-            data.messageStatus = (column%4 > 1) ? .sending : .receiving
-            if data.messageStatus == .sending {
-                data.avatarID = "111111111111"
-                data.avatarText = "发送"
+            if cuindex == 2 {
+                var data = GXTestTextData()
+                data.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+                if cuindex == 0 {
+                    data.messageContinuousStatus = .begin
+                } else if cuindex == 3 {
+                    data.messageContinuousStatus = .end
+                } else {
+                    data.messageContinuousStatus = .ongoing
+                }
+                data.messageStatus = (column%4 > 1) ? .sending : .receiving
+                if data.messageStatus == .sending {
+                    data.avatarID = "111111111111"
+                    data.avatarText = "发送"
+                }
+                else {
+                    data.avatarID = "\(column)"
+                    data.avatarText = "收\(column)"
+                }
+
+                let item = GXMessageItem(data: data)
+                array.append(item)
             }
             else {
-                data.avatarID = "\(column)"
-                data.avatarText = "收\(column)"
-            }
+                var data = GXTestPhotoData()
+                if cuindex == 0 {
+                    data.messageContinuousStatus = .begin
+                } else if cuindex == 3 {
+                    data.messageContinuousStatus = .end
+                } else {
+                    data.messageContinuousStatus = .ongoing
+                }
+                data.messageStatus = (column%4 > 1) ? .sending : .receiving
+                if data.messageStatus == .sending {
+                    data.avatarID = "111111111111"
+                    data.avatarText = "发送"
+                }
+                else {
+                    data.avatarID = "\(column)"
+                    data.avatarText = "收\(column)"
+                }
 
-            array.append(data)
+                let item = GXMessageItem(data: data)
+                array.append(item)
+            }
         }
         self.list.append(array)
     }
@@ -98,17 +105,21 @@ class ViewController: UIViewController {
 
 }
 
-extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
+extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
     
     func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataProtocol {        
-        return self.list[indexPath.section][indexPath.row]
+        return self.list[indexPath.section][indexPath.row].data
     }
     
     func gx_tableView(_ tableView: UITableView, changeForRowAt indexPath: IndexPath, avatar: UIView) {
-        let data = self.list[indexPath.section][indexPath.row]
-        
         if let avatarButton = avatar as? UIButton {
-            avatarButton.setTitle(data.avatarText, for: .normal)
+            let item = self.list[indexPath.section][indexPath.row]
+            if item.gx_isShowAvatar {
+                GXMessagesBaseCell.updateAvatar(item: item, avatarButton: avatarButton)
+            }
+            else {
+                avatarButton.isHidden = true
+            }
         }
     }
     
@@ -121,13 +132,28 @@ extension  ViewController: UITableViewDataSource, UITableViewDelegate, GXMessage
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: GXMessagesTestCell = tableView.dequeueReusableCell(for: indexPath)
-        
-        let data = self.list[indexPath.section][indexPath.row]
-        cell.textLabel?.text = "\t\t\t section: \(indexPath.section), row: \(indexPath.row), id: \(data.text)"
-        cell.bindCell(data: data)
-        
-        return cell
+        let item = self.list[indexPath.section][indexPath.row]
+        switch item.data.gx_messageType {
+        case .text:
+            let cell: GXMessagesTextCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
+            
+            return cell
+        case .phote:
+            let cell: GXMessagesMediaCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
+            
+            return cell
+            
+        default: break
+        }
+        return UITableViewCell ()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = self.list[indexPath.section][indexPath.row]
+
+        return item.cellHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

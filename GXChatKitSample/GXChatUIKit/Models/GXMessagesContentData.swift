@@ -8,8 +8,6 @@
 import UIKit
 
 public protocol GXMessagesContentData {
-    /// 文本
-    var text: String? { get }
     /// 媒体视图
     var mediaView: UIView? { get }
     /// 媒体占位视图
