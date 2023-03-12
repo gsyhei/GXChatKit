@@ -8,8 +8,7 @@
 import UIKit
 import GXMessagesTableView
 
-public class GXMessageItem {
-    
+public class GXMessagesItemData {
     public var data: GXMessagesDataProtocol
     
     public var avatar: GXMessagesAvatar?
@@ -40,7 +39,7 @@ public class GXMessageItem {
     }
 }
  
-private extension GXMessageItem {
+private extension GXMessagesItemData {
     
     func updateBaseLayout(containerWidth: CGFloat, containerHeight: CGFloat) {
         let containerLeft = self.gx_containerLeft(container: containerWidth)
@@ -147,7 +146,7 @@ private extension GXMessageItem {
     
 }
 
-public extension GXMessageItem {
+public extension GXMessagesItemData {
     /// 头像是否显示
     var gx_isShowAvatar: Bool {
         if self.data.gx_messageStatus == .sending {

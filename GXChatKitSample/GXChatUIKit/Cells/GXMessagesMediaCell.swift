@@ -24,7 +24,7 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         super.createSubviews()
     }
 
-    public override func bindCell(item: GXMessageItem) {
+    public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
         self.messageBubbleNameLabel.textColor = .white

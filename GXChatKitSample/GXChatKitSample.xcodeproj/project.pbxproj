@@ -19,7 +19,7 @@
 		965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */; };
 		969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957552973BBD4001DCC17 /* GXMessagesData.swift */; };
 		969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957572973C8CE001DCC17 /* GXChatConfiguration.swift */; };
-		9699575A2973E698001DCC17 /* GXMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957592973E698001DCC17 /* GXMessageItem.swift */; };
+		9699575A2973E698001DCC17 /* GXMessagesItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957592973E698001DCC17 /* GXMessagesItemData.swift */; };
 		9699575C2974075F001DCC17 /* GXMessagesAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */; };
 		9699575E297407EF001DCC17 /* GXMessagesBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699575D297407EF001DCC17 /* GXMessagesBubble.swift */; };
 		96995760297506B2001DCC17 /* GXMessagesContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699575F297506B2001DCC17 /* GXMessagesContentData.swift */; };
@@ -32,6 +32,8 @@
 		9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577129757F2D001DCC17 /* GXMessagesViewController.swift */; };
 		969957762975A9D6001DCC17 /* GXMessagesBubbleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */; };
 		9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577729767567001DCC17 /* UIColor+GXChat.swift */; };
+		96D13EFD29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D13EFC29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift */; };
+		96D13EFF29BDA6F900BF4B80 /* GXMessagesSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */; };
 		96D30A912956F4F000AFBB90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A902956F4F000AFBB90 /* AppDelegate.swift */; };
 		96D30A932956F4F000AFBB90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A922956F4F000AFBB90 /* SceneDelegate.swift */; };
 		96D30A952956F4F000AFBB90 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30A942956F4F000AFBB90 /* ViewController.swift */; };
@@ -117,7 +119,7 @@
 		965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GXChat.swift"; sourceTree = "<group>"; };
 		969957552973BBD4001DCC17 /* GXMessagesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesData.swift; sourceTree = "<group>"; };
 		969957572973C8CE001DCC17 /* GXChatConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatConfiguration.swift; sourceTree = "<group>"; };
-		969957592973E698001DCC17 /* GXMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessageItem.swift; sourceTree = "<group>"; };
+		969957592973E698001DCC17 /* GXMessagesItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesItemData.swift; sourceTree = "<group>"; };
 		9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAvatar.swift; sourceTree = "<group>"; };
 		9699575D297407EF001DCC17 /* GXMessagesBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesBubble.swift; sourceTree = "<group>"; };
 		9699575F297506B2001DCC17 /* GXMessagesContentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesContentData.swift; sourceTree = "<group>"; };
@@ -131,6 +133,8 @@
 		9699577129757F2D001DCC17 /* GXMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesViewController.swift; sourceTree = "<group>"; };
 		969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesBubbleFactory.swift; sourceTree = "<group>"; };
 		9699577729767567001DCC17 /* UIColor+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GXChat.swift"; sourceTree = "<group>"; };
+		96D13EFC29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSectionHeader.swift; sourceTree = "<group>"; };
+		96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSectionData.swift; sourceTree = "<group>"; };
 		96D30A8D2956F4F000AFBB90 /* GXChatKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GXChatKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30A902956F4F000AFBB90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96D30A922956F4F000AFBB90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 		965FA5B22970439B001D7633 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				96D13EFC29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift */,
 				965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */,
 				965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */,
 				96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */,
@@ -257,7 +262,8 @@
 				9699576529752525001DCC17 /* GXMessagesVideoContent.swift */,
 				9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */,
 				9699575D297407EF001DCC17 /* GXMessagesBubble.swift */,
-				969957592973E698001DCC17 /* GXMessageItem.swift */,
+				96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */,
+				969957592973E698001DCC17 /* GXMessagesItemData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -693,9 +699,11 @@
 				9699575C2974075F001DCC17 /* GXMessagesAvatar.swift in Sources */,
 				9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */,
 				969957682975756A001DCC17 /* GXMessagesAvatarFactory.swift in Sources */,
-				9699575A2973E698001DCC17 /* GXMessageItem.swift in Sources */,
+				96D13EFF29BDA6F900BF4B80 /* GXMessagesSectionData.swift in Sources */,
+				9699575A2973E698001DCC17 /* GXMessagesItemData.swift in Sources */,
 				9699576429751AFC001DCC17 /* GXMessagesPhotoContent.swift in Sources */,
 				9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */,
+				96D13EFD29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift in Sources */,
 				969957582973C8CE001DCC17 /* GXChatConfiguration.swift in Sources */,
 				96198E6029BD31C1005C42A2 /* GXMessagesMediaCell.swift in Sources */,
 				9699576E29757CD1001DCC17 /* Bundle+GXChat.swift in Sources */,

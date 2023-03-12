@@ -67,6 +67,13 @@ public class GXChatConfiguration: NSObject {
     public var sendingTimeColor: UIColor = UIColor(hex: 0x009900)
     /// 接收方时间颜色
     public var receivingTimeColor: UIColor = .gray
+    
+    /// header文本字体
+    public var headerTextFont: UIFont = .boldSystemFont(ofSize: 13)
+    /// header文本颜色
+    public var headerTextColor: UIColor = UIColor(hex: 0xFFFFFF)
+    /// header文本颜色
+    public var headerBackgroudColor: UIColor = UIColor(hex: 0x33333388, useAlpha: true)
 }
 
 public extension GXChatConfiguration {

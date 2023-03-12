@@ -22,11 +22,11 @@ public struct GXTestTextData: GXMessagesDataProtocol {
     }
     
     public var gx_messageDate: Date {
-        return Date()
+        return self.date
     }
     
     public var gx_messageTime: String {
-        return Date().string(format: "H:mm a")
+        return self.date.string(format: "H:mm a")
     }
     
     public var gx_chatType: GXChatConfiguration.ChatType {
@@ -63,6 +63,7 @@ public struct GXTestTextData: GXMessagesDataProtocol {
         return self.avatarID
     }
     
+    var date: Date = Date()
     var avatarID: String = ""
     var messageContinuousStatus: GXMessageContinuousStatus = .begin
     var messageStatus: GXMessageStatus = .sending
@@ -124,6 +125,7 @@ public struct GXTestPhotoData: GXMessagesDataProtocol {
         return self.avatarID
     }
     
+    var date: Date = Date()
     var avatarID: String = ""
     var messageContinuousStatus: GXMessageContinuousStatus = .begin
     var messageStatus: GXMessageStatus = .sending

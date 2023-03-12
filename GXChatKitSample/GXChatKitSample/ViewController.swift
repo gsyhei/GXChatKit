@@ -7,7 +7,7 @@ import GXChatUIKit
 
 class ViewController: UIViewController {
     
-    private var list: [[GXMessageItem]] = []
+    private var list: [GXMessagesSectionData] = []
     
     private lazy var tableView: GXMessagesTableView = {
         let tv = GXMessagesTableView(frame: self.view.bounds, style: .plain)
@@ -17,10 +17,17 @@ class ViewController: UIViewController {
         tv.backgroundColor = UIColor(hexString: "#333333")
         tv.rowHeight = 100.0
         tv.separatorStyle = .none
-
+        
         return tv
     }()
-
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        
+        let frame = self.view.bounds.inset(by: self.view.safeAreaInsets)
+        self.tableView.frame = frame
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -28,92 +35,123 @@ class ViewController: UIViewController {
         self.view.addSubview(self.tableView)
         self.tableView.register(cellType: GXMessagesTextCell.self)
         self.tableView.register(cellType: GXMessagesMediaCell.self)
-        
+        self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
-        self.tableView.addMessagesHeader {[weak self] in
-            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
-                self?.updateDatas()
-                self?.tableView.endHeaderLoading()
-            }
-        }
+//        self.tableView.addMessagesHeader {[weak self] in
+//            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
+//                self?.updateDatas()
+//                self?.tableView.endHeaderLoading()
+//            }
+//        }
         
         self.updateDatas()
         self.tableView.reloadData()
     }
     
     public func updateDatas() {
-        var array: [GXMessageItem] = []
+        var data1 = GXTestTextData()
+        data1.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        data1.messageContinuousStatus = .begin
+        data1.messageStatus = .receiving
+        data1.avatarID = "111111111111"
+        data1.date = Date().dateByAdding(days: -2)!
+        let item1 = GXMessagesItemData(data: data1)
 
-        for index in 0..<40 {
-            let column = index / 4
-            let cuindex = index % 4
-            
-            if cuindex == 2 {
-                var data = GXTestTextData()
-                data.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
-                if cuindex == 0 {
-                    data.messageContinuousStatus = .begin
-                } else if cuindex == 3 {
-                    data.messageContinuousStatus = .end
-                } else {
-                    data.messageContinuousStatus = .ongoing
-                }
-                data.messageStatus = (column%4 > 1) ? .sending : .receiving
-                if data.messageStatus == .sending {
-                    data.avatarID = "111111111111"
-                    data.avatarText = "发送"
-                }
-                else {
-                    data.avatarID = "\(column)"
-                    data.avatarText = "收\(column)"
-                }
+        let sectionData = GXMessagesSectionData(date: data1.date)
+        sectionData.append(item: item1)
 
-                let item = GXMessageItem(data: data)
-                array.append(item)
-            }
-            else {
-                var data = GXTestPhotoData()
-                if cuindex == 0 {
-                    data.messageContinuousStatus = .begin
-                } else if cuindex == 3 {
-                    data.messageContinuousStatus = .end
-                } else {
-                    data.messageContinuousStatus = .ongoing
-                }
-                data.messageStatus = (column%4 > 1) ? .sending : .receiving
-                if data.messageStatus == .sending {
-                    data.avatarID = "111111111111"
-                    data.avatarText = "发送"
-                }
-                else {
-                    data.avatarID = "\(column)"
-                    data.avatarText = "收\(column)"
-                }
+        var data2 = GXTestTextData()
+        data2.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        data2.messageContinuousStatus = .begin
+        data2.messageStatus = .receiving
+        data2.avatarID = "111111111111"
+        data2.date = Date().dateByAdding(days: -2)!
+        let item2 = GXMessagesItemData(data: data2)
+        sectionData.append(item: item2)
 
-                let item = GXMessageItem(data: data)
-                array.append(item)
-            }
-        }
-        self.list.append(array)
+        var data3 = GXTestPhotoData()
+        data3.messageContinuousStatus = .end
+        data3.messageStatus = .receiving
+        data3.avatarID = "111111111111"
+        data3.date = Date().dateByAdding(days: -2)!
+        let item3 = GXMessagesItemData(data: data3)
+        sectionData.append(item: item3)
+
+        self.list.append(sectionData)
+
+
+        var data11 = GXTestTextData()
+        data11.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        data11.messageContinuousStatus = .begin
+        data11.messageStatus = .sending
+        data11.avatarID = "2222222222"
+        data11.date = Date().dateByAdding(days: -1)!
+        let item11 = GXMessagesItemData(data: data11)
+
+        let sectionData1 = GXMessagesSectionData(date: data11.date)
+        sectionData1.append(item: item11)
+
+        var data22 = GXTestTextData()
+        data22.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        data22.messageContinuousStatus = .begin
+        data22.messageStatus = .sending
+        data22.avatarID = "2222222222"
+        data22.date = Date().dateByAdding(days: -1)!
+        let item22 = GXMessagesItemData(data: data22)
+        sectionData1.append(item: item22)
+
+        var data33 = GXTestPhotoData()
+        data33.messageContinuousStatus = .end
+        data33.messageStatus = .sending
+        data33.avatarID = "2222222222"
+        data33.date = Date().dateByAdding(days: -1)!
+        let item33 = GXMessagesItemData(data: data33)
+        sectionData1.append(item: item33)
+
+        self.list.append(sectionData1)
+        
+        
+        var data13 = GXTestTextData()
+        data13.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        data13.messageContinuousStatus = .begin
+        data13.messageStatus = .sending
+        data13.avatarID = "2222222222"
+        data13.date = Date()
+        let item13 = GXMessagesItemData(data: data13)
+        
+        let sectionData2 = GXMessagesSectionData(date: data13.date)
+        sectionData2.append(item: item13)
+        
+        var data23 = GXTestTextData()
+        data23.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        data23.messageContinuousStatus = .begin
+        data23.messageStatus = .sending
+        data23.avatarID = "2222222222"
+        data23.date = Date()
+        let item23 = GXMessagesItemData(data: data23)
+        sectionData2.append(item: item23)
+        
+        var data34 = GXTestPhotoData()
+        data34.messageContinuousStatus = .end
+        data34.messageStatus = .sending
+        data34.avatarID = "2222222222"
+        data34.date = Date()
+        let item34 = GXMessagesItemData(data: data34)
+        sectionData2.append(item: item34)
+
+        self.list.append(sectionData2)
     }
-    
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        let rect = self.view.bounds.insetBy(dx: 0, dy: self.view.safeAreaInsets.bottom)
-        self.tableView.frame = rect
-    }
-
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
     
-    func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataProtocol {        
-        return self.list[indexPath.section][indexPath.row].data
+    func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataProtocol {
+        return self.list[indexPath.section].items[indexPath.row].data
     }
     
     func gx_tableView(_ tableView: UITableView, changeForRowAt indexPath: IndexPath, avatar: UIView) {
         if let avatarButton = avatar as? UIButton {
-            let item = self.list[indexPath.section][indexPath.row]
+            let item = self.list[indexPath.section].items[indexPath.row]
             if item.gx_isShowAvatar {
                 GXMessagesBaseCell.updateAvatar(item: item, avatarButton: avatarButton)
             }
@@ -128,11 +166,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.list[section].count
+        return self.list[section].items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = self.list[indexPath.section][indexPath.row]
+        let item = self.list[indexPath.section].items[indexPath.row]
         switch item.data.gx_messageType {
         case .text:
             let cell: GXMessagesTextCell = tableView.dequeueReusableCell(for: indexPath)
@@ -151,18 +189,19 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let item = self.list[indexPath.section][indexPath.row]
-
+        let item = self.list[indexPath.section].items[indexPath.row]
+        
         return item.cellHeight
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30.0
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let viewID = "ViewID"
-        var header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "viewID")
-        if header == nil {
-            header = UITableViewHeaderFooterView(reuseIdentifier: viewID)
-        }
-        header?.textLabel?.text = "Section: \(section)"
+        let header: GXMessagesSectionHeader? = tableView.dequeueReusableHeaderFooterView()
+        let sectionData = self.list[section]
+        header?.bindHeader(data: sectionData)
         
         return header
     }
@@ -171,4 +210,24 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
         
     }
     
+}
+
+extension ViewController: UIScrollViewDelegate {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.tableView.gx_scrollBeginDragging()
+    }
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        self.tableView.gx_scrollEndDragging()
+    }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.tableView.gx_scrollEndDragging()
+        }
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.tableView.gx_scrollEndDragging()
+    }
 }

@@ -19,14 +19,14 @@ let STATUS_HEIGHT = StatusBarHeight()
 
 let GXCHATC = GXChatConfiguration.shared
 
-@available(iOS 13.0, *)
-//let STATUS_HEIGHT = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.statusBarManager?.statusBarFrame.height ?? 0
+let GX_USER_FILE = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+let GX_USER_FILE_USER = GX_USER_FILE!.appending("/GXUser.data")
+let GX_USER_FILE_CITY = GX_USER_FILE!.appending("/GXMessages.data")
 
 typealias GXActionBlock = (() -> Void)
 typealias GXActionBlockItem<T: Any> = ((T) -> Void)
 typealias GXActionBlockBack<T: Any> = (() -> T)
 typealias GXActionBlockItemBack<T1: Any, T2: Any> = ((T1) -> T2)
-
 
 private func StatusBarHeight() -> CGFloat {
     if #available(iOS 13.0, *) {
@@ -35,5 +35,9 @@ private func StatusBarHeight() -> CGFloat {
     else {
         return UIApplication.shared.statusBarFrame.height
     }
+}
+
+public func GXLS(_ string: String) -> String {
+    return NSLocalizedString(string, comment: "")
 }
 

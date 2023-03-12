@@ -89,7 +89,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleContainerView.addSubview(self.messageBubbleTimeLabel)
     }
     
-    public func bindCell(item: GXMessageItem) {
+    public func bindCell(item: GXMessagesItemData) {
         switch item.data.gx_messageContinuousStatus {
         case .begin:
             self.messageBubbleImageView.image = item.bubble?.messageBeginBubbleImage
@@ -141,7 +141,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
 }
 
 public extension GXMessagesBaseCell {
-    class func updateAvatar(item: GXMessageItem, avatarButton: UIButton) {
+    class func updateAvatar(item: GXMessagesItemData, avatarButton: UIButton) {
         avatarButton.setImage(item.avatar?.avatarImage, for: .normal)
         avatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
     }
