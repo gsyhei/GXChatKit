@@ -131,7 +131,7 @@ class ViewController: UIViewController {
         let item23 = GXMessagesItemData(data: data23)
         sectionData2.append(item: item23)
         
-        var data34 = GXTestPhotoData()
+        var data34 = GXTestVideoData()
         data34.messageContinuousStatus = .end
         data34.messageStatus = .receiving
         data34.avatarID = "2222222222"
@@ -187,7 +187,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             cell.bindCell(item: item)
             
             return cell
-        case .phote:
+        case .phote, .video:
             let cell: GXMessagesMediaCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bindCell(item: item)
             

@@ -11,6 +11,22 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
     
     /// 气泡imageView
     public var mediaView: UIView?
+    
+    /// 播放按钮
+    public lazy var playButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "play.circle")
+        button.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        button.backgroundColor = UIColor(white: 0.0, alpha: 0.2)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 20.0
+        button.setBackgroundImage(image, for: .normal)
+        button.tintColor = .white
+        button.isUserInteractionEnabled = false
+        button.isHidden = true
+        
+        return button
+    }()
 
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +36,23 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         super.setSelected(selected, animated: animated)
     }
     
+    public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        if !self.playButton.isHidden {
+            self.playButton.isHighlighted = highlighted
+        }
+    }
+    
+    open override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.playButton.isHidden = true
+        self.mediaView?.removeFromSuperview()
+    }
+    
     public override func createSubviews() {
         super.createSubviews()
+        self.messageBubbleContainerView.addSubview(self.playButton)
     }
 
     public override func bindCell(item: GXMessagesItemData) {
@@ -41,9 +72,6 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         self.messageBubbleTimeLabel.frame = item.timeRect.inset(by: UIEdgeInsets(top: -4, left: -item.timeRect.height, bottom: 0, right: 0))
 
         if let photoContent = item.data.gx_messagesContentData as? GXMessagesPhotoContent {
-            if mediaView != nil {
-                self.mediaView?.removeFromSuperview()
-            }
             if let itemMediaView = photoContent.mediaView {
                 self.messageBubbleImageView.addSubview(itemMediaView)
                 itemMediaView.frame = item.contentRect
@@ -58,9 +86,6 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
             }
         }
         else if let videoContent = item.data.gx_messagesContentData as? GXMessagesVideoContent {
-            if mediaView != nil {
-                self.mediaView?.removeFromSuperview()
-            }
             if let itemMediaView = videoContent.mediaView {
                 self.messageBubbleImageView.addSubview(itemMediaView)
                 itemMediaView.frame = item.contentRect
@@ -73,6 +98,8 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
                 self.mediaView = itemMediaView
                 self.messageBubbleImageView.addSubview(itemMediaView)
             }
+            self.playButton.isHidden = false
+            self.playButton.center = self.messageBubbleImageView.center
         }
     }
 

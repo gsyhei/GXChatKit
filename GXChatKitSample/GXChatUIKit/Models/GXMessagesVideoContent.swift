@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GXMessagesVideoContent: GXMessagesContentData {
+public class GXMessagesVideoContent: GXMessagesContentData {
     /// 下载地址
     private(set) var videoURL: NSURL?
     /// 缩略图下载地址

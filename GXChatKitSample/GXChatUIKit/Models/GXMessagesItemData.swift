@@ -34,6 +34,8 @@ public class GXMessagesItemData {
             self.updateTextLayout()
         case .phote:
             self.updatePhotoLayout()
+        case .video:
+            self.updateVideoLayout()
         default: break
         }
     }
@@ -140,6 +142,15 @@ private extension GXMessagesItemData {
         
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
         let displaySize = self.gx_resize(size: photoContent.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
+        self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
+        self.updateBaseLayout(containerWidth: displaySize.width, containerHeight: displaySize.height)
+    }
+    
+    func updateVideoLayout() {
+        guard let videoContent = self.data.gx_messagesContentData as? GXMessagesVideoContent else { return }
+        
+        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
+        let displaySize = self.gx_resize(size: videoContent.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
         self.updateBaseLayout(containerWidth: displaySize.width, containerHeight: displaySize.height)
     }

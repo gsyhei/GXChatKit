@@ -76,6 +76,14 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleImageView.isHighlighted = highlighted
     }
     
+    open override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.messageAvatarButton.isHidden = true
+        self.messageAvatarButton.setImage(nil, for: .normal)
+        self.messageBubbleNameLabel.isHidden = true
+    }
+    
     public func createSubviews() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
@@ -110,19 +118,11 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
             self.messageAvatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
             self.messageAvatarButton.isHidden = (item.data.gx_messageContinuousStatus != .end && item.data.gx_messageContinuousStatus != .beginAndEnd)
         }
-        else {
-            self.messageAvatarButton.isHidden = true
-            self.messageAvatarButton.setImage(nil, for: .normal)
-        }
-        
         if item.gx_isShowNickname {
             self.messageBubbleNameLabel.isHidden = false
             self.messageBubbleNameLabel.frame = item.nicknameRect
             self.messageBubbleNameLabel.textAlignment = .left
             self.messageBubbleNameLabel.text = item.data.gx_senderDisplayName
-        }
-        else {
-            self.messageBubbleNameLabel.isHidden = true
         }
         self.messageBubbleTimeLabel.frame = item.timeRect
         self.messageBubbleTimeLabel.textAlignment = .right
