@@ -39,6 +39,13 @@ public class GXMessagesItemData {
         default: break
         }
     }
+
+    public func updateMessagesAvatar(image: UIImage?) {
+        if let avatarImage = image {
+            self.avatar?.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image: avatarImage)
+            self.avatar?.avatarHighlightedImage = GXMessagesAvatarFactory.circularAvatarHighlightedImage(image: avatarImage)
+        }
+    }
 }
  
 private extension GXMessagesItemData {

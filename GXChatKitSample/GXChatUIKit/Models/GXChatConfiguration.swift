@@ -69,7 +69,7 @@ public class GXChatConfiguration: NSObject {
     public var receivingTimeColor: UIColor = .gray
     
     /// header文本字体
-    public var headerTextFont: UIFont = .boldSystemFont(ofSize: 13)
+    public var headerTextFont: UIFont = .boldSystemFont(ofSize: 12)
     /// header文本颜色
     public var headerTextColor: UIColor = UIColor(hex: 0xFFFFFF)
     /// header文本颜色

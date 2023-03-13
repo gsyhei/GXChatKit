@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.view.addSubview(self.tableView)
+        self.tableView.backgroundImage = UIImage(named: "background")
         self.tableView.register(cellType: GXMessagesTextCell.self)
         self.tableView.register(cellType: GXMessagesMediaCell.self)
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         data1.avatarID = "111111111111"
         data1.date = Date().dateByAdding(days: -2)!
         let item1 = GXMessagesItemData(data: data1)
+        item1.updateMessagesAvatar(image: UIImage(named: "avatar1"))
 
         let sectionData = GXMessagesSectionData(date: data1.date)
         sectionData.append(item: item1)
@@ -67,6 +69,7 @@ class ViewController: UIViewController {
         data2.avatarID = "111111111111"
         data2.date = Date().dateByAdding(days: -2)!
         let item2 = GXMessagesItemData(data: data2)
+        item2.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item2)
 
         var data3 = GXTestPhotoData()
@@ -75,6 +78,7 @@ class ViewController: UIViewController {
         data3.avatarID = "111111111111"
         data3.date = Date().dateByAdding(days: -2)!
         let item3 = GXMessagesItemData(data: data3)
+        item3.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item3)
 
         self.list.append(sectionData)
@@ -87,7 +91,8 @@ class ViewController: UIViewController {
         data11.avatarID = "2222222222"
         data11.date = Date().dateByAdding(days: -1)!
         let item11 = GXMessagesItemData(data: data11)
-
+        item11.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+        
         let sectionData1 = GXMessagesSectionData(date: data11.date)
         sectionData1.append(item: item11)
 
@@ -98,6 +103,7 @@ class ViewController: UIViewController {
         data22.avatarID = "2222222222"
         data22.date = Date().dateByAdding(days: -1)!
         let item22 = GXMessagesItemData(data: data22)
+        item22.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item22)
 
         var data33 = GXTestPhotoData()
@@ -106,6 +112,7 @@ class ViewController: UIViewController {
         data33.avatarID = "2222222222"
         data33.date = Date().dateByAdding(days: -1)!
         let item33 = GXMessagesItemData(data: data33)
+        item33.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item33)
 
         self.list.append(sectionData1)
@@ -118,7 +125,8 @@ class ViewController: UIViewController {
         data13.avatarID = "2222222222"
         data13.date = Date()
         let item13 = GXMessagesItemData(data: data13)
-        
+        item13.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+
         let sectionData2 = GXMessagesSectionData(date: data13.date)
         sectionData2.append(item: item13)
         
@@ -129,6 +137,7 @@ class ViewController: UIViewController {
         data23.avatarID = "2222222222"
         data23.date = Date()
         let item23 = GXMessagesItemData(data: data23)
+        item23.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData2.append(item: item23)
         
         var data34 = GXTestVideoData()
@@ -137,6 +146,7 @@ class ViewController: UIViewController {
         data34.avatarID = "2222222222"
         data34.date = Date()
         let item34 = GXMessagesItemData(data: data34)
+        item34.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData2.append(item: item34)
         
         var data24 = GXTestTextData()
@@ -146,6 +156,7 @@ class ViewController: UIViewController {
         data24.avatarID = "3333333333"
         data24.date = Date()
         let item24 = GXMessagesItemData(data: data24)
+        item24.updateMessagesAvatar(image: UIImage(named: "avatar3"))
         sectionData2.append(item: item24)
         
         self.list.append(sectionData2)

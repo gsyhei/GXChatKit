@@ -81,6 +81,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         
         self.messageAvatarButton.isHidden = true
         self.messageAvatarButton.setImage(nil, for: .normal)
+        self.messageAvatarButton.setImage(nil, for: .highlighted)
         self.messageBubbleNameLabel.isHidden = true
     }
     
@@ -114,8 +115,12 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         if item.gx_isShowAvatar {
             self.messageAvatarButton.isHidden = false
             self.messageAvatarButton.frame = item.avatarRect
-            self.messageAvatarButton.setImage(item.avatar?.avatarImage, for: .normal)
-            self.messageAvatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
+            if item.avatar == nil {
+                self.messageAvatarButton.setImage(item.avatar?.avatarPlaceholderImage, for: .normal)
+            } else {
+                self.messageAvatarButton.setImage(item.avatar?.avatarImage, for: .normal)
+                self.messageAvatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
+            }
             self.messageAvatarButton.isHidden = (item.data.gx_messageContinuousStatus != .end && item.data.gx_messageContinuousStatus != .beginAndEnd)
         }
         if item.gx_isShowNickname {
