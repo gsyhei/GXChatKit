@@ -30,5 +30,5 @@ public protocol GXMessagesData {
     /// 消息读取状态
     var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
     /// 消息内容
-    var gx_messagesContentData: GXMessagesContentData { get }
+    var gx_messagesContentData: GXMessagesContentData? { get }
 }

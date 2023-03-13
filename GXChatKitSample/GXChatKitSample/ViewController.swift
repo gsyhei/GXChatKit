@@ -62,7 +62,7 @@ class ViewController: UIViewController {
 
         var data2 = GXTestTextData()
         data2.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
-        data2.messageContinuousStatus = .begin
+        data2.messageContinuousStatus = .ongoing
         data2.messageStatus = .receiving
         data2.avatarID = "111111111111"
         data2.date = Date().dateByAdding(days: -2)!
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         var data11 = GXTestTextData()
         data11.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
         data11.messageContinuousStatus = .begin
-        data11.messageStatus = .sending
+        data11.messageStatus = .receiving
         data11.avatarID = "2222222222"
         data11.date = Date().dateByAdding(days: -1)!
         let item11 = GXMessagesItemData(data: data11)
@@ -93,8 +93,8 @@ class ViewController: UIViewController {
 
         var data22 = GXTestTextData()
         data22.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
-        data22.messageContinuousStatus = .begin
-        data22.messageStatus = .sending
+        data22.messageContinuousStatus = .ongoing
+        data22.messageStatus = .receiving
         data22.avatarID = "2222222222"
         data22.date = Date().dateByAdding(days: -1)!
         let item22 = GXMessagesItemData(data: data22)
@@ -102,7 +102,7 @@ class ViewController: UIViewController {
 
         var data33 = GXTestPhotoData()
         data33.messageContinuousStatus = .end
-        data33.messageStatus = .sending
+        data33.messageStatus = .receiving
         data33.avatarID = "2222222222"
         data33.date = Date().dateByAdding(days: -1)!
         let item33 = GXMessagesItemData(data: data33)
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
         var data13 = GXTestTextData()
         data13.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
         data13.messageContinuousStatus = .begin
-        data13.messageStatus = .sending
+        data13.messageStatus = .receiving
         data13.avatarID = "2222222222"
         data13.date = Date()
         let item13 = GXMessagesItemData(data: data13)
@@ -124,8 +124,8 @@ class ViewController: UIViewController {
         
         var data23 = GXTestTextData()
         data23.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
-        data23.messageContinuousStatus = .begin
-        data23.messageStatus = .sending
+        data23.messageContinuousStatus = .ongoing
+        data23.messageStatus = .receiving
         data23.avatarID = "2222222222"
         data23.date = Date()
         let item23 = GXMessagesItemData(data: data23)
@@ -133,13 +133,23 @@ class ViewController: UIViewController {
         
         var data34 = GXTestPhotoData()
         data34.messageContinuousStatus = .end
-        data34.messageStatus = .sending
+        data34.messageStatus = .receiving
         data34.avatarID = "2222222222"
         data34.date = Date()
         let item34 = GXMessagesItemData(data: data34)
         sectionData2.append(item: item34)
-
+        
+        var data24 = GXTestTextData()
+        data24.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        data24.messageContinuousStatus = .beginAndEnd
+        data24.messageStatus = .receiving
+        data24.avatarID = "3333333333"
+        data24.date = Date()
+        let item24 = GXMessagesItemData(data: data24)
+        sectionData2.append(item: item24)
+        
         self.list.append(sectionData2)
+
     }
 }
 

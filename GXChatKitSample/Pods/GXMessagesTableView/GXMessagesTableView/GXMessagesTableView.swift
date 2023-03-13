@@ -18,6 +18,7 @@ public class GXMessagesTableView: GXMessagesLoadTableView {
     
     private var hoverAvatar: UIView?
     private var hoverAvatarData: GXMessagesAvatarDataProtocol?
+    private var hoverAvatarIndexPath: IndexPath?
     private var lastHiddenIndexPath: IndexPath?
     
     public override init(frame: CGRect, style: UITableView.Style) {
@@ -67,55 +68,27 @@ private extension GXMessagesTableView {
         let lastCell = self.visibleCells.last(where: {$0 is GXMessagesAvatarCellProtocol})
         guard let lastAvatarCell = lastCell as? GXMessagesAvatarCellProtocol else { return }
         guard let lastAvatarIndexPath = self.indexPath(for: lastAvatarCell) else { return }
-        
-        let previousIndexPath = self.indexPathsForVisibleRows?.last(where: {$0 < lastAvatarIndexPath})
         let lastAvatarData = dataDelegate.gx_tableView(self, avatarDataForRowAt: lastAvatarIndexPath)
         
+        // 悬浮头像与显示的最后一个头像不同
         if self.hoverAvatarData?.gx_senderId != lastAvatarData.gx_senderId {
-            self.gx_resetPreEndAvatar()
-            let avatar = lastAvatarCell.createAvatarView()
-            dataDelegate.gx_tableView(self, changeForRowAt: lastAvatarIndexPath, avatar: avatar)
-            let avatarOrigin = CGPoint(x: lastAvatarCell.avatar.left, y: lastAvatarCell.bottom - lastAvatarCell.avatar.height)
-            avatar.frame = CGRect(origin: avatarOrigin, size: lastAvatarCell.avatar.size)
-            self.addSubview(avatar)
-            self.hoverAvatarData = lastAvatarData
-            self.hoverAvatar = avatar
+            self.gx_addLastHoverAvatar(cell: lastAvatarCell, indexPath: lastAvatarIndexPath, data: lastAvatarData)
         }
-        else if (self.hoverAvatarData?.gx_messageStatus == lastAvatarData.gx_messageStatus && self.hoverAvatarData?.gx_messageStatus == .sending) {
-            self.gx_resetPreEndAvatar()
-            let avatar = lastAvatarCell.createAvatarView()
-            dataDelegate.gx_tableView(self, changeForRowAt: lastAvatarIndexPath, avatar: avatar)
-            let avatarHeight = lastAvatarCell.height - lastAvatarCell.avatar.top
-            let avatarOrigin = CGPoint(x: lastAvatarCell.avatar.left, y: lastAvatarCell.bottom - avatarHeight)
-            avatar.frame = CGRect(origin: avatarOrigin, size: lastAvatarCell.avatar.size)
-            self.addSubview(avatar)
-            self.hoverAvatarData = lastAvatarData
-            self.hoverAvatar = avatar
-            
-            if lastAvatarData.gx_messageContinuousStatus == .end || lastAvatarData.gx_messageContinuousStatus == .beginAndEnd {
-                lastAvatarCell.avatar.isHidden = true
-                self.lastHiddenIndexPath = lastAvatarIndexPath
-            }
+        // 悬浮头像与显示的最后一个头像的section不同
+        else if (self.hoverAvatarIndexPath?.section != lastAvatarIndexPath.section) {
+            self.gx_addLastHoverAvatar(cell: lastAvatarCell, indexPath: lastAvatarIndexPath, data: lastAvatarData)
         }
+        // 悬浮头像与显示的最后一个头像相同，且section也相同
         else {
-            guard let preIndexPath = previousIndexPath else { return }
-            if self.cellForRow(at: preIndexPath) is GXMessagesAvatarCellProtocol {
-                if lastAvatarData.gx_messageContinuousStatus == .end || lastAvatarData.gx_messageContinuousStatus == .beginAndEnd {
-                    lastAvatarCell.avatar.isHidden = true
-                    self.lastHiddenIndexPath = lastAvatarIndexPath
+            if self.hoverAvatarIndexPath != lastAvatarIndexPath {
+                if self.indexPathsForVisibleRows?.last != lastAvatarIndexPath {
+                    self.gx_addLastHoverAvatar(cell: lastAvatarCell, indexPath: lastAvatarIndexPath, data: lastAvatarData)
                 }
             }
-            else {
-                self.gx_resetPreEndAvatar()
-                let hoverAvatar = lastAvatarCell.createAvatarView()
-                dataDelegate.gx_tableView(self, changeForRowAt: lastAvatarIndexPath, avatar: hoverAvatar)
-                let avatarHeight = lastAvatarCell.height - lastAvatarCell.avatar.top
-                let avatarOrigin = CGPoint(x: lastAvatarCell.avatar.left, y: lastAvatarCell.bottom - avatarHeight)
-                hoverAvatar.frame = CGRect(origin: avatarOrigin, size: lastAvatarCell.avatar.size)
-                self.addSubview(hoverAvatar)
-                self.hoverAvatarData = lastAvatarData
-                self.hoverAvatar = hoverAvatar
-            }
+        }
+        if lastAvatarData.gx_messageContinuousStatus == .end || lastAvatarData.gx_messageContinuousStatus == .beginAndEnd {
+            lastAvatarCell.avatar.isHidden = true
+            self.lastHiddenIndexPath = lastAvatarIndexPath
         }
         
         guard let avatar = self.hoverAvatar else { return }
@@ -135,12 +108,16 @@ private extension GXMessagesTableView {
             }
         }
         else {
-            guard let preIndexPath = previousIndexPath else { return }
-            let preAvatarData = dataDelegate.gx_tableView(self, avatarDataForRowAt: preIndexPath)
-            if self.cellForRow(at: preIndexPath) is GXMessagesAvatarCellProtocol &&
-                (preAvatarData.gx_messageContinuousStatus != .end && preAvatarData.gx_messageContinuousStatus != .beginAndEnd) &&
-                lastAvatarIndexPath.section == preIndexPath.section {
-                avatar.top = self.height - avatarHeight + self.contentOffset.y + self.topDifference
+            if let preIndexPath = self.indexPathsForVisibleRows?.last(where: {$0 < lastAvatarIndexPath}) {
+                let preAvatarData = dataDelegate.gx_tableView(self, avatarDataForRowAt: preIndexPath)
+                if self.cellForRow(at: preIndexPath) is GXMessagesAvatarCellProtocol &&
+                    (preAvatarData.gx_messageContinuousStatus != .end && preAvatarData.gx_messageContinuousStatus != .beginAndEnd) &&
+                    lastAvatarIndexPath.section == preIndexPath.section {
+                    avatar.top = self.height - avatarHeight + self.contentOffset.y + self.topDifference
+                }
+                else {
+                    avatar.top = cellRect.minY + self.topDifference
+                }
             }
             else {
                 avatar.top = cellRect.minY + self.topDifference
@@ -157,6 +134,20 @@ private extension GXMessagesTableView {
                 preEndCell.avatar.isHidden = false
             }
         }
+    }
+    
+    func gx_addLastHoverAvatar(cell: GXMessagesAvatarCellProtocol, indexPath: IndexPath, data: GXMessagesAvatarDataProtocol) {
+        self.gx_resetPreEndAvatar()
+        
+        let avatar = cell.createAvatarView()
+        self.datalist?.gx_tableView(self, changeForRowAt: indexPath, avatar: avatar)
+        let avatarHeight = cell.height - cell.avatar.top
+        let avatarOrigin = CGPoint(x: cell.avatar.left, y: cell.bottom - avatarHeight)
+        avatar.frame = CGRect(origin: avatarOrigin, size: cell.avatar.size)
+        self.addSubview(avatar)
+        self.hoverAvatarData = data
+        self.hoverAvatar = avatar
+        self.hoverAvatarIndexPath = indexPath
     }
     
     func gx_scrollHeaderAnimate(header: UIView?, hidden: Bool) {

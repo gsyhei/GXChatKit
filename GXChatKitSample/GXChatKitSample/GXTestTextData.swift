@@ -45,7 +45,7 @@ public struct GXTestTextData: GXMessagesDataProtocol {
         return .allRead
     }
     
-    public var gx_messagesContentData: GXMessagesContentData {
+    public var gx_messagesContentData: GXMessagesContentData? {
         return GXMessagesTextContent(text: self.text)
     }
     
@@ -107,7 +107,7 @@ public struct GXTestPhotoData: GXMessagesDataProtocol {
         return .allRead
     }
     
-    public var gx_messagesContentData: GXMessagesContentData {
+    public var gx_messagesContentData: GXMessagesContentData? {
         return GXMessagesPhotoContent(thumbnailImage: UIImage(named: "testphoto"))
     }
     
