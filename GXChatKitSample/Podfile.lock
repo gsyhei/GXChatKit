@@ -1,6 +1,6 @@
 PODS:
   - GXCategories (1.0.5)
-  - GXMessagesTableView (1.0.1):
+  - GXMessagesTableView (1.0.2):
     - GXCategories
     - GXRefresh
   - GXRefresh (1.1.2)
@@ -23,7 +23,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   GXCategories: 911f8094403c17a8dd2c4f6a1fb87cfc45d39a96
-  GXMessagesTableView: bc66dad25185e8e9a58a65defc652bd269de3907
+  GXMessagesTableView: 92fe52f7f74e8469bec332c1217fa620f70424b2
   GXRefresh: d8c64ca667f1daad0f332cd6066023714fc0da6d
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
 
