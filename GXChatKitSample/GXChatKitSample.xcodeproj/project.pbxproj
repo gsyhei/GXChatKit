@@ -13,6 +13,10 @@
 		96198E6229BD5781005C42A2 /* GXTestTextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96198E6129BD5781005C42A2 /* GXTestTextData.swift */; };
 		9623D81F29B983B300BE0BFB /* GXMessagesTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */; };
 		9639158D2962796F002974F7 /* Pods_GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */; };
+		96495C4429C1A1170055C19A /* GXAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96495C4329C1A1170055C19A /* GXAudioManager.swift */; };
+		96495C4629C1E4F20055C19A /* voip_call_noice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4529C1E4F20055C19A /* voip_call_noice.wav */; };
+		96495C4829C1EE350055C19A /* dudu_1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4729C1EE350055C19A /* dudu_1.m4a */; };
+		96495C4A29C1EE4F0055C19A /* redpacket_sound_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */; };
 		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
 		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
 		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
@@ -114,6 +118,10 @@
 		96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesMediaCell.swift; sourceTree = "<group>"; };
 		96198E6129BD5781005C42A2 /* GXTestTextData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXTestTextData.swift; sourceTree = "<group>"; };
 		9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTestCell.swift; sourceTree = "<group>"; };
+		96495C4329C1A1170055C19A /* GXAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXAudioManager.swift; sourceTree = "<group>"; };
+		96495C4529C1E4F20055C19A /* voip_call_noice.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = voip_call_noice.wav; sourceTree = "<group>"; };
+		96495C4729C1EE350055C19A /* dudu_1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dudu_1.m4a; sourceTree = "<group>"; };
+		96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = redpacket_sound_open.wav; sourceTree = "<group>"; };
 		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
 		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
@@ -225,6 +233,14 @@
 			path = ToolBar;
 			sourceTree = "<group>";
 		};
+		96495C4229C1A0FE0055C19A /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				96495C4329C1A1170055C19A /* GXAudioManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		965FA5AE296C3AA8001D7633 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +323,9 @@
 		96D30A8F2956F4F000AFBB90 /* GXChatKitSample */ = {
 			isa = PBXGroup;
 			children = (
+				96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */,
+				96495C4529C1E4F20055C19A /* voip_call_noice.wav */,
+				96495C4729C1EE350055C19A /* dudu_1.m4a */,
 				96D30A902956F4F000AFBB90 /* AppDelegate.swift */,
 				96D30A922956F4F000AFBB90 /* SceneDelegate.swift */,
 				96D30A942956F4F000AFBB90 /* ViewController.swift */,
@@ -342,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				965FA5AE296C3AA8001D7633 /* Resources */,
+				96495C4229C1A0FE0055C19A /* Manager */,
 				96198E5C29BAD7AC005C42A2 /* Define */,
 				969957522973BB6C001DCC17 /* Models */,
 				965FA5B12970431D001D7633 /* Factories */,
@@ -560,10 +580,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96495C4829C1EE350055C19A /* dudu_1.m4a in Resources */,
 				96D30A9D2956F4F100AFBB90 /* LaunchScreen.storyboard in Resources */,
 				96D30A9A2956F4F100AFBB90 /* Assets.xcassets in Resources */,
+				96495C4629C1E4F20055C19A /* voip_call_noice.wav in Resources */,
 				96B4FA6529BFA44400AA9384 /* TestXibView.xib in Resources */,
 				96D30A982956F4F000AFBB90 /* Main.storyboard in Resources */,
+				96495C4A29C1EE4F0055C19A /* redpacket_sound_open.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96495C4429C1A1170055C19A /* GXAudioManager.swift in Sources */,
 				9699575E297407EF001DCC17 /* GXMessagesBubble.swift in Sources */,
 				9699576629752525001DCC17 /* GXMessagesVideoContent.swift in Sources */,
 				965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */,

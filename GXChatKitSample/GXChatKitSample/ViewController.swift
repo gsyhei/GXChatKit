@@ -14,8 +14,7 @@ class ViewController: UIViewController {
         tv.dataSource = self
         tv.delegate = self
         tv.datalist = self
-        tv.backgroundColor = UIColor(hexString: "#333333")
-        tv.rowHeight = 100.0
+        tv.backgroundColor = UIColor(hex: 0xEFEFEF)
         tv.separatorStyle = .none
         
         return tv
@@ -38,15 +37,23 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesMediaCell.self)
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
-//        self.tableView.addMessagesHeader {[weak self] in
-//            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
-//                self?.updateDatas()
-//                self?.tableView.endHeaderLoading()
-//            }
-//        }
+        //        self.tableView.addMessagesHeader {[weak self] in
+        //            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
+        //                self?.updateDatas()
+        //                self?.tableView.endHeaderLoading()
+        //            }
+        //        }
         
         self.updateDatas()
         self.tableView.reloadData()
+        
+        if let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav") {
+            let url = URL(fileURLWithPath: urlString)
+            Task {
+                await GXAudioManager.cutAudioData(size: CGSize(width: 100, height: 50), url: url)
+            }
+        }
+        
     }
     
     public func updateDatas() {
@@ -58,10 +65,10 @@ class ViewController: UIViewController {
         data1.date = Date().dateByAdding(days: -2)!
         let item1 = GXMessagesItemData(data: data1)
         item1.updateMessagesAvatar(image: UIImage(named: "avatar1"))
-
+        
         let sectionData = GXMessagesSectionData(date: data1.date)
         sectionData.append(item: item1)
-
+        
         var data2 = GXTestTextData()
         data2.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
         data2.messageContinuousStatus = .ongoing
@@ -71,7 +78,7 @@ class ViewController: UIViewController {
         let item2 = GXMessagesItemData(data: data2)
         item2.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item2)
-
+        
         var data3 = GXTestPhotoData()
         data3.messageContinuousStatus = .end
         data3.messageStatus = .receiving
@@ -80,10 +87,10 @@ class ViewController: UIViewController {
         let item3 = GXMessagesItemData(data: data3)
         item3.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item3)
-
+        
         self.list.append(sectionData)
-
-
+        
+        
         var data11 = GXTestTextData()
         data11.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
         data11.messageContinuousStatus = .begin
@@ -95,7 +102,7 @@ class ViewController: UIViewController {
         
         let sectionData1 = GXMessagesSectionData(date: data11.date)
         sectionData1.append(item: item11)
-
+        
         var data22 = GXTestTextData()
         data22.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
         data22.messageContinuousStatus = .ongoing
@@ -105,7 +112,7 @@ class ViewController: UIViewController {
         let item22 = GXMessagesItemData(data: data22)
         item22.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item22)
-
+        
         var data33 = GXTestPhotoData()
         data33.messageContinuousStatus = .end
         data33.messageStatus = .receiving
@@ -114,7 +121,7 @@ class ViewController: UIViewController {
         let item33 = GXMessagesItemData(data: data33)
         item33.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item33)
-
+        
         self.list.append(sectionData1)
         
         
@@ -126,7 +133,7 @@ class ViewController: UIViewController {
         data13.date = Date()
         let item13 = GXMessagesItemData(data: data13)
         item13.updateMessagesAvatar(image: UIImage(named: "avatar2"))
-
+        
         let sectionData2 = GXMessagesSectionData(date: data13.date)
         sectionData2.append(item: item13)
         
@@ -160,7 +167,7 @@ class ViewController: UIViewController {
         sectionData2.append(item: item24)
         
         self.list.append(sectionData2)
-
+        
     }
 }
 
