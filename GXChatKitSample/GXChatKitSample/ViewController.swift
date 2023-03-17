@@ -4,6 +4,7 @@ import UIKit
 import Reusable
 import GXMessagesTableView
 import GXChatUIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -49,7 +50,11 @@ class ViewController: UIViewController {
         
         if let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav") {
             let url = URL(fileURLWithPath: urlString)
-            GXAudioManager.gx_cutAudioTrackList(size: CGSize(width: 20, height: 48), url: url) { trackList in
+            let asset = AVAsset(url: url)
+            
+            let time = asset.duration
+            
+            GXAudioManager.gx_cutAudioTrackList(asset: asset, count: 20, height: 48) { trackList in
                 let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: 300, time: 4)
                 let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
                 

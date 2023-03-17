@@ -9,29 +9,31 @@ import UIKit
 import AVFoundation
 
 public class GXAudioManager: NSObject {
-    
+
     /// 按需获取音频数据音轨缩放数组
     /// - Parameters:
-    ///   - size: 音轨数据大小比例值（width为数据宽度、height则为缩放最大值）
-    ///   - url: 音频路径
+    ///   - asset: 音频
+    ///   - count: 音轨数据缩放大小
+    ///   - height: 缩放高度最大值
     ///   - completion: 结果回调
-    public class func gx_cutAudioTrackList(size: CGSize, url: URL, completion: @escaping (([Int]) -> Void)) {
-        GXAudioManager.gx_recorderData(url: url) { data in
-            let audioList = GXAudioManager.gx_filterAudioData(size: size, audioData: data)
+    public class func gx_cutAudioTrackList(asset: AVAsset, count: Int, height: CGFloat, completion: @escaping (([Int]) -> Void)) {
+        GXAudioManager.gx_assetTrack(asset: asset) { track in
+            let data = GXAudioManager.gx_recorderData(asset: asset, assetTrack: track)
+            let audioList = GXAudioManager.gx_filterAudioData(count: count, height: height, audioData: data)
             DispatchQueue.main.async {
                 completion(audioList)
             }
         }
     }
     
-    private class func gx_filterAudioData(size: CGSize, audioData: Data?) -> [Int] {
+    private class func gx_filterAudioData(count: Int, height: CGFloat, audioData: Data?) -> [Int] {
         guard let data = audioData else { return [] }
 
         let sampleCount: Int = Int(data.count / MemoryLayout<Int16>.size)
-        let binSize: Int = Int(CGFloat(sampleCount) / size.width)
+        let binSize: Int = sampleCount / count
         let bytes = data.bytes
         var maxSample: Int = 0, minSample: Int = -1
-        let length = (sampleCount - 1) / binSize
+        let length = sampleCount / binSize
         var filteredSamplesMA: [Int] = []
         for index in 0..<length {
             let i = index * binSize
@@ -45,21 +47,13 @@ public class GXAudioManager: NSObject {
             if minSample == -1 { minSample = value }
             minSample = min(minSample, value)
         }
-        let scaleFactor = size.height / CGFloat(maxSample - minSample)
+        let scaleFactor = height / CGFloat(maxSample - minSample)
         for index in 0..<filteredSamplesMA.count {
             filteredSamplesMA[index] = Int(CGFloat(filteredSamplesMA[index] - minSample) * scaleFactor)
         }
         NSLog("filteredSamplesMA count = \(filteredSamplesMA.count), %@", filteredSamplesMA.description)
         
         return filteredSamplesMA;
-    }
-    
-    private class func gx_recorderData(url: URL, completion: @escaping ((Data?) -> Void)) {
-        let asset = AVAsset(url: url)
-        GXAudioManager.gx_assetTrack(asset: asset) { track in
-            let data = GXAudioManager.gx_recorderData(asset: asset, assetTrack: track)
-            completion(data)
-        }
     }
     
     private class func gx_recorderData(asset: AVAsset, assetTrack: AVAssetTrack?) -> Data? {
