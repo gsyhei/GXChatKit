@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 
 public class GXAudioManager: NSObject {
-
+    
     /// 按需获取音频数据音轨缩放数组
     /// - Parameters:
     ///   - asset: 音频
@@ -18,17 +18,18 @@ public class GXAudioManager: NSObject {
     ///   - completion: 结果回调
     public class func gx_cutAudioTrackList(asset: AVAsset, count: Int, height: CGFloat, completion: @escaping (([Int]) -> Void)) {
         GXAudioManager.gx_assetTrack(asset: asset) { track in
-            let data = GXAudioManager.gx_recorderData(asset: asset, assetTrack: track)
-            let audioList = GXAudioManager.gx_filterAudioData(count: count, height: height, audioData: data)
-            DispatchQueue.main.async {
-                completion(audioList)
-            }
+            GXAudioManager.gx_recorderData(asset: asset, assetTrack: track, completion: { data in
+                let audioList = GXAudioManager.gx_filterAudioData(count: count, height: height, audioData: data)
+                DispatchQueue.main.async {
+                    completion(audioList)
+                }
+            })
         }
     }
     
     private class func gx_filterAudioData(count: Int, height: CGFloat, audioData: Data?) -> [Int] {
         guard let data = audioData else { return [] }
-
+        
         let sampleCount: Int = Int(data.count / MemoryLayout<Int16>.size)
         let binSize: Int = sampleCount / count
         let bytes = data.bytes
@@ -56,10 +57,10 @@ public class GXAudioManager: NSObject {
         return filteredSamplesMA;
     }
     
-    private class func gx_recorderData(asset: AVAsset, assetTrack: AVAssetTrack?) -> Data? {
-        guard let track = assetTrack else { return nil }
-        guard let reader = try? AVAssetReader(asset: asset) else { return nil }
-
+    private class func gx_recorderData(asset: AVAsset, assetTrack: AVAssetTrack?, completion: @escaping ((Data?) -> Void)) {
+        guard let track = assetTrack else { completion(nil); return }
+        guard let reader = try? AVAssetReader(asset: asset) else { completion(nil); return }
+        
         let outputSettings: [String : Any] = [
             AVFormatIDKey: kAudioFormatLinearPCM,
             AVLinearPCMIsBigEndianKey: false,
@@ -70,22 +71,26 @@ public class GXAudioManager: NSObject {
         reader.add(output)
         reader.startReading()
         var data = Data()
-        while (reader.status == .reading) {
-            if let sampleBuffer = output.copyNextSampleBuffer(),
-               let blockBUfferRef = CMSampleBufferGetDataBuffer(sampleBuffer) {
-                autoreleasepool {
-                    let length = CMBlockBufferGetDataLength(blockBUfferRef)
-                    let sampleBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
-                    CMBlockBufferCopyDataBytes(blockBUfferRef, atOffset: 0, dataLength: length, destination: sampleBytes)
-                    data.append(sampleBytes, count: length)
-                    CMSampleBufferInvalidate(sampleBuffer)
+        DispatchQueue.global(qos: .background).async {
+            while (reader.status == .reading) {
+                if let sampleBuffer = output.copyNextSampleBuffer(),
+                   let blockBUfferRef = CMSampleBufferGetDataBuffer(sampleBuffer) {
+                    autoreleasepool {
+                        let length = CMBlockBufferGetDataLength(blockBUfferRef)
+                        let sampleBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
+                        CMBlockBufferCopyDataBytes(blockBUfferRef, atOffset: 0, dataLength: length, destination: sampleBytes)
+                        data.append(sampleBytes, count: length)
+                        CMSampleBufferInvalidate(sampleBuffer)
+                    }
                 }
             }
+            if (reader.status == .completed) {
+                completion(data)
+            }
+            else {
+                completion(nil)
+            }
         }
-        if (reader.status == .completed) {
-            return data
-        }
-        return nil
     }
     
     private class func gx_assetTrack(asset: AVAsset, completion: @escaping ((AVAssetTrack?) -> Void)) {

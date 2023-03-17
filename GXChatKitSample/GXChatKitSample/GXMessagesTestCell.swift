@@ -57,8 +57,8 @@ class GXMessagesTestCell: GXMessagesAvatarCellProtocol, Reusable {
         super.setSelected(selected, animated: animated)
     }
     
-    func bindCell(data: GXTestTextData) {
-        self.avatarButton.setTitle(data.avatarText, for: .normal)
+    func bindCell(data: GXMessagesTestData) {
+        self.avatarButton.setTitle(data.avatarID, for: .normal)
         self.avatarButton.isHidden = (data.messageContinuousStatus != .end && data.messageContinuousStatus != .beginAndEnd)
         if data.messageStatus == .receiving {
             let size: CGFloat = 60.0

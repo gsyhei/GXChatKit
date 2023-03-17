@@ -23,13 +23,13 @@ class GXUtilManager: NSObject {
             // 返回主线程处理一些事件，更新UI等等
             DispatchQueue.main.async {
                 handler?(timeCount)
-                if timeCount <= 0 {
-                    completion?()
-                }
             }
             // 时间到了取消时间源
             if timeCount <= 0 {
                 codeTimer.cancel()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    completion?()
+                }
             }
         })
         // 启动时间源

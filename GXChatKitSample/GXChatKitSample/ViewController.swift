@@ -36,6 +36,8 @@ class ViewController: UIViewController {
         self.tableView.backgroundImage = UIImage(named: "background")
         self.tableView.register(cellType: GXMessagesTextCell.self)
         self.tableView.register(cellType: GXMessagesMediaCell.self)
+        self.tableView.register(cellType: GXMessagesAudioCell.self)
+
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
         //        self.tableView.addMessagesHeader {[weak self] in
@@ -217,7 +219,7 @@ class ViewController: UIViewController {
         data44.date = Date().dateByAdding(days: 1)!
         data44.showName = "你算什么男人"
         data44.avatarID = "22"
-        data34.messageContinuousStatus = .beginAndEnd
+        data44.messageContinuousStatus = .beginAndEnd
         data44.messageStatus = .receiving
         data44.messageType = .audio
         let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav")!
@@ -225,10 +227,13 @@ class ViewController: UIViewController {
         data44.messagesContentData = GXMessagesAudioContent(fileURL: url)
 
         let item44 = GXMessagesItemData(data: data44)
-        item44.updateMessagesAvatar(image: UIImage(named: "avatar3"))
+        item44.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         
         let sectionData4 = GXMessagesSectionData(date: data44.date)
         sectionData4.append(item: item44)
+        
+        self.list.append(sectionData4)
+
     }
 }
 
@@ -268,6 +273,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             return cell
         case .phote, .video:
             let cell: GXMessagesMediaCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
+            
+            return cell
+        case .audio:
+            let cell: GXMessagesAudioCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bindCell(item: item)
             
             return cell

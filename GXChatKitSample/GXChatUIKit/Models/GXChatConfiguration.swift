@@ -64,7 +64,7 @@ public class GXChatConfiguration: NSObject {
     /// 时间字体
     public var timeFont: UIFont = .systemFont(ofSize: 10)
     /// 发送方时间颜色
-    public var sendingTimeColor: UIColor = UIColor(hex: 0x009900)
+    public var sendingTimeColor: UIColor = UIColor(hex: 0x02A603)
     /// 接收方时间颜色
     public var receivingTimeColor: UIColor = .gray
     
@@ -77,7 +77,20 @@ public class GXChatConfiguration: NSObject {
     
     /// 语音播放按钮尺寸
     public var audioPlaySize: CGSize = CGSize(width: 50.0, height: 50.0)
-    
+    /// 语音播放峰值间隔
+    public var audioSpacing: CGFloat = 2.0
+    /// 语音播放峰值宽度
+    public var audioItemWidth: CGFloat = 3.0
+    /// 语音播放峰值最小高度
+    public var audioMinHeight: CGFloat = 2.0
+    /// 发送方语音时间颜色
+    public var audioSendingTimeColor: UIColor = UIColor(hex: 0x02A603)
+    /// 发送方语音浅色
+    public var audioSendingTimeHighlightColor: UIColor = UIColor(hex: 0x93D887)
+    /// 接收方语音时间颜色
+    public var audioReceivingTimeColor: UIColor = .systemBlue
+    /// 接收方语音浅色
+    public var audioReceivingTimeHighlightColor: UIColor = UIColor(hex: 0x7CC1F2)
 }
 
 public extension GXChatConfiguration {

@@ -37,7 +37,6 @@ public class GXMessagesItemData {
         case .video:
             self.updateVideoLayout()
         case .audio:
-            NSLog("GXMessagesAudioContent init task end update data")
             self.updateAudioLayout()
         default: break
         }
@@ -111,38 +110,36 @@ private extension GXMessagesItemData {
         
         let maxContainerWidth = SCREEN_WIDTH - self.gx_avatarContentWidth
         let maxContentWidth = maxContainerWidth - GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
-        
         let text = content.text + self.data.gx_messageTime
         let maxTextSize = CGSizeMake(maxContentWidth, 10000)
-        let displaySize = text.size(size: maxTextSize, font: GXCHATC.textFont)
-        content.displaySize = displaySize
-        var contentHeight = displaySize.height
+        content.displaySize = text.size(size: maxTextSize, font: GXCHATC.textFont)
+        var contentHeight = content.displaySize.height
         if self.gx_isShowNickname {
             contentHeight += GXCHATC.nicknameFont.lineHeight
             if self.data.gx_messageStatus == .sending {
                 let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight
                 let left = GXCHATC.bubbleTrailingInset.left
-                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: displaySize)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
             else {
                 let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight
                 let left = GXCHATC.bubbleLeadingInset.left
-                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: displaySize)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
         }
         else {
             if self.data.gx_messageStatus == .sending {
                 let top = GXCHATC.bubbleTrailingInset.top
                 let left = GXCHATC.bubbleTrailingInset.left
-                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: displaySize)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
             else {
                 let top = GXCHATC.bubbleLeadingInset.top
                 let left = GXCHATC.bubbleLeadingInset.left
-                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: displaySize)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
         }
-        let containerWidth = displaySize.width + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
+        let containerWidth = content.displaySize.width + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
         let containerHeight = contentHeight + GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom
         self.updateBaseLayout(containerWidth: containerWidth, containerHeight: containerHeight)
     }
@@ -172,34 +169,36 @@ private extension GXMessagesItemData {
         maxContainerWidth -= (GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right)
         maxContainerWidth -= GXChatConfiguration.shared.audioPlaySize.width
         let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: maxContainerWidth, time: content.duration)
+        content.trackCount = count
         let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
-        content.displaySize = CGSize(width: width, height: GXChatConfiguration.shared.audioPlaySize.height/2)
+        content.audioSize = CGSize(width: width, height: GXChatConfiguration.shared.audioPlaySize.height/2 - 10.0)
         
         let contentWidth = width + 10.0 + GXChatConfiguration.shared.audioPlaySize.width
-        var contentHeight = GXChatConfiguration.shared.audioPlaySize.height + GXChatConfiguration.shared.timeFont.lineHeight
+        content.displaySize = CGSize(width: contentWidth, height: GXChatConfiguration.shared.audioPlaySize.height)
+        var contentHeight = content.displaySize.height + GXChatConfiguration.shared.timeFont.lineHeight
         if self.gx_isShowNickname {
             contentHeight += GXCHATC.nicknameFont.lineHeight
             if self.data.gx_messageStatus == .sending {
                 let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight
                 let left = GXCHATC.bubbleTrailingInset.left
-                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
             else {
                 let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight
                 let left = GXCHATC.bubbleLeadingInset.left
-                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
         }
         else {
             if self.data.gx_messageStatus == .sending {
                 let top = GXCHATC.bubbleTrailingInset.top
                 let left = GXCHATC.bubbleTrailingInset.left
-                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
             else {
                 let top = GXCHATC.bubbleLeadingInset.top
                 let left = GXCHATC.bubbleLeadingInset.left
-                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
         }
         let containerWidth = contentWidth + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right

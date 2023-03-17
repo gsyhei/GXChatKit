@@ -73,30 +73,32 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
 
         if let content = item.data.gx_messagesContentData as? GXMessagesPhotoContent {
             if let itemMediaView = content.mediaView {
-                self.messageBubbleImageView.addSubview(itemMediaView)
                 itemMediaView.frame = item.contentRect
+                self.messageBubbleImageView.addSubview(itemMediaView)
                 self.mediaView = itemMediaView
             }
             else {
                 let itemMediaView = UIImageView(frame: item.contentRect)
                 itemMediaView.image = content.thumbnailImage
                 itemMediaView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)
-                self.mediaView = itemMediaView
                 self.messageBubbleImageView.addSubview(itemMediaView)
+                self.mediaView = itemMediaView
+                content.mediaView = itemMediaView
             }
         }
         else if let content = item.data.gx_messagesContentData as? GXMessagesVideoContent {
             if let itemMediaView = content.mediaView {
-                self.messageBubbleImageView.addSubview(itemMediaView)
                 itemMediaView.frame = item.contentRect
+                self.messageBubbleImageView.addSubview(itemMediaView)
                 self.mediaView = itemMediaView
             }
             else {
                 let itemMediaView = UIImageView(frame: item.contentRect)
                 itemMediaView.image = content.thumbnailImage
                 itemMediaView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)
-                self.mediaView = itemMediaView
                 self.messageBubbleImageView.addSubview(itemMediaView)
+                self.mediaView = itemMediaView
+                content.mediaView = itemMediaView
             }
             self.playButton.isHidden = false
             self.playButton.center = self.messageBubbleImageView.center
