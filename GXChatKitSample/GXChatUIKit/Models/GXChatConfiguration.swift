@@ -74,6 +74,10 @@ public class GXChatConfiguration: NSObject {
     public var headerTextColor: UIColor = UIColor(hex: 0xFFFFFF)
     /// header文本颜色
     public var headerBackgroudColor: UIColor = UIColor(hex: 0x33333388, useAlpha: true)
+    
+    /// 语音播放按钮尺寸
+    public var audioPlaySize: CGSize = CGSize(width: 50.0, height: 50.0)
+    
 }
 
 public extension GXChatConfiguration {
@@ -117,6 +121,8 @@ public extension GXChatConfiguration {
     
     /// 消息读取状态
     enum MessageReadingStatus: Int {
+        /// 无需读取
+        case none    = -1
         /// 未读
         case unread  = 0
         /// 已读

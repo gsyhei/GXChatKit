@@ -16,9 +16,9 @@ public class GXMessagesAudioTrackView: UIView {
     private var trackLayers: [CALayer] = []
 
     /// 根据时长与最大宽度获取count
-    public class func GetTrackMaxCount(maxWidth: CGFloat, time: TimeInterval) -> Int {
+    public class func GetTrackMaxCount(maxWidth: CGFloat, time: Int) -> Int {
         let maxCount = maxWidth / (spacing * itemWidth)
-        let trackCount: Int = Int(maxCount / 60 * time)
+        let trackCount: Int = Int(maxCount / 60 * CGFloat(time))
         let minCount = max(trackCount, 10)
         
         return minCount
@@ -67,6 +67,9 @@ public extension GXMessagesAudioTrackView {
 
     func gx_animation(time: TimeInterval, completion: (() -> Void)? = nil) {
         let count = self.trackLayers.count
+        if count == 0 {
+            completion?(); return
+        }
         let duration = time / Double(count)
         let milliseconds: Int = Int(duration * 1000.0)
         GXUtilManager.gx_countdownTimer(count: count, milliseconds: milliseconds) { index in

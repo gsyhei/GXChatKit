@@ -9,11 +9,11 @@ import UIKit
 
 public class GXMessagesPhotoContent: GXMessagesContentData {
     /// 下载地址
-    private(set) var imageURL: NSURL?
+    private(set) var imageURL: URL?
     /// 缩略图下载地址
-    private(set) var thumbnailImageURL: NSURL?
+    private(set) var thumbnailImageURL: URL?
     /// 本地存储地址
-    private(set) var fileURL: NSURL?
+    private(set) var fileURL: URL?
     /// 缩略图
     private(set) var thumbnailImage: UIImage?
         
@@ -21,15 +21,15 @@ public class GXMessagesPhotoContent: GXMessagesContentData {
     
     public var mediaPlaceholderView: UIView?
     
-    public var displaySize: CGSize = CGSizeZero
+    public var displaySize: CGSize = .zero
     
-    public required init(thumbnailImageURL: NSURL, imageURL: NSURL? = nil, displaySize: CGSize) {
+    public required init(thumbnailImageURL: URL, imageURL: URL? = nil, displaySize: CGSize) {
         self.thumbnailImageURL = thumbnailImageURL
         self.imageURL = imageURL
         self.displaySize = displaySize
     }
     
-    public required init(thumbnailImage: UIImage?, fileURL: NSURL? = nil) {
+    public required init(thumbnailImage: UIImage?, fileURL: URL? = nil) {
         self.thumbnailImage = thumbnailImage
         self.fileURL = fileURL
         self.displaySize = thumbnailImage?.size ?? .zero

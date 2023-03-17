@@ -23,7 +23,7 @@ public class GXMessagesItemData {
     
     public required init(data: GXMessagesDataProtocol) {
         self.data = data
-        self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName, image: UIImage(named: "avatar1"))
+        self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName)
         self.bubble = GXMessagesBubbleFactory.messagesBubble(status: data.gx_messageStatus)
         self.updateLayout()
     }
@@ -36,6 +36,9 @@ public class GXMessagesItemData {
             self.updatePhotoLayout()
         case .video:
             self.updateVideoLayout()
+        case .audio:
+            NSLog("GXMessagesAudioContent init task end update data")
+            self.updateAudioLayout()
         default: break
         }
     }
@@ -104,15 +107,15 @@ private extension GXMessagesItemData {
     }
     
     func updateTextLayout() {
-        guard let textContent = self.data.gx_messagesContentData as? GXMessagesTextContent else { return }
+        guard let content = self.data.gx_messagesContentData as? GXMessagesTextContent else { return }
         
         let maxContainerWidth = SCREEN_WIDTH - self.gx_avatarContentWidth
         let maxContentWidth = maxContainerWidth - GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
         
-        let text = textContent.text + self.data.gx_messageTime
+        let text = content.text + self.data.gx_messageTime
         let maxTextSize = CGSizeMake(maxContentWidth, 10000)
         let displaySize = text.size(size: maxTextSize, font: GXCHATC.textFont)
-        textContent.displaySize = displaySize
+        content.displaySize = displaySize
         var contentHeight = displaySize.height
         if self.gx_isShowNickname {
             contentHeight += GXCHATC.nicknameFont.lineHeight
@@ -145,23 +148,64 @@ private extension GXMessagesItemData {
     }
     
     func updatePhotoLayout() {
-        guard let photoContent = self.data.gx_messagesContentData as? GXMessagesPhotoContent else { return }
+        guard let content = self.data.gx_messagesContentData as? GXMessagesPhotoContent else { return }
         
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
-        let displaySize = self.gx_resize(size: photoContent.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
+        let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
         self.updateBaseLayout(containerWidth: displaySize.width, containerHeight: displaySize.height)
     }
     
     func updateVideoLayout() {
-        guard let videoContent = self.data.gx_messagesContentData as? GXMessagesVideoContent else { return }
+        guard let content = self.data.gx_messagesContentData as? GXMessagesVideoContent else { return }
         
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
-        let displaySize = self.gx_resize(size: videoContent.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
+        let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
         self.updateBaseLayout(containerWidth: displaySize.width, containerHeight: displaySize.height)
     }
     
+    func updateAudioLayout() {
+        guard let content = self.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        
+        var maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0) * 2
+        maxContainerWidth -= (GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right)
+        maxContainerWidth -= GXChatConfiguration.shared.audioPlaySize.width
+        let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: maxContainerWidth, time: content.duration)
+        let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
+        content.displaySize = CGSize(width: width, height: GXChatConfiguration.shared.audioPlaySize.height/2)
+        
+        let contentWidth = width + 10.0 + GXChatConfiguration.shared.audioPlaySize.width
+        var contentHeight = GXChatConfiguration.shared.audioPlaySize.height + GXChatConfiguration.shared.timeFont.lineHeight
+        if self.gx_isShowNickname {
+            contentHeight += GXCHATC.nicknameFont.lineHeight
+            if self.data.gx_messageStatus == .sending {
+                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight
+                let left = GXCHATC.bubbleTrailingInset.left
+                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+            }
+            else {
+                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight
+                let left = GXCHATC.bubbleLeadingInset.left
+                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+            }
+        }
+        else {
+            if self.data.gx_messageStatus == .sending {
+                let top = GXCHATC.bubbleTrailingInset.top
+                let left = GXCHATC.bubbleTrailingInset.left
+                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+            }
+            else {
+                let top = GXCHATC.bubbleLeadingInset.top
+                let left = GXCHATC.bubbleLeadingInset.left
+                self.contentRect = CGRect(x: left, y: top, width: contentWidth, height: contentHeight)
+            }
+        }
+        let containerWidth = contentWidth + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
+        let containerHeight = contentHeight + GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom
+        self.updateBaseLayout(containerWidth: containerWidth, containerHeight: containerHeight)
+    }
 }
 
 public extension GXMessagesItemData {

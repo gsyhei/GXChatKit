@@ -32,72 +32,78 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-//        self.view.addSubview(self.tableView)
-//        self.tableView.backgroundImage = UIImage(named: "background")
-//        self.tableView.register(cellType: GXMessagesTextCell.self)
-//        self.tableView.register(cellType: GXMessagesMediaCell.self)
-//        self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
-//        self.tableView.sectionHeaderHeight = 30.0
-//        //        self.tableView.addMessagesHeader {[weak self] in
-//        //            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
-//        //                self?.updateDatas()
-//        //                self?.tableView.endHeaderLoading()
-//        //            }
-//        //        }
-//
-//        self.updateDatas()
-//        self.tableView.reloadData()
+        self.view.addSubview(self.tableView)
+        self.tableView.backgroundImage = UIImage(named: "background")
+        self.tableView.register(cellType: GXMessagesTextCell.self)
+        self.tableView.register(cellType: GXMessagesMediaCell.self)
+        self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
+        self.tableView.sectionHeaderHeight = 30.0
+        //        self.tableView.addMessagesHeader {[weak self] in
+        //            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
+        //                self?.updateDatas()
+        //                self?.tableView.endHeaderLoading()
+        //            }
+        //        }
+
+        self.updateDatas()
+        self.tableView.reloadData()
         
-        if let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav") {
-            let url = URL(fileURLWithPath: urlString)
-            let asset = AVAsset(url: url)
-            
-            let time = asset.duration
-            
-            GXAudioManager.gx_cutAudioTrackList(asset: asset, count: 20, height: 48) { trackList in
-                let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: 300, time: 4)
-                let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
-                
-                let rect = CGRect(x: 10, y: 100, width: width, height: 50)
-                let trackView = GXMessagesAudioTrackView(frame: rect, trackList: trackList)
-                self.view.addSubview(trackView)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                    trackView.gx_animation(time: 3.0)
-                })
-            }
-        }
+//        if let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav") {
+//            let url = URL(fileURLWithPath: urlString)
+//            let asset = AVAsset(url: url)
+//            GXAudioManager.gx_cutAudioTrackList(asset: asset, count: 20, height: 48) { trackList in
+//                let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: 300, time: 4)
+//                let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
+//
+//                let rect = CGRect(x: 10, y: 100, width: width, height: 50)
+//                let trackView = GXMessagesAudioTrackView(frame: rect, trackList: trackList)
+//                self.view.addSubview(trackView)
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+//                    trackView.gx_animation(time: 3.0)
+//                })
+//            }
+//        }
         
     }
     
     public func updateDatas() {
-        var data1 = GXTestTextData()
-        data1.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        var data1 = GXMessagesTestData()
+        data1.date = Date().dateByAdding(days: -2)!
+        data1.showName = "抬头45度仰望天空"
+        data1.avatarID = "11"
         data1.messageContinuousStatus = .begin
         data1.messageStatus = .receiving
-        data1.avatarID = "111111111111"
-        data1.date = Date().dateByAdding(days: -2)!
+        data1.messageType = .text
+        data1.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
         let item1 = GXMessagesItemData(data: data1)
         item1.updateMessagesAvatar(image: UIImage(named: "avatar1"))
-        
         let sectionData = GXMessagesSectionData(date: data1.date)
         sectionData.append(item: item1)
         
-        var data2 = GXTestTextData()
-        data2.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        var data2 = GXMessagesTestData()
+        data2.date = Date().dateByAdding(days: -2)!
+        data2.showName = "抬头45度仰望天空"
+        data2.avatarID = "11"
         data2.messageContinuousStatus = .ongoing
         data2.messageStatus = .receiving
-        data2.avatarID = "111111111111"
-        data2.date = Date().dateByAdding(days: -2)!
+        data2.messageType = .text
+        data2.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
         let item2 = GXMessagesItemData(data: data2)
         item2.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item2)
         
-        var data3 = GXTestPhotoData()
+        var data3 = GXMessagesTestData()
+        data3.date = Date().dateByAdding(days: -2)!
+        data3.showName = "抬头45度仰望天空"
+        data3.avatarID = "11"
         data3.messageContinuousStatus = .end
         data3.messageStatus = .receiving
-        data3.avatarID = "111111111111"
-        data3.date = Date().dateByAdding(days: -2)!
+        data3.messageType = .phote
+        data3.messagesContentData = GXMessagesPhotoContent(thumbnailImage: UIImage(named: "testphoto"))
+        
         let item3 = GXMessagesItemData(data: data3)
         item3.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item3)
@@ -105,33 +111,43 @@ class ViewController: UIViewController {
         self.list.append(sectionData)
         
         
-        var data11 = GXTestTextData()
-        data11.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        var data11 = GXMessagesTestData()
+        data11.date = Date().dateByAdding(days: -1)!
+        data11.showName = "你算什么男人"
+        data11.avatarID = "22"
         data11.messageContinuousStatus = .begin
         data11.messageStatus = .receiving
-        data11.avatarID = "2222222222"
-        data11.date = Date().dateByAdding(days: -1)!
+        data11.messageType = .text
+        data11.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
         let item11 = GXMessagesItemData(data: data11)
         item11.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         
         let sectionData1 = GXMessagesSectionData(date: data11.date)
         sectionData1.append(item: item11)
         
-        var data22 = GXTestTextData()
-        data22.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        var data22 = GXMessagesTestData()
+        data22.date = Date().dateByAdding(days: -1)!
+        data22.showName = "你算什么男人"
+        data22.avatarID = "22"
         data22.messageContinuousStatus = .ongoing
         data22.messageStatus = .receiving
-        data22.avatarID = "2222222222"
-        data22.date = Date().dateByAdding(days: -1)!
+        data22.messageType = .text
+        data22.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
         let item22 = GXMessagesItemData(data: data22)
         item22.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item22)
         
-        var data33 = GXTestPhotoData()
+        var data33 = GXMessagesTestData()
+        data33.date = Date().dateByAdding(days: -1)!
+        data33.showName = "你算什么男人"
+        data33.avatarID = "22"
         data33.messageContinuousStatus = .end
         data33.messageStatus = .receiving
-        data33.avatarID = "2222222222"
-        data33.date = Date().dateByAdding(days: -1)!
+        data33.messageType = .video
+        data33.messagesContentData = GXMessagesVideoContent(thumbnailImage: UIImage(named: "testphoto"))
+        
         let item33 = GXMessagesItemData(data: data33)
         item33.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item33)
@@ -139,49 +155,80 @@ class ViewController: UIViewController {
         self.list.append(sectionData1)
         
         
-        var data13 = GXTestTextData()
-        data13.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        var data13 = GXMessagesTestData()
+        data13.date = Date()
+        data13.showName = "你算什么男人"
+        data13.avatarID = "22"
         data13.messageContinuousStatus = .begin
         data13.messageStatus = .receiving
-        data13.avatarID = "2222222222"
-        data13.date = Date()
+        data13.messageType = .text
+        data13.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
         let item13 = GXMessagesItemData(data: data13)
         item13.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         
         let sectionData2 = GXMessagesSectionData(date: data13.date)
         sectionData2.append(item: item13)
         
-        var data23 = GXTestTextData()
-        data23.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        var data23 = GXMessagesTestData()
+        data23.date = Date()
+        data23.showName = "你算什么男人"
+        data23.avatarID = "22"
         data23.messageContinuousStatus = .ongoing
         data23.messageStatus = .receiving
-        data23.avatarID = "2222222222"
-        data23.date = Date()
+        data23.messageType = .text
+        data23.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
         let item23 = GXMessagesItemData(data: data23)
         item23.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData2.append(item: item23)
         
-        var data34 = GXTestVideoData()
+        var data34 = GXMessagesTestData()
+        data34.date = Date()
+        data34.showName = "你算什么男人"
+        data34.avatarID = "22"
         data34.messageContinuousStatus = .end
         data34.messageStatus = .receiving
-        data34.avatarID = "2222222222"
-        data34.date = Date()
+        data34.messageType = .video
+        data34.messagesContentData = GXMessagesVideoContent(thumbnailImage: UIImage(named: "testphoto"))
+        
         let item34 = GXMessagesItemData(data: data34)
         item34.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData2.append(item: item34)
         
-        var data24 = GXTestTextData()
-        data24.text = "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。"
+        var data24 = GXMessagesTestData()
+        data24.date = Date()
+        data24.showName = "这样也好"
+        data24.avatarID = "33"
         data24.messageContinuousStatus = .beginAndEnd
         data24.messageStatus = .receiving
-        data24.avatarID = "3333333333"
-        data24.date = Date()
+        data24.messageType = .text
+        data24.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
         let item24 = GXMessagesItemData(data: data24)
         item24.updateMessagesAvatar(image: UIImage(named: "avatar3"))
         sectionData2.append(item: item24)
         
         self.list.append(sectionData2)
         
+        
+        
+        var data44 = GXMessagesTestData()
+        data44.date = Date().dateByAdding(days: 1)!
+        data44.showName = "你算什么男人"
+        data44.avatarID = "22"
+        data34.messageContinuousStatus = .beginAndEnd
+        data44.messageStatus = .receiving
+        data44.messageType = .audio
+        let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav")!
+        let url = URL(fileURLWithPath: urlString)
+        data44.messagesContentData = GXMessagesAudioContent(fileURL: url)
+
+        let item44 = GXMessagesItemData(data: data44)
+        item44.updateMessagesAvatar(image: UIImage(named: "avatar3"))
+        
+        let sectionData4 = GXMessagesSectionData(date: data44.date)
+        sectionData4.append(item: item44)
     }
 }
 

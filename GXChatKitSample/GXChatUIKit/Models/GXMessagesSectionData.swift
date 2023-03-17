@@ -44,6 +44,10 @@ public class GXMessagesSectionData: NSObject {
         self.items.append(item)
     }
     
+    public func inset(item: GXMessagesItemData) {
+        self.items.insert(item, at: 0)
+    }
+    
     public func remove(at index: Int) {
         guard index < self.items.count else { return }
         self.items.remove(at: index)

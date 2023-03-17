@@ -15,7 +15,7 @@ public class GXMessagesTextContent: GXMessagesContentData {
     
     public var mediaPlaceholderView: UIView? = nil
     
-    public var displaySize: CGSize = CGSizeZero
+    public var displaySize: CGSize = .zero
     
     public required init(text: String) {
         self.text = text

@@ -9,7 +9,7 @@ import UIKit
 
 public class GXMessagesTextCell: GXMessagesBaseCell {
     
-    /// 右边的时间
+    /// 文本Label
     public lazy var contentTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -35,8 +35,8 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
-        guard let textContent = item.data.gx_messagesContentData as? GXMessagesTextContent else { return }
-        self.contentTextLabel.text = textContent.text
+        guard let content = item.data.gx_messagesContentData as? GXMessagesTextContent else { return }
+        self.contentTextLabel.text = content.text
         self.contentTextLabel.frame = item.contentRect
     }
     
