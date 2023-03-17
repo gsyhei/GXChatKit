@@ -31,26 +31,35 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.view.addSubview(self.tableView)
-        self.tableView.backgroundImage = UIImage(named: "background")
-        self.tableView.register(cellType: GXMessagesTextCell.self)
-        self.tableView.register(cellType: GXMessagesMediaCell.self)
-        self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
-        self.tableView.sectionHeaderHeight = 30.0
-        //        self.tableView.addMessagesHeader {[weak self] in
-        //            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
-        //                self?.updateDatas()
-        //                self?.tableView.endHeaderLoading()
-        //            }
-        //        }
-        
-        self.updateDatas()
-        self.tableView.reloadData()
+//        self.view.addSubview(self.tableView)
+//        self.tableView.backgroundImage = UIImage(named: "background")
+//        self.tableView.register(cellType: GXMessagesTextCell.self)
+//        self.tableView.register(cellType: GXMessagesMediaCell.self)
+//        self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
+//        self.tableView.sectionHeaderHeight = 30.0
+//        //        self.tableView.addMessagesHeader {[weak self] in
+//        //            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
+//        //                self?.updateDatas()
+//        //                self?.tableView.endHeaderLoading()
+//        //            }
+//        //        }
+//
+//        self.updateDatas()
+//        self.tableView.reloadData()
         
         if let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav") {
             let url = URL(fileURLWithPath: urlString)
-            Task {
-                await GXAudioManager.cutAudioData(size: CGSize(width: 100, height: 50), url: url)
+            GXAudioManager.gx_cutAudioTrackList(size: CGSize(width: 20, height: 48), url: url) { trackList in
+                let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: 300, time: 4)
+                let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
+                
+                let rect = CGRect(x: 10, y: 100, width: width, height: 50)
+                let trackView = GXMessagesAudioTrackView(frame: rect, trackList: trackList)
+                self.view.addSubview(trackView)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                    trackView.gx_animation(time: 3.0)
+                })
             }
         }
         

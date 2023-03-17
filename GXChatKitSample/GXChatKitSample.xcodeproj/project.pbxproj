@@ -36,6 +36,8 @@
 		9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577129757F2D001DCC17 /* GXMessagesViewController.swift */; };
 		969957762975A9D6001DCC17 /* GXMessagesBubbleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */; };
 		9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699577729767567001DCC17 /* UIColor+GXChat.swift */; };
+		96A36A7729C2BFF500BD4506 /* GXMessagesAudioTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A36A7629C2BFF500BD4506 /* GXMessagesAudioTrackView.swift */; };
+		96A36A7929C2E10400BD4506 /* GXUtilManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A36A7829C2E10400BD4506 /* GXUtilManager.swift */; };
 		96B4FA6529BFA44400AA9384 /* TestXibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B4FA6429BFA44400AA9384 /* TestXibView.xib */; };
 		96D13EFD29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D13EFC29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift */; };
 		96D13EFF29BDA6F900BF4B80 /* GXMessagesSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */; };
@@ -142,6 +144,8 @@
 		9699577129757F2D001DCC17 /* GXMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesViewController.swift; sourceTree = "<group>"; };
 		969957752975A9D6001DCC17 /* GXMessagesBubbleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesBubbleFactory.swift; sourceTree = "<group>"; };
 		9699577729767567001DCC17 /* UIColor+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GXChat.swift"; sourceTree = "<group>"; };
+		96A36A7629C2BFF500BD4506 /* GXMessagesAudioTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioTrackView.swift; sourceTree = "<group>"; };
+		96A36A7829C2E10400BD4506 /* GXUtilManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXUtilManager.swift; sourceTree = "<group>"; };
 		96B4FA6429BFA44400AA9384 /* TestXibView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestXibView.xib; sourceTree = "<group>"; };
 		96D13EFC29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSectionHeader.swift; sourceTree = "<group>"; };
 		96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSectionData.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				96495C4329C1A1170055C19A /* GXAudioManager.swift */,
+				96A36A7829C2E10400BD4506 /* GXUtilManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 		96D30AF12956FC1800AFBB90 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
+				96A36A7629C2BFF500BD4506 /* GXMessagesAudioTrackView.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -737,11 +743,13 @@
 				9699576E29757CD1001DCC17 /* Bundle+GXChat.swift in Sources */,
 				969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */,
 				965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */,
+				96A36A7729C2BFF500BD4506 /* GXMessagesAudioTrackView.swift in Sources */,
 				965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */,
 				9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */,
 				96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */,
 				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
 				96995760297506B2001DCC17 /* GXMessagesContentData.swift in Sources */,
+				96A36A7929C2E10400BD4506 /* GXUtilManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
