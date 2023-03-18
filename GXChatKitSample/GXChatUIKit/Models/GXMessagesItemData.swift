@@ -38,7 +38,6 @@ public class GXMessagesItemData {
             self.updateVideoLayout()
         case .audio:
             self.updateAudioLayout()
-        default: break
         }
     }
 
@@ -168,9 +167,7 @@ private extension GXMessagesItemData {
         var maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0) * 2
         maxContainerWidth -= (GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right)
         maxContainerWidth -= GXChatConfiguration.shared.audioPlaySize.width
-        let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: maxContainerWidth, time: content.duration)
-        content.trackCount = count
-        let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
+        let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: content.tracks?.count ?? 0)
         content.audioSize = CGSize(width: width, height: GXChatConfiguration.shared.audioPlaySize.height/2 - 10.0)
         
         let contentWidth = width + 10.0 + GXChatConfiguration.shared.audioPlaySize.width

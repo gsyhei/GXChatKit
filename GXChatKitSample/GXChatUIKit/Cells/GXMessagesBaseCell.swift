@@ -11,6 +11,9 @@ import GXMessagesTableView
 
 open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
+    /// 消息数据
+    public weak var item: GXMessagesItemData?
+    
     /// 气泡上边的Label（群昵称）
     public lazy var messageBubbleNameLabel: UILabel = {
         let label = UILabel()
@@ -99,6 +102,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     }
     
     public func bindCell(item: GXMessagesItemData) {
+        self.item = item
         switch item.data.gx_messageContinuousStatus {
         case .begin:
             self.messageBubbleImageView.image = item.bubble?.messageBeginBubbleImage

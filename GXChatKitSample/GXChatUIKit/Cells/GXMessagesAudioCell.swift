@@ -10,13 +10,11 @@ import UIKit
 public class GXMessagesAudioCell: GXMessagesBaseCell {
 
     /// 语音音轨视图
-    public var trackView: GXMessagesAudioTrackView?
+    public weak var trackView: GXMessagesAudioTrackView?
     /// 播放按钮
     public lazy var playButton: UIButton = {
         let button = UIButton(type: .custom)
-        let image = UIImage(systemName: "play.circle.fill")
         button.frame = CGRect(origin: .zero, size: GXChatConfiguration.shared.audioPlaySize)
-        button.setBackgroundImage(image, for: .normal)
         button.tintColor = .systemBlue
         button.addTarget(self, action: #selector(playButtonClicked(_:)), for: .touchUpInside)
         
@@ -46,9 +44,10 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
 
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
-        
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        
         self.playButton.frame = CGRect(origin: item.contentRect.origin, size: GXChatConfiguration.shared.audioPlaySize)
+        self.updatePlayButton(content: content)
         
         if let itemMediaView = content.mediaView as? GXMessagesAudioTrackView {
             self.messageBubbleContainerView.addSubview(itemMediaView)
@@ -58,17 +57,14 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
             self.trackView = itemMediaView
         }
         else {
-            content.updateAudioTracks { trackList,audio  in
-                let left = self.playButton.right + 10.0, top = self.playButton.top + 10.0
-                let rect = CGRect(x: left, y: top, width: content.audioSize.width, height: content.audioSize.height)
-                let trackView = GXMessagesAudioTrackView(frame: rect)
-                trackView.updateTracks(trackList: trackList, duration: content.duration, status: item.data.gx_messageStatus)
-                self.messageBubbleContainerView.addSubview(trackView)
-                self.trackView = trackView
-                audio.mediaView = trackView
-            }
+            let left = self.playButton.right + 10.0, top = self.playButton.top + 10.0
+            let rect = CGRect(x: left, y: top, width: content.audioSize.width, height: content.audioSize.height)
+            let trackView = GXMessagesAudioTrackView(frame: rect)
+            trackView.updateAudio(content: content, status: item.data.gx_messageStatus)
+            self.messageBubbleContainerView.addSubview(trackView)
+            self.trackView = trackView
+            content.mediaView = trackView
         }
-        
         let left = self.playButton.right + 10.0, top = self.playButton.frame.midY + 5.0
         self.timeLabel.text = String(format: "0:%02d", content.duration)
         self.timeLabel.frame = CGRect(x: left, y: top, width: content.audioSize.width, height: self.timeLabel.font.lineHeight)
@@ -80,12 +76,32 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         }
     }
 
+    public func updatePlayButton(content: GXMessagesAudioContent) {
+        if content.isPlaying {
+            let image = UIImage(systemName: "pause.circle.fill")
+            self.playButton.setBackgroundImage(image, for: .normal)
+        }
+        else {
+            let image = UIImage(systemName: "play.circle.fill")
+            self.playButton.setBackgroundImage(image, for: .normal)
+        }
+    }
 }
 
 extension GXMessagesAudioCell {
     @objc func playButtonClicked(_ sender: Any?) {
-        self.trackView?.gx_animation(completion: {
-            
-        })
+        guard let content = self.item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+
+        content.isPlaying = !content.isPlaying
+        self.updatePlayButton(content: content)
+        if content.isPlaying {
+            self.trackView?.gx_animation(completion: {[weak self] in
+                content.isPlaying = false
+                self?.updatePlayButton(content: content)
+            })
+        }
+        else {
+            self.trackView?.gx_animationPause()
+        }
     }
 }

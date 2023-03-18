@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         data1.showName = "抬头45度仰望天空"
         data1.avatarID = "11"
         data1.messageContinuousStatus = .begin
-        data1.messageStatus = .receiving
+        data1.messageStatus = .sending
         data1.messageType = .text
         data1.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         data2.showName = "抬头45度仰望天空"
         data2.avatarID = "11"
         data2.messageContinuousStatus = .ongoing
-        data2.messageStatus = .receiving
+        data2.messageStatus = .sending
         data2.messageType = .text
         data2.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
@@ -102,7 +102,7 @@ class ViewController: UIViewController {
         data3.showName = "抬头45度仰望天空"
         data3.avatarID = "11"
         data3.messageContinuousStatus = .end
-        data3.messageStatus = .receiving
+        data3.messageStatus = .sending
         data3.messageType = .phote
         data3.messagesContentData = GXMessagesPhotoContent(thumbnailImage: UIImage(named: "testphoto"))
         
@@ -214,7 +214,6 @@ class ViewController: UIViewController {
         self.list.append(sectionData2)
         
         
-        
         var data44 = GXMessagesTestData()
         data44.date = Date().dateByAdding(days: 1)!
         data44.showName = "你算什么男人"
@@ -224,7 +223,8 @@ class ViewController: UIViewController {
         data44.messageType = .audio
         let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav")!
         let url = URL(fileURLWithPath: urlString)
-        data44.messagesContentData = GXMessagesAudioContent(fileURL: url)
+        let tracks = [0, 4, 8, 11, 8, 12, 0, 13, 6, 1]
+        data44.messagesContentData = GXMessagesAudioContent(fileURL: url, duration: 1, tracks: tracks)
 
         let item44 = GXMessagesItemData(data: data44)
         item44.updateMessagesAvatar(image: UIImage(named: "avatar2"))

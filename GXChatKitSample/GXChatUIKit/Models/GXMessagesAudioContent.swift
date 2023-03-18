@@ -20,55 +20,31 @@ public class GXMessagesAudioContent: GXMessagesContentData {
     
     public var displaySize: CGSize = .zero
     
-    public var duration: Int = 0
-
-    public var trackCount: Int = 0
-
+    // MARK: - 实时音频数据
+    
+    /// 音轨视图尺寸
     public var audioSize: CGSize = .zero
-
-    public var trackList: [Int]?
+    /// 持续时间
+    public var duration: Int = 0
+    /// 音轨数组
+    public var tracks: [Int]?
+    /// 是否正在播放
+    public var isPlaying: Bool = false
+    /// 当前动画count
+    public var currentPlayIndex: Int = 0
+    /// 当前播放时间
+    public var currentPlayDuration: Int = 0
     
-    public required init(audioURL: URL? = nil) {
+    public required init(audioURL: URL?, duration: Int, tracks: [Int]) {
         self.audioURL = audioURL
+        self.duration = duration
+        self.tracks = tracks
     }
     
-    public required init(fileURL: URL? = nil) {
-        self.updateTime(fileURL: fileURL)
-    }
-    
-    public func updateTime(fileURL: URL?) {
+    public required init(fileURL: URL?, duration: Int, tracks: [Int]) {
         self.fileURL = fileURL
-        if let url = fileURL {
-            let asset = AVAsset(url: url)
-            if #available(iOS 15.0, *) {
-                Task {
-                    let time = try? await asset.load(.duration)
-                    guard let letTime = time else { return }
-                    let letDuration = (letTime.value + CMTimeValue(letTime.timescale)) / CMTimeValue(letTime.timescale)
-                    self.duration = Int(letDuration)
-                }
-            }
-            else {
-                let time = asset.duration
-                let letDuration = (time.value + CMTimeValue(time.timescale)) / CMTimeValue(time.timescale)
-                self.duration = Int(letDuration)
-            }
-        }
-    }
-    
-    public func updateAudioTracks(completion: @escaping (([Int], GXMessagesAudioContent) -> Void)) {
-        if let tracks = self.trackList {
-            completion(tracks, self); return
-        }
-        guard let url = self.fileURL else {
-            completion([], self); return
-        }
-        let asset = AVAsset(url: url)
-        let maxHeight = self.audioSize.height - GXChatConfiguration.shared.audioMinHeight
-        GXAudioManager.gx_cutAudioTrackList(asset: asset, count: self.trackCount, height: maxHeight) { list in
-            self.trackList = list
-            completion(list, self)
-        }
+        self.duration = duration
+        self.tracks = tracks
     }
     
 }

@@ -9,7 +9,10 @@ import UIKit
 
 class GXUtilManager: NSObject {
     
-    class func gx_countdownTimer(count: Int, milliseconds: Int, handler: ((Int) -> Void)? = nil, completion: (() -> Void)? = nil) {
+    class func gx_countdownTimer(count: Int, milliseconds:
+                                 Int, handler: ((Int) -> Void)? = nil,
+                                 completion: (() -> Void)? = nil) -> DispatchSourceTimer
+    {
         // 定义需要计时的时间
         var timeCount: Int = count
         // 在global线程里创建一个时间源
@@ -34,6 +37,8 @@ class GXUtilManager: NSObject {
         })
         // 启动时间源
         codeTimer.resume()
+        
+        return codeTimer
     }
     
 }
