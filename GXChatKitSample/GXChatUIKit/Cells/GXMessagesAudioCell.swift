@@ -8,14 +8,12 @@
 import UIKit
 
 public class GXMessagesAudioCell: GXMessagesBaseCell {
-
     /// 语音音轨视图
     public weak var trackView: GXMessagesAudioTrackView?
     /// 播放按钮
     public lazy var playButton: UIButton = {
         let button = UIButton(type: .custom)
         button.frame = CGRect(origin: .zero, size: GXChatConfiguration.shared.audioPlaySize)
-        button.tintColor = .systemBlue
         button.addTarget(self, action: #selector(playButtonClicked(_:)), for: .touchUpInside)
         
         return button
@@ -24,14 +22,22 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     public lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.font = GXCHATC.timeFont
-
+        
         return label
     }()
-
+    /// 播放时间后面的点
+    public lazy var dotView: UIView = {
+        let view = UIView(frame: CGRect(origin: .zero, size: CGSizeMake(4, 4)))
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 2
+        
+        return view
+    }()
+    
     public override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -40,8 +46,9 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         super.createSubviews()
         self.messageBubbleContainerView.addSubview(self.playButton)
         self.messageBubbleContainerView.addSubview(self.timeLabel)
+        self.messageBubbleContainerView.addSubview(self.dotView)
     }
-
+    
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
@@ -67,13 +74,19 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         }
         let left = self.playButton.right + 10.0, top = self.playButton.frame.midY + 5.0
         self.timeLabel.text = String(format: "0:%02d", content.duration)
-        self.timeLabel.frame = CGRect(x: left, y: top, width: content.audioSize.width, height: self.timeLabel.font.lineHeight)
+        self.timeLabel.frame = CGRect(x: left, y: top, width: 28.0, height: self.timeLabel.font.lineHeight)
         if item.data.gx_messageStatus == .sending {
+            self.playButton.tintColor = GXChatConfiguration.shared.audioSendingTimeColor
             self.timeLabel.textColor = GXChatConfiguration.shared.audioSendingTimeColor
+            self.dotView.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor
         }
         else {
+            self.playButton.tintColor = GXChatConfiguration.shared.audioReceivingTimeColor
             self.timeLabel.textColor = GXChatConfiguration.shared.audioReceivingTimeColor
+            self.dotView.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeColor
         }
+        self.dotView.left = self.timeLabel.right
+        self.dotView.centerY = self.timeLabel.centerY
     }
 
     public func updatePlayButton(content: GXMessagesAudioContent) {

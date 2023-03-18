@@ -29,7 +29,7 @@ public class GXChatConfiguration: NSObject {
     /// 结束气泡图
     public var bubbleEndImage: UIImage? = .gx_bundleAssetImage(name: "bubble_min")
     /// 发送方气泡色
-    public var sendingBubbleMaskColor: UIColor = .systemGreen
+    public var sendingBubbleMaskColor: UIColor = UIColor(hex: 0xE0FFC6)
     /// 接收方气泡色
     public var receivingBubbleMaskColor: UIColor = .white
 

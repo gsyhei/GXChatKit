@@ -45,7 +45,7 @@ public extension GXMessagesAudioTrackView {
             
             let layer = CALayer()
             layer.frame = frame
-            if index <= content.currentPlayIndex {
+            if index < content.currentPlayIndex {
                 if self.messageStatus == .sending {
                     layer.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor.cgColor
                 } else {

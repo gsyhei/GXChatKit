@@ -32,7 +32,7 @@
                     <rect key="frame" x="121" y="93" width="150" height="158"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" systemColor="systemGreenColor"/>
-                    <imageReference key="image" image="pause.circle.fill" catalog="system" symbolScale="default" variableValue="1"/>
+                    <imageReference key="image" image="playpause.circle.fill" catalog="system" symbolScale="default" variableValue="1"/>
                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
                 </imageView>
             </subviews>
@@ -42,8 +42,8 @@
         </view>
     </objects>
     <resources>
-        <image name="pause.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="playpause.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
