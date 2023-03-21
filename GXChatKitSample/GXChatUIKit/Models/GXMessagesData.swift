@@ -13,6 +13,8 @@ public typealias GXMessagesDataProtocol = GXMessagesData & GXMessagesAvatarDataP
 public protocol GXMessagesData {
     /// 消息唯一ID
     var gx_messageId: String { get }
+    /// 群ID（不是群则为nil）
+    var gx_groupId: String? { get }
     /// 发送方ID
     var gx_senderId: String { get }
     /// 发送方显示名称

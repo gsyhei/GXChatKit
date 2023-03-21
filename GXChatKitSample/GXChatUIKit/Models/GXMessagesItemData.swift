@@ -22,9 +22,17 @@ public class GXMessagesItemData: Equatable {
     public var cellHeight: CGFloat = 0
     
     public static func == (lhs: GXMessagesItemData, rhs: GXMessagesItemData) -> Bool {
-        return lhs.data.gx_chatType == rhs.data.gx_chatType
-        && lhs.data.gx_senderId == rhs.data.gx_senderId
-        && lhs.data.gx_messageId == rhs.data.gx_messageId
+        if lhs.data.gx_chatType == .group {
+            return lhs.data.gx_chatType == rhs.data.gx_chatType
+            && lhs.data.gx_groupId == rhs.data.gx_groupId
+            && lhs.data.gx_senderId == rhs.data.gx_senderId
+            && lhs.data.gx_messageId == rhs.data.gx_messageId
+        }
+        else {
+            return lhs.data.gx_chatType == rhs.data.gx_chatType
+            && lhs.data.gx_senderId == rhs.data.gx_senderId
+            && lhs.data.gx_messageId == rhs.data.gx_messageId
+        }
     }
     
     public required init(data: GXMessagesDataProtocol) {
