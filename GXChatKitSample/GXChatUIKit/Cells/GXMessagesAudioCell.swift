@@ -56,11 +56,10 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     
     public override func createSubviews() {
         super.createSubviews()
-        
-        self.addObserver()
         self.messageBubbleContainerView.addSubview(self.playButton)
         self.messageBubbleContainerView.addSubview(self.timeLabel)
         self.messageBubbleContainerView.addSubview(self.dotView)
+        self.addObserver()
     }
     
     public func addObserver() {

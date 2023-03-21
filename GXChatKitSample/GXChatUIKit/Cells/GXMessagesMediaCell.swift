@@ -52,20 +52,20 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
     
     public override func createSubviews() {
         super.createSubviews()
-        self.messageBubbleContainerView.addSubview(self.playButton)
-    }
-
-    public override func bindCell(item: GXMessagesItemData) {
-        super.bindCell(item: item)
         
-        self.messageBubbleNameLabel.textColor = .white
-        self.messageBubbleTimeLabel.textColor = .white
+        self.messageBubbleContainerView.addSubview(self.playButton)
         self.messageBubbleNameLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
         self.messageBubbleTimeLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
         self.messageBubbleNameLabel.textAlignment = .center
         self.messageBubbleTimeLabel.textAlignment = .center
         self.messageBubbleNameLabel.layer.masksToBounds = true
         self.messageBubbleTimeLabel.layer.masksToBounds = true
+    }
+
+    public override func bindCell(item: GXMessagesItemData) {
+        super.bindCell(item: item)
+        self.messageBubbleNameLabel.textColor = .white
+        self.messageBubbleTimeLabel.textColor = .white
         self.messageBubbleNameLabel.layer.cornerRadius = item.nicknameRect.height/2 + 2
         self.messageBubbleTimeLabel.layer.cornerRadius = item.timeRect.height/2 + 2
         self.messageBubbleNameLabel.frame = item.nicknameRect.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -4, right: -item.nicknameRect.height))
