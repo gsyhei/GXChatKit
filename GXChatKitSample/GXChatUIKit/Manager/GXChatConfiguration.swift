@@ -75,6 +75,10 @@ public class GXChatConfiguration: NSObject {
     /// header文本颜色
     public var headerBackgroudColor: UIColor = UIColor(hex: 0x33333388, useAlpha: true)
     
+    /// 语音播放扬声器模式
+    public var audioPlaySpeaker: Bool = true
+    /// 语音的音轨最大值
+    public var audioTrackMaxVakue: CGFloat = 255.0
     /// 语音播放按钮尺寸
     public var audioPlaySize: CGSize = CGSize(width: 50.0, height: 50.0)
     /// 语音播放峰值间隔

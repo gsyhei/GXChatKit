@@ -12,6 +12,10 @@ import GXMessagesTableView
 public struct GXMessagesTestData: GXMessagesDataProtocol {
     //MARK: - GXMessagesData
     
+    public var gx_messageId: String {
+        return self.messageID
+    }
+    
     public var gx_senderDisplayName: String {
         return self.showName
     }
@@ -64,6 +68,7 @@ public struct GXMessagesTestData: GXMessagesDataProtocol {
     
     var date: Date = Date()
     var showName: String = "抬头45度仰望天空"
+    var messageID: String = ""
     var avatarID: String = ""
     var messageContinuousStatus: GXMessageContinuousStatus = .begin
     var messageStatus: GXMessageStatus = .sending

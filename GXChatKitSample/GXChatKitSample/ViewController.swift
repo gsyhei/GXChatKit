@@ -57,6 +57,7 @@ class ViewController: UIViewController {
         data1.date = Date().dateByAdding(days: -2)!
         data1.showName = "抬头45度仰望天空"
         data1.avatarID = "11"
+        data1.messageID = "111"
         data1.messageContinuousStatus = .begin
         data1.messageStatus = .sending
         data1.messageType = .text
@@ -71,6 +72,7 @@ class ViewController: UIViewController {
         data2.date = Date().dateByAdding(days: -2)!
         data2.showName = "抬头45度仰望天空"
         data2.avatarID = "11"
+        data2.messageID = "112"
         data2.messageContinuousStatus = .ongoing
         data2.messageStatus = .sending
         data2.messageType = .text
@@ -84,6 +86,7 @@ class ViewController: UIViewController {
         data3.date = Date().dateByAdding(days: -2)!
         data3.showName = "抬头45度仰望天空"
         data3.avatarID = "11"
+        data3.messageID = "113"
         data3.messageContinuousStatus = .end
         data3.messageStatus = .sending
         data3.messageType = .phote
@@ -100,6 +103,7 @@ class ViewController: UIViewController {
         data11.date = Date().dateByAdding(days: -1)!
         data11.showName = "你算什么男人"
         data11.avatarID = "22"
+        data11.messageID = "114"
         data11.messageContinuousStatus = .begin
         data11.messageStatus = .receiving
         data11.messageType = .text
@@ -115,6 +119,7 @@ class ViewController: UIViewController {
         data22.date = Date().dateByAdding(days: -1)!
         data22.showName = "你算什么男人"
         data22.avatarID = "22"
+        data22.messageID = "115"
         data22.messageContinuousStatus = .ongoing
         data22.messageStatus = .receiving
         data22.messageType = .text
@@ -128,6 +133,7 @@ class ViewController: UIViewController {
         data33.date = Date().dateByAdding(days: -1)!
         data33.showName = "你算什么男人"
         data33.avatarID = "22"
+        data33.messageID = "116"
         data33.messageContinuousStatus = .end
         data33.messageStatus = .receiving
         data33.messageType = .video
@@ -144,6 +150,7 @@ class ViewController: UIViewController {
         data13.date = Date()
         data13.showName = "你算什么男人"
         data13.avatarID = "22"
+        data13.messageID = "117"
         data13.messageContinuousStatus = .begin
         data13.messageStatus = .receiving
         data13.messageType = .text
@@ -159,6 +166,7 @@ class ViewController: UIViewController {
         data23.date = Date()
         data23.showName = "你算什么男人"
         data23.avatarID = "22"
+        data23.messageID = "118"
         data23.messageContinuousStatus = .ongoing
         data23.messageStatus = .receiving
         data23.messageType = .text
@@ -172,6 +180,7 @@ class ViewController: UIViewController {
         data34.date = Date()
         data34.showName = "你算什么男人"
         data34.avatarID = "22"
+        data34.messageID = "119"
         data34.messageContinuousStatus = .end
         data34.messageStatus = .receiving
         data34.messageType = .video
@@ -185,6 +194,7 @@ class ViewController: UIViewController {
         data24.date = Date()
         data24.showName = "这样也好"
         data24.avatarID = "33"
+        data24.messageID = "120"
         data24.messageContinuousStatus = .beginAndEnd
         data24.messageStatus = .receiving
         data24.messageType = .text
@@ -201,13 +211,14 @@ class ViewController: UIViewController {
         data44.date = Date().dateByAdding(days: 1)!
         data44.showName = "你算什么男人"
         data44.avatarID = "22"
+        data44.messageID = "121"
         data44.messageContinuousStatus = .beginAndEnd
         data44.messageStatus = .receiving
         data44.messageType = .audio
-        let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav")!
+        let urlString = Bundle.main.path(forResource: "voicexinwen", ofType: "mp3")!
         let url = URL(fileURLWithPath: urlString)
-        let tracks = [0, 4, 8, 11, 8, 12, 0, 13, 6, 1]
-        data44.messagesContentData = GXMessagesAudioContent(fileURL: url, duration: 1, tracks: tracks)
+        let tracks = [120, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 0, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 255]
+        data44.messagesContentData = GXMessagesAudioContent(fileURL: url, duration: 12, tracks: tracks)
 
         let item44 = GXMessagesItemData(data: data44)
         item44.updateMessagesAvatar(image: UIImage(named: "avatar2"))

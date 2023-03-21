@@ -12,6 +12,7 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
     /// 文本Label
     public lazy var contentTextLabel: UILabel = {
         let label = UILabel()
+        label.backgroundColor = .clear
         label.numberOfLines = 0
         label.font = GXCHATC.textFont
         label.textColor = GXCHATC.textColor
@@ -27,6 +28,12 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         super.setSelected(selected, animated: animated)
     }
     
+    open override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.contentTextLabel.text = nil
+    }
+    
     public override func createSubviews() {
         super.createSubviews()
         self.messageBubbleContainerView.addSubview(self.contentTextLabel)
@@ -35,11 +42,6 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
-        if item.data.gx_messageStatus == .sending {
-            self.contentTextLabel.backgroundColor = GXChatConfiguration.shared.sendingBubbleMaskColor
-        } else {
-            self.contentTextLabel.backgroundColor = GXChatConfiguration.shared.receivingBubbleMaskColor
-        }
         guard let content = item.data.gx_messagesContentData as? GXMessagesTextContent else { return }
         self.contentTextLabel.text = content.text
         self.contentTextLabel.frame = item.contentRect

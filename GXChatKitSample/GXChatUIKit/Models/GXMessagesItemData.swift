@@ -8,18 +8,24 @@
 import UIKit
 import GXMessagesTableView
 
-public class GXMessagesItemData {
+public class GXMessagesItemData: Equatable {
     public var data: GXMessagesDataProtocol
     
     public var avatar: GXMessagesAvatar?
     public var bubble: GXMessagesBubble?
-
+    
     public var containerRect: CGRect = .zero
     public var contentRect: CGRect = .zero
     public var avatarRect: CGRect = .zero
     public var nicknameRect: CGRect = .zero
     public var timeRect: CGRect = .zero
     public var cellHeight: CGFloat = 0
+    
+    public static func == (lhs: GXMessagesItemData, rhs: GXMessagesItemData) -> Bool {
+        return lhs.data.gx_chatType == rhs.data.gx_chatType
+        && lhs.data.gx_senderId == rhs.data.gx_senderId
+        && lhs.data.gx_messageId == rhs.data.gx_messageId
+    }
     
     public required init(data: GXMessagesDataProtocol) {
         self.data = data
@@ -40,15 +46,16 @@ public class GXMessagesItemData {
             self.updateAudioLayout()
         }
     }
-
+    
     public func updateMessagesAvatar(image: UIImage?) {
         if let avatarImage = image {
             self.avatar?.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image: avatarImage)
             self.avatar?.avatarHighlightedImage = GXMessagesAvatarFactory.circularAvatarHighlightedImage(image: avatarImage)
         }
     }
+    
 }
- 
+
 private extension GXMessagesItemData {
     
     func updateBaseLayout(containerSize: CGSize) {
@@ -169,7 +176,8 @@ private extension GXMessagesItemData {
         maxContainerWidth -= GXChatConfiguration.shared.audioPlaySize.width
         
         let count = content.tracks?.count ?? 0
-        let width = CGFloat(count) * (GXChatConfiguration.shared.audioSpacing * GXChatConfiguration.shared.audioItemWidth)
+        content.animateDuration = content.duration / Double(count)
+        let width = CGFloat(count) * (GXChatConfiguration.shared.audioSpacing + GXChatConfiguration.shared.audioItemWidth)
         content.audioSize = CGSize(width: width, height: GXChatConfiguration.shared.audioPlaySize.height/2 - 10.0)
         
         let contentWidth = width + 10.0 + GXChatConfiguration.shared.audioPlaySize.width
@@ -261,7 +269,7 @@ public extension GXMessagesItemData {
         }
         return avatarContentWidth
     }
-
+    
     /// 内容视图的left
     func gx_containerLeft(container width: CGFloat) -> CGFloat {
         if self.data.gx_messageStatus == .sending {

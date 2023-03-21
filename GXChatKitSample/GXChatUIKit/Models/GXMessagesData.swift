@@ -11,6 +11,8 @@ import GXMessagesTableView
 public typealias GXMessagesDataProtocol = GXMessagesData & GXMessagesAvatarDataProtocol
 
 public protocol GXMessagesData {
+    /// 消息唯一ID
+    var gx_messageId: String { get }
     /// 发送方ID
     var gx_senderId: String { get }
     /// 发送方显示名称

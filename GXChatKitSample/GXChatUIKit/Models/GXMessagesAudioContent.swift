@@ -25,23 +25,25 @@ public class GXMessagesAudioContent: GXMessagesContentData {
     /// 音轨视图尺寸
     public var audioSize: CGSize = .zero
     /// 持续时间
-    public var duration: Int = 0
+    public var duration: TimeInterval = 0
     /// 音轨数组
     public var tracks: [Int]?
     /// 是否正在播放
     public var isPlaying: Bool = false
+    /// 单个音轨动画时长
+    public var animateDuration: TimeInterval = 0
     /// 当前动画count
     public var currentPlayIndex: Int = 0
     /// 当前播放时间
-    public var currentPlayDuration: Int = 0
+    public var currentPlayDuration: TimeInterval = 0
     
-    public required init(audioURL: URL?, duration: Int, tracks: [Int]) {
+    public required init(audioURL: URL?, duration: TimeInterval, tracks: [Int]) {
         self.audioURL = audioURL
         self.duration = duration
         self.tracks = tracks
     }
     
-    public required init(fileURL: URL?, duration: Int, tracks: [Int]) {
+    public required init(fileURL: URL?, duration: TimeInterval, tracks: [Int]) {
         self.fileURL = fileURL
         self.duration = duration
         self.tracks = tracks

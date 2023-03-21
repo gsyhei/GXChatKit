@@ -17,6 +17,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     /// 气泡上边的Label（群昵称）
     public lazy var messageBubbleNameLabel: UILabel = {
         let label = UILabel()
+        label.backgroundColor = .clear
         label.font = GXCHATC.nicknameFont
         
         return label
@@ -37,6 +38,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     /// 右边的时间
     public lazy var messageBubbleTimeLabel: UILabel = {
         let label = UILabel()
+        label.backgroundColor = .clear
         label.textAlignment = .right
         label.font = GXCHATC.timeFont
 
@@ -139,14 +141,10 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleTimeLabel.text = item.data.gx_messageTime
         
         if item.data.gx_messageStatus == .sending {
-            self.messageBubbleNameLabel.backgroundColor = GXChatConfiguration.shared.sendingBubbleMaskColor
-            self.messageBubbleTimeLabel.backgroundColor = GXChatConfiguration.shared.sendingBubbleMaskColor
             self.messageBubbleNameLabel.textColor = GXCHATC.sendingNicknameColor
             self.messageBubbleTimeLabel.textColor = GXCHATC.sendingTimeColor
         }
         else {
-            self.messageBubbleNameLabel.backgroundColor = GXChatConfiguration.shared.receivingBubbleMaskColor
-            self.messageBubbleTimeLabel.backgroundColor = GXChatConfiguration.shared.receivingBubbleMaskColor
             self.messageBubbleNameLabel.textColor = GXCHATC.receivingNicknameColor
             self.messageBubbleTimeLabel.textColor = GXCHATC.receivingTimeColor
         }
