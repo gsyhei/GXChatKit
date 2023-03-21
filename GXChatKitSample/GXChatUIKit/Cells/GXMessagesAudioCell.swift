@@ -76,14 +76,18 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         self.timeLabel.text = String(format: "0:%02d", content.duration)
         self.timeLabel.frame = CGRect(x: left, y: top, width: 28.0, height: self.timeLabel.font.lineHeight)
         if item.data.gx_messageStatus == .sending {
+            self.playButton.backgroundColor = GXChatConfiguration.shared.sendingBubbleMaskColor
+            self.timeLabel.backgroundColor = GXChatConfiguration.shared.sendingBubbleMaskColor
+            self.dotView.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor
             self.playButton.tintColor = GXChatConfiguration.shared.audioSendingTimeColor
             self.timeLabel.textColor = GXChatConfiguration.shared.audioSendingTimeColor
-            self.dotView.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor
         }
         else {
+            self.playButton.backgroundColor = GXChatConfiguration.shared.receivingBubbleMaskColor
+            self.timeLabel.backgroundColor = GXChatConfiguration.shared.receivingBubbleMaskColor
+            self.dotView.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeColor
             self.playButton.tintColor = GXChatConfiguration.shared.audioReceivingTimeColor
             self.timeLabel.textColor = GXChatConfiguration.shared.audioReceivingTimeColor
-            self.dotView.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeColor
         }
         self.dotView.left = self.timeLabel.right
         self.dotView.centerY = self.timeLabel.centerY

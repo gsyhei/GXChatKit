@@ -13,11 +13,6 @@ public class GXMessagesAudioTrackView: UIView {
     private var messageStatus: GXMessageStatus = .sending
     private weak var audioContent: GXMessagesAudioContent?
     private var timer: DispatchSourceTimer?
-
-    /// 根据count获取到音频视图width
-    public class func GetTrackViewWidth(count: Int) -> CGFloat {
-        return CGFloat(count) * (GXChatConfiguration.shared.audioSpacing * GXChatConfiguration.shared.audioItemWidth)
-    }
     
     public func updateAudio(content: GXMessagesAudioContent, status: GXMessageStatus) {
         self.audioContent = content

@@ -121,7 +121,8 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
             self.messageAvatarButton.frame = item.avatarRect
             if item.avatar == nil {
                 self.messageAvatarButton.setImage(item.avatar?.avatarPlaceholderImage, for: .normal)
-            } else {
+            }
+            else {
                 self.messageAvatarButton.setImage(item.avatar?.avatarImage, for: .normal)
                 self.messageAvatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
             }
@@ -138,11 +139,14 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleTimeLabel.text = item.data.gx_messageTime
         
         if item.data.gx_messageStatus == .sending {
-            self.messageBubbleContainerView.autoresizingMask = [.flexibleLeftMargin, .flexibleWidth]
+            self.messageBubbleNameLabel.backgroundColor = GXChatConfiguration.shared.sendingBubbleMaskColor
+            self.messageBubbleTimeLabel.backgroundColor = GXChatConfiguration.shared.sendingBubbleMaskColor
             self.messageBubbleNameLabel.textColor = GXCHATC.sendingNicknameColor
             self.messageBubbleTimeLabel.textColor = GXCHATC.sendingTimeColor
-        } else {
-            self.messageBubbleContainerView.autoresizingMask = [.flexibleRightMargin, .flexibleWidth]
+        }
+        else {
+            self.messageBubbleNameLabel.backgroundColor = GXChatConfiguration.shared.receivingBubbleMaskColor
+            self.messageBubbleTimeLabel.backgroundColor = GXChatConfiguration.shared.receivingBubbleMaskColor
             self.messageBubbleNameLabel.textColor = GXCHATC.receivingNicknameColor
             self.messageBubbleTimeLabel.textColor = GXCHATC.receivingTimeColor
         }

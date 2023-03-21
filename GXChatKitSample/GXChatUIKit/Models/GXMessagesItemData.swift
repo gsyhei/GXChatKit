@@ -51,20 +51,20 @@ public class GXMessagesItemData {
  
 private extension GXMessagesItemData {
     
-    func updateBaseLayout(containerWidth: CGFloat, containerHeight: CGFloat) {
-        let containerLeft = self.gx_containerLeft(container: containerWidth)
+    func updateBaseLayout(containerSize: CGSize) {
+        let containerLeft = self.gx_containerLeft(container: containerSize.width)
         switch self.data.gx_messageContinuousStatus {
         case .begin:
-            self.containerRect = CGRect(x: containerLeft, y: 5.0, width: containerWidth, height: containerHeight)
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 5.0), size: containerSize)
             self.cellHeight = self.containerRect.maxY + 1.0
         case .ongoing:
-            self.containerRect = CGRect(x: containerLeft, y: 1.0, width: containerWidth, height: containerHeight)
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 1.0), size: containerSize)
             self.cellHeight = self.containerRect.maxY + 1.0
         case .end:
-            self.containerRect = CGRect(x: containerLeft, y: 1.0, width: containerWidth, height: containerHeight)
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 1.0), size: containerSize)
             self.cellHeight = self.containerRect.maxY + 5.0
         case .beginAndEnd:
-            self.containerRect = CGRect(x: containerLeft, y: 5.0, width: containerWidth, height: containerHeight)
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 5.0), size: containerSize)
             self.cellHeight = self.containerRect.maxY + 5.0
         }
         
@@ -140,7 +140,7 @@ private extension GXMessagesItemData {
         }
         let containerWidth = content.displaySize.width + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
         let containerHeight = contentHeight + GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom
-        self.updateBaseLayout(containerWidth: containerWidth, containerHeight: containerHeight)
+        self.updateBaseLayout(containerSize: CGSizeMake(containerWidth, containerHeight))
     }
     
     func updatePhotoLayout() {
@@ -149,7 +149,7 @@ private extension GXMessagesItemData {
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
         let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
-        self.updateBaseLayout(containerWidth: displaySize.width, containerHeight: displaySize.height)
+        self.updateBaseLayout(containerSize: displaySize)
     }
     
     func updateVideoLayout() {
@@ -158,7 +158,7 @@ private extension GXMessagesItemData {
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
         let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
-        self.updateBaseLayout(containerWidth: displaySize.width, containerHeight: displaySize.height)
+        self.updateBaseLayout(containerSize: displaySize)
     }
     
     func updateAudioLayout() {
@@ -167,7 +167,9 @@ private extension GXMessagesItemData {
         var maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0) * 2
         maxContainerWidth -= (GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right)
         maxContainerWidth -= GXChatConfiguration.shared.audioPlaySize.width
-        let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: content.tracks?.count ?? 0)
+        
+        let count = content.tracks?.count ?? 0
+        let width = CGFloat(count) * (GXChatConfiguration.shared.audioSpacing * GXChatConfiguration.shared.audioItemWidth)
         content.audioSize = CGSize(width: width, height: GXChatConfiguration.shared.audioPlaySize.height/2 - 10.0)
         
         let contentWidth = width + 10.0 + GXChatConfiguration.shared.audioPlaySize.width
@@ -200,7 +202,7 @@ private extension GXMessagesItemData {
         }
         let containerWidth = contentWidth + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
         let containerHeight = contentHeight + GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom
-        self.updateBaseLayout(containerWidth: containerWidth, containerHeight: containerHeight)
+        self.updateBaseLayout(containerSize: CGSizeMake(containerWidth, containerHeight))
     }
 }
 

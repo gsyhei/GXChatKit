@@ -50,23 +50,6 @@ class ViewController: UIViewController {
         self.updateDatas()
         self.tableView.reloadData()
         
-//        if let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav") {
-//            let url = URL(fileURLWithPath: urlString)
-//            let asset = AVAsset(url: url)
-//            GXAudioManager.gx_cutAudioTrackList(asset: asset, count: 20, height: 48) { trackList in
-//                let count = GXMessagesAudioTrackView.GetTrackMaxCount(maxWidth: 300, time: 4)
-//                let width = GXMessagesAudioTrackView.GetTrackViewWidth(count: count)
-//
-//                let rect = CGRect(x: 10, y: 100, width: width, height: 50)
-//                let trackView = GXMessagesAudioTrackView(frame: rect, trackList: trackList)
-//                self.view.addSubview(trackView)
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-//                    trackView.gx_animation(time: 3.0)
-//                })
-//            }
-//        }
-        
     }
     
     public func updateDatas() {

@@ -34,11 +34,11 @@ public class GXChatConfiguration: NSObject {
     public var receivingBubbleMaskColor: UIColor = .white
 
     /// 单聊发送方是否显示头像
-    public var singleChatSendingShowAvatar: Bool = false
+    public var singleChatSendingShowAvatar: Bool = true
     /// 单聊接收方是否显示头像
     public var singleChatReceivingShowAvatar: Bool = true
     /// 群组发送方是否显示头像
-    public var groupChatSendingShowAvatar: Bool = false
+    public var groupChatSendingShowAvatar: Bool = true
     /// 群组接收方是否显示头像
     public var groupChatReceivingShowAvatar: Bool = true
     
