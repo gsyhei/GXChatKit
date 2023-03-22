@@ -30,40 +30,36 @@ public class GXAudioManager: NSObject {
     deinit {
         self.stopAudio()
     }
-    
-    public func playAudio(item: GXMessagesItemData?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
+}
+
+public extension GXAudioManager {
+    func playAudio(item: GXMessagesItemData?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
         guard let newItem = item else { return }
-        if self.audioItem != newItem {
-            self.stopAudio()
-            
-            self.audioItem = newItem
+        if self.audioItem == newItem {
             guard let content = item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
-            self.playAudio(url: content.fileURL, time: content.currentPlayDuration)
-        }
-        else {
             if let player = self.audioPlayer {
                 if !player.isPlaying {
-                    guard let content = self.audioItem?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+                    self.gx_playRemoveObserver()
                     content.isPlaying = true
-                    self.removeObserver()
-
                     player.play()
                     NotificationCenter.default.post(name: GXAudioManager.audioPlayNotification, object: item)
-                    self.gx_playProgress()
-                    self.updateAudioPlay(isSpeaker: true)
-                    UIDevice.current.isProximityMonitoringEnabled = true
-                    self.addObserver()
+                    self.gx_playAddObserver()
                 }
             }
             else {
                 self.audioItem = newItem
-                guard let content = item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
                 self.playAudio(url: content.fileURL, time: content.currentPlayDuration)
             }
         }
+        else {
+            self.stopAudio()
+            self.audioItem = newItem
+            guard let content = item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+            self.playAudio(url: content.fileURL, time: content.currentPlayDuration)
+        }
     }
     
-    public func playAudio(url: URL?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
+    func playAudio(url: URL?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
         guard let item = self.audioItem else { return }
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         
@@ -88,10 +84,7 @@ public class GXAudioManager: NSObject {
             content.isPlaying = isPlayer
             if isPlayer {
                 NotificationCenter.default.post(name: GXAudioManager.audioPlayNotification, object: item)
-                self.gx_playProgress()
-                self.updateAudioPlay(isSpeaker: true)
-                UIDevice.current.isProximityMonitoringEnabled = true
-                self.addObserver()
+                self.gx_playAddObserver()
             }
         }
         else {
@@ -99,7 +92,7 @@ public class GXAudioManager: NSObject {
         }
     }
     
-    public func playAudio(data: Data?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
+    func playAudio(data: Data?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
         guard let item = self.audioItem else { return }
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         
@@ -124,10 +117,7 @@ public class GXAudioManager: NSObject {
             content.isPlaying = isPlayer
             if isPlayer {
                 NotificationCenter.default.post(name: GXAudioManager.audioPlayNotification, object: item)
-                self.gx_playProgress()
-                self.updateAudioPlay(isSpeaker: true)
-                UIDevice.current.isProximityMonitoringEnabled = true
-                self.addObserver()
+                self.gx_playAddObserver()
             }
         }
         else {
@@ -135,7 +125,7 @@ public class GXAudioManager: NSObject {
         }
     }
     
-    public func pauseAudio() {
+    func pauseAudio() {
         guard let item = self.audioItem else { return }
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
@@ -143,13 +133,11 @@ public class GXAudioManager: NSObject {
         content.currentPlayDuration = self.currentTime
         NotificationCenter.default.post(name: GXAudioManager.audioPauseNotification , object: item)
 
-        UIDevice.current.isProximityMonitoringEnabled = false
-        self.removeObserver()
+        self.gx_playRemoveObserver()
         self.audioPlayer?.pause()
-        self.timer?.cancel()
     }
     
-    public func stopAudio() {
+    func stopAudio() {
         guard let item = self.audioItem else { return }
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         
@@ -158,15 +146,16 @@ public class GXAudioManager: NSObject {
         content.currentPlayIndex = 0
         NotificationCenter.default.post(name: GXAudioManager.audioStopNotification, object: item)
 
-        UIDevice.current.isProximityMonitoringEnabled = false
-        self.removeObserver()
+        self.gx_playRemoveObserver()
         if audioPlayer?.isPlaying ?? false {
             self.audioPlayer?.stop()
         }
-        self.timer?.cancel()
         self.audioPlayer = nil
     }
+}
 
+extension GXAudioManager: AVAudioPlayerDelegate {
+    
     func gx_playProgress() {
         guard let item = self.audioItem else { return }
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
@@ -186,12 +175,8 @@ public class GXAudioManager: NSObject {
         self.timer = codeTimer
     }
     
-}
-
-extension GXAudioManager: AVAudioPlayerDelegate {
-    
-    func updateAudioPlay(isSpeaker: Bool) {
-        if isSpeaker && GXChatConfiguration.shared.audioPlaySpeaker {
+    func gx_updateAudioPlay(isSpeaker: Bool) {
+        if isSpeaker && GXCHATC.audioPlaySpeaker {
             try? AVAudioSession.sharedInstance().setCategory(.playback)
         }
         else {
@@ -199,14 +184,19 @@ extension GXAudioManager: AVAudioPlayerDelegate {
         }
     }
     
-    func addObserver() {
+    func gx_playAddObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(audioSessionInterruption), name: AVAudioSession.interruptionNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(proximityStateDidChange), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+        UIDevice.current.isProximityMonitoringEnabled = true
+        self.gx_updateAudioPlay(isSpeaker: true)
+        self.gx_playProgress()
     }
     
-    func removeObserver() {
+    func gx_playRemoveObserver() {
         NotificationCenter.default.removeObserver(self)
+        UIDevice.current.isProximityMonitoringEnabled = false
+        self.timer?.cancel()
     }
     
     @objc func applicationWillResignActive(notification: NSNotification) {
@@ -221,7 +211,7 @@ extension GXAudioManager: AVAudioPlayerDelegate {
     }
     
     @objc func proximityStateDidChange(notification: NSNotification) {
-        self.updateAudioPlay(isSpeaker: !UIDevice.current.proximityState)
+        self.gx_updateAudioPlay(isSpeaker: !UIDevice.current.proximityState)
     }
     
     //MARK: -AVAudioPlayerDelegate

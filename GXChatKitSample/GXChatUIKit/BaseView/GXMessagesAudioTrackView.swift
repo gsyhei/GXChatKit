@@ -35,17 +35,17 @@ public class GXMessagesAudioTrackView: UIView {
         if animated {
             UIView.animate(withDuration: self.audioContent?.animateDuration ?? 0) {
                 if self.messageStatus == .sending {
-                    layer.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor.cgColor
+                    layer.backgroundColor = GXCHATC.audioSendingTimeColor.cgColor
                 } else {
-                    layer.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeColor.cgColor
+                    layer.backgroundColor = GXCHATC.audioReceivingTimeColor.cgColor
                 }
             }
         }
         else {
             if self.messageStatus == .sending {
-                layer.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor.cgColor
+                layer.backgroundColor = GXCHATC.audioSendingTimeColor.cgColor
             } else {
-                layer.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeColor.cgColor
+                layer.backgroundColor = GXCHATC.audioReceivingTimeColor.cgColor
             }
         }
     }
@@ -53,9 +53,9 @@ public class GXMessagesAudioTrackView: UIView {
     public func gx_resetTracksLayer() {
         self.trackLayers.forEach {[weak self] layer in
             if self?.messageStatus == .sending {
-                layer.backgroundColor = GXChatConfiguration.shared.audioSendingTimeHighlightColor.cgColor
+                layer.backgroundColor = GXCHATC.audioSendingTimeHighlightColor.cgColor
             } else {
-                layer.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeHighlightColor.cgColor
+                layer.backgroundColor = GXCHATC.audioReceivingTimeHighlightColor.cgColor
             }
         }
     }
@@ -72,28 +72,28 @@ fileprivate extension GXMessagesAudioTrackView {
         let count = tracks.count
         for index in 0..<count {
             let track = tracks[index]
-            let maxTrackHeight = self.height - GXChatConfiguration.shared.audioMinHeight
-            let trackScale = maxTrackHeight / GXChatConfiguration.shared.audioTrackMaxVakue
-            let height = trackScale * CGFloat(track) + GXChatConfiguration.shared.audioMinHeight
+            let maxTrackHeight = self.height - GXCHATC.audioMinHeight
+            let trackScale = maxTrackHeight / GXCHATC.audioTrackMaxVakue
+            let height = trackScale * CGFloat(track) + GXCHATC.audioMinHeight
             let top = self.height - height
-            let width = GXChatConfiguration.shared.audioItemWidth
-            let left = CGFloat(index) * (GXChatConfiguration.shared.audioSpacing + width)
+            let width = GXCHATC.audioItemWidth
+            let left = CGFloat(index) * (GXCHATC.audioSpacing + width)
             let frame = CGRect(x: left, y: top, width: width, height: height)
             
             let layer = CALayer()
             layer.frame = frame
             if index < content.currentPlayIndex {
                 if self.messageStatus == .sending {
-                    layer.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor.cgColor
+                    layer.backgroundColor = GXCHATC.audioSendingTimeColor.cgColor
                 } else {
-                    layer.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeColor.cgColor
+                    layer.backgroundColor = GXCHATC.audioReceivingTimeColor.cgColor
                 }
             }
             else {
                 if self.messageStatus == .sending {
-                    layer.backgroundColor = GXChatConfiguration.shared.audioSendingTimeHighlightColor.cgColor
+                    layer.backgroundColor = GXCHATC.audioSendingTimeHighlightColor.cgColor
                 } else {
-                    layer.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeHighlightColor.cgColor
+                    layer.backgroundColor = GXCHATC.audioReceivingTimeHighlightColor.cgColor
                 }
             }
             self.layer.addSublayer(layer)

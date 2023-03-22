@@ -28,8 +28,8 @@ public class GXMessagesAvatarFactory {
     /// - Parameter image: 图片
     /// - Returns: 头像图
     public class func circularAvatarImage(image: UIImage) -> UIImage? {
-        let avatarSize = GXChatConfiguration.shared.avatarSize
-        let avatarRadius = GXChatConfiguration.shared.avatarRadius
+        let avatarSize = GXCHATC.avatarSize
+        let avatarRadius = GXCHATC.avatarRadius
 
         return UIImage.gx_roundedImage(image, size: avatarSize, radius: avatarRadius)
     }
@@ -38,8 +38,8 @@ public class GXMessagesAvatarFactory {
     /// - Parameter image: 图片
     /// - Returns: 高亮头像图
     public class func circularAvatarHighlightedImage(image: UIImage) -> UIImage? {
-        let avatarSize = GXChatConfiguration.shared.avatarSize
-        let avatarRadius = GXChatConfiguration.shared.avatarRadius
+        let avatarSize = GXCHATC.avatarSize
+        let avatarRadius = GXCHATC.avatarRadius
         let highlightedColor = UIColor(white: 0.1, alpha: 0.3)
         
         return UIImage.gx_roundedImage(image, size: avatarSize, radius: avatarRadius, highlightedColor: highlightedColor)
@@ -49,7 +49,7 @@ public class GXMessagesAvatarFactory {
     /// - Parameter image: 图片
     /// - Returns: 高亮头像图
     public class func circularAvatarPlaceholderImage(text: String) -> UIImage? {
-        let avatarSize = GXChatConfiguration.shared.avatarSize
+        let avatarSize = GXCHATC.avatarSize
         let font = UIFont.boldSystemFont(ofSize: 30)
         let image = UIImage.gx_textImage(text, size: avatarSize, backgroundColor: .orange, textColor: .white, font: font)
         guard let textImage = image else { return nil }

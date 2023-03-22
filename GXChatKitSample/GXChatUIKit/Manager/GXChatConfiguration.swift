@@ -16,12 +16,18 @@ public class GXChatConfiguration: NSObject {
         }
     }
     /// 会话头像圆角
-    public var avatarRadius: CGFloat = 25.0
+    public var avatarRadius: CGFloat = 20.0
     /// 头像在前的气泡inset
     public var bubbleLeadingInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 10)
     /// 头像在后的气泡inset
     public var bubbleTrailingInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 17)
-        
+    /// 头像两边的空白边距
+    public var avatarMargin: CGFloat = 4.0
+    /// cell最小行间距
+    public var cellMinLineSpacing: CGFloat = 1.0
+    /// cell最大行间距
+    public var cellMaxLineSpacing: CGFloat = 5.0
+
     /// 开始气泡图
     public var bubbleBeginImage: UIImage? = .gx_bundleAssetImage(name: "bubble_min_tailless")
     /// 持续中气泡图

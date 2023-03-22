@@ -10,6 +10,11 @@ import GXChatUIKit
 import GXMessagesTableView
 
 public struct GXMessagesTestData: GXMessagesDataProtocol {
+    
+    public var gx_groupId: String? {
+        return nil
+    }
+    
     //MARK: - GXMessagesData
     
     public var gx_messageId: String {

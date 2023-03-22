@@ -24,8 +24,8 @@ private extension GXMessagesBubbleFactory {
     class func gx_messagesBubbleImage(status: GXMessageStatus) -> GXMessagesBubble {
         let messagesBubble = GXMessagesBubble()
         if status == .sending {
-            let color = GXChatConfiguration.shared.sendingBubbleMaskColor
-            if let beginBubbleImage = GXChatConfiguration.shared.bubbleBeginImage {
+            let color = GXCHATC.sendingBubbleMaskColor
+            if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
                 if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
                     messagesBubble.messageBeginBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
@@ -36,7 +36,7 @@ private extension GXMessagesBubbleFactory {
                     }
                 }
             }
-            if let bubbleOngoingImage = GXChatConfiguration.shared.bubbleOngoingImage {
+            if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
                 if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
                     messagesBubble.messageOngoingBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
@@ -47,7 +47,7 @@ private extension GXMessagesBubbleFactory {
                     }
                 }
             }
-            if let bubbleEndImage = GXChatConfiguration.shared.bubbleEndImage {
+            if let bubbleEndImage = GXCHATC.bubbleEndImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
                 if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
                     messagesBubble.messageEndBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
@@ -60,8 +60,8 @@ private extension GXMessagesBubbleFactory {
             }
         }
         else {
-            let color = GXChatConfiguration.shared.receivingBubbleMaskColor
-            if let beginBubbleImage = GXChatConfiguration.shared.bubbleBeginImage {
+            let color = GXCHATC.receivingBubbleMaskColor
+            if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
                 if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
@@ -76,7 +76,7 @@ private extension GXMessagesBubbleFactory {
                     }
                 }
             }
-            if let bubbleOngoingImage = GXChatConfiguration.shared.bubbleOngoingImage {
+            if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
                 if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
@@ -91,7 +91,7 @@ private extension GXMessagesBubbleFactory {
                     }
                 }
             }
-            if let bubbleEndImage = GXChatConfiguration.shared.bubbleEndImage {
+            if let bubbleEndImage = GXCHATC.bubbleEndImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
                 if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {

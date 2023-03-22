@@ -16,29 +16,27 @@ public class GXUtilManager: NSObject {
     ///   - handler: 倒计时回调
     ///   - completion: 完成回调
     /// - Returns: 计时器对象
-    class func gx_countdownTimer(count: Int, milliseconds:
-                                 Int, handler: ((Int) -> Void)? = nil,
-                                 completion: (() -> Void)? = nil) -> DispatchSourceTimer
-    {
+    class func gx_countdownTimer(count: Int, handler: ((Int) -> Void)? = nil, completion: (() -> Void)? = nil) -> DispatchSourceTimer {
         // 定义需要计时的时间
         var timeCount: Int = count
         // 在global线程里创建一个时间源
         let codeTimer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
         // 设定这个时间源是每秒循环一次，立即开始
-        codeTimer.schedule(wallDeadline: .now(), repeating: .milliseconds(milliseconds))
+        codeTimer.schedule(wallDeadline: .now(), repeating: .seconds(1))
         // 设定时间源的触发事件
         codeTimer.setEventHandler(handler: {
             // 每秒计时一次
             timeCount -= 1
-            // 返回主线程处理一些事件，更新UI等等
-            DispatchQueue.main.async {
-                handler?(timeCount)
-            }
             // 时间到了取消时间源
             if timeCount <= 0 {
                 codeTimer.cancel()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.async {
                     completion?()
+                }
+            }
+            else {
+                DispatchQueue.main.async {
+                    handler?(timeCount)
                 }
             }
         })

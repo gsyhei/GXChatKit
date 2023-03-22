@@ -70,23 +70,23 @@ private extension GXMessagesItemData {
         let containerLeft = self.gx_containerLeft(container: containerSize.width)
         switch self.data.gx_messageContinuousStatus {
         case .begin:
-            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 5.0), size: containerSize)
-            self.cellHeight = self.containerRect.maxY + 1.0
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMaxLineSpacing), size: containerSize)
+            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMinLineSpacing
         case .ongoing:
-            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 1.0), size: containerSize)
-            self.cellHeight = self.containerRect.maxY + 1.0
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMinLineSpacing), size: containerSize)
+            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMinLineSpacing
         case .end:
-            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 1.0), size: containerSize)
-            self.cellHeight = self.containerRect.maxY + 5.0
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMinLineSpacing), size: containerSize)
+            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMaxLineSpacing
         case .beginAndEnd:
-            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: 5.0), size: containerSize)
-            self.cellHeight = self.containerRect.maxY + 5.0
+            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMaxLineSpacing), size: containerSize)
+            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMaxLineSpacing
         }
         
         if self.data.gx_messageStatus == .sending {
             if self.gx_isShowAvatar {
-                let avatarTop = self.cellHeight - GXCHATC.avatarSize.height - 2
-                self.avatarRect = CGRect(origin: CGPoint(x: self.containerRect.maxX + 5.0, y: avatarTop), size: GXCHATC.avatarSize)
+                let avatarTop = self.cellHeight - GXCHATC.avatarSize.height - 2.0
+                self.avatarRect = CGRect(origin: CGPoint(x: self.containerRect.maxX + GXCHATC.avatarMargin, y: avatarTop), size: GXCHATC.avatarSize)
             }
             if self.gx_isShowNickname {
                 let left = GXCHATC.bubbleTrailingInset.left, top =  GXCHATC.bubbleTrailingInset.top
@@ -102,8 +102,8 @@ private extension GXMessagesItemData {
         }
         else {
             if self.gx_isShowAvatar {
-                let avatarTop = self.cellHeight - GXCHATC.avatarSize.height - 2
-                self.avatarRect = CGRect(origin: CGPoint(x: 5.0, y: avatarTop), size: GXChatConfiguration.shared.avatarSize)
+                let avatarTop = self.cellHeight - GXCHATC.avatarSize.height - 2.0
+                self.avatarRect = CGRect(origin: CGPoint(x: GXCHATC.avatarMargin, y: avatarTop), size: GXCHATC.avatarSize)
             }
             if self.gx_isShowNickname {
                 let left = GXCHATC.bubbleLeadingInset.left, top =  GXCHATC.bubbleLeadingInset.top
@@ -122,7 +122,8 @@ private extension GXMessagesItemData {
     func updateTextLayout() {
         guard let content = self.data.gx_messagesContentData as? GXMessagesTextContent else { return }
         
-        let maxContainerWidth = SCREEN_WIDTH - self.gx_avatarContentWidth
+        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        let maxContainerWidth = SCREEN_WIDTH - self.gx_avatarContentWidth - hookWidth
         let maxContentWidth = maxContainerWidth - GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
         let text = content.text + self.data.gx_messageTime
         let maxTextSize = CGSizeMake(maxContentWidth, 10000)
@@ -161,7 +162,8 @@ private extension GXMessagesItemData {
     func updatePhotoLayout() {
         guard let content = self.data.gx_messagesContentData as? GXMessagesPhotoContent else { return }
         
-        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
+        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
         let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
         self.updateBaseLayout(containerSize: displaySize)
@@ -170,7 +172,8 @@ private extension GXMessagesItemData {
     func updateVideoLayout() {
         guard let content = self.data.gx_messagesContentData as? GXMessagesVideoContent else { return }
         
-        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0)*2
+        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
         let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
         self.updateBaseLayout(containerSize: displaySize)
@@ -179,18 +182,19 @@ private extension GXMessagesItemData {
     func updateAudioLayout() {
         guard let content = self.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         
-        var maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0) * 2
+        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        var maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
         maxContainerWidth -= (GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right)
-        maxContainerWidth -= GXChatConfiguration.shared.audioPlaySize.width
+        maxContainerWidth -= GXCHATC.audioPlaySize.width
         
         let count = content.tracks?.count ?? 0
         content.animateDuration = content.duration / Double(count)
-        let width = CGFloat(count) * (GXChatConfiguration.shared.audioSpacing + GXChatConfiguration.shared.audioItemWidth)
-        content.audioSize = CGSize(width: width, height: GXChatConfiguration.shared.audioPlaySize.height/2 - 10.0)
+        let width = CGFloat(count) * (GXCHATC.audioSpacing + GXCHATC.audioItemWidth)
+        content.audioSize = CGSize(width: width, height: GXCHATC.audioPlaySize.height/2 - 10)
         
-        let contentWidth = width + 10.0 + GXChatConfiguration.shared.audioPlaySize.width
-        content.displaySize = CGSize(width: contentWidth, height: GXChatConfiguration.shared.audioPlaySize.height)
-        var contentHeight = content.displaySize.height + GXChatConfiguration.shared.timeFont.lineHeight
+        let contentWidth = width + 10 + GXCHATC.audioPlaySize.width
+        content.displaySize = CGSize(width: contentWidth, height: GXCHATC.audioPlaySize.height)
+        var contentHeight = content.displaySize.height + GXCHATC.timeFont.lineHeight
         if self.gx_isShowNickname {
             contentHeight += GXCHATC.nicknameFont.lineHeight
             if self.data.gx_messageStatus == .sending {
@@ -265,15 +269,15 @@ public extension GXMessagesItemData {
     
     /// 头像占用的width
     var gx_avatarContentWidth: CGFloat {
-        var avatarContentWidth: CGFloat = GXCHATC.avatarSize.width + 10.0
+        var avatarContentWidth: CGFloat = GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
         if self.data.gx_messageStatus == .sending && GXCHATC.singleChatSendingShowAvatar {
-            avatarContentWidth += GXCHATC.avatarSize.width + 10.0
+            avatarContentWidth += GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
         }
         else if self.data.gx_messageStatus == .receiving && GXCHATC.singleChatReceivingShowAvatar {
-            avatarContentWidth += GXCHATC.avatarSize.width + 10.0
+            avatarContentWidth += GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
         }
         else {
-            avatarContentWidth += 10.0
+            avatarContentWidth += GXCHATC.avatarMargin*2
         }
         return avatarContentWidth
     }
@@ -283,36 +287,36 @@ public extension GXMessagesItemData {
         if self.data.gx_messageStatus == .sending {
             if self.data.gx_chatType == .single {
                 if GXCHATC.singleChatSendingShowAvatar {
-                    return SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0) - width
+                    return SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) - width
                 }
                 else {
-                    return SCREEN_WIDTH - 10.0 - width
+                    return SCREEN_WIDTH - GXCHATC.avatarMargin*2 - width
                 }
             }
             else {
                 if GXCHATC.groupChatSendingShowAvatar {
-                    return SCREEN_WIDTH - (GXCHATC.avatarSize.width + 10.0) - width
+                    return SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) - width
                 }
                 else {
-                    return SCREEN_WIDTH - 10.0 - width
+                    return SCREEN_WIDTH - GXCHATC.avatarMargin*2 - width
                 }
             }
         }
         else {
             if self.data.gx_chatType == .single {
                 if GXCHATC.singleChatReceivingShowAvatar {
-                    return GXCHATC.avatarSize.width + 10.0
+                    return GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
                 }
                 else {
-                    return 10.0
+                    return GXCHATC.avatarMargin*2
                 }
             }
             else {
                 if GXCHATC.groupChatReceivingShowAvatar {
-                    return GXCHATC.avatarSize.width + 10.0
+                    return GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
                 }
                 else {
-                    return 10.0
+                    return GXCHATC.avatarMargin*2
                 }
             }
         }
@@ -322,10 +326,10 @@ public extension GXMessagesItemData {
         if size.width < maxSize.width && size.height < maxSize.height {
             return size
         }
-        let scaleW = size.width / maxSize.width, scaleH = size.height / maxSize.height
-        let resizeScale = max(scaleW, scaleH)
+        let scaleW = maxSize.width/size.width, scaleH = maxSize.height/size.height
+        let resizeScale = min(scaleW, scaleH)
         
-        return CGSize(width: size.width / resizeScale, height: size.height / resizeScale)
+        return CGSize(width: size.width * resizeScale, height: size.height * resizeScale)
     }
     
 }

@@ -13,7 +13,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     /// 播放按钮
     public lazy var playButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.frame = CGRect(origin: .zero, size: GXChatConfiguration.shared.audioPlaySize)
+        button.frame = CGRect(origin: .zero, size: GXCHATC.audioPlaySize)
         button.addTarget(self, action: #selector(playButtonClicked(_:)), for: .touchUpInside)
         
         return button
@@ -73,8 +73,8 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         super.bindCell(item: item)
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         
-        self.playButton.frame = CGRect(origin: item.contentRect.origin, size: GXChatConfiguration.shared.audioPlaySize)
-        self.updatePlayButton(content: content)
+        self.playButton.frame = CGRect(origin: item.contentRect.origin, size: GXCHATC.audioPlaySize)
+        self.gx_updatePlayButton(content: content)
 
         if let itemMediaView = content.mediaView as? GXMessagesAudioTrackView {
             self.messageBubbleContainerView.addSubview(itemMediaView)
@@ -96,25 +96,28 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         self.timeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
         self.timeLabel.frame = CGRect(x: left, y: top, width: 28.0, height: self.timeLabel.font.lineHeight)
         if item.data.gx_messageStatus == .sending {
-            self.dotView.backgroundColor = GXChatConfiguration.shared.audioSendingTimeColor
-            self.playButton.tintColor = GXChatConfiguration.shared.audioSendingTimeColor
-            self.timeLabel.textColor = GXChatConfiguration.shared.audioSendingTimeColor
+            self.dotView.backgroundColor = GXCHATC.audioSendingTimeColor
+            self.playButton.tintColor = GXCHATC.audioSendingTimeColor
+            self.timeLabel.textColor = GXCHATC.audioSendingTimeColor
         }
         else {
-            self.dotView.backgroundColor = GXChatConfiguration.shared.audioReceivingTimeColor
-            self.playButton.tintColor = GXChatConfiguration.shared.audioReceivingTimeColor
-            self.timeLabel.textColor = GXChatConfiguration.shared.audioReceivingTimeColor
+            self.dotView.backgroundColor = GXCHATC.audioReceivingTimeColor
+            self.playButton.tintColor = GXCHATC.audioReceivingTimeColor
+            self.timeLabel.textColor = GXCHATC.audioReceivingTimeColor
         }
         self.dotView.left = self.timeLabel.right
         self.dotView.centerY = self.timeLabel.centerY
         
         if content.isPlaying {
             self.trackView?.gx_layerAnimation(index: content.currentPlayIndex - 1, animated: false)
-            self.playAudio(isPlay: true)
+            self.gx_playAudio(isPlay: true)
         }
     }
+}
 
-    public func updatePlayButton(content: GXMessagesAudioContent) {
+extension GXMessagesAudioCell {
+    
+    private func gx_updatePlayButton(content: GXMessagesAudioContent) {
         if content.isPlaying {
             let image = UIImage(systemName: "pause.circle.fill")
             self.playButton.setBackgroundImage(image, for: .normal)
@@ -125,7 +128,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         }
     }
     
-    private func playAudio(isPlay: Bool) {
+    private func gx_playAudio(isPlay: Bool) {
         if isPlay {
             GXAudioManager.shared.playAudio(item: self.item)
         }
@@ -134,15 +137,13 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         }
     }
     
-}
-
-extension GXMessagesAudioCell {
+    //MARK: - UIButton Clicked
     
     @objc func playButtonClicked(_ sender: Any?) {
         guard let content = self.item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
         self.playButton.isUserInteractionEnabled = false
-        self.playAudio(isPlay: !content.isPlaying)
+        self.gx_playAudio(isPlay: !content.isPlaying)
         self.playButton.isUserInteractionEnabled = true
     }
 
@@ -153,7 +154,7 @@ extension GXMessagesAudioCell {
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
-        self.updatePlayButton(content: content)
+        self.gx_updatePlayButton(content: content)
     }
     
     @objc func audioStop(notification: NSNotification) {
@@ -161,7 +162,7 @@ extension GXMessagesAudioCell {
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
-        self.updatePlayButton(content: content)
+        self.gx_updatePlayButton(content: content)
         self.timeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
         self.trackView?.gx_resetTracksLayer()
     }
@@ -171,7 +172,7 @@ extension GXMessagesAudioCell {
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
-        self.updatePlayButton(content: content)
+        self.gx_updatePlayButton(content: content)
         self.timeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
     }
     
