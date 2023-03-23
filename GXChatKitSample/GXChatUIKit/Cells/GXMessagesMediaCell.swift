@@ -56,14 +56,14 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         self.messageBubbleContainerView.addSubview(self.playButton)
         self.messageBubbleNameLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
         self.messageBubbleTimeLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-        self.messageBubbleNameLabel.textAlignment = .center
-        self.messageBubbleTimeLabel.textAlignment = .center
         self.messageBubbleNameLabel.layer.masksToBounds = true
         self.messageBubbleTimeLabel.layer.masksToBounds = true
     }
 
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
+        self.messageBubbleNameLabel.textAlignment = .center
+        self.messageBubbleTimeLabel.textAlignment = .center
         self.messageBubbleNameLabel.textColor = .white
         self.messageBubbleTimeLabel.textColor = .white
         self.messageBubbleNameLabel.layer.cornerRadius = item.nicknameRect.height/2 + 2

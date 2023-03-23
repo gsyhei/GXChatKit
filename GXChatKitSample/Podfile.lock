@@ -9,10 +9,12 @@ PODS:
     - Reusable/View (= 4.1.2)
   - Reusable/Storyboard (4.1.2)
   - Reusable/View (4.1.2)
+  - SwiftyAttributes (5.3.0)
 
 DEPENDENCIES:
   - GXMessagesTableView
   - Reusable
+  - SwiftyAttributes
 
 SPEC REPOS:
   trunk:
@@ -20,13 +22,15 @@ SPEC REPOS:
     - GXMessagesTableView
     - GXRefresh
     - Reusable
+    - SwiftyAttributes
 
 SPEC CHECKSUMS:
   GXCategories: 911f8094403c17a8dd2c4f6a1fb87cfc45d39a96
   GXMessagesTableView: 92fe52f7f74e8469bec332c1217fa620f70424b2
   GXRefresh: d8c64ca667f1daad0f332cd6066023714fc0da6d
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
+  SwiftyAttributes: 6d7386e90ac611b6acac8b59e38f34bfa4621c80
 
-PODFILE CHECKSUM: ae0ce2b25de4332f7610f8c66883a1c837f2ef2f
+PODFILE CHECKSUM: 3d4257a75158f461688f78b0fe0eecbe663b0a45
 
 COCOAPODS: 1.11.3
