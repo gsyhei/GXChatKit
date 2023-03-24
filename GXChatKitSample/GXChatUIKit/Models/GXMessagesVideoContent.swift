@@ -8,6 +8,15 @@
 import UIKit
 
 public class GXMessagesVideoContent: GXMessagesContentData {
+    // MARK: - GXMessagesContentData
+    
+    /// 媒体视图
+    public var mediaView: UIView?
+    /// 媒体占位视图
+    public var mediaPlaceholderView: UIView?
+    /// 显示区域尺寸
+    public var displaySize: CGSize = .zero
+    
     /// 下载地址
     private(set) var videoURL: URL?
     /// 缩略图下载地址
@@ -16,12 +25,6 @@ public class GXMessagesVideoContent: GXMessagesContentData {
     private(set) var fileURL: URL?
     /// 缩略图
     private(set) var thumbnailImage: UIImage?
-        
-    public var mediaView: UIView?
-    
-    public var mediaPlaceholderView: UIView?
-    
-    public var displaySize: CGSize = .zero
     
     public required init(thumbnailImageURL: URL, videoURL: URL? = nil, displaySize: CGSize) {
         self.thumbnailImageURL = thumbnailImageURL

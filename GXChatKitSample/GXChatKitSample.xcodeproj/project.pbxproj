@@ -20,7 +20,7 @@
 		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
 		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
 		965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */; };
-		9668EB9B29CB05D400892718 /* GXRichText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668EB9A29CB05D400892718 /* GXRichText.swift */; };
+		9668EB9B29CB05D400892718 /* GXMessagesRichText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668EB9A29CB05D400892718 /* GXMessagesRichText.swift */; };
 		968B917329C941A100F6113B /* GXChatConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B917229C941A100F6113B /* GXChatConfiguration.swift */; };
 		969957562973BBD4001DCC17 /* GXMessagesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957552973BBD4001DCC17 /* GXMessagesData.swift */; };
 		9699575A2973E698001DCC17 /* GXMessagesItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969957592973E698001DCC17 /* GXMessagesItemData.swift */; };
@@ -131,7 +131,7 @@
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
 		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
 		965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GXChat.swift"; sourceTree = "<group>"; };
-		9668EB9A29CB05D400892718 /* GXRichText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXRichText.swift; sourceTree = "<group>"; };
+		9668EB9A29CB05D400892718 /* GXMessagesRichText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesRichText.swift; sourceTree = "<group>"; };
 		968B917229C941A100F6113B /* GXChatConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXChatConfiguration.swift; sourceTree = "<group>"; };
 		969957552973BBD4001DCC17 /* GXMessagesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesData.swift; sourceTree = "<group>"; };
 		969957592973E698001DCC17 /* GXMessagesItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesItemData.swift; sourceTree = "<group>"; };
@@ -404,7 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				96A36A7629C2BFF500BD4506 /* GXMessagesAudioTrackView.swift */,
-				9668EB9A29CB05D400892718 /* GXRichText.swift */,
+				9668EB9A29CB05D400892718 /* GXMessagesRichText.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -751,7 +751,7 @@
 				9699575A2973E698001DCC17 /* GXMessagesItemData.swift in Sources */,
 				9699576429751AFC001DCC17 /* GXMessagesPhotoContent.swift in Sources */,
 				9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */,
-				9668EB9B29CB05D400892718 /* GXRichText.swift in Sources */,
+				9668EB9B29CB05D400892718 /* GXMessagesRichText.swift in Sources */,
 				96D13EFD29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift in Sources */,
 				968B917329C941A100F6113B /* GXChatConfiguration.swift in Sources */,
 				96198E6029BD31C1005C42A2 /* GXMessagesMediaCell.swift in Sources */,

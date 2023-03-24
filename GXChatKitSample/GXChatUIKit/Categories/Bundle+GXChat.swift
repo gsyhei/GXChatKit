@@ -26,4 +26,16 @@ public extension Bundle {
         return NSLocalizedString(key, tableName: "GXMessages", bundle: bundle, comment: "")
     }
     
+    class func gx_bundleEmojiJson() -> Array<Dictionary<String, Any>>? {
+        let bundle = Bundle.gx_messagesAssetBundle
+        let emojiPath = bundle?.path(forResource: "emoji", ofType: "plist")
+        guard let path = emojiPath else { return nil }
+        guard let data = NSData(contentsOfFile: path) else { return nil }
+        
+        return Array.arrayWithPlistData(data as Data)
+    }
+    
+    
+//    NSString * emojiPath = [[NSBundle mainBundle] pathForResource:@"emoji" ofType:@"plist"];
+//    NSArray *array = [NSArray arrayWithContentsOfFile:filepath];
 }

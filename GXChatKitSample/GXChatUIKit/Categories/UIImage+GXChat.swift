@@ -21,6 +21,17 @@ public extension UIImage {
         return UIImage(contentsOfFile: imagePath)
     }
     
+    /// 内部表情图
+    /// - Parameter name: 图片名
+    /// - Returns: 图片
+    class func gx_bundleEmojiImage(name: String) -> UIImage? {
+        let bundle = Bundle.gx_messagesAssetBundle
+        let path = bundle?.path(forResource: name, ofType: "png", inDirectory: "emoji")
+        guard let imagePath = path else { return nil }
+        
+        return UIImage(contentsOfFile: imagePath)
+    }
+    
     /// 当前image生成指定颜色的mask图
     /// - Parameter maskColor: mask色
     /// - Returns: 指定颜色的mask图

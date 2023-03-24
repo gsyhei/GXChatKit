@@ -43,7 +43,9 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         super.bindCell(item: item)
         
         guard let content = item.data.gx_messagesContentData as? GXMessagesTextContent else { return }
-        self.contentTextLabel.text = content.text
+//        self.contentTextLabel.text = content.text
+        
+        self.contentTextLabel.attributedText = GXMessagesRichText.text()
         self.contentTextLabel.frame = item.contentRect
     }
     
