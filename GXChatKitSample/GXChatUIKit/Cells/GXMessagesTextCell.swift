@@ -10,14 +10,18 @@ import UIKit
 public class GXMessagesTextCell: GXMessagesBaseCell {
     
     /// 文本Label
-    public lazy var contentTextLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.numberOfLines = 0
-        label.font = GXCHATC.textFont
-        label.textColor = GXCHATC.textColor
-
-        return label
+    public lazy var contentTextView: GXMessagesTextView = {
+        let textView = GXMessagesTextView()
+        textView.backgroundColor = .clear
+        textView.font = GXCHATC.textFont
+        textView.textColor = GXCHATC.textColor
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.dataDetectorTypes = .all
+        
+        return textView
     }()
 
     public override func awakeFromNib() {
@@ -31,22 +35,20 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
     open override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.contentTextLabel.text = nil
+        self.contentTextView.text = nil
     }
     
     public override func createSubviews() {
         super.createSubviews()
-        self.messageBubbleContainerView.addSubview(self.contentTextLabel)
+        self.messageBubbleContainerView.addSubview(self.contentTextView)
     }
 
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
         guard let content = item.data.gx_messagesContentData as? GXMessagesTextContent else { return }
-//        self.contentTextLabel.text = content.text
-        
-        self.contentTextLabel.attributedText = GXMessagesRichText.text()
-        self.contentTextLabel.frame = item.contentRect
+        self.contentTextView.attributedText = content.attributedText
+        self.contentTextView.frame = item.contentRect
     }
     
 }

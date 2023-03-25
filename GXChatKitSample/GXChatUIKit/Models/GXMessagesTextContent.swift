@@ -19,10 +19,11 @@ public class GXMessagesTextContent: GXMessagesContentData {
     
     public var text: String
     
-    public var attributedText: NSAttributedString?
+    public var attributedText: NSAttributedString
 
     public required init(text: String) {
         self.text = text
+        self.attributedText = GXMessagesRichText.attributedText(string: text)
     }
 }
    

@@ -55,6 +55,7 @@
 		96D30AE22956F5EE00AFBB90 /* GXChatUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */; };
 		96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; };
 		96D30AE72956F5EE00AFBB90 /* GXChatUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96D431E929CEF63700EE97A1 /* GXMessagesTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D431E829CEF63700EE97A1 /* GXMessagesTextView.swift */; };
 		96E5D43C29C571D9005AB5C9 /* voicexinwen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96E5D43B29C571D9005AB5C9 /* voicexinwen.mp3 */; };
 		96F92C9029C41C70009E30F4 /* GXMessagesAudioContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F92C8F29C41C70009E30F4 /* GXMessagesAudioContent.swift */; };
 		96F92C9229C443D0009E30F4 /* GXMessagesAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F92C9129C443D0009E30F4 /* GXMessagesAudioCell.swift */; };
@@ -170,6 +171,7 @@
 		96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GXChatUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30ADA2956F5ED00AFBB90 /* GXChatUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXChatUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatUIKitTests.swift; sourceTree = "<group>"; };
+		96D431E829CEF63700EE97A1 /* GXMessagesTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesTextView.swift; sourceTree = "<group>"; };
 		96E5D43B29C571D9005AB5C9 /* voicexinwen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicexinwen.mp3; sourceTree = "<group>"; };
 		96F92C8F29C41C70009E30F4 /* GXMessagesAudioContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioContent.swift; sourceTree = "<group>"; };
 		96F92C9129C443D0009E30F4 /* GXMessagesAudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioCell.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 		96D30AF12956FC1800AFBB90 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
+				96D431E829CEF63700EE97A1 /* GXMessagesTextView.swift */,
 				96A36A7629C2BFF500BD4506 /* GXMessagesAudioTrackView.swift */,
 				9668EB9A29CB05D400892718 /* GXMessagesRichText.swift */,
 			);
@@ -763,6 +766,7 @@
 				9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */,
 				96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */,
 				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
+				96D431E929CEF63700EE97A1 /* GXMessagesTextView.swift in Sources */,
 				96995760297506B2001DCC17 /* GXMessagesContentData.swift in Sources */,
 				96A36A7929C2E10400BD4506 /* GXUtilManager.swift in Sources */,
 				96F92C9229C443D0009E30F4 /* GXMessagesAudioCell.swift in Sources */,

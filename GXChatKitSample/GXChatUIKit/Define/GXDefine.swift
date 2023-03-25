@@ -7,26 +7,26 @@
 
 import UIKit
 
-let SCREEN_SIZE = UIScreen.main.bounds.size
+public let SCREEN_SIZE = UIScreen.main.bounds.size
 
-let SCREEN_WIDTH = UIScreen.main.bounds.width
+public let SCREEN_WIDTH = UIScreen.main.bounds.width
 
-let SCREEN_HEIGHT = UIScreen.main.bounds.height
+public let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
-let SCREEN_SCALE = UIScreen.main.scale
+public let SCREEN_SCALE = UIScreen.main.scale
 
-let STATUS_HEIGHT = StatusBarHeight()
+public let STATUS_HEIGHT = StatusBarHeight()
 
-let GXCHATC = GXChatConfiguration.shared
+public let GXCHATC = GXChatConfiguration.shared
 
-let GX_USER_FILE = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-let GX_USER_FILE_USER = GX_USER_FILE!.appending("/GXUser.data")
-let GX_USER_FILE_CITY = GX_USER_FILE!.appending("/GXMessages.data")
+public let GX_USER_FILE = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+public let GX_USER_FILE_USER = GX_USER_FILE!.appending("/GXUser.data")
+public let GX_USER_FILE_CITY = GX_USER_FILE!.appending("/GXMessages.data")
 
-typealias GXActionBlock = (() -> Void)
-typealias GXActionBlockItem<T: Any> = ((T) -> Void)
-typealias GXActionBlockBack<T: Any> = (() -> T)
-typealias GXActionBlockItemBack<T1: Any, T2: Any> = ((T1) -> T2)
+public typealias GXActionBlock = (() -> Void)
+public typealias GXActionBlockItem<T: Any> = ((T) -> Void)
+public typealias GXActionBlockBack<T: Any> = (() -> T)
+public typealias GXActionBlockItemBack<T1: Any, T2: Any> = ((T1) -> T2)
 
 private func StatusBarHeight() -> CGFloat {
     if #available(iOS 13.0, *) {

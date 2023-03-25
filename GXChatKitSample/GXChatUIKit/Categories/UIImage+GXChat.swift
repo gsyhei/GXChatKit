@@ -26,7 +26,7 @@ public extension UIImage {
     /// - Returns: 图片
     class func gx_bundleEmojiImage(name: String) -> UIImage? {
         let bundle = Bundle.gx_messagesAssetBundle
-        let path = bundle?.path(forResource: name, ofType: "png", inDirectory: "emoji")
+        let path = bundle?.path(forResource: name, ofType: nil, inDirectory: "emoji")
         guard let imagePath = path else { return nil }
         
         return UIImage(contentsOfFile: imagePath)

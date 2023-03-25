@@ -125,9 +125,10 @@ private extension GXMessagesItemData {
         let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
         let maxContainerWidth = SCREEN_WIDTH - self.gx_avatarContentWidth - hookWidth
         let maxContentWidth = maxContainerWidth - GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
-        let text = content.text + self.data.gx_messageTime
+        let attributedText = NSMutableAttributedString(attributedString: content.attributedText)
+        attributedText.append(NSAttributedString(string: self.data.gx_messageTime))        
         let maxTextSize = CGSizeMake(maxContentWidth, 10000)
-        content.displaySize = text.size(size: maxTextSize, font: GXCHATC.textFont)
+        content.displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
         var contentHeight = content.displaySize.height
         if self.gx_isShowNickname {
             contentHeight += GXCHATC.nicknameFont.lineHeight

@@ -61,7 +61,11 @@ class ViewController: UIViewController {
         data1.messageContinuousStatus = .begin
         data1.messageStatus = .sending
         data1.messageType = .text
-        data1.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        let text = "也不知道说什么！7867868765765765656556565656测试网址https://www.baidu.com，" +
+        "测试电话0755-89776672，测试手机号18826763432，" +
+        "测试表情[微笑][厌恶][鬼脸]。" +
+        "邮箱：22872347834@qq.com"
+        data1.messagesContentData = GXMessagesTextContent(text: text)
         
         let item1 = GXMessagesItemData(data: data1)
         item1.updateMessagesAvatar(image: UIImage(named: "avatar1"))
