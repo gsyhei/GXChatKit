@@ -116,6 +116,10 @@ public class GXChatConfiguration: NSObject {
     public var audioReceivingTimeColor: UIColor = .systemBlue
     /// 接收方语音浅色
     public var audioReceivingTimeHighlightColor: UIColor = UIColor(hex: 0x7CC1F2)
+    
+    /// 位置文本字体
+    public var locationTextFont: UIFont = .systemFont(ofSize: 13)
+    
 }
 
 public extension GXChatConfiguration {
@@ -130,13 +134,25 @@ public extension GXChatConfiguration {
     /// 消息类型
     enum MessageType : Int {
         /// 文本
-        case text   = 0
+        case text      = 0
         /// 图片
-        case phote  = 1
+        case phote     = 1
         /// 视频
-        case video  = 2
+        case video     = 2
         /// 语音
-        case audio  = 3
+        case audio     = 3
+        /// 位置
+        case location  = 4
+        /// 名片
+        case vCard     = 5
+        /// 文件
+        case file      = 6
+        /// 红包
+        case redPacket = 7
+        /// 语音通话
+        case voiceCall = 8
+        /// 视频通话
+        case videoCall = 9
     }
     
     /// 消息状态

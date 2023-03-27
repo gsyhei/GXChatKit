@@ -33,8 +33,14 @@ public class GXMessagesVideoContent: GXMessagesContentData {
     }
     
     public required init(thumbnailImage: UIImage?, fileURL: URL? = nil) {
-        self.thumbnailImage = thumbnailImage
-        self.fileURL = fileURL
-        self.displaySize = thumbnailImage?.size ?? .zero
+        if let image = thumbnailImage {
+            self.thumbnailImage = image
+            self.displaySize = image.size
+        }
+        else if let url = fileURL {
+            self.fileURL = url
+            self.thumbnailImage = UIImage(contentsOfFile: url.absoluteString)
+            self.displaySize = self.thumbnailImage?.size ?? .zero
+        }
     }
 }

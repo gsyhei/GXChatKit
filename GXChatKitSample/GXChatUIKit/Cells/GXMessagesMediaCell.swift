@@ -17,11 +17,12 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         let button = UIButton(type: .custom)
         let image = UIImage(systemName: "play.circle")
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        button.backgroundColor = UIColor(white: 0.0, alpha: 0.2)
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 20.0
         button.setBackgroundImage(image, for: .normal)
         button.tintColor = .white
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 5.0
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = .zero
         button.isUserInteractionEnabled = false
         button.isHidden = true
         
@@ -62,13 +63,16 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
 
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
-        self.messageBubbleNameLabel.textAlignment = .center
+        
+        if item.gx_isShowNickname {
+            self.messageBubbleNameLabel.textAlignment = .center
+            self.messageBubbleNameLabel.textColor = .white
+            self.messageBubbleNameLabel.layer.cornerRadius = item.nicknameRect.height/2 + 2
+            self.messageBubbleNameLabel.frame = item.nicknameRect.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -4, right: -item.nicknameRect.height))
+        }
         self.messageBubbleTimeLabel.textAlignment = .center
-        self.messageBubbleNameLabel.textColor = .white
         self.messageBubbleTimeLabel.textColor = .white
-        self.messageBubbleNameLabel.layer.cornerRadius = item.nicknameRect.height/2 + 2
         self.messageBubbleTimeLabel.layer.cornerRadius = item.timeRect.height/2 + 2
-        self.messageBubbleNameLabel.frame = item.nicknameRect.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -4, right: -item.nicknameRect.height))
         self.messageBubbleTimeLabel.frame = item.timeRect.inset(by: UIEdgeInsets(top: -4, left: -item.timeRect.height, bottom: 0, right: 0))
 
         if let content = item.data.gx_messagesContentData as? GXMessagesPhotoContent {

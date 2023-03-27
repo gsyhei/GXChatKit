@@ -5,6 +5,7 @@ import Reusable
 import GXMessagesTableView
 import GXChatUIKit
 import AVFoundation
+import CoreLocation
 
 class ViewController: UIViewController {
     
@@ -37,7 +38,9 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesTextCell.self)
         self.tableView.register(cellType: GXMessagesMediaCell.self)
         self.tableView.register(cellType: GXMessagesAudioCell.self)
+        self.tableView.register(cellType: GXMessagesLocationCell.self)
 
+        
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
         //        self.tableView.addMessagesHeader {[weak self] in
@@ -216,7 +219,7 @@ class ViewController: UIViewController {
         data44.showName = "你算什么男人"
         data44.avatarID = "22"
         data44.messageID = "121"
-        data44.messageContinuousStatus = .beginAndEnd
+        data44.messageContinuousStatus = .begin
         data44.messageStatus = .receiving
         data44.messageType = .audio
         let urlString = Bundle.main.path(forResource: "voicexinwen", ofType: "mp3")!
@@ -230,8 +233,25 @@ class ViewController: UIViewController {
         let sectionData4 = GXMessagesSectionData(date: data44.date)
         sectionData4.append(item: item44)
         
-        self.list.append(sectionData4)
+        
+        var data35 = GXMessagesTestData()
+        data35.date = Date().dateByAdding(days: 1)!
+        data35.showName = "你算什么男人"
+        data35.avatarID = "22"
+        data35.messageID = "122"
+        data35.messageContinuousStatus = .end
+        data35.messageStatus = .receiving
+        data35.messageType = .location
+        let locationTitle = "广东省深圳市南山区南山村正街正三坊168号6栋618"
+        data35.messagesContentData = GXMessagesLocationContent(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), locationTitle: locationTitle, locationImage: UIImage(named: "testphoto"))
+        
+        let item35 = GXMessagesItemData(data: data35)
+        item35.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+        sectionData4.append(item: item35)
 
+        self.list.append(sectionData4)
+        
+        
     }
 }
 
@@ -279,7 +299,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             cell.bindCell(item: item)
             
             return cell
+        case .location:
+            let cell: GXMessagesLocationCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
             
+            return cell
+
         default: break
         }
         return UITableViewCell ()

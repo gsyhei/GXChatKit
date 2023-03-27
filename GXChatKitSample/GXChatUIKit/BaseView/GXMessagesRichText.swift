@@ -18,20 +18,6 @@ class GXTextAttachment: NSTextAttachment {
 
 class GXMessagesRichText: NSMutableAttributedString {
     
-    class func attributedText() -> NSAttributedString {
-        /// 测试如何解析
-        let string = "也不知道说什么！测试网址https://www.baidu.com，" +
-        "测试电话0755-89776672，测试手机号18826763432，" +
-        "测试表情[微笑][厌恶][鬼脸]。" +
-        "邮箱：22872347834@qq.com"
-        
-        let attributed = self.attributedText(string: string)
-        
-
-        
-        return attributed
-    }
-    
     public class func attributedText(string: String) -> NSAttributedString {
         let attributed = NSMutableAttributedString(string: string)
         attributed.addAttributes([.textColor(GXCHATC.textColor), .font(GXCHATC.textFont)], range: 0..<string.count)

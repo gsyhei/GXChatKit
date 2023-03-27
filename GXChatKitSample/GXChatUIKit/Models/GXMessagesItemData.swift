@@ -52,6 +52,9 @@ public class GXMessagesItemData: Equatable {
             self.updateVideoLayout()
         case .audio:
             self.updateAudioLayout()
+        case .location:
+            self.updateLocationLayout()
+        default: break
         }
     }
     
@@ -225,6 +228,37 @@ private extension GXMessagesItemData {
         let containerHeight = contentHeight + GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom
         self.updateBaseLayout(containerSize: CGSizeMake(containerWidth, containerHeight))
     }
+    
+    func updateLocationLayout() {
+        guard let content = self.data.gx_messagesContentData as? GXMessagesLocationContent else { return }
+        
+        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
+        let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
+        self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
+        
+        let maxContentWidth = maxContainerWidth - hookWidth
+        let text = content.locationTitle + self.data.gx_messageTime
+        let maxTitleSize = CGSize(width: maxContentWidth - 16.0, height: displaySize.height)
+        let titleHeight = text.size(size: maxTitleSize, font: GXCHATC.locationTextFont).height
+        let locationContentSize = CGSize(width: displaySize.width, height: titleHeight + 10.0 + GXCHATC.bubbleTrailingInset.bottom)
+        let locationContentTop = displaySize.height - locationContentSize.height
+        content.locationContentRect = CGRect(origin: CGPoint(x: 0, y: locationContentTop), size: locationContentSize)
+        if self.data.gx_messageStatus == .sending {
+            let left = GXCHATC.bubbleTrailingInset.left
+            let width = content.locationContentRect.width - left - GXCHATC.bubbleTrailingInset.right
+            let height = content.locationContentRect.height + GXCHATC.bubbleTrailingInset.bottom
+            content.locationTitleRect = CGRect(x: left, y: 0, width: width, height: height)
+        }
+        else {
+            let left = GXCHATC.bubbleLeadingInset.left
+            let width = content.locationContentRect.width - left - GXCHATC.bubbleLeadingInset.right
+            let height = content.locationContentRect.height + GXCHATC.bubbleLeadingInset.bottom
+            content.locationTitleRect = CGRect(x: left, y: 0, width: width, height: height)
+        }
+        self.updateBaseLayout(containerSize: displaySize)
+    }
+    
 }
 
 public extension GXMessagesItemData {
