@@ -76,12 +76,17 @@ public class GXChatConfiguration: NSObject {
     public var textFont: UIFont = .systemFont(ofSize: 15)
     /// 文本颜色
     public var textColor: UIColor = UIColor(hex: 0x333333)
+    /// 文本行间距
+    public var textLineSpacing: CGFloat = 2.0
+    
     /// 昵称字体
     public var nicknameFont: UIFont = .boldSystemFont(ofSize: 15)
+    /// 昵称下面的行间距
+    public var nicknameLineSpacing: CGFloat = 4.0
     /// 发送方昵称颜色
     public var sendingNicknameColor: UIColor = .systemBlue
     /// 接收方昵称颜色
-    public var receivingNicknameColor: UIColor = .systemBlue
+    public var receivingNicknameColor: UIColor = .systemRed
     /// 时间字体
     public var timeFont: UIFont = .systemFont(ofSize: 10)
     /// 发送方时间颜色

@@ -92,10 +92,12 @@ private extension GXMessagesItemData {
                 self.avatarRect = CGRect(origin: CGPoint(x: self.containerRect.maxX + GXCHATC.avatarMargin, y: avatarTop), size: GXCHATC.avatarSize)
             }
             if self.gx_isShowNickname {
-                let left = GXCHATC.bubbleTrailingInset.left, top =  GXCHATC.bubbleTrailingInset.top
+                self.cellHeight += GXCHATC.nicknameLineSpacing
+                let top = GXCHATC.bubbleTrailingInset.top
                 let maxWidth = self.containerRect.width - GXCHATC.bubbleTrailingInset.left - GXCHATC.bubbleTrailingInset.right
                 let maxHeight = GXCHATC.nicknameFont.lineHeight
                 let nameSize = self.data.gx_senderDisplayName.size(size: CGSize(width: maxWidth, height: maxHeight), font: GXCHATC.nicknameFont)
+                let left = self.containerRect.width - GXCHATC.bubbleTrailingInset.right - nameSize.width
                 self.nicknameRect = CGRect(x: left, y: top, width: nameSize.width, height: nameSize.height)
             }
             let timeSize = self.data.gx_messageTime.size(size: self.containerRect.size, font: GXCHATC.timeFont)
@@ -109,6 +111,7 @@ private extension GXMessagesItemData {
                 self.avatarRect = CGRect(origin: CGPoint(x: GXCHATC.avatarMargin, y: avatarTop), size: GXCHATC.avatarSize)
             }
             if self.gx_isShowNickname {
+                self.cellHeight += GXCHATC.nicknameLineSpacing
                 let left = GXCHATC.bubbleLeadingInset.left, top =  GXCHATC.bubbleLeadingInset.top
                 let maxWidth = self.containerRect.width - GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
                 let maxHeight = GXCHATC.nicknameFont.lineHeight
@@ -134,14 +137,14 @@ private extension GXMessagesItemData {
         content.displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
         var contentHeight = content.displaySize.height
         if self.gx_isShowNickname {
-            contentHeight += GXCHATC.nicknameFont.lineHeight
+            contentHeight += (GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing)
             if self.data.gx_messageStatus == .sending {
-                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight
+                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
                 let left = GXCHATC.bubbleTrailingInset.left
                 self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
             else {
-                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight
+                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
                 let left = GXCHATC.bubbleLeadingInset.left
                 self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
@@ -200,14 +203,14 @@ private extension GXMessagesItemData {
         content.displaySize = CGSize(width: contentWidth, height: GXCHATC.audioPlaySize.height)
         var contentHeight = content.displaySize.height + GXCHATC.timeFont.lineHeight
         if self.gx_isShowNickname {
-            contentHeight += GXCHATC.nicknameFont.lineHeight
+            contentHeight += (GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing)
             if self.data.gx_messageStatus == .sending {
-                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight
+                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
                 let left = GXCHATC.bubbleTrailingInset.left
                 self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }
             else {
-                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight
+                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
                 let left = GXCHATC.bubbleLeadingInset.left
                 self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: content.displaySize)
             }

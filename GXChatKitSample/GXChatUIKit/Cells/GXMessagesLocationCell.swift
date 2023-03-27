@@ -49,18 +49,19 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
     
     public override func createSubviews() {
         super.createSubviews()
+        
+        self.messageBubbleNameLabel.layer.shadowOpacity = 1.0
+        self.messageBubbleNameLabel.layer.shadowRadius = 2.0
+        self.messageBubbleNameLabel.layer.shadowColor = UIColor.black.cgColor
+        self.messageBubbleNameLabel.layer.shadowOffset = .zero
     }
 
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
         if item.gx_isShowNickname {
-            self.messageBubbleNameLabel.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
-            self.messageBubbleNameLabel.textAlignment = .center
             self.messageBubbleNameLabel.textColor = .white
-            self.messageBubbleNameLabel.layer.masksToBounds = true
-            self.messageBubbleNameLabel.layer.cornerRadius = item.nicknameRect.height/2 + 2
-            self.messageBubbleNameLabel.frame = item.nicknameRect.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: -4, right: -item.nicknameRect.height))
+            self.messageBubbleNameLabel.frame = item.nicknameRect
         }
         self.messageBubbleTimeLabel.textColor = .white
 

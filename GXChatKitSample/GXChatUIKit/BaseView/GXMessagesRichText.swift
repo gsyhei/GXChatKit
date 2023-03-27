@@ -20,7 +20,9 @@ class GXMessagesRichText: NSMutableAttributedString {
     
     public class func attributedText(string: String) -> NSAttributedString {
         let attributed = NSMutableAttributedString(string: string)
-        attributed.addAttributes([.textColor(GXCHATC.textColor), .font(GXCHATC.textFont)], range: 0..<string.count)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
+        attributed.addAttributes([.textColor(GXCHATC.textColor), .font(GXCHATC.textFont), .paragraphStyle(paragraphStyle)], range: 0..<string.count)
         if let emojiRegular = try? NSRegularExpression(pattern: GXCHATC.emojiRegularExpression) {
             var stop: Bool = false
             while !stop {

@@ -243,7 +243,7 @@ class ViewController: UIViewController {
         data35.messageStatus = .receiving
         data35.messageType = .location
         let locationTitle = "广东省深圳市南山区南山村正街正三坊168号6栋618"
-        data35.messagesContentData = GXMessagesLocationContent(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), locationTitle: locationTitle, locationImage: UIImage(named: "testphoto"))
+        data35.messagesContentData = GXMessagesLocationContent(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), locationTitle: locationTitle, locationImage: UIImage(named: "location"))
         
         let item35 = GXMessagesItemData(data: data35)
         item35.updateMessagesAvatar(image: UIImage(named: "avatar2"))
