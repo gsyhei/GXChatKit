@@ -62,6 +62,18 @@ public class GXUtilManager: NSObject {
             })
         }
     }
+    
+    public class func gx_timeString(duration: Int) -> String {
+        let hour   = duration / 3600
+        let minute = duration / 60 % 60
+        let second = duration % 60
+        if hour > 0 {
+            return String(format: "%02d:%02d:%02d", hour, minute, second)
+        }
+        else {
+            return String(format: "%02d:%02d", minute, second)
+        }
+    }
 
 }
 

@@ -54,6 +54,9 @@ public class GXMessagesItemData: Equatable {
             self.updateAudioLayout()
         case .location:
             self.updateLocationLayout()
+        case .voiceCall, .videoCall:
+            self.updateCallLayout()
+            
         default: break
         }
     }
@@ -171,9 +174,9 @@ private extension GXMessagesItemData {
         
         let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
-        let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
-        self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
-        self.updateBaseLayout(containerSize: displaySize)
+        let contentSize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
+        self.contentRect = CGRect(x: 0, y: 0, width: contentSize.width, height: contentSize.height)
+        self.updateBaseLayout(containerSize: contentSize)
     }
     
     func updateVideoLayout() {
@@ -181,9 +184,9 @@ private extension GXMessagesItemData {
         
         let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
-        let displaySize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
-        self.contentRect = CGRect(x: 0, y: 0, width: displaySize.width, height: displaySize.height)
-        self.updateBaseLayout(containerSize: displaySize)
+        let contentSize = self.gx_resize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
+        self.contentRect = CGRect(x: 0, y: 0, width: contentSize.width, height: contentSize.height)
+        self.updateBaseLayout(containerSize: contentSize)
     }
     
     func updateAudioLayout() {
@@ -260,6 +263,51 @@ private extension GXMessagesItemData {
             content.locationTitleRect = CGRect(x: left, y: 0, width: width, height: height)
         }
         self.updateBaseLayout(containerSize: displaySize)
+    }
+    
+    func updateCallLayout() {
+        guard let content = self.data.gx_messagesContentData as? GXMessagesCallContent else { return }
+        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
+        let maxTitleSize = CGSize(width: maxContainerWidth, height: 100)
+        let text = content.text + self.data.gx_messageTime
+        let maxTextSize = text.size(size: maxTitleSize, font: GXCHATC.textFont)
+        let textSize = content.text.size(size: maxTitleSize, font: GXCHATC.textFont)
+        let iconSize = CGSize(width: GXCHATC.textFont.lineHeight * 1.5, height: GXCHATC.textFont.lineHeight)
+        content.displaySize = CGSize(width: maxTextSize.width + 10.0 + iconSize.width, height: maxTextSize.height)
+        var contentHeight = content.displaySize.height
+        if self.gx_isShowNickname {
+            contentHeight += (GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing)
+            if self.data.gx_messageStatus == .sending {
+                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
+                let left = GXCHATC.bubbleTrailingInset.left
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: textSize)
+                content.iconRect = CGRect(origin: CGPoint(x: self.contentRect.maxX + 10.0, y: top), size: iconSize)
+            }
+            else {
+                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
+                let left = GXCHATC.bubbleLeadingInset.left
+                content.iconRect = CGRect(origin: CGPoint(x: left, y: top), size: iconSize)
+                self.contentRect = CGRect(origin: CGPoint(x: content.iconRect.maxX + 10.0, y: top), size: textSize)
+            }
+        }
+        else {
+            if self.data.gx_messageStatus == .sending {
+                let top = GXCHATC.bubbleTrailingInset.top
+                let left = GXCHATC.bubbleTrailingInset.left
+                self.contentRect = CGRect(origin: CGPoint(x: left, y: top), size: textSize)
+                content.iconRect = CGRect(origin: CGPoint(x: self.contentRect.maxX + 10.0, y: top), size: iconSize)
+            }
+            else {
+                let top = GXCHATC.bubbleLeadingInset.top
+                let left = GXCHATC.bubbleLeadingInset.left
+                content.iconRect = CGRect(origin: CGPoint(x: left, y: top), size: iconSize)
+                self.contentRect = CGRect(origin: CGPoint(x: content.iconRect.maxX + 10.0, y: top), size: textSize)
+            }
+        }
+        let containerWidth = content.displaySize.width + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
+        let containerHeight = contentHeight + GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom
+        self.updateBaseLayout(containerSize: CGSizeMake(containerWidth, containerHeight))
     }
     
 }
@@ -365,9 +413,16 @@ public extension GXMessagesItemData {
             return size
         }
         let scaleW = maxSize.width/size.width, scaleH = maxSize.height/size.height
-        let resizeScale = min(scaleW, scaleH)
+        let resizeScale = min(min(scaleW, scaleH), 1.0)
+        let resize = CGSize(width: size.width * resizeScale, height: size.height * resizeScale)
+        if resize.width < 40.0 { // 最小宽度40.0
+            var height = (40.0 / maxSize.width) * size.height
+            height = min(height, maxSize.height)
+            
+            return CGSize(width: 40.0, height: height)
+        }
         
-        return CGSize(width: size.width * resizeScale, height: size.height * resizeScale)
+        return resize
     }
     
 }

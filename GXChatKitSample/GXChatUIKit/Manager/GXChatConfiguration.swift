@@ -8,9 +8,10 @@
 import UIKit
 
 public class GXChatConfiguration: NSObject {
-    /// 表情json
-    public var emojiJson: Dictionary<String, String> = [:]
-
+    
+    /// 文本代理
+    public var chatText: GXChatTextProtocol = GXChatChineseText()
+    
     /**
     ///这里我们直接使用属性dataDetectorTypes = .all就可以检测大部分超链接属性的内容了
     /// url正则表达式
@@ -23,6 +24,8 @@ public class GXChatConfiguration: NSObject {
      
     /// emoji表情正则表达式
     public var emojiRegularExpression = "\\[[\\u4e00-\\u9fa5\\w\\-]+\\]"
+    /// 表情json
+    public var emojiJson: Dictionary<String, String> = [:]
     
     /// 会话头像尺寸
     public var avatarSize: CGSize = CGSize(width: 40.0, height: 40.0) {
@@ -33,9 +36,9 @@ public class GXChatConfiguration: NSObject {
     /// 会话头像圆角
     public var avatarRadius: CGFloat = 20.0
     /// 头像在前的气泡inset
-    public var bubbleLeadingInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 10)
+    public var bubbleLeadingInset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 10)
     /// 头像在后的气泡inset
-    public var bubbleTrailingInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 17)
+    public var bubbleTrailingInset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 17)
     /// 头像两边的空白边距
     public var avatarMargin: CGFloat = 4.0
     /// cell最小行间距
@@ -158,6 +161,14 @@ public extension GXChatConfiguration {
         case voiceCall = 8
         /// 视频通话
         case videoCall = 9
+        /// AT消息(只支持@文本)
+        case atText    = 10
+        /// 转发消息
+        case forward   = 11
+        /// 引用消息
+        case quote     = 12
+        /// 系统消息
+        case system    = 13
     }
     
     /// 消息状态
@@ -188,6 +199,20 @@ public extension GXChatConfiguration {
         case read    = 1
         /// 全部已读（群消息）
         case allRead = 2
+    }
+    
+    /// 消息通话状态
+    enum MessageCallStatus: Int {
+        /// 未接听
+        case missed    = 0
+        /// 已取消
+        case cancel    = 1
+        /// 已挂断
+        case hangUp    = 2
+        /// 已中断
+        case interrupt = 3
+        /// 已结束
+        case finish    = 4
     }
     
     /// 消息菜单

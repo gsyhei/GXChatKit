@@ -17,15 +17,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IL4-TH-uff">
-                    <rect key="frame" x="121" y="366" width="150" height="150"/>
+                    <rect key="frame" x="121" y="366" width="150" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" systemColor="systemGreenColor"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain">
-                        <backgroundConfiguration key="background" imageContentMode="scaleToFill" strokeWidth="4" strokeOutset="-18">
+                        <backgroundConfiguration key="background" imageContentMode="scaleAspectFit" strokeWidth="4" strokeOutset="-18">
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <imageReference key="image" image="play.circle.fill" catalog="system" symbolScale="large"/>
+                            <imageReference key="image" image="video" catalog="system" symbolScale="large"/>
                             <color key="strokeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </backgroundConfiguration>
                         <directionalEdgeInsets key="contentInsets" top="-9" leading="-9" bottom="-9" trailing="-9"/>
@@ -45,8 +45,8 @@
         </view>
     </objects>
     <resources>
-        <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="playpause.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="video" catalog="system" width="128" height="82"/>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

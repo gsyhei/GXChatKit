@@ -39,9 +39,6 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
     
     public override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        if !self.playButton.isHidden {
-            self.playButton.isHighlighted = highlighted
-        }
     }
     
     open override func prepareForReuse() {

@@ -39,6 +39,7 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesMediaCell.self)
         self.tableView.register(cellType: GXMessagesAudioCell.self)
         self.tableView.register(cellType: GXMessagesLocationCell.self)
+        self.tableView.register(cellType: GXMessagesCallCell.self)
 
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
@@ -233,7 +234,6 @@ class ViewController: UIViewController {
         let sectionData4 = GXMessagesSectionData(date: data44.date)
         sectionData4.append(item: item44)
         
-        
         var data35 = GXMessagesTestData()
         data35.date = Date().dateByAdding(days: 1)!
         data35.showName = "你算什么男人"
@@ -244,7 +244,7 @@ class ViewController: UIViewController {
         data35.messageType = .location
         let locationTitle = "广东省深圳市南山区南山村正街正三坊168号6栋618"
         data35.messagesContentData = GXMessagesLocationContent(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), locationTitle: locationTitle, locationImage: UIImage(named: "location"))
-        
+
         let item35 = GXMessagesItemData(data: data35)
         item35.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData4.append(item: item35)
@@ -252,6 +252,23 @@ class ViewController: UIViewController {
         self.list.append(sectionData4)
         
         
+        var data36 = GXMessagesTestData()
+        data36.date = Date().dateByAdding(days: 1)!
+        data36.showName = "你算什么男人"
+        data36.avatarID = "22"
+        data36.messageID = "123"
+        data36.messageContinuousStatus = .beginAndEnd
+        data36.messageStatus = .receiving
+        data36.messageType = .videoCall
+        data36.messagesContentData = GXMessagesCallContent(duration: 100, status: .interrupt, messagesStatus: data36.messageStatus)
+        
+        let item36 = GXMessagesItemData(data: data36)
+        item36.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+        
+        let sectionData5 = GXMessagesSectionData(date: data36.date)
+        sectionData5.append(item: item36)
+
+        self.list.append(sectionData5)
     }
 }
 
@@ -304,7 +321,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             cell.bindCell(item: item)
             
             return cell
-
+        case .voiceCall, .videoCall:
+            let cell: GXMessagesCallCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
+            
+            return cell
+            
         default: break
         }
         return UITableViewCell ()
