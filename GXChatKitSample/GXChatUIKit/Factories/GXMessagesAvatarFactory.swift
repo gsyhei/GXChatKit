@@ -50,8 +50,9 @@ public class GXMessagesAvatarFactory {
     /// - Returns: 高亮头像图
     public class func circularAvatarPlaceholderImage(text: String) -> UIImage? {
         let avatarSize = GXCHATC.avatarSize
-        let font = UIFont.boldSystemFont(ofSize: 30)
-        let image = UIImage.gx_textImage(text, size: avatarSize, backgroundColor: .orange, textColor: .white, font: font)
+        let font = UIFont.boldSystemFont(ofSize: 20)
+        let title = (text.count > 0) ? text[0] : ""
+        let image = UIImage.gx_textImage(title, size: avatarSize, backgroundColor: .orange, textColor: .white, font: font)
         guard let textImage = image else { return nil }
         
         return GXMessagesAvatarFactory.circularAvatarImage(image: textImage)

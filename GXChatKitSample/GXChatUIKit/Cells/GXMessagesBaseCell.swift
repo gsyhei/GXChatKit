@@ -121,7 +121,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         if item.gx_isShowAvatar {
             self.messageAvatarButton.isHidden = false
             self.messageAvatarButton.frame = item.layout.avatarRect
-            if item.avatar == nil {
+            if item.avatar?.avatarImage == nil {
                 self.messageAvatarButton.setImage(item.avatar?.avatarPlaceholderImage, for: .normal)
             }
             else {
