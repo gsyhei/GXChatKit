@@ -12,7 +12,7 @@ import GXMessagesTableView
 open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     /// 消息数据
-    public weak var item: GXMessagesItemData?
+    public weak var item: GXMessagesItemLayoutData?
     
     /// 气泡上边的Label（群昵称）
     public lazy var messageBubbleNameLabel: UILabel = {
@@ -103,7 +103,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleContainerView.addSubview(self.messageBubbleTimeLabel)
     }
     
-    public func bindCell(item: GXMessagesItemData) {
+    public func bindCell(item: GXMessagesItemLayoutData) {
         self.item = item
         switch item.data.gx_messageContinuousStatus {
         case .begin:
@@ -116,11 +116,11 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
             self.messageBubbleImageView.image = item.bubble?.messageEndBubbleImage
             self.messageBubbleImageView.highlightedImage = item.bubble?.messageEndBubbleHighlightedImage
         }
-        self.messageBubbleContainerView.frame = item.containerRect
+        self.messageBubbleContainerView.frame = item.layout.containerRect
         
         if item.gx_isShowAvatar {
             self.messageAvatarButton.isHidden = false
-            self.messageAvatarButton.frame = item.avatarRect
+            self.messageAvatarButton.frame = item.layout.avatarRect
             if item.avatar == nil {
                 self.messageAvatarButton.setImage(item.avatar?.avatarPlaceholderImage, for: .normal)
             }
@@ -132,11 +132,11 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         }
         if item.gx_isShowNickname {
             self.messageBubbleNameLabel.isHidden = false
-            self.messageBubbleNameLabel.frame = item.nicknameRect
+            self.messageBubbleNameLabel.frame = item.layout.nicknameRect
             self.messageBubbleNameLabel.textAlignment = .left
             self.messageBubbleNameLabel.text = item.data.gx_senderDisplayName
         }
-        self.messageBubbleTimeLabel.frame = item.timeRect
+        self.messageBubbleTimeLabel.frame = item.layout.timeRect
         self.messageBubbleTimeLabel.textAlignment = .right
         self.messageBubbleTimeLabel.text = item.data.gx_messageTime
         
@@ -152,7 +152,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
 }
 
 public extension GXMessagesBaseCell {
-    class func updateAvatar(item: GXMessagesItemData, avatarButton: UIButton) {
+    class func updateAvatar(item: GXMessagesItemLayoutData, avatarButton: UIButton) {
         avatarButton.setImage(item.avatar?.avatarImage, for: .normal)
         avatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
     }

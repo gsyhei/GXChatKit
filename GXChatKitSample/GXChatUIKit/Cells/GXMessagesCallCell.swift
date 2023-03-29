@@ -51,15 +51,16 @@ public class GXMessagesCallCell: GXMessagesBaseCell {
         self.messageBubbleContainerView.addSubview(self.titleLabel)
     }
 
-    public override func bindCell(item: GXMessagesItemData) {
+    public override func bindCell(item: GXMessagesItemLayoutData) {
         super.bindCell(item: item)
         
         guard let content = item.data.gx_messagesContentData as? GXMessagesCallContent else { return }
-        
+        guard let layout = item.layout as? GXMessagesCallLayout else { return }
+
         self.titleLabel.text = content.text
-        self.titleLabel.frame = item.contentRect
+        self.titleLabel.frame = layout.textRect
         
-        self.iconIView.frame = content.iconRect
+        self.iconIView.frame = layout.iconRect
         if item.data.gx_messageType == .voiceCall {
             self.iconIView.image = UIImage(systemName: "phone.down")
         }

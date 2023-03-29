@@ -165,10 +165,12 @@ public extension GXChatConfiguration {
         case atText    = 10
         /// 转发消息
         case forward   = 11
+        /// 回复消息
+        case reply     = 12
         /// 引用消息
-        case quote     = 12
+        case quote     = 13
         /// 系统消息
-        case system    = 13
+        case system    = 14
     }
     
     /// 消息状态

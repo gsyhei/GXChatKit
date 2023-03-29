@@ -71,7 +71,7 @@ class ViewController: UIViewController {
         "邮箱：22872347834@qq.com"
         data1.messagesContentData = GXMessagesTextContent(text: text)
         
-        let item1 = GXMessagesItemData(data: data1)
+        let item1 = GXMessagesItemLayoutData(data: data1)
         item1.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         let sectionData = GXMessagesSectionData(date: data1.date)
         sectionData.append(item: item1)
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         data2.messageType = .text
         data2.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
-        let item2 = GXMessagesItemData(data: data2)
+        let item2 = GXMessagesItemLayoutData(data: data2)
         item2.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item2)
         
@@ -100,7 +100,7 @@ class ViewController: UIViewController {
         data3.messageType = .phote
         data3.messagesContentData = GXMessagesPhotoContent(thumbnailImage: UIImage(named: "testphoto"))
         
-        let item3 = GXMessagesItemData(data: data3)
+        let item3 = GXMessagesItemLayoutData(data: data3)
         item3.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item3)
         
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         data11.messageType = .text
         data11.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
-        let item11 = GXMessagesItemData(data: data11)
+        let item11 = GXMessagesItemLayoutData(data: data11)
         item11.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         
         let sectionData1 = GXMessagesSectionData(date: data11.date)
@@ -133,7 +133,7 @@ class ViewController: UIViewController {
         data22.messageType = .text
         data22.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
-        let item22 = GXMessagesItemData(data: data22)
+        let item22 = GXMessagesItemLayoutData(data: data22)
         item22.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item22)
         
@@ -147,7 +147,7 @@ class ViewController: UIViewController {
         data33.messageType = .video
         data33.messagesContentData = GXMessagesVideoContent(thumbnailImage: UIImage(named: "testphoto"))
         
-        let item33 = GXMessagesItemData(data: data33)
+        let item33 = GXMessagesItemLayoutData(data: data33)
         item33.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData1.append(item: item33)
         
@@ -164,7 +164,7 @@ class ViewController: UIViewController {
         data13.messageType = .text
         data13.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
-        let item13 = GXMessagesItemData(data: data13)
+        let item13 = GXMessagesItemLayoutData(data: data13)
         item13.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         
         let sectionData2 = GXMessagesSectionData(date: data13.date)
@@ -180,7 +180,7 @@ class ViewController: UIViewController {
         data23.messageType = .text
         data23.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
-        let item23 = GXMessagesItemData(data: data23)
+        let item23 = GXMessagesItemLayoutData(data: data23)
         item23.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData2.append(item: item23)
         
@@ -194,7 +194,7 @@ class ViewController: UIViewController {
         data34.messageType = .video
         data34.messagesContentData = GXMessagesVideoContent(thumbnailImage: UIImage(named: "testphoto"))
         
-        let item34 = GXMessagesItemData(data: data34)
+        let item34 = GXMessagesItemLayoutData(data: data34)
         item34.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData2.append(item: item34)
         
@@ -208,7 +208,7 @@ class ViewController: UIViewController {
         data24.messageType = .text
         data24.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
-        let item24 = GXMessagesItemData(data: data24)
+        let item24 = GXMessagesItemLayoutData(data: data24)
         item24.updateMessagesAvatar(image: UIImage(named: "avatar3"))
         sectionData2.append(item: item24)
         
@@ -228,7 +228,7 @@ class ViewController: UIViewController {
         let tracks = [120, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 0, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 255]
         data44.messagesContentData = GXMessagesAudioContent(fileURL: url, duration: 12, tracks: tracks)
 
-        let item44 = GXMessagesItemData(data: data44)
+        let item44 = GXMessagesItemLayoutData(data: data44)
         item44.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         
         let sectionData4 = GXMessagesSectionData(date: data44.date)
@@ -245,7 +245,7 @@ class ViewController: UIViewController {
         let locationTitle = "广东省深圳市南山区南山村正街正三坊168号6栋618"
         data35.messagesContentData = GXMessagesLocationContent(coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), locationTitle: locationTitle, locationImage: UIImage(named: "location"))
 
-        let item35 = GXMessagesItemData(data: data35)
+        let item35 = GXMessagesItemLayoutData(data: data35)
         item35.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         sectionData4.append(item: item35)
 
@@ -262,7 +262,7 @@ class ViewController: UIViewController {
         data36.messageType = .videoCall
         data36.messagesContentData = GXMessagesCallContent(duration: 100, status: .interrupt, messagesStatus: data36.messageStatus)
         
-        let item36 = GXMessagesItemData(data: data36)
+        let item36 = GXMessagesItemLayoutData(data: data36)
         item36.updateMessagesAvatar(image: UIImage(named: "avatar2"))
         
         let sectionData5 = GXMessagesSectionData(date: data36.date)
@@ -335,7 +335,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = self.list[indexPath.section].items[indexPath.row]
         
-        return item.cellHeight
+        return item.layout.cellHeight
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

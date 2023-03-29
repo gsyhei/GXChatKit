@@ -43,12 +43,14 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         self.messageBubbleContainerView.addSubview(self.contentTextView)
     }
 
-    public override func bindCell(item: GXMessagesItemData) {
+    public override func bindCell(item: GXMessagesItemLayoutData) {
         super.bindCell(item: item)
         
         guard let content = item.data.gx_messagesContentData as? GXMessagesTextContent else { return }
         self.contentTextView.attributedText = content.attributedText
-        self.contentTextView.frame = item.contentRect
+        
+        guard let layout = item.layout as? GXMessagesTextLayout else { return }
+        self.contentTextView.frame = layout.textRect
     }
     
 }

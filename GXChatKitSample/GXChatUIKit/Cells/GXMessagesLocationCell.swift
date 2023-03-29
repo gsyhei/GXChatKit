@@ -56,27 +56,28 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
         self.messageBubbleNameLabel.layer.shadowOffset = .zero
     }
 
-    public override func bindCell(item: GXMessagesItemData) {
+    public override func bindCell(item: GXMessagesItemLayoutData) {
         super.bindCell(item: item)
-        
+
         if item.gx_isShowNickname {
             self.messageBubbleNameLabel.textColor = .white
-            self.messageBubbleNameLabel.frame = item.nicknameRect
+            self.messageBubbleNameLabel.frame = item.layout.nicknameRect
         }
         self.messageBubbleTimeLabel.textColor = .white
 
         guard let content = item.data.gx_messagesContentData as? GXMessagesLocationContent else { return }
+        guard let layout = item.layout as? GXMessagesLocationLayout else { return }
+
         if let itemMediaView = content.mediaView {
-            itemMediaView.frame = item.contentRect
             self.messageBubbleImageView.addSubview(itemMediaView)
             self.mediaView = itemMediaView
         }
         else {
             self.locationTextView.text = content.locationTitle
-            self.locationTextView.frame = content.locationTitleRect
-            self.locationContentView.frame = content.locationContentRect
+            self.locationTextView.frame = layout.locationTitleRect
+            self.locationContentView.frame = layout.locationContentRect
             self.locationContentView.addSubview(self.locationTextView)
-            let itemMediaView = UIImageView(frame: item.contentRect)
+            let itemMediaView = UIImageView(frame: layout.imageRect)
             itemMediaView.addSubview(self.locationContentView)
             itemMediaView.image = content.locationImage
             itemMediaView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)

@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-public class GXMessagesLocationContent: GXMessagesContentData {
+public class GXMessagesLocationContent: GXMessagesContentProtocol {
     // MARK: - GXMessagesContentData
     
     /// 媒体视图
@@ -17,11 +17,7 @@ public class GXMessagesLocationContent: GXMessagesContentData {
     public var mediaPlaceholderView: UIView?
     /// 显示区域尺寸
     public var displaySize: CGSize = .zero
-    
-    /// 位置名称容器尺寸
-    public var locationContentRect: CGRect = .zero
-    /// 位置名称尺寸
-    public var locationTitleRect: CGRect = .zero
+
     /// 位置图
     private(set) var locationImage: UIImage?
     /// 位置图下载地址

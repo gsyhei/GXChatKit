@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol GXMessagesContentData {
+public protocol GXMessagesContentProtocol {
     /// 媒体视图
     var mediaView: UIView? { get }
     /// 媒体占位视图

@@ -7,20 +7,9 @@
 
 import UIKit
 
-class GXChatChineseText: GXChatTextProtocol {
+open class GXChatChineseText: GXChatTextProtocol {
     
-    func gx_textCall(status: GXChatConfiguration.MessageCallStatus, isSending: Bool = false) -> String {
-//        /// 未接听
-//        case missed    = 0
-//        /// 已取消
-//        case cancel    = 1
-//        /// 已挂断
-//        case hangUp    = 2
-//        /// 已中断
-//        case interrupt = 3
-//        /// 已结束
-//        case finish    = 4
-        
+    open func gx_textCall(status: GXChatConfiguration.MessageCallStatus, isSending: Bool = false) -> String {
         switch status {
         case .missed:
             return isSending ? "对方未接听":"未接听"

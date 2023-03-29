@@ -9,7 +9,7 @@ import UIKit
 import GXChatUIKit
 import GXMessagesTableView
 
-public struct GXMessagesTestData: GXMessagesDataProtocol {
+public struct GXMessagesTestData: GXMessagesItemDataProtocol {
     
     public var gx_groupId: String? {
         return nil
@@ -53,7 +53,7 @@ public struct GXMessagesTestData: GXMessagesDataProtocol {
         return .allRead
     }
     
-    public var gx_messagesContentData: GXMessagesContentData? {
+    public var gx_messagesContentData: GXMessagesContentProtocol? {
         return self.messagesContentData
     }
     
@@ -78,5 +78,5 @@ public struct GXMessagesTestData: GXMessagesDataProtocol {
     var messageContinuousStatus: GXMessageContinuousStatus = .begin
     var messageStatus: GXMessageStatus = .sending
     var messageType: GXChatConfiguration.MessageType = .text
-    var messagesContentData: GXMessagesContentData? = nil
+    var messagesContentData: GXMessagesContentProtocol? = nil
 }

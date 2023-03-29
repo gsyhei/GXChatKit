@@ -8,7 +8,7 @@
 import UIKit
 import GXMessagesTableView
 
-public class GXMessagesCallContent: GXMessagesContentData {
+public class GXMessagesCallContent: GXMessagesContentProtocol {
     // MARK: - GXMessagesContentData
     
     /// 媒体视图
@@ -18,8 +18,6 @@ public class GXMessagesCallContent: GXMessagesContentData {
     /// 显示区域尺寸
     public var displaySize: CGSize = .zero
     
-    /// icon位置
-    public var iconRect: CGRect = .zero
     /// 文本
     private(set) var text: String
     /// 通话时长

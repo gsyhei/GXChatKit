@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-public class GXMessagesAudioContent: GXMessagesContentData {
+public class GXMessagesAudioContent: GXMessagesContentProtocol {
     // MARK: - GXMessagesContentData
     
     /// 媒体视图
@@ -24,9 +24,7 @@ public class GXMessagesAudioContent: GXMessagesContentData {
     private(set) var fileURL: URL?
     
     // MARK: - 实时音频数据
-    
-    /// 音轨视图尺寸
-    public var audioSize: CGSize = .zero
+
     /// 持续时间
     public var duration: TimeInterval = 0
     /// 音轨数组

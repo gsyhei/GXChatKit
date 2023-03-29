@@ -19,7 +19,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         return button
     }()
     /// 文本Label
-    public lazy var timeLabel: UILabel = {
+    public lazy var audioTimeLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.font = GXCHATC.timeFont
@@ -50,14 +50,14 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     open override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.timeLabel.text = nil
+        self.audioTimeLabel.text = nil
         self.trackView?.removeFromSuperview()
     }
     
     public override func createSubviews() {
         super.createSubviews()
         self.messageBubbleContainerView.addSubview(self.playButton)
-        self.messageBubbleContainerView.addSubview(self.timeLabel)
+        self.messageBubbleContainerView.addSubview(self.audioTimeLabel)
         self.messageBubbleContainerView.addSubview(self.dotView)
         self.addObserver()
     }
@@ -69,44 +69,39 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         NotificationCenter.default.addObserver(self, selector: #selector(audioPlayProgress), name: GXAudioManager.audioPlayProgressNotification, object: nil)
     }
     
-    public override func bindCell(item: GXMessagesItemData) {
+    public override func bindCell(item: GXMessagesItemLayoutData) {
         super.bindCell(item: item)
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
-        
-        self.playButton.frame = CGRect(origin: item.contentRect.origin, size: GXCHATC.audioPlaySize)
+        guard let layout = item.layout as? GXMessagesAudioLayout else { return }
+
+        self.playButton.frame = CGRect(origin: layout.playButtonRect.origin, size: GXCHATC.audioPlaySize)
         self.gx_updatePlayButton(content: content)
 
         if let itemMediaView = content.mediaView as? GXMessagesAudioTrackView {
             self.messageBubbleContainerView.addSubview(itemMediaView)
-            let left = self.playButton.right + 10.0, top = self.playButton.top + 10.0
-            let rect = CGRect(x: left, y: top, width: content.audioSize.width, height: content.audioSize.height)
-            itemMediaView.frame = rect
             self.trackView = itemMediaView
         }
         else {
-            let left = self.playButton.right + 10.0, top = self.playButton.top + 10.0
-            let rect = CGRect(x: left, y: top, width: content.audioSize.width, height: content.audioSize.height)
-            let trackView = GXMessagesAudioTrackView(frame: rect)
+            let trackView = GXMessagesAudioTrackView(frame: layout.audioTrackRect)
             trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
             self.messageBubbleContainerView.addSubview(trackView)
-            self.trackView = trackView
             content.mediaView = trackView
+            self.trackView = trackView
         }
-        let left = self.playButton.right + 10.0, top = self.playButton.frame.midY + 5.0
-        self.timeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
-        self.timeLabel.frame = CGRect(x: left, y: top, width: 28.0, height: self.timeLabel.font.lineHeight)
+        self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
+        self.audioTimeLabel.frame = layout.audioTimeRect
         if item.data.gx_messageStatus == .sending {
             self.dotView.backgroundColor = GXCHATC.audioSendingTimeColor
             self.playButton.tintColor = GXCHATC.audioSendingTimeColor
-            self.timeLabel.textColor = GXCHATC.audioSendingTimeColor
+            self.audioTimeLabel.textColor = GXCHATC.audioSendingTimeColor
         }
         else {
             self.dotView.backgroundColor = GXCHATC.audioReceivingTimeColor
             self.playButton.tintColor = GXCHATC.audioReceivingTimeColor
-            self.timeLabel.textColor = GXCHATC.audioReceivingTimeColor
+            self.audioTimeLabel.textColor = GXCHATC.audioReceivingTimeColor
         }
-        self.dotView.left = self.timeLabel.right
-        self.dotView.centerY = self.timeLabel.centerY
+        self.dotView.left = self.audioTimeLabel.right
+        self.dotView.centerY = self.audioTimeLabel.centerY
         
         if content.isPlaying {
             self.trackView?.gx_layerAnimation(index: content.currentPlayIndex - 1, animated: false)
@@ -150,7 +145,7 @@ extension GXMessagesAudioCell {
     //MARK: - NSNotification
     
     @objc func audioPlay(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
@@ -158,30 +153,30 @@ extension GXMessagesAudioCell {
     }
     
     @objc func audioStop(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
         self.gx_updatePlayButton(content: content)
-        self.timeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
+        self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
         self.trackView?.gx_resetTracksLayer()
     }
     
     @objc func audioPause(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
         self.gx_updatePlayButton(content: content)
-        self.timeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
+        self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
     }
     
     @objc func audioPlayProgress(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         
-        self.timeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
+        self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
         self.trackView?.gx_layerAnimation(index: (content.currentPlayIndex - 1), animated: true)
     }
     

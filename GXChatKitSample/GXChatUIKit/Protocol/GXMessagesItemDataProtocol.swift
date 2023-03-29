@@ -8,9 +8,9 @@
 import Foundation
 import GXMessagesTableView
 
-public typealias GXMessagesDataProtocol = GXMessagesData & GXMessagesAvatarDataProtocol
+public typealias GXMessagesItemDataProtocol = GXMessagesDataProtocol & GXMessagesAvatarDataProtocol
 
-public protocol GXMessagesData {
+public protocol GXMessagesDataProtocol {
     /// 消息唯一ID
     var gx_messageId: String { get }
     /// 群ID（不是群则为nil）
@@ -34,5 +34,5 @@ public protocol GXMessagesData {
     /// 消息读取状态
     var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
     /// 消息内容
-    var gx_messagesContentData: GXMessagesContentData? { get }
+    var gx_messagesContentData: GXMessagesContentProtocol? { get }
 }
