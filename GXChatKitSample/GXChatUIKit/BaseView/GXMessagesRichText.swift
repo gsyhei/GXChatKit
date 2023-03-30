@@ -16,13 +16,15 @@ class GXTextAttachment: NSTextAttachment {
     public var identifier: String = ""
 }
 
-class GXMessagesRichText: NSMutableAttributedString {
+public class GXMessagesRichText: NSMutableAttributedString {
     
-    public class func attributedText(string: String) -> NSAttributedString {
+    public class func attributedText(string: String, users: [GXMessagesUserProtocol]? = nil) -> NSAttributedString {
         let attributed = NSMutableAttributedString(string: string)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
-        attributed.addAttributes([.textColor(GXCHATC.textColor), .font(GXCHATC.textFont), .paragraphStyle(paragraphStyle)], range: 0..<string.count)
+        let attributes: [Attribute] = [.textColor(GXCHATC.textColor), .font(GXCHATC.textFont), .paragraphStyle(paragraphStyle)]
+        
+        attributed.addAttributes(attributes, range: 0..<string.count)
         if let emojiRegular = try? NSRegularExpression(pattern: GXCHATC.emojiRegularExpression) {
             var stop: Bool = false
             while !stop {
@@ -43,6 +45,22 @@ class GXMessagesRichText: NSMutableAttributedString {
                 }
             }
         }
+        if let userArr = users {
+            for user in userArr.reversed() {
+                let string = "@" + user.gx_userDisplayName + " "
+                let atAttributes: [Attribute] = [.textColor(GXCHATC.textColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
+                let appendString = NSMutableAttributedString(string: string)
+                let range: NSRange = NSMakeRange(0, appendString.length)
+                appendString.addAttributes(atAttributes, range: range)
+                let urlString = GXCHAT_AT_PREFIX + user.gx_userId
+                appendString.beginEditing()
+                appendString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: range)
+                appendString.addAttribute(.link, value: urlString, range: range)
+                appendString.endEditing()
+                attributed.insert(appendString, at: 0)
+            }
+        }
+        
         return attributed
     }
     

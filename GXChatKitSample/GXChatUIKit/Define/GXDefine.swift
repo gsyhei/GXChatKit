@@ -23,6 +23,8 @@ public let GX_USER_FILE = NSSearchPathForDirectoriesInDomains(.documentDirectory
 public let GX_USER_FILE_USER = GX_USER_FILE!.appending("/GXUser.data")
 public let GX_USER_FILE_CITY = GX_USER_FILE!.appending("/GXMessages.data")
 
+public let GXCHAT_AT_PREFIX = "@URL:"
+
 public typealias GXActionBlock = (() -> Void)
 public typealias GXActionBlockItem<T: Any> = ((T) -> Void)
 public typealias GXActionBlockBack<T: Any> = (() -> T)

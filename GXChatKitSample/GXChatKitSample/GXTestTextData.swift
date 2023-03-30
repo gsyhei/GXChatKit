@@ -80,3 +80,23 @@ public struct GXMessagesTestData: GXMessagesDataProtocol {
     var messageType: GXChatConfiguration.MessageType = .text
     var messagesContentData: GXMessagesContentProtocol? = nil
 }
+
+class GXTextUser: GXMessagesUserProtocol {
+    
+    var gx_userId: String {
+        return userId
+    }
+    
+    var gx_userDisplayName: String {
+        return userName
+    }
+    
+    var gx_userAvatarUrl: NSURL? {
+        return userUrl
+    }
+    
+    var userId: String = ""
+    var userName: String = ""
+    var userUrl: NSURL? = nil
+
+}

@@ -53,6 +53,9 @@
 		96A3C13329D46D3C00ADBC65 /* GXMessagesVideoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13229D46D3C00ADBC65 /* GXMessagesVideoLayout.swift */; };
 		96A3C13529D46D6D00ADBC65 /* GXMessagesLocationLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13429D46D6D00ADBC65 /* GXMessagesLocationLayout.swift */; };
 		96A3C13729D46EC500ADBC65 /* GXMessagesCallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13629D46EC500ADBC65 /* GXMessagesCallLayout.swift */; };
+		96A3C13929D5A07800ADBC65 /* GXMessagesUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13829D5A07800ADBC65 /* GXMessagesUserProtocol.swift */; };
+		96A3C13B29D5B6D000ADBC65 /* GXMessagesAtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13A29D5B6D000ADBC65 /* GXMessagesAtCell.swift */; };
+		96A3C13D29D5B70E00ADBC65 /* GXMessagesAtLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13C29D5B70E00ADBC65 /* GXMessagesAtLayout.swift */; };
 		96B4FA6529BFA44400AA9384 /* TestXibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B4FA6429BFA44400AA9384 /* TestXibView.xib */; };
 		96D13EFD29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D13EFC29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift */; };
 		96D13EFF29BDA6F900BF4B80 /* GXMessagesSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */; };
@@ -180,6 +183,9 @@
 		96A3C13229D46D3C00ADBC65 /* GXMessagesVideoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesVideoLayout.swift; sourceTree = "<group>"; };
 		96A3C13429D46D6D00ADBC65 /* GXMessagesLocationLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesLocationLayout.swift; sourceTree = "<group>"; };
 		96A3C13629D46EC500ADBC65 /* GXMessagesCallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesCallLayout.swift; sourceTree = "<group>"; };
+		96A3C13829D5A07800ADBC65 /* GXMessagesUserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesUserProtocol.swift; sourceTree = "<group>"; };
+		96A3C13A29D5B6D000ADBC65 /* GXMessagesAtCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAtCell.swift; sourceTree = "<group>"; };
+		96A3C13C29D5B70E00ADBC65 /* GXMessagesAtLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAtLayout.swift; sourceTree = "<group>"; };
 		96B4FA6429BFA44400AA9384 /* TestXibView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestXibView.xib; sourceTree = "<group>"; };
 		96D13EFC29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSectionHeader.swift; sourceTree = "<group>"; };
 		96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSectionData.swift; sourceTree = "<group>"; };
@@ -313,6 +319,7 @@
 				96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */,
 				9675963829D1C98800A4A11B /* GXMessagesLocationCell.swift */,
 				96A3C11429D2CBDD00ADBC65 /* GXMessagesCallCell.swift */,
+				96A3C13A29D5B6D000ADBC65 /* GXMessagesAtCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -349,6 +356,7 @@
 				96A3C12729D446DF00ADBC65 /* GXChatTextProtocol.swift */,
 				96A3C12329D446D300ADBC65 /* GXMessagesContentProtocol.swift */,
 				96A3C12429D446D300ADBC65 /* GXMessagesDataProtocol.swift */,
+				96A3C13829D5A07800ADBC65 /* GXMessagesUserProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -363,6 +371,7 @@
 				96A3C13229D46D3C00ADBC65 /* GXMessagesVideoLayout.swift */,
 				96A3C13429D46D6D00ADBC65 /* GXMessagesLocationLayout.swift */,
 				96A3C13629D46EC500ADBC65 /* GXMessagesCallLayout.swift */,
+				96A3C13C29D5B70E00ADBC65 /* GXMessagesAtLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -812,7 +821,9 @@
 				9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */,
 				96A3C13329D46D3C00ADBC65 /* GXMessagesVideoLayout.swift in Sources */,
 				9675963929D1C98800A4A11B /* GXMessagesLocationCell.swift in Sources */,
+				96A3C13D29D5B70E00ADBC65 /* GXMessagesAtLayout.swift in Sources */,
 				96A3C11329D2C85E00ADBC65 /* GXChatChineseText.swift in Sources */,
+				96A3C13B29D5B6D000ADBC65 /* GXMessagesAtCell.swift in Sources */,
 				969957682975756A001DCC17 /* GXMessagesAvatarFactory.swift in Sources */,
 				96D13EFF29BDA6F900BF4B80 /* GXMessagesSectionData.swift in Sources */,
 				9699575A2973E698001DCC17 /* GXMessagesItemData.swift in Sources */,
@@ -834,6 +845,7 @@
 				96A3C12629D446D300ADBC65 /* GXMessagesDataProtocol.swift in Sources */,
 				9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */,
 				9675963729D194B100A4A11B /* GXMessagesLocationContent.swift in Sources */,
+				96A3C13929D5A07800ADBC65 /* GXMessagesUserProtocol.swift in Sources */,
 				96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */,
 				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
 				96D431E929CEF63700EE97A1 /* GXMessagesTextView.swift in Sources */,

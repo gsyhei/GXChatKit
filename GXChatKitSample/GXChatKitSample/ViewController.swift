@@ -40,7 +40,9 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesAudioCell.self)
         self.tableView.register(cellType: GXMessagesLocationCell.self)
         self.tableView.register(cellType: GXMessagesCallCell.self)
+        self.tableView.register(cellType: GXMessagesAtCell.self)
 
+        
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
@@ -267,8 +269,36 @@ class ViewController: UIViewController {
         
         let sectionData5 = GXMessagesSectionData(date: data36.date)
         sectionData5.append(item: item36)
-
         self.list.append(sectionData5)
+        
+        
+        let user1 = GXTextUser()
+        user1.userId = "11"
+        user1.userName = "抬头45度仰望天空"
+        let user2 = GXTextUser()
+        user2.userId = "22"
+        user2.userName = "你算什么男人"
+        let user3 = GXTextUser()
+        user3.userId = "33"
+        user3.userName = "这样也好"
+        let users = [user1, user2, user3]
+        
+        var data37 = GXMessagesTestData()
+        data37.date = Date().dateByAdding(days: 1)!
+        data37.showName = "你算什么男人"
+        data37.avatarID = "22"
+        data37.messageID = "124"
+        data37.messageContinuousStatus = .beginAndEnd
+        data37.messageStatus = .receiving
+        data37.messageType = .atText
+        data37.messagesContentData = GXMessagesAtContent(text: text, users: users)
+        
+        let item37 = GXMessagesItemData(data: data37)
+        item37.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+        
+        let sectionData6 = GXMessagesSectionData(date: data37.date)
+        sectionData6.append(item: item37)
+        self.list.append(sectionData6)
     }
 }
 
@@ -326,7 +356,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             cell.bindCell(item: item)
             
             return cell
+        case .atText:
+            let cell: GXMessagesAtCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
             
+            return cell
         default: break
         }
         return UITableViewCell ()

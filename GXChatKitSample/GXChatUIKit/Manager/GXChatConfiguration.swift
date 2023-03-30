@@ -82,6 +82,9 @@ public class GXChatConfiguration: NSObject {
     /// 文本行间距
     public var textLineSpacing: CGFloat = 2.0
     
+    /// @At文本字体
+    public var atTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    
     /// 昵称字体
     public var nicknameFont: UIFont = .boldSystemFont(ofSize: 15)
     /// 昵称下面的行间距

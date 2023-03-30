@@ -51,6 +51,8 @@ public class GXMessagesItemData: Equatable {
             self.layout = GXMessagesLocationLayout(data: self.data)
         case .voiceCall, .videoCall:
             self.layout = GXMessagesCallLayout(data: self.data)
+        case .atText:
+            self.layout = GXMessagesAtLayout(data: self.data)
             
         default: break
         }

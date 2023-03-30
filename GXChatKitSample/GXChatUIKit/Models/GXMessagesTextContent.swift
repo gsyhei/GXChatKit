@@ -17,8 +17,9 @@ public class GXMessagesTextContent: GXMessagesContentProtocol {
     /// 显示区域尺寸
     public var displaySize: CGSize = .zero
     
+    /// 文本字符串
     public var text: String
-    
+    /// 富文本字符串
     public var attributedText: NSAttributedString
 
     public required init(text: String) {
