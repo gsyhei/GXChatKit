@@ -74,6 +74,23 @@ public class GXUtilManager: NSObject {
             return String(format: "%02d:%02d", minute, second)
         }
     }
+    
+    public class func gx_imageResize(size: CGSize, maxSize: CGSize) -> CGSize {
+        if size.width < maxSize.width && size.height < maxSize.height {
+            return size
+        }
+        let scaleW = maxSize.width/size.width, scaleH = maxSize.height/size.height
+        let resizeScale = min(min(scaleW, scaleH), 1.0)
+        let resize = CGSize(width: size.width * resizeScale, height: size.height * resizeScale)
+        if resize.width < 40.0 { // 最小宽度40.0
+            var height = (40.0 / maxSize.width) * size.height
+            height = min(height, maxSize.height)
+            
+            return CGSize(width: 40.0, height: height)
+        }
+        
+        return resize
+    }
 
 }
 

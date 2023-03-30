@@ -16,7 +16,7 @@ public class GXAudioManager: NSObject {
 
     private var audioPlayer: AVAudioPlayer?
     private var timer: DispatchSourceTimer?
-    private weak var audioItem: GXMessagesItemLayoutData?
+    private weak var audioItem: GXMessagesItemData?
     
     public var currentTime: TimeInterval {
         return self.audioPlayer?.currentTime ?? 0
@@ -33,7 +33,7 @@ public class GXAudioManager: NSObject {
 }
 
 public extension GXAudioManager {
-    func playAudio(item: GXMessagesItemLayoutData?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
+    func playAudio(item: GXMessagesItemData?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
         guard let newItem = item else { return }
         if self.audioItem == newItem {
             guard let content = item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }

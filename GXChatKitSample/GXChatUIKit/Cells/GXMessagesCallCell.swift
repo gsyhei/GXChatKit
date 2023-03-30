@@ -51,7 +51,7 @@ public class GXMessagesCallCell: GXMessagesBaseCell {
         self.messageBubbleContainerView.addSubview(self.titleLabel)
     }
 
-    public override func bindCell(item: GXMessagesItemLayoutData) {
+    public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
         guard let content = item.data.gx_messagesContentData as? GXMessagesCallContent else { return }

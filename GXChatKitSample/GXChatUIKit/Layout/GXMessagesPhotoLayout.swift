@@ -11,14 +11,14 @@ class GXMessagesPhotoLayout: GXMessagesBaseLayout {
     
     public var imageRect: CGRect = .zero
 
-    public override func updateLayout(item: GXMessagesItemLayoutData) {
-        guard let content = item.data.gx_messagesContentData as? GXMessagesPhotoContent else { return }
+    public override func updateLayout(data: GXMessagesDataProtocol) {
+        guard let content = data.gx_messagesContentData as? GXMessagesPhotoContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
-        let contentSize = item.gx_imageResize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
+        let contentSize = GXUtilManager.gx_imageResize(size: content.displaySize, maxSize: CGSize(width: maxContainerWidth, height: SCREEN_HEIGHT/2))
         self.imageRect = CGRect(x: 0, y: 0, width: contentSize.width, height: contentSize.height)
-        self.updateBaseLayout(item: item, containerSize: contentSize)
+        self.updateBaseLayout(data: data, containerSize: contentSize)
     }
     
 }

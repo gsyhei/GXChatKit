@@ -9,7 +9,7 @@ import UIKit
 import GXChatUIKit
 import GXMessagesTableView
 
-public struct GXMessagesTestData: GXMessagesItemDataProtocol {
+public struct GXMessagesTestData: GXMessagesDataProtocol {
     
     public var gx_groupId: String? {
         return nil

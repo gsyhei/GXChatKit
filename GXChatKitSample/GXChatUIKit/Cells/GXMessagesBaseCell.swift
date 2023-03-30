@@ -12,7 +12,7 @@ import GXMessagesTableView
 open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     /// 消息数据
-    public weak var item: GXMessagesItemLayoutData?
+    public weak var item: GXMessagesItemData?
     
     /// 气泡上边的Label（群昵称）
     public lazy var messageBubbleNameLabel: UILabel = {
@@ -103,7 +103,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleContainerView.addSubview(self.messageBubbleTimeLabel)
     }
     
-    public func bindCell(item: GXMessagesItemLayoutData) {
+    public func bindCell(item: GXMessagesItemData) {
         self.item = item
         switch item.data.gx_messageContinuousStatus {
         case .begin:
@@ -118,7 +118,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         }
         self.messageBubbleContainerView.frame = item.layout.containerRect
         
-        if item.gx_isShowAvatar {
+        if item.data.gx_isShowAvatar {
             self.messageAvatarButton.isHidden = false
             self.messageAvatarButton.frame = item.layout.avatarRect
             if item.avatar?.avatarImage == nil {
@@ -130,7 +130,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
             }
             self.messageAvatarButton.isHidden = (item.data.gx_messageContinuousStatus != .end && item.data.gx_messageContinuousStatus != .beginAndEnd)
         }
-        if item.gx_isShowNickname {
+        if item.data.gx_isShowNickname {
             self.messageBubbleNameLabel.isHidden = false
             self.messageBubbleNameLabel.frame = item.layout.nicknameRect
             self.messageBubbleNameLabel.textAlignment = .left
@@ -152,7 +152,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
 }
 
 public extension GXMessagesBaseCell {
-    class func updateAvatar(item: GXMessagesItemLayoutData, avatarButton: UIButton) {
+    class func updateAvatar(item: GXMessagesItemData, avatarButton: UIButton) {
         avatarButton.setImage(item.avatar?.avatarImage, for: .normal)
         avatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
     }

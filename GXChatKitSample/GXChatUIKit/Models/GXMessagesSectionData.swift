@@ -12,7 +12,7 @@ public class GXMessagesSectionData: NSObject {
     public var dateString: String
     
     public var dateSize: CGSize = .zero
-    public var items:[GXMessagesItemLayoutData] = []
+    public var items:[GXMessagesItemData] = []
     
     public required init(date: Date) {
         self.currentDate = date
@@ -40,11 +40,11 @@ public class GXMessagesSectionData: NSObject {
         return NSCalendar.current.isDate(self.currentDate, inSameDayAs: date)
     }
     
-    public func append(item: GXMessagesItemLayoutData) {
+    public func append(item: GXMessagesItemData) {
         self.items.append(item)
     }
     
-    public func inset(item: GXMessagesItemLayoutData) {
+    public func inset(item: GXMessagesItemData) {
         self.items.insert(item, at: 0)
     }
     

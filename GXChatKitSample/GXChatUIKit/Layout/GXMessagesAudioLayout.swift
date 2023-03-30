@@ -13,8 +13,8 @@ class GXMessagesAudioLayout: GXMessagesBaseLayout {
     public var audioTrackRect: CGRect = .zero
     public var audioTimeRect: CGRect = .zero
     
-    public override func updateLayout(item: GXMessagesItemLayoutData) {
-        guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+    public override func updateLayout(data: GXMessagesDataProtocol) {
+        guard let content = data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
         var maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
@@ -29,7 +29,7 @@ class GXMessagesAudioLayout: GXMessagesBaseLayout {
         let contentWidth = width + 10 + GXCHATC.audioPlaySize.width
         content.displaySize = CGSize(width: contentWidth, height: GXCHATC.audioPlaySize.height)
         
-        let contentPoint = item.gx_contentPoint
+        let contentPoint = data.gx_contentPoint
         self.playButtonRect = CGRect(origin: contentPoint, size: GXCHATC.audioPlaySize)
         self.audioTrackRect = CGRect(origin: CGPoint(x: self.playButtonRect.maxX + 10.0, y: contentPoint.y + 10.0), size: audioSize)
         let audioTimePoint = CGPoint(x: self.playButtonRect.maxX + 10.0, y: self.playButtonRect.midY + 5.0)
@@ -38,10 +38,10 @@ class GXMessagesAudioLayout: GXMessagesBaseLayout {
         
         var containerHeight = content.displaySize.height + GXCHATC.timeFont.lineHeight
         containerHeight += (GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom)
-        if item.gx_isShowNickname {
+        if data.gx_isShowNickname {
             containerHeight += (GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing)
         }
         let containerWidth = contentWidth + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
-        self.updateBaseLayout(item: item, containerSize: CGSizeMake(containerWidth, containerHeight))
+        self.updateBaseLayout(data: data, containerSize: CGSizeMake(containerWidth, containerHeight))
     }
 }

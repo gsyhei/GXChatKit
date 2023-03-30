@@ -69,7 +69,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         NotificationCenter.default.addObserver(self, selector: #selector(audioPlayProgress), name: GXAudioManager.audioPlayProgressNotification, object: nil)
     }
     
-    public override func bindCell(item: GXMessagesItemLayoutData) {
+    public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         guard let layout = item.layout as? GXMessagesAudioLayout else { return }
@@ -145,7 +145,7 @@ extension GXMessagesAudioCell {
     //MARK: - NSNotification
     
     @objc func audioPlay(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
@@ -153,7 +153,7 @@ extension GXMessagesAudioCell {
     }
     
     @objc func audioStop(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
@@ -163,7 +163,7 @@ extension GXMessagesAudioCell {
     }
     
     @objc func audioPause(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
 
@@ -172,7 +172,7 @@ extension GXMessagesAudioCell {
     }
     
     @objc func audioPlayProgress(notification: NSNotification) {
-        guard let notiItem = notification.object as? GXMessagesItemLayoutData else { return }
+        guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
         guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
         

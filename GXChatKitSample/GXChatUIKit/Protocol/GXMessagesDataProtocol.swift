@@ -1,0 +1,156 @@
+//
+//  GXMessageData.swift
+//  GXChatUIKit
+//
+//  Created by Gin on 2023/1/15.
+//
+
+import Foundation
+import GXMessagesTableView
+
+public protocol GXMessagesDataProtocol: GXMessagesAvatarDataProtocol  {
+    /// 消息唯一ID
+    var gx_messageId: String { get }
+    /// 群ID（不是群则为nil）
+    var gx_groupId: String? { get }
+    /// 发送方ID
+    var gx_senderId: String { get }
+    /// 发送方显示名称
+    var gx_senderDisplayName: String { get }
+    /// 发送方头像
+    var gx_sendAvatarUrl: NSURL? { get }
+    /// 消息日期
+    var gx_messageDate: Date { get }
+    /// 消息显示时间
+    var gx_messageTime: String { get }
+    /// 聊天类型
+    var gx_chatType: GXChatConfiguration.ChatType { get }
+    /// 消息类型
+    var gx_messageType: GXChatConfiguration.MessageType { get }
+    /// 消息发送状态
+    var gx_messageSendStatus: GXChatConfiguration.MessageSendStatus { get }
+    /// 消息读取状态
+    var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
+    /// 消息内容
+    var gx_messagesContentData: GXMessagesContentProtocol? { get }
+}
+
+public extension GXMessagesDataProtocol {
+    
+    /// 头像是否显示
+    var gx_isShowAvatar: Bool {
+        if self.gx_messageStatus == .sending {
+            if self.gx_chatType == .single {
+                return GXCHATC.singleChatSendingShowAvatar
+            }
+            else {
+                return GXCHATC.groupChatSendingShowAvatar
+            }
+        }
+        else {
+            if self.gx_chatType == .single {
+                return GXCHATC.singleChatReceivingShowAvatar
+            }
+            else {
+                return GXCHATC.groupChatReceivingShowAvatar
+            }
+        }
+    }
+    
+    /// 昵称是否显示
+    var gx_isShowNickname: Bool {
+        if self.gx_messageStatus == .sending {
+            if self.gx_chatType == .single {
+                return GXCHATC.singleChatSendingShowNickname
+            }
+            else {
+                return GXCHATC.groupChatSendingShowNickname
+            }
+        }
+        else {
+            if self.gx_chatType == .single {
+                return GXCHATC.singleChatReceivingShowNickname
+            }
+            else {
+                return GXCHATC.groupChatReceivingShowNickname
+            }
+        }
+    }
+    
+    /// 头像占用的width
+    var gx_avatarContentWidth: CGFloat {
+        var avatarContentWidth: CGFloat = GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
+        if self.gx_messageStatus == .sending && GXCHATC.singleChatSendingShowAvatar {
+            avatarContentWidth += GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
+        }
+        else if self.gx_messageStatus == .receiving && GXCHATC.singleChatReceivingShowAvatar {
+            avatarContentWidth += GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
+        }
+        else {
+            avatarContentWidth += GXCHATC.avatarMargin*2
+        }
+        return avatarContentWidth
+    }
+    
+    var gx_contentPoint: CGPoint {
+        if self.gx_isShowNickname {
+            if self.gx_messageStatus == .sending {
+                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
+                return CGPoint(x: GXCHATC.bubbleTrailingInset.left, y: top)
+            }
+            else {
+                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
+                return CGPoint(x: GXCHATC.bubbleLeadingInset.left, y: top)
+            }
+        }
+        else {
+            if self.gx_messageStatus == .sending {
+                return CGPoint(x: GXCHATC.bubbleTrailingInset.left, y: GXCHATC.bubbleTrailingInset.top)
+            }
+            else {
+                return CGPoint(x: GXCHATC.bubbleLeadingInset.left, y: GXCHATC.bubbleLeadingInset.top)
+            }
+        }
+    }
+    
+    /// 内容视图的left
+    func gx_containerLeft(container width: CGFloat) -> CGFloat {
+        if self.gx_messageStatus == .sending {
+            if self.gx_chatType == .single {
+                if GXCHATC.singleChatSendingShowAvatar {
+                    return SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) - width
+                }
+                else {
+                    return SCREEN_WIDTH - GXCHATC.avatarMargin*2 - width
+                }
+            }
+            else {
+                if GXCHATC.groupChatSendingShowAvatar {
+                    return SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) - width
+                }
+                else {
+                    return SCREEN_WIDTH - GXCHATC.avatarMargin*2 - width
+                }
+            }
+        }
+        else {
+            if self.gx_chatType == .single {
+                if GXCHATC.singleChatReceivingShowAvatar {
+                    return GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
+                }
+                else {
+                    return GXCHATC.avatarMargin*2
+                }
+            }
+            else {
+                if GXCHATC.groupChatReceivingShowAvatar {
+                    return GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
+                }
+                else {
+                    return GXCHATC.avatarMargin*2
+                }
+            }
+        }
+    }
+    
+}

@@ -56,10 +56,10 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
         self.messageBubbleNameLabel.layer.shadowOffset = .zero
     }
 
-    public override func bindCell(item: GXMessagesItemLayoutData) {
+    public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
 
-        if item.gx_isShowNickname {
+        if item.data.gx_isShowNickname {
             self.messageBubbleNameLabel.textColor = .white
             self.messageBubbleNameLabel.frame = item.layout.nicknameRect
         }
