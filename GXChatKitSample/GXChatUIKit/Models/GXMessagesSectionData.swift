@@ -17,21 +17,7 @@ public class GXMessagesSectionData: NSObject {
     public required init(date: Date) {
         self.currentDate = date
 
-        if date.isToday {
-            self.dateString = date.string(format: "MMMM d")//date.string(format: "今天")
-        }
-        else if date.isYesterday {
-            self.dateString = date.string(format: "MMMM d")//date.string(format: "昨天")
-        }
-        else if NSCalendar.current.isDate(date, equalTo: Date(), toGranularity: .month) {
-            self.dateString = date.string(format: "MMMM d")
-        }
-        else if NSCalendar.current.isDate(date, equalTo: Date(), toGranularity: .year) {
-            self.dateString = date.string(format: "MMMM d")
-        }
-        else {
-            self.dateString = date.string(format: "MMMM d, y")
-        }
+        self.dateString = GXCHATC.chatText.gx_sectionHeaderString(date: date)
         let size = self.dateString.size(size: CGSize(width: SCREEN_WIDTH, height: 100), font: GXCHATC.headerTextFont)
         self.dateSize = CGSize(width: size.width + GXCHATC.timeFont.lineHeight, height: size.height + 4.0)
     }

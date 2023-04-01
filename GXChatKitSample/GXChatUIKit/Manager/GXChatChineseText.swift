@@ -7,9 +7,27 @@
 
 import UIKit
 
-open class GXChatChineseText: GXChatTextProtocol {
+public class GXChatChineseText: GXChatTextProtocol {
     
-    open func gx_textCall(status: GXChatConfiguration.MessageCallStatus, isSending: Bool = false) -> String {
+    public func gx_sectionHeaderString(date: Date) -> String {
+        if date.isToday {
+            return GXLS("今天")
+        }
+        else if date.isYesterday {
+            return GXLS("昨天")
+        }
+        else if NSCalendar.current.isDate(date, equalTo: Date(), toGranularity: .month) {
+            return date.string(format: "M月d日")      //英文版简写date.string(format: "MMMM d")
+        }
+        else if NSCalendar.current.isDate(date, equalTo: Date(), toGranularity: .year) {
+            return date.string(format: "M月d日")      //英文版简写date.string(format: "MMMM d")
+        }
+        else {
+            return date.string(format: "YYYY年M月d日") //英文版简写date.string(format: "MMMM d, y")
+        }
+    }
+    
+    public func gx_textCall(status: GXChatConfiguration.MessageCallStatus, isSending: Bool = false) -> String {
         switch status {
         case .missed:
             return isSending ? "对方未接听":"未接听"

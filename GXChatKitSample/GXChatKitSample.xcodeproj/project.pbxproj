@@ -285,9 +285,9 @@
 			isa = PBXGroup;
 			children = (
 				96A3C11229D2C85E00ADBC65 /* GXChatChineseText.swift */,
-				968B917229C941A100F6113B /* GXChatConfiguration.swift */,
 				96A36A7829C2E10400BD4506 /* GXUtilManager.swift */,
 				96495C4329C1A1170055C19A /* GXAudioManager.swift */,
+				968B917229C941A100F6113B /* GXChatConfiguration.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -327,6 +327,10 @@
 		969957522973BB6C001DCC17 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */,
+				9699575D297407EF001DCC17 /* GXMessagesBubble.swift */,
+				96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */,
+				969957592973E698001DCC17 /* GXMessagesItemData.swift */,
 				9699576129750CFF001DCC17 /* GXMessagesTextContent.swift */,
 				9699576329751AFC001DCC17 /* GXMessagesPhotoContent.swift */,
 				9699576529752525001DCC17 /* GXMessagesVideoContent.swift */,
@@ -334,10 +338,6 @@
 				9675963629D194B100A4A11B /* GXMessagesLocationContent.swift */,
 				96A3C10C29D2C46700ADBC65 /* GXMessagesCallContent.swift */,
 				96A3C11629D43ECF00ADBC65 /* GXMessagesAtContent.swift */,
-				9699575B2974075F001DCC17 /* GXMessagesAvatar.swift */,
-				9699575D297407EF001DCC17 /* GXMessagesBubble.swift */,
-				96D13EFE29BDA6F900BF4B80 /* GXMessagesSectionData.swift */,
-				969957592973E698001DCC17 /* GXMessagesItemData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

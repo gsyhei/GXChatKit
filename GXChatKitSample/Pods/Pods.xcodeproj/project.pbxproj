@@ -179,7 +179,7 @@
 /* Begin PBXFileReference section */
 		01B1D651EC4FA7F2EE2DC0D88554B69A /* Date+GXAdd.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+GXAdd.swift"; path = "GXCategories/Date+GXAdd.swift"; sourceTree = "<group>"; };
 		01C56035F59ACC778CB60CBA839C3153 /* Attribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Attribute.swift; path = SwiftyAttributes/Sources/common/Attribute.swift; sourceTree = "<group>"; };
-		049BD4FED152DF3449EA27C63074D76B /* SwiftyAttributes */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyAttributes; path = SwiftyAttributes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		049BD4FED152DF3449EA27C63074D76B /* SwiftyAttributes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyAttributes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DA53D92533DA710BA947900BECFC7F /* GXCategories-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GXCategories-dummy.m"; sourceTree = "<group>"; };
 		058B206F36D4C9043286DBC772C82781 /* GXCategories.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GXCategories.debug.xcconfig; sourceTree = "<group>"; };
 		06B1B090FB6C6ED8DFBF6E8064F556B4 /* WritingDirection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WritingDirection.swift; path = SwiftyAttributes/Sources/common/WritingDirection.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 		99C5866A479E3A35127C475A8240AEAA /* GXRefresh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GXRefresh.release.xcconfig; sourceTree = "<group>"; };
 		9C68A687791E76D9A9AD125E91AEED9D /* Pods-GXChatKitSample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GXChatKitSample-acknowledgements.plist"; sourceTree = "<group>"; };
 		9CCC8603719CCA0380541A77E11ADD6D /* UIImage+GXAdd.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImage+GXAdd.swift"; path = "GXCategories/UIImage+GXAdd.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E72F22372C07E88092BD9586D3AD3F3 /* Reusable.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Reusable.modulemap; sourceTree = "<group>"; };
 		A0ABA07B4D48354ED3F51C2D6AF5426B /* Reusable */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Reusable; path = Reusable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28C1E4910E7FA074FD8BA0035046DD7 /* GXMessagesLoadHeader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GXMessagesLoadHeader.swift; path = GXMessagesTableView/GXMessagesLoadHeader.swift; sourceTree = "<group>"; };
@@ -398,7 +398,6 @@
 				06B1B090FB6C6ED8DFBF6E8064F556B4 /* WritingDirection.swift */,
 				4D7B992CE4514DC8222A80B11CBF97F0 /* Support Files */,
 			);
-			name = SwiftyAttributes;
 			path = SwiftyAttributes;
 			sourceTree = "<group>";
 		};
@@ -411,7 +410,6 @@
 				8701F578F520BA072267C0B82FCE2C37 /* GXMessagesTableView.swift */,
 				DF84B84BD73214B12C27300E70FA9D85 /* Support Files */,
 			);
-			name = GXMessagesTableView;
 			path = GXMessagesTableView;
 			sourceTree = "<group>";
 		};
@@ -493,7 +491,6 @@
 				66E96C6F7573E495284DE04E3409D106 /* UIViewController+GXAdd.swift */,
 				2E3B351832380EB6DBC54398422CB37A /* Support Files */,
 			);
-			name = GXCategories;
 			path = GXCategories;
 			sourceTree = "<group>";
 		};
@@ -524,7 +521,7 @@
 				F09D3FCC06E3106A7A3072B62711821F /* Pods-GXChatKitSample */,
 				2F597329ACABAB30491DF092E2EFA699 /* Pods-GXChatUIKit */,
 				A0ABA07B4D48354ED3F51C2D6AF5426B /* Reusable */,
-				049BD4FED152DF3449EA27C63074D76B /* SwiftyAttributes */,
+				049BD4FED152DF3449EA27C63074D76B /* SwiftyAttributes.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -546,7 +543,6 @@
 				C8724E99060048570A14308AF7C738E7 /* Resources */,
 				2DACF79976B5AEF16F8F656E62AA8DC8 /* Support Files */,
 			);
-			name = GXRefresh;
 			path = GXRefresh;
 			sourceTree = "<group>";
 		};
@@ -624,7 +620,6 @@
 				9AFDBF2B2A6ED75E1AD36A02D8EDCCAC /* Support Files */,
 				EFA04DF8981CB76C775260E1A25457AB /* View */,
 			);
-			name = Reusable;
 			path = Reusable;
 			sourceTree = "<group>";
 		};
@@ -809,7 +804,7 @@
 			);
 			name = SwiftyAttributes;
 			productName = SwiftyAttributes;
-			productReference = 049BD4FED152DF3449EA27C63074D76B /* SwiftyAttributes */;
+			productReference = 049BD4FED152DF3449EA27C63074D76B /* SwiftyAttributes.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C6AE4D88E072F2E7F9FE9C2D08C69398 /* GXMessagesTableView */ = {
@@ -1145,7 +1140,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyAttributes/SwiftyAttributes-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyAttributes/SwiftyAttributes-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1392,7 +1387,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyAttributes/SwiftyAttributes-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyAttributes/SwiftyAttributes-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -18,7 +18,10 @@ class GXTextAttachment: NSTextAttachment {
 
 public class GXMessagesRichText: NSMutableAttributedString {
     
-    public class func attributedText(string: String, users: [GXMessagesUserProtocol]? = nil) -> NSAttributedString {
+    /// 转换为文本消息的富文本
+    /// - Parameter string: 字符串
+    /// - Returns: 富文本
+    public class func attributedText(string: String) -> NSMutableAttributedString {
         let attributed = NSMutableAttributedString(string: string)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
@@ -45,25 +48,47 @@ public class GXMessagesRichText: NSMutableAttributedString {
                 }
             }
         }
-        if let userArr = users {
-            for user in userArr.reversed() {
-                let string = "@" + user.gx_userDisplayName + " "
-                let atAttributes: [Attribute] = [.textColor(GXCHATC.textColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
-                let appendString = NSMutableAttributedString(string: string)
-                let range: NSRange = NSMakeRange(0, appendString.length)
-                appendString.addAttributes(atAttributes, range: range)
-                let urlString = GXCHAT_AT_PREFIX + user.gx_userId
-                appendString.beginEditing()
-                appendString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: range)
-                appendString.addAttribute(.link, value: urlString, range: range)
-                appendString.endEditing()
-                attributed.insert(appendString, at: 0)
-            }
+        return attributed
+    }
+    
+    /// 转换为At消息富文本
+    /// - Parameters:
+    ///   - attributedString: 文本消息的富文本
+    ///   - users: @用户组
+    /// - Returns: 富文本消息
+    public class func atAttributedText(string: String, users: [GXMessagesUserProtocol]) -> NSAttributedString {
+        let attributed = GXMessagesRichText.attributedText(string: string)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
+        let string = "\n"
+        let atAttributes: [Attribute] = [.textColor(GXCHATC.textColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
+        let appendString = NSMutableAttributedString(string: string)
+        let range: NSRange = NSMakeRange(0, appendString.length)
+        appendString.addAttributes(atAttributes, range: range)
+        attributed.insert(appendString, at: 0)
+        
+        for user in users.reversed() {
+            let string = "@" + user.gx_userDisplayName + " "
+            let atAttributes: [Attribute] = [.textColor(GXCHATC.textColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
+            let appendString = NSMutableAttributedString(string: string)
+            let range: NSRange = NSMakeRange(0, appendString.length)
+            appendString.addAttributes(atAttributes, range: range)
+            let urlString = GXCHAT_AT_PREFIX + user.gx_userId
+            appendString.beginEditing()
+            appendString.addAttribute(.foregroundColor, value: GXCHATC.atTextColor, range: range)
+            appendString.addAttribute(.link, value: urlString, range: range)
+            appendString.endEditing()
+            attributed.insert(appendString, at: 0)
         }
         
         return attributed
     }
     
+    
+    /// 富文本转换为字符串
+    /// - Parameter attributedString: 消息富文本
+    /// - Returns: 字符串
     public class func text(attributedString: NSAttributedString) -> String {
         let mutableString = NSMutableString()
         let count = attributedString.length

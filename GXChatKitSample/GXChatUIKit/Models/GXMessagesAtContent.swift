@@ -27,7 +27,11 @@ public class GXMessagesAtContent: GXMessagesContentProtocol {
     public required init(text: String, users: [GXMessagesUserProtocol]) {
         self.text = text
         self.users = users
-        self.attributedText = GXMessagesRichText.attributedText(string: text, users: users)
+        self.attributedText = GXMessagesRichText.atAttributedText(string: text, users: users)
+        
+        let string = GXMessagesRichText.text(attributedString: self.attributedText)
+        
+        NSLog("GXMessagesAtContent: \(string)")
     }
     
 }

@@ -12,20 +12,7 @@ public class GXChatConfiguration: NSObject {
     /// 文本代理
     public var chatText: GXChatTextProtocol = GXChatChineseText()
     
-    /**
-    ///这里我们直接使用属性dataDetectorTypes = .all就可以检测大部分超链接属性的内容了
-    /// url正则表达式
-    public var urlRegularExpression = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,6})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,6})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(((http[s]{0,1}|ftp)://|)((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)"
-    /// 电话号码正则表达式
-    public var phoneRegularExpression = "\\d{3}-\\d{8}|\\d{3}-\\d{7}|\\d{4}-\\d{8}|\\d{4}-\\d{7}|1+[3578]+\\d{9}|[+]861+[3578]+\\d{9}|861+[3578]+\\d{9}|1+[3578]+\\d{1}-\\d{4}-\\d{4}|\\d{8}|\\d{7}|400-\\d{3}-\\d{4}|400-\\d{4}-\\d{3}"
-    /// email正则表达式
-    public var emailRegularExpression = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,6}"
-    */
-     
-    /// emoji表情正则表达式
-    public var emojiRegularExpression = "\\[[\\u4e00-\\u9fa5\\w\\-]+\\]"
-    /// 表情json
-    public var emojiJson: Dictionary<String, String> = [:]
+    //MARK: - Base
     
     /// 会话头像尺寸
     public var avatarSize: CGSize = CGSize(width: 40.0, height: 40.0) {
@@ -74,17 +61,7 @@ public class GXChatConfiguration: NSObject {
     public var groupChatSendingShowNickname: Bool = true
     /// 群组接收方是否显示昵称
     public var groupChatReceivingShowNickname: Bool = true
-    
-    /// 文本字体
-    public var textFont: UIFont = .systemFont(ofSize: 15)
-    /// 文本颜色
-    public var textColor: UIColor = UIColor(hex: 0x333333)
-    /// 文本行间距
-    public var textLineSpacing: CGFloat = 2.0
-    
-    /// @At文本字体
-    public var atTextFont: UIFont = .boldSystemFont(ofSize: 14)
-    
+
     /// 昵称字体
     public var nicknameFont: UIFont = .boldSystemFont(ofSize: 15)
     /// 昵称下面的行间距
@@ -106,6 +83,55 @@ public class GXChatConfiguration: NSObject {
     public var headerTextColor: UIColor = UIColor(hex: 0xFFFFFF)
     /// header文本颜色
     public var headerBackgroudColor: UIColor = UIColor(hex: 0x33333388, useAlpha: true)
+    
+    //MARK: - Content
+    
+    /**
+    ///这里我们直接使用属性dataDetectorTypes = .all就可以检测大部分超链接属性的内容了
+    /// url正则表达式
+    public var urlRegularExpression = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,6})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,6})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(((http[s]{0,1}|ftp)://|)((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)"
+    /// 电话号码正则表达式
+    public var phoneRegularExpression = "\\d{3}-\\d{8}|\\d{3}-\\d{7}|\\d{4}-\\d{8}|\\d{4}-\\d{7}|1+[3578]+\\d{9}|[+]861+[3578]+\\d{9}|861+[3578]+\\d{9}|1+[3578]+\\d{1}-\\d{4}-\\d{4}|\\d{8}|\\d{7}|400-\\d{3}-\\d{4}|400-\\d{4}-\\d{3}"
+    /// email正则表达式
+    public var emailRegularExpression = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,6}"
+    */
+    /// emoji表情正则表达式
+    public var emojiRegularExpression = "\\[[\\u4e00-\\u9fa5\\w\\-]+\\]"
+    /// 表情json
+    public var emojiJson: Dictionary<String, String> = [:]
+    
+    /// 文本字体
+    public var textFont: UIFont = .systemFont(ofSize: 15)
+    /// 文本颜色
+    public var textColor: UIColor = UIColor(hex: 0x333333)
+    /// 文本行间距
+    public var textLineSpacing: CGFloat = 2.0
+    
+    /// @At文本字体
+    public var atTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    /// @At文本颜色
+    public var atTextColor: UIColor = .systemBlue
+
+    /// 转发文本字体
+    public var forwardTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    /// 转发文本颜色
+    public var forwardTextColor: UIColor = .systemGreen
+    
+    /// 回复文本字体
+    public var replyTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    /// 回复文本颜色
+    public var replyTextColor: UIColor = .systemGreen
+    
+    /// 引用文本字体
+    public var quoteTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    /// 引用文本颜色
+    public var quoteTextColor: UIColor = .systemGreen
+    
+    /// 系统文本字体
+    public var systemTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    /// 系统文本颜色
+    public var systemTextColor: UIColor = .systemGreen
+    
     
     /// 语音播放扬声器模式
     public var audioPlaySpeaker: Bool = true
@@ -154,12 +180,14 @@ public extension GXChatConfiguration {
         case audio     = 3
         /// 位置
         case location  = 4
+        
         /// 名片
         case vCard     = 5
         /// 文件
         case file      = 6
         /// 红包
         case redPacket = 7
+        
         /// 语音通话
         case voiceCall = 8
         /// 视频通话
@@ -168,6 +196,7 @@ public extension GXChatConfiguration {
         case atText    = 10
         /// 转发消息
         case forward   = 11
+        
         /// 回复消息
         case reply     = 12
         /// 引用消息
