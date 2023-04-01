@@ -9,6 +9,10 @@ import UIKit
 
 public class GXChatChineseText: GXChatTextProtocol {
     
+    public func gx_forwardContentString() -> String {
+        return GXLS("转发自")
+    }
+    
     public func gx_sectionHeaderString(date: Date) -> String {
         if date.isToday {
             return GXLS("今天")
@@ -27,7 +31,7 @@ public class GXChatChineseText: GXChatTextProtocol {
         }
     }
     
-    public func gx_textCall(status: GXChatConfiguration.MessageCallStatus, isSending: Bool = false) -> String {
+    public func gx_callContentString(status: GXChatConfiguration.MessageCallStatus, isSending: Bool = false) -> String {
         switch status {
         case .missed:
             return isSending ? "对方未接听":"未接听"

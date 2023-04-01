@@ -1,13 +1,13 @@
 //
-//  GXMessagesTextContent.swift
+//  GXMessagesForwardContent.swift
 //  GXChatUIKit
 //
-//  Created by Gin on 2023/1/16.
+//  Created by Gin on 2023/4/2.
 //
 
 import UIKit
 
-public class GXMessagesTextContent: GXMessagesContentProtocol {
+public class GXMessagesForwardContent: GXMessagesContentProtocol {
     // MARK: - GXMessagesContentData
     
     /// 媒体视图
@@ -21,10 +21,13 @@ public class GXMessagesTextContent: GXMessagesContentProtocol {
     public var text: String
     /// 富文本字符串
     public var attributedText: NSAttributedString
-
-    public required init(text: String) {
+    /// 转发来至用户
+    public var user: GXMessagesUserProtocol
+    
+    public required init(text: String, user: GXMessagesUserProtocol) {
         self.text = text
-        self.attributedText = GXRichManager.attributedText(string: text)
+        self.user = user
+        self.attributedText = GXRichManager.forwardAttributedText(string: text, user: user)
     }
+    
 }
-   

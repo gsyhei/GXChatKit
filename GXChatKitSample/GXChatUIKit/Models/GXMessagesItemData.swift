@@ -39,7 +39,7 @@ public class GXMessagesItemData: Equatable {
     
     public func updateLayout() {
         switch self.data.gx_messageType {
-        case .text:
+        case .text, .atText, .forward:
             self.layout = GXMessagesTextLayout(data: self.data)
         case .phote:
             self.layout = GXMessagesPhotoLayout(data: self.data)
@@ -51,8 +51,6 @@ public class GXMessagesItemData: Equatable {
             self.layout = GXMessagesLocationLayout(data: self.data)
         case .voiceCall, .videoCall:
             self.layout = GXMessagesCallLayout(data: self.data)
-        case .atText:
-            self.layout = GXMessagesAtLayout(data: self.data)
             
         default: break
         }

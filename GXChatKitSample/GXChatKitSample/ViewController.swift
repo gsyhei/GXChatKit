@@ -40,8 +40,6 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesAudioCell.self)
         self.tableView.register(cellType: GXMessagesLocationCell.self)
         self.tableView.register(cellType: GXMessagesCallCell.self)
-        self.tableView.register(cellType: GXMessagesAtCell.self)
-
         
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
@@ -292,13 +290,30 @@ class ViewController: UIViewController {
         data37.messageStatus = .receiving
         data37.messageType = .atText
         data37.messagesContentData = GXMessagesAtContent(text: text, users: users)
-        
+
         let item37 = GXMessagesItemData(data: data37)
         item37.updateMessagesAvatar(image: UIImage(named: "avatar2"))
-        
+
         let sectionData6 = GXMessagesSectionData(date: data37.date)
         sectionData6.append(item: item37)
         self.list.append(sectionData6)
+        
+        var data38 = GXMessagesTestData()
+        data38.date = Date().dateByAdding(days: 1)!
+        data38.showName = "你算什么男人"
+        data38.avatarID = "22"
+        data38.messageID = "124"
+        data38.messageContinuousStatus = .beginAndEnd
+        data38.messageStatus = .receiving
+        data38.messageType = .forward
+        data38.messagesContentData = GXMessagesForwardContent(text: text, user: user3)
+        
+        let item38 = GXMessagesItemData(data: data38)
+        item38.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+        
+        let sectionData7 = GXMessagesSectionData(date: data38.date)
+        sectionData7.append(item: item38)
+        self.list.append(sectionData7)
     }
 }
 
@@ -331,7 +346,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.list[indexPath.section].items[indexPath.row]
         switch item.data.gx_messageType {
-        case .text:
+        case .text, .atText, .forward:
             let cell: GXMessagesTextCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bindCell(item: item)
             
@@ -356,11 +371,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             cell.bindCell(item: item)
             
             return cell
-        case .atText:
-            let cell: GXMessagesAtCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
-            return cell
+
         default: break
         }
         return UITableViewCell ()
@@ -373,7 +384,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30.0
+        return GXCHATC.headerHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

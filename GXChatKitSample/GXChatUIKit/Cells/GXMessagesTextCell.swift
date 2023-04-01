@@ -45,12 +45,33 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
 
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
-        
-        guard let content = item.data.gx_messagesContentData as? GXMessagesTextContent else { return }
-        self.contentTextView.attributedText = content.attributedText
-        
+                
         guard let layout = item.layout as? GXMessagesTextLayout else { return }
         self.contentTextView.frame = layout.textRect
+        
+        if let content = item.data.gx_messagesContentData as? GXMessagesTextContent {
+            self.contentTextView.attributedText = content.attributedText
+        }
+        else if let content = item.data.gx_messagesContentData as? GXMessagesAtContent {
+            self.contentTextView.attributedText = content.attributedText
+        }
+        else if let content = item.data.gx_messagesContentData as? GXMessagesForwardContent {
+            self.contentTextView.attributedText = content.attributedText
+        }
+    }
+    
+}
+
+extension GXMessagesTextCell: UITextViewDelegate {
+    
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if URL.absoluteString .hasPrefix(GXCHAT_AT_PREFIX) && interaction == .invokeDefaultAction {
+            let userId = URL.absoluteString.substring(from: GXCHAT_AT_PREFIX.count)
+            NSLog("UITextView shouldInteractWith: userId = \(userId)")
+            
+            return false
+        }
+        return true
     }
     
 }

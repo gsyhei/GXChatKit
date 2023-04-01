@@ -16,9 +16,9 @@ class GXTextAttachment: NSTextAttachment {
     public var identifier: String = ""
 }
 
-public class GXMessagesRichText: NSMutableAttributedString {
+public class GXRichManager: NSObject {
     
-    /// 转换为文本消息的富文本
+    /// 拼接为文本消息的富文本
     /// - Parameter string: 字符串
     /// - Returns: 富文本
     public class func attributedText(string: String) -> NSMutableAttributedString {
@@ -51,38 +51,60 @@ public class GXMessagesRichText: NSMutableAttributedString {
         return attributed
     }
     
-    /// 转换为At消息富文本
+    /// 拼接为At消息富文本
     /// - Parameters:
     ///   - attributedString: 文本消息的富文本
     ///   - users: @用户组
     /// - Returns: 富文本消息
     public class func atAttributedText(string: String, users: [GXMessagesUserProtocol]) -> NSAttributedString {
-        let attributed = GXMessagesRichText.attributedText(string: string)
-        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
-        let string = "\n"
-        let atAttributes: [Attribute] = [.textColor(GXCHATC.textColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
-        let appendString = NSMutableAttributedString(string: string)
-        let range: NSRange = NSMakeRange(0, appendString.length)
-        appendString.addAttributes(atAttributes, range: range)
-        attributed.insert(appendString, at: 0)
-        
-        for user in users.reversed() {
-            let string = "@" + user.gx_userDisplayName + " "
-            let atAttributes: [Attribute] = [.textColor(GXCHATC.textColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
-            let appendString = NSMutableAttributedString(string: string)
+        let attributes: [Attribute] = [.textColor(GXCHATC.atTextColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
+
+        let attributedString = NSMutableAttributedString()
+        for user in users {
+            let userString = "@" + user.gx_userDisplayName + " "
+            let appendString = NSMutableAttributedString(string: userString)
             let range: NSRange = NSMakeRange(0, appendString.length)
-            appendString.addAttributes(atAttributes, range: range)
+            appendString.addAttributes(attributes, range: range)
             let urlString = GXCHAT_AT_PREFIX + user.gx_userId
             appendString.beginEditing()
             appendString.addAttribute(.foregroundColor, value: GXCHATC.atTextColor, range: range)
             appendString.addAttribute(.link, value: urlString, range: range)
             appendString.endEditing()
-            attributed.insert(appendString, at: 0)
+            attributedString.append(appendString)
         }
+        let returnString = NSMutableAttributedString(string: "\n")
+        returnString.addAttributes(attributes, range: NSMakeRange(0, returnString.length))
+        attributedString.append(returnString)
         
-        return attributed
+        let attributedText = GXRichManager.attributedText(string: string)
+        attributedString.append(attributedText)
+        
+        return attributedString
+    }
+    
+    /// 拼接为转发消息富文本
+    /// - Parameters:
+    ///   - attributedString: 文本消息的富文本
+    ///   - user: 转发来至用户
+    /// - Returns: 富文本消息
+    public class func forwardAttributedText(string: String, user: GXMessagesUserProtocol) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
+        let attributes: [Attribute] = [.textColor(GXCHATC.forwardTextColor), .font(GXCHATC.forwardTextFont), .paragraphStyle(paragraphStyle)]
+
+        let attributedString = NSMutableAttributedString()
+        let userString = GXCHATC.chatText.gx_forwardContentString() + "\n" + user.gx_userDisplayName + "\n"
+        let appendString = NSMutableAttributedString(string: userString)
+        let range: NSRange = NSMakeRange(0, appendString.length)
+        appendString.addAttributes(attributes, range: range)
+        attributedString.append(appendString)
+        
+        let attributedText = GXRichManager.attributedText(string: string)
+        attributedString.append(attributedText)
+        
+        return attributedString
     }
     
     

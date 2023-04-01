@@ -77,6 +77,8 @@ public class GXChatConfiguration: NSObject {
     /// 接收方时间颜色
     public var receivingTimeColor: UIColor = .gray
     
+    /// header高度
+    public var headerHeight: CGFloat = 30.0
     /// header文本字体
     public var headerTextFont: UIFont = .boldSystemFont(ofSize: 12)
     /// header文本颜色
@@ -113,9 +115,9 @@ public class GXChatConfiguration: NSObject {
     public var atTextColor: UIColor = .systemBlue
 
     /// 转发文本字体
-    public var forwardTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    public var forwardTextFont: UIFont = .boldSystemFont(ofSize: 12)
     /// 转发文本颜色
-    public var forwardTextColor: UIColor = .systemGreen
+    public var forwardTextColor: UIColor = .systemPink
     
     /// 回复文本字体
     public var replyTextFont: UIFont = .boldSystemFont(ofSize: 14)
