@@ -31,9 +31,10 @@ public class GXMessagesItemData: Equatable {
     
     public required init(data: GXMessagesDataProtocol) {
         self.data = data
-        self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName)
-        self.bubble = GXMessagesBubbleFactory.messagesBubble(status: data.gx_messageStatus)
-        
+        if data.gx_messageType != .system {
+            self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName)
+            self.bubble = GXMessagesBubbleFactory.messagesBubble(status: data.gx_messageStatus)
+        }
         self.updateLayout()
     }
     
@@ -51,6 +52,8 @@ public class GXMessagesItemData: Equatable {
             self.layout = GXMessagesLocationLayout(data: self.data)
         case .voiceCall, .videoCall:
             self.layout = GXMessagesCallLayout(data: self.data)
+        case .system:
+            self.layout = GXMessagesSystemLayout(data: self.data)
             
         default: break
         }

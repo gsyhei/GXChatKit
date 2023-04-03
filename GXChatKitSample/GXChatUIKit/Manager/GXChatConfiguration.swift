@@ -22,10 +22,10 @@ public class GXChatConfiguration: NSObject {
     }
     /// 会话头像圆角
     public var avatarRadius: CGFloat = 20.0
-    /// 头像在前的气泡inset
-    public var bubbleLeadingInset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 10)
-    /// 头像在后的气泡inset
-    public var bubbleTrailingInset: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 17)
+    /// 头像在前的气泡insets
+    public var bubbleLeadingInsets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 17, bottom: 10, right: 10)
+    /// 头像在后的气泡insets
+    public var bubbleTrailingInsets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 17)
     /// 头像两边的空白边距
     public var avatarMargin: CGFloat = 4.0
     /// cell最小行间距
@@ -83,7 +83,7 @@ public class GXChatConfiguration: NSObject {
     public var headerTextFont: UIFont = .boldSystemFont(ofSize: 12)
     /// header文本颜色
     public var headerTextColor: UIColor = UIColor(hex: 0xFFFFFF)
-    /// header文本颜色
+    /// header文本背景颜色
     public var headerBackgroudColor: UIColor = UIColor(hex: 0x33333388, useAlpha: true)
     
     //MARK: - Content
@@ -130,10 +130,15 @@ public class GXChatConfiguration: NSObject {
     public var quoteTextColor: UIColor = .systemGreen
     
     /// 系统文本字体
-    public var systemTextFont: UIFont = .boldSystemFont(ofSize: 14)
+    public var systemTextFont: UIFont = .systemFont(ofSize: 12)
     /// 系统文本颜色
-    public var systemTextColor: UIColor = .systemGreen
-    
+    public var systemTextColor: UIColor = .white
+    /// 系统cell内容背景颜色
+    public var systemBackgroudColor: UIColor = UIColor(hex: 0x33333388, useAlpha: true)
+    /// 系统文本insets
+    public var systemTextInserts = UIEdgeInsets(top: 4, left: 6, bottom: 4, right: 6)
+    /// 系统Cell insets
+    public var systemCellInserts = UIEdgeInsets(top: 10, left: 40, bottom: 10, right: 40)
     
     /// 语音播放扬声器模式
     public var audioPlaySpeaker: Bool = true

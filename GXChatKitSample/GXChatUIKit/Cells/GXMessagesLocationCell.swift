@@ -65,7 +65,7 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
         }
         self.messageBubbleTimeLabel.textColor = .white
 
-        guard let content = item.data.gx_messagesContentData as? GXMessagesLocationContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesLocationContent else { return }
         guard let layout = item.layout as? GXMessagesLocationLayout else { return }
 
         if let itemMediaView = content.mediaView {

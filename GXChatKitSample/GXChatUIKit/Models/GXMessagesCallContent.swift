@@ -11,10 +11,6 @@ import GXMessagesTableView
 public class GXMessagesCallContent: GXMessagesContentProtocol {
     // MARK: - GXMessagesContentData
     
-    /// 媒体视图
-    public var mediaView: UIView?
-    /// 媒体占位视图
-    public var mediaPlaceholderView: UIView?
     /// 显示区域尺寸
     public var displaySize: CGSize = .zero
     

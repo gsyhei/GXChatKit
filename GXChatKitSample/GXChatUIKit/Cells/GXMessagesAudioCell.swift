@@ -71,7 +71,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
-        guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         guard let layout = item.layout as? GXMessagesAudioLayout else { return }
 
         self.playButton.frame = CGRect(origin: layout.playButtonRect.origin, size: GXCHATC.audioPlaySize)
@@ -135,7 +135,7 @@ extension GXMessagesAudioCell {
     //MARK: - UIButton Clicked
     
     @objc func playButtonClicked(_ sender: Any?) {
-        guard let content = self.item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
 
         self.playButton.isUserInteractionEnabled = false
         self.gx_playAudio(isPlay: !content.isPlaying)
@@ -147,7 +147,7 @@ extension GXMessagesAudioCell {
     @objc func audioPlay(notification: NSNotification) {
         guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
-        guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = notiItem.data.gx_messagesContent as? GXMessagesAudioContent else { return }
 
         self.gx_updatePlayButton(content: content)
     }
@@ -155,7 +155,7 @@ extension GXMessagesAudioCell {
     @objc func audioStop(notification: NSNotification) {
         guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
-        guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = notiItem.data.gx_messagesContent as? GXMessagesAudioContent else { return }
 
         self.gx_updatePlayButton(content: content)
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
@@ -165,7 +165,7 @@ extension GXMessagesAudioCell {
     @objc func audioPause(notification: NSNotification) {
         guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
-        guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = notiItem.data.gx_messagesContent as? GXMessagesAudioContent else { return }
 
         self.gx_updatePlayButton(content: content)
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
@@ -174,7 +174,7 @@ extension GXMessagesAudioCell {
     @objc func audioPlayProgress(notification: NSNotification) {
         guard let notiItem = notification.object as? GXMessagesItemData else { return }
         guard notiItem == self.item else { return }
-        guard let content = notiItem.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = notiItem.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
         self.trackView?.gx_layerAnimation(index: (content.currentPlayIndex - 1), animated: true)

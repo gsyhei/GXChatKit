@@ -49,13 +49,13 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         guard let layout = item.layout as? GXMessagesTextLayout else { return }
         self.contentTextView.frame = layout.textRect
         
-        if let content = item.data.gx_messagesContentData as? GXMessagesTextContent {
+        if let content = item.data.gx_messagesContent as? GXMessagesTextContent {
             self.contentTextView.attributedText = content.attributedText
         }
-        else if let content = item.data.gx_messagesContentData as? GXMessagesAtContent {
+        else if let content = item.data.gx_messagesContent as? GXMessagesAtContent {
             self.contentTextView.attributedText = content.attributedText
         }
-        else if let content = item.data.gx_messagesContentData as? GXMessagesForwardContent {
+        else if let content = item.data.gx_messagesContent as? GXMessagesForwardContent {
             self.contentTextView.attributedText = content.attributedText
         }
     }

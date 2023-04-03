@@ -72,7 +72,7 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         self.messageBubbleTimeLabel.textColor = .white
         self.messageBubbleTimeLabel.frame = item.layout.timeRect
 
-        if let content = item.data.gx_messagesContentData as? GXMessagesPhotoContent {
+        if let content = item.data.gx_messagesContent as? GXMessagesPhotoContent {
             guard let layout = item.layout as? GXMessagesPhotoLayout else { return }
 
             if let itemMediaView = content.mediaView {
@@ -88,7 +88,7 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
                 content.mediaView = itemMediaView
             }
         }
-        else if let content = item.data.gx_messagesContentData as? GXMessagesVideoContent {
+        else if let content = item.data.gx_messagesContent as? GXMessagesVideoContent {
             guard let layout = item.layout as? GXMessagesVideoLayout else { return }
 
             if let itemMediaView = content.mediaView {

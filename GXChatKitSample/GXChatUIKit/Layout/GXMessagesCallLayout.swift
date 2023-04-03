@@ -7,14 +7,14 @@
 
 import UIKit
 
-class GXMessagesCallLayout: GXMessagesBaseLayout {
+public class GXMessagesCallLayout: GXMessagesBaseLayout {
 
     public var textRect: CGRect = .zero
     public var iconRect: CGRect = .zero
     
     public override func updateLayout(data: GXMessagesDataProtocol) {
-        guard let content = data.gx_messagesContentData as? GXMessagesCallContent else { return }
-        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        guard let content = data.gx_messagesContent as? GXMessagesCallContent else { return }
+        let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
         let maxTitleSize = CGSize(width: maxContainerWidth, height: 100)
         let text = content.text + data.gx_messageTime
@@ -33,11 +33,11 @@ class GXMessagesCallLayout: GXMessagesBaseLayout {
             self.textRect = CGRect(origin: CGPoint(x: self.iconRect.maxX + 10.0, y: contentPoint.y), size: textSize)
         }
         
-        var containerHeight = content.displaySize.height + GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom
+        var containerHeight = content.displaySize.height + GXCHATC.bubbleLeadingInsets.top + GXCHATC.bubbleLeadingInsets.bottom
         if data.gx_isShowNickname {
             containerHeight += (GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing)
         }
-        let containerWidth = content.displaySize.width + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
+        let containerWidth = content.displaySize.width + GXCHATC.bubbleLeadingInsets.left + GXCHATC.bubbleLeadingInsets.right
         self.updateBaseLayout(data: data, containerSize: CGSizeMake(containerWidth, containerHeight))
     }
     

@@ -7,18 +7,18 @@
 
 import UIKit
 
-class GXMessagesAudioLayout: GXMessagesBaseLayout {
+public class GXMessagesAudioLayout: GXMessagesBaseLayout {
 
     public var playButtonRect: CGRect = .zero
     public var audioTrackRect: CGRect = .zero
     public var audioTimeRect: CGRect = .zero
     
     public override func updateLayout(data: GXMessagesDataProtocol) {
-        guard let content = data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
-        let hookWidth = GXCHATC.bubbleLeadingInset.left - GXCHATC.bubbleLeadingInset.right
+        let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
         var maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
-        maxContainerWidth -= (GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right)
+        maxContainerWidth -= (GXCHATC.bubbleLeadingInsets.left + GXCHATC.bubbleLeadingInsets.right)
         maxContainerWidth -= GXCHATC.audioPlaySize.width
         
         let count = content.tracks?.count ?? 0
@@ -37,11 +37,11 @@ class GXMessagesAudioLayout: GXMessagesBaseLayout {
         self.audioTimeRect = CGRect(origin: audioTimePoint, size: audioTimeSize)
         
         var containerHeight = content.displaySize.height + GXCHATC.timeFont.lineHeight
-        containerHeight += (GXCHATC.bubbleLeadingInset.top + GXCHATC.bubbleLeadingInset.bottom)
+        containerHeight += (GXCHATC.bubbleLeadingInsets.top + GXCHATC.bubbleLeadingInsets.bottom)
         if data.gx_isShowNickname {
             containerHeight += (GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing)
         }
-        let containerWidth = contentWidth + GXCHATC.bubbleLeadingInset.left + GXCHATC.bubbleLeadingInset.right
+        let containerWidth = contentWidth + GXCHATC.bubbleLeadingInsets.left + GXCHATC.bubbleLeadingInsets.right
         self.updateBaseLayout(data: data, containerSize: CGSizeMake(containerWidth, containerHeight))
     }
 }

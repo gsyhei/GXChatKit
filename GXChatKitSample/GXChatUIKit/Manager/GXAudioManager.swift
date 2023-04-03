@@ -36,7 +36,7 @@ public extension GXAudioManager {
     func playAudio(item: GXMessagesItemData?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
         guard let newItem = item else { return }
         if self.audioItem == newItem {
-            guard let content = item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+            guard let content = item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
             if let player = self.audioPlayer {
                 if !player.isPlaying {
                     self.gx_playRemoveObserver()
@@ -54,14 +54,14 @@ public extension GXAudioManager {
         else {
             self.stopAudio()
             self.audioItem = newItem
-            guard let content = item?.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+            guard let content = item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
             self.playAudio(url: content.fileURL, time: content.currentPlayDuration)
         }
     }
     
     func playAudio(url: URL?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
         guard let item = self.audioItem else { return }
-        guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
         if self.audioPlayer == nil {
             guard let audioUrl = url else { return }
@@ -94,7 +94,7 @@ public extension GXAudioManager {
     
     func playAudio(data: Data?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
         guard let item = self.audioItem else { return }
-        guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
         if self.audioPlayer == nil {
             guard let audioData = data else { return }
@@ -127,7 +127,7 @@ public extension GXAudioManager {
     
     func pauseAudio() {
         guard let item = self.audioItem else { return }
-        guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
 
         content.isPlaying = false
         content.currentPlayDuration = self.currentTime
@@ -139,7 +139,7 @@ public extension GXAudioManager {
     
     func stopAudio() {
         guard let item = self.audioItem else { return }
-        guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
         content.isPlaying = false
         content.currentPlayDuration = 0
@@ -158,7 +158,7 @@ extension GXAudioManager: AVAudioPlayerDelegate {
     
     func gx_playProgress() {
         guard let item = self.audioItem else { return }
-        guard let content = item.data.gx_messagesContentData as? GXMessagesAudioContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         guard let trackCount = content.tracks?.count, trackCount > 0 else { return }
 
         let milliseconds: Int = Int(content.animateDuration * 1000.0)

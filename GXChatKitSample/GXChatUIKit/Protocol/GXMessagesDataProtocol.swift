@@ -32,7 +32,7 @@ public protocol GXMessagesDataProtocol: GXMessagesAvatarDataProtocol  {
     /// 消息读取状态
     var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
     /// 消息内容
-    var gx_messagesContentData: GXMessagesContentProtocol? { get }
+    var gx_messagesContent: GXMessagesContentProtocol? { get }
 }
 
 public extension GXMessagesDataProtocol {
@@ -95,20 +95,20 @@ public extension GXMessagesDataProtocol {
     var gx_contentPoint: CGPoint {
         if self.gx_isShowNickname {
             if self.gx_messageStatus == .sending {
-                let top = GXCHATC.bubbleTrailingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
-                return CGPoint(x: GXCHATC.bubbleTrailingInset.left, y: top)
+                let top = GXCHATC.bubbleTrailingInsets.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
+                return CGPoint(x: GXCHATC.bubbleTrailingInsets.left, y: top)
             }
             else {
-                let top = GXCHATC.bubbleLeadingInset.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
-                return CGPoint(x: GXCHATC.bubbleLeadingInset.left, y: top)
+                let top = GXCHATC.bubbleLeadingInsets.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
+                return CGPoint(x: GXCHATC.bubbleLeadingInsets.left, y: top)
             }
         }
         else {
             if self.gx_messageStatus == .sending {
-                return CGPoint(x: GXCHATC.bubbleTrailingInset.left, y: GXCHATC.bubbleTrailingInset.top)
+                return CGPoint(x: GXCHATC.bubbleTrailingInsets.left, y: GXCHATC.bubbleTrailingInsets.top)
             }
             else {
-                return CGPoint(x: GXCHATC.bubbleLeadingInset.left, y: GXCHATC.bubbleLeadingInset.top)
+                return CGPoint(x: GXCHATC.bubbleLeadingInsets.left, y: GXCHATC.bubbleLeadingInsets.top)
             }
         }
     }

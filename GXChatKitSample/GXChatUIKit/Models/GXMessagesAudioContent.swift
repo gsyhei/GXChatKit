@@ -8,8 +8,8 @@
 import UIKit
 import AVFoundation
 
-public class GXMessagesAudioContent: GXMessagesContentProtocol {
-    // MARK: - GXMessagesContentData
+public class GXMessagesAudioContent: GXMessagesMediaContentProtocol {
+    // MARK: - GXMessagesMediaContentProtocol
     
     /// 媒体视图
     public var mediaView: UIView?

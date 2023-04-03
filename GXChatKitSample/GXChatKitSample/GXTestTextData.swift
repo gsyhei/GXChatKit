@@ -53,7 +53,7 @@ public struct GXMessagesTestData: GXMessagesDataProtocol {
         return .allRead
     }
     
-    public var gx_messagesContentData: GXMessagesContentProtocol? {
+    public var gx_messagesContent: GXMessagesContentProtocol? {
         return self.messagesContentData
     }
     

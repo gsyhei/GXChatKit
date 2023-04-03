@@ -7,8 +7,8 @@
 
 import UIKit
 
-public class GXMessagesPhotoContent: GXMessagesContentProtocol {
-    // MARK: - GXMessagesContentData
+public class GXMessagesPhotoContent: GXMessagesMediaContentProtocol {
+    // MARK: - GXMessagesMediaContentProtocol
     
     /// 媒体视图
     public var mediaView: UIView?

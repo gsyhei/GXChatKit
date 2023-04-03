@@ -54,7 +54,7 @@ public class GXMessagesCallCell: GXMessagesBaseCell {
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
-        guard let content = item.data.gx_messagesContentData as? GXMessagesCallContent else { return }
+        guard let content = item.data.gx_messagesContent as? GXMessagesCallContent else { return }
         guard let layout = item.layout as? GXMessagesCallLayout else { return }
 
         self.titleLabel.text = content.text

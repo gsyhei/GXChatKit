@@ -40,7 +40,8 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesAudioCell.self)
         self.tableView.register(cellType: GXMessagesLocationCell.self)
         self.tableView.register(cellType: GXMessagesCallCell.self)
-        
+        self.tableView.register(cellType: GXMessagesSystemCell.self)
+
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
@@ -307,13 +308,31 @@ class ViewController: UIViewController {
         data38.messageStatus = .receiving
         data38.messageType = .forward
         data38.messagesContentData = GXMessagesForwardContent(text: text, user: user3)
-        
+
         let item38 = GXMessagesItemData(data: data38)
         item38.updateMessagesAvatar(image: UIImage(named: "avatar2"))
-        
+
         let sectionData7 = GXMessagesSectionData(date: data38.date)
         sectionData7.append(item: item38)
         self.list.append(sectionData7)
+        
+        var data39 = GXMessagesTestData()
+        data39.date = Date().dateByAdding(days: 1)!
+        data39.showName = "你算什么男人"
+        data39.avatarID = "22"
+        data39.messageID = "124"
+        data39.messageContinuousStatus = .beginAndEnd
+        data39.messageStatus = .receiving
+        data39.messageType = .system
+//        let systemText = "'这样也好'邀请了'抬头45度仰望天空'加入群聊，请注意'抬头45度仰望天空'与群里其他人都不是好友关系。"
+        data39.messagesContentData = GXMessagesSystemContent(text: "'这样也好'邀请了'抬头45度仰望天空'加入群聊。")
+        
+        let item39 = GXMessagesItemData(data: data39)
+        
+        let sectionData8 = GXMessagesSectionData(date: data39.date)
+        sectionData8.append(item: item39)
+        self.list.append(sectionData8)
+        
     }
 }
 
@@ -371,7 +390,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             cell.bindCell(item: item)
             
             return cell
-
+        case .system:
+            let cell: GXMessagesSystemCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
+            
+            return cell
+            
         default: break
         }
         return UITableViewCell ()
