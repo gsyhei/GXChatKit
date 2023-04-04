@@ -25,4 +25,9 @@ public protocol GXChatTextProtocol {
     /// - Returns: 文本
     func gx_callContentString(status: GXChatConfiguration.MessageCallStatus, isSending: Bool) -> String
     
+    /// 名片类型名称
+    /// - Parameter contact: 名片联系人对象
+    /// - Returns: 文本
+    func gx_cardTypeName(contact: GXMessagesContactProtocol) -> String
+    
 }

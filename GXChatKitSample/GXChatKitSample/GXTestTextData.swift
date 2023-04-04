@@ -83,15 +83,15 @@ public struct GXMessagesTestData: GXMessagesDataProtocol {
 
 class GXTextUser: GXMessagesUserProtocol {
     
-    var gx_userId: String {
+    var gx_id: String {
         return userId
     }
     
-    var gx_userDisplayName: String {
+    var gx_displayName: String {
         return userName
     }
     
-    var gx_userAvatarUrl: NSURL? {
+    var gx_avatarUrl: NSURL? {
         return userUrl
     }
     

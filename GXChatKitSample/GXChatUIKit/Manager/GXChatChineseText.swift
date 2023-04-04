@@ -46,5 +46,14 @@ public class GXChatChineseText: GXChatTextProtocol {
         }
     }
     
-
+    public func gx_cardTypeName(contact: GXMessagesContactProtocol) -> String {
+        if contact is GXMessagesUserProtocol {
+            return "个人名片"
+        }
+        else {
+            return "群名片"
+        }
+    }
+    
+    
 }

@@ -63,11 +63,11 @@ public class GXRichManager: NSObject {
 
         let attributedString = NSMutableAttributedString()
         for user in users {
-            let userString = "@" + user.gx_userDisplayName + " "
+            let userString = "@" + user.gx_displayName + " "
             let appendString = NSMutableAttributedString(string: userString)
             let range: NSRange = NSMakeRange(0, appendString.length)
             appendString.addAttributes(attributes, range: range)
-            let urlString = GXCHAT_AT_PREFIX + user.gx_userId
+            let urlString = GXCHAT_LINK_PREFIX + user.gx_id
             appendString.beginEditing()
             appendString.addAttribute(.foregroundColor, value: GXCHATC.atTextColor, range: range)
             appendString.addAttribute(.link, value: urlString, range: range)
@@ -95,7 +95,7 @@ public class GXRichManager: NSObject {
         let attributes: [Attribute] = [.textColor(GXCHATC.forwardTextColor), .font(GXCHATC.forwardTextFont), .paragraphStyle(paragraphStyle)]
 
         let attributedString = NSMutableAttributedString()
-        let userString = GXCHATC.chatText.gx_forwardContentString() + "\n" + user.gx_userDisplayName + "\n"
+        let userString = GXCHATC.chatText.gx_forwardContentString() + "\n" + user.gx_displayName + "\n"
         let appendString = NSMutableAttributedString(string: userString)
         let range: NSRange = NSMakeRange(0, appendString.length)
         appendString.addAttributes(attributes, range: range)

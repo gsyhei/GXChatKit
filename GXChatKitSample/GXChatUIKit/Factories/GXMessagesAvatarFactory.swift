@@ -27,22 +27,26 @@ public class GXMessagesAvatarFactory {
     /// 圆形头像
     /// - Parameter image: 图片
     /// - Returns: 头像图
-    public class func circularAvatarImage(image: UIImage) -> UIImage? {
+    public class func circularAvatarImage(image: UIImage?) -> UIImage? {
+        guard let letImage = image else { return nil }
+        
         let avatarSize = GXCHATC.avatarSize
         let avatarRadius = GXCHATC.avatarRadius
 
-        return UIImage.gx_roundedImage(image, size: avatarSize, radius: avatarRadius)
+        return UIImage.gx_roundedImage(letImage, size: avatarSize, radius: avatarRadius)
     }
     
     /// 圆形高亮头像
     /// - Parameter image: 图片
     /// - Returns: 高亮头像图
-    public class func circularAvatarHighlightedImage(image: UIImage) -> UIImage? {
+    public class func circularAvatarHighlightedImage(image: UIImage?) -> UIImage? {
+        guard let letImage = image else { return nil }
+        
         let avatarSize = GXCHATC.avatarSize
         let avatarRadius = GXCHATC.avatarRadius
         let highlightedColor = UIColor(white: 0.1, alpha: 0.3)
         
-        return UIImage.gx_roundedImage(image, size: avatarSize, radius: avatarRadius, highlightedColor: highlightedColor)
+        return UIImage.gx_roundedImage(letImage, size: avatarSize, radius: avatarRadius, highlightedColor: highlightedColor)
     }
     
     /// 圆形占位头像

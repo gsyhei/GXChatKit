@@ -32,6 +32,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     /// 气泡imageView
     public lazy var messageBubbleImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
+        imageView.backgroundColor = .clear
 
         return imageView
     }()
@@ -47,6 +48,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     /// 头像按钮
     public lazy var messageAvatarButton: UIButton = {
         let button = UIButton(type: .custom)
+        button.backgroundColor = .clear
 
         return button
     }()
@@ -59,6 +61,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     public func createAvatarView() -> UIView {
         let button = UIButton(type: .custom)
+        button.backgroundColor = .clear
 
         return button
     }

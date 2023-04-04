@@ -65,8 +65,8 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
 extension GXMessagesTextCell: UITextViewDelegate {
     
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        if URL.absoluteString .hasPrefix(GXCHAT_AT_PREFIX) && interaction == .invokeDefaultAction {
-            let userId = URL.absoluteString.substring(from: GXCHAT_AT_PREFIX.count)
+        if URL.absoluteString .hasPrefix(GXCHAT_LINK_PREFIX) && interaction == .invokeDefaultAction {
+            let userId = URL.absoluteString.substring(from: GXCHAT_LINK_PREFIX.count)
             NSLog("UITextView shouldInteractWith: userId = \(userId)")
             
             return false

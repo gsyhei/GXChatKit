@@ -187,9 +187,9 @@ public extension GXChatConfiguration {
         case audio     = 3
         /// 位置
         case location  = 4
-        
         /// 名片
-        case vCard     = 5
+        case bCard     = 5
+        
         /// 文件
         case file      = 6
         /// 红包
@@ -208,6 +208,7 @@ public extension GXChatConfiguration {
         case reply     = 12
         /// 引用消息
         case quote     = 13
+        
         /// 系统消息
         case system    = 14
     }
