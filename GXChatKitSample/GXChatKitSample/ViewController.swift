@@ -6,6 +6,7 @@ import GXMessagesTableView
 import GXChatUIKit
 import AVFoundation
 import CoreLocation
+import FPSLabel
 
 class ViewController: UIViewController {
     
@@ -33,6 +34,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        FPSLabel.install(on: self.view.currentWindow())
+
         self.view.addSubview(self.tableView)
         self.tableView.backgroundImage = UIImage(named: "background")
         self.tableView.register(cellType: GXMessagesTextCell.self)
