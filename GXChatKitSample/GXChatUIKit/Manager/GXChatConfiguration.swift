@@ -140,6 +140,9 @@ public class GXChatConfiguration: NSObject {
     /// 系统Cell insets
     public var systemCellInserts = UIEdgeInsets(top: 10, left: 40, bottom: 10, right: 40)
     
+    /// 名片width比例
+    public var cardMaxWidthScale: CGFloat = 0.8
+    
     /// 语音播放扬声器模式
     public var audioPlaySpeaker: Bool = true
     /// 语音的音轨最大值

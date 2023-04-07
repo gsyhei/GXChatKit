@@ -18,25 +18,12 @@ public class GXMessagesCardLayout: GXMessagesBaseLayout {
         guard let content = data.gx_messagesContent as? GXMessagesCardContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
-        let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
+        let maxContainerWidth = SCREEN_MIN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
         let maxContentWidth = maxContainerWidth - GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
-        let maxNameWidth = maxContentWidth - GXCHATC.avatarSize.width - 10
-        let maxNameSize = CGSizeMake(10000, 10000)
-        let lineNameWidth = content.contact.gx_displayName.size(size: maxNameSize, font: GXCHATC.textFont).width
-        let nameWidth = min(lineNameWidth, maxNameWidth)
-        
-        var contentWidth = nameWidth + GXCHATC.avatarSize.width + 10
-        var contentHeight = GXCHATC.avatarSize.height
-        let bottomText = content.cardTypeName + data.gx_messageTime
-        let bottomTextWidth = bottomText.size(size: maxNameSize, font: GXCHATC.textFont).width + 10
-        if bottomTextWidth > maxContentWidth {
-            contentHeight += GXCHATC.timeFont.lineHeight
-        }
-        else if bottomTextWidth > contentWidth {
-            contentWidth = bottomTextWidth
-        }
+        let contentWidth = maxContentWidth * GXCHATC.cardMaxWidthScale
+        let contentHeight = GXCHATC.avatarSize.height
         content.displaySize = CGSize(width: contentWidth, height: contentHeight)
-        
+    
         let contentPoint = data.gx_contentPoint
         self.cardAvatarRect = CGRect(origin: contentPoint, size: GXCHATC.avatarSize)
         let cardNamePoint = CGPoint(x: self.cardAvatarRect.maxX + 10, y: contentPoint.y)
@@ -54,8 +41,9 @@ public class GXMessagesCardLayout: GXMessagesBaseLayout {
         let containerWidth = contentWidth + GXCHATC.bubbleLeadingInsets.left + GXCHATC.bubbleLeadingInsets.right
         self.updateBaseLayout(data: data, containerSize: CGSizeMake(containerWidth, containerHeight))
         
+        let cardTypeWidth = content.cardTypeName.size(size: CGSizeMake(1000, GXCHATC.textFont.lineHeight), font: GXCHATC.textFont).width
         let cardTypePoint = CGPoint(x:contentPoint.x, y: self.timeRect.minY)
-        let cardTypeSize = CGSize(width: bottomTextWidth - self.timeRect.width, height: GXCHATC.timeFont.lineHeight)
+        let cardTypeSize = CGSize(width: cardTypeWidth, height: GXCHATC.timeFont.lineHeight)
         self.cardTypeRect = CGRect(origin: cardTypePoint, size: cardTypeSize)
     }
     

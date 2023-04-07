@@ -9,9 +9,11 @@ import UIKit
 
 public let SCREEN_SIZE = UIScreen.main.bounds.size
 
-public let SCREEN_WIDTH = UIScreen.main.bounds.width
+public let SCREEN_WIDTH = UIScreen.main.bounds.width - GXSafeAreaInsets.left - GXSafeAreaInsets.right
 
 public let SCREEN_HEIGHT = UIScreen.main.bounds.height
+
+public let SCREEN_MIN_WIDTH = min(SCREEN_WIDTH, SCREEN_HEIGHT)
 
 public let SCREEN_SCALE = UIScreen.main.scale
 
@@ -42,4 +44,18 @@ private func StatusBarHeight() -> CGFloat {
 public func GXLS(_ string: String) -> String {
     return NSLocalizedString(string, comment: "")
 }
+
+public var GXSafeAreaInsets: UIEdgeInsets {
+    if let safeAreaInsets = UIApplication.shared.delegate?.window??.rootViewController?.view.safeAreaInsets {
+        return safeAreaInsets
+    }
+    else if let safeAreaInsets = UIApplication.shared.windows.first?.rootViewController?.view.safeAreaInsets {
+        return safeAreaInsets
+    }
+    else if let safeAreaInsets = UIApplication.shared.delegate?.window??.windowScene?.windows.first?.rootViewController?.view.safeAreaInsets {
+        return safeAreaInsets
+    }
+    return .zero
+}
+
 
