@@ -143,6 +143,21 @@ public class GXChatConfiguration: NSObject {
     /// 名片width比例
     public var cardMaxWidthScale: CGFloat = 0.8
     
+    /// 文件图尺寸
+    public var fileIconSize: CGSize = CGSize(width: 40.0, height: 40.0)
+    /// 文件icon颜色
+    public var fileIconColor: UIColor = .systemOrange
+    /// 文件文本字体
+    public var fileNameFont: UIFont = .systemFont(ofSize: 13)
+    /// 文件文本颜色
+    public var fileNameColor: UIColor = UIColor(hex: 0x333333)
+    /// 文件文本字体
+    public var fileExtFont: UIFont = .boldSystemFont(ofSize: 13)
+    /// 文件文本颜色
+    public var fileExtColor: UIColor = .white
+    /// 名片width比例
+    public var fileMaxWidthScale: CGFloat = 0.8
+    
     /// 语音播放扬声器模式
     public var audioPlaySpeaker: Bool = true
     /// 语音的音轨最大值
@@ -192,9 +207,9 @@ public extension GXChatConfiguration {
         case location  = 4
         /// 名片
         case bCard     = 5
-        
         /// 文件
         case file      = 6
+        
         /// 红包
         case redPacket = 7
         

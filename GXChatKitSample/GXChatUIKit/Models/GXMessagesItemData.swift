@@ -56,6 +56,8 @@ public class GXMessagesItemData: Equatable {
             self.layout = GXMessagesSystemLayout(data: self.data)
         case .bCard:
             self.layout = GXMessagesCardLayout(data: self.data)
+        case .file:
+            self.layout = GXMessagesFileLayout(data: self.data)
             
         default: break
         }

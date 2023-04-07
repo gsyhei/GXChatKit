@@ -45,7 +45,8 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesCallCell.self)
         self.tableView.register(cellType: GXMessagesSystemCell.self)
         self.tableView.register(cellType: GXMessagesCardCell.self)
-        
+        self.tableView.register(cellType: GXMessagesFileCell.self)
+
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
@@ -345,10 +346,10 @@ class ViewController: UIViewController {
         data40.messageContinuousStatus = .beginAndEnd
         data40.messageStatus = .sending
         data40.messageType = .bCard
-        
+
         let cardAvatar = GXMessagesAvatarFactory.messagesAvatar(text: user1.gx_displayName)
         cardAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image:  UIImage(named: "avatar1"))
-        
+
         data40.messagesContentData = GXMessagesCardContent(contact: user1, avatar: cardAvatar)
 
         let item40 = GXMessagesItemData(data: data40)
@@ -357,6 +358,30 @@ class ViewController: UIViewController {
         let sectionData9 = GXMessagesSectionData(date: data40.date)
         sectionData9.append(item: item40)
         self.list.append(sectionData9)
+        
+        var data41 = GXMessagesTestData()
+        data41.date = Date().dateByAdding(days: 1)!
+        data41.showName = "你算什么男人"
+        data41.avatarID = "22"
+        data41.messageID = "127"
+        data41.messageContinuousStatus = .beginAndEnd
+        data41.messageStatus = .receiving
+        data41.messageType = .file
+//        let fileUrl = Bundle.main.path(forResource: "voicexinwen", ofType: "mp3")!
+        let bundle = Bundle.gx_messagesAssetBundle
+        let fileUrl: String = (bundle?.path(forResource: "file", ofType: "png", inDirectory: "images"))!
+        if #available(iOS 16.0, *) {
+            data41.messagesContentData = GXMessagesFileContent(fileUrl: URL(filePath: fileUrl))
+        } else {
+            data41.messagesContentData = GXMessagesFileContent(fileUrl: URL(fileURLWithPath: fileUrl))
+        }
+
+        let item41 = GXMessagesItemData(data: data41)
+        item41.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+        
+        let sectionData10 = GXMessagesSectionData(date: data41.date)
+        sectionData10.append(item: item41)
+        self.list.append(sectionData10)
         
     }
 }
@@ -422,6 +447,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             return cell
         case .bCard:
             let cell: GXMessagesCardCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
+            
+            return cell
+        case .file:
+            let cell: GXMessagesFileCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bindCell(item: item)
             
             return cell

@@ -54,13 +54,12 @@ public class GXMessagesCallCell: GXMessagesBaseCell {
     public override func bindCell(item: GXMessagesItemData) {
         super.bindCell(item: item)
         
-        guard let content = item.data.gx_messagesContent as? GXMessagesCallContent else { return }
         guard let layout = item.layout as? GXMessagesCallLayout else { return }
-
-        self.titleLabel.text = content.text
         self.titleLabel.frame = layout.textRect
-        
         self.iconIView.frame = layout.iconRect
+        
+        guard let content = item.data.gx_messagesContent as? GXMessagesCallContent else { return }
+        self.titleLabel.text = content.text
         if item.data.gx_messageType == .voiceCall {
             self.iconIView.image = UIImage(systemName: "phone.down")
         }

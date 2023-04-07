@@ -15,16 +15,17 @@ public class GXMessagesCardCell: GXMessagesBaseCell {
 
         return imageView
     }()
-    /// 文本Label
+    /// 名片名称Label
     public lazy var cardNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
+        label.numberOfLines = 2
         label.font = GXCHATC.textFont
         label.textColor = GXCHATC.textColor
 
         return label
     }()
-    /// 文本Label
+    /// 名片类型Label
     public lazy var cardTypeLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
@@ -72,6 +73,12 @@ public class GXMessagesCardCell: GXMessagesBaseCell {
         self.cardTypeLabel.textColor = self.messageBubbleTimeLabel.textColor
         self.cardLineView.backgroundColor = self.messageBubbleTimeLabel.textColor
         
+        guard let layout = item.layout as? GXMessagesCardLayout else { return }
+        self.cardAvatarIView.frame = layout.cardAvatarRect
+        self.cardNameLabel.frame = layout.cardNameRect
+        self.cardTypeLabel.frame = layout.cardTypeRect
+        self.cardLineView.frame = layout.cardLineRect
+        
         guard let content = item.data.gx_messagesContent as? GXMessagesCardContent else { return }
         if content.cardAvatar.avatarImage == nil {
             self.cardAvatarIView.image = content.cardAvatar.avatarPlaceholderImage
@@ -81,11 +88,5 @@ public class GXMessagesCardCell: GXMessagesBaseCell {
         }
         self.cardTypeLabel.text = content.cardTypeName
         self.cardNameLabel.text = content.contact.gx_displayName
-        
-        guard let layout = item.layout as? GXMessagesCardLayout else { return }
-        self.cardAvatarIView.frame = layout.cardAvatarRect
-        self.cardNameLabel.frame = layout.cardNameRect
-        self.cardTypeLabel.frame = layout.cardTypeRect
-        self.cardLineView.frame = layout.cardLineRect
     }
 }

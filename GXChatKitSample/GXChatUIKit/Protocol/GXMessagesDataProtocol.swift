@@ -92,6 +92,7 @@ public extension GXMessagesDataProtocol {
         return avatarContentWidth
     }
     
+    /// 内容的point
     var gx_contentPoint: CGPoint {
         if self.gx_isShowNickname {
             if self.gx_messageStatus == .sending {
@@ -113,7 +114,7 @@ public extension GXMessagesDataProtocol {
         }
     }
     
-    /// 内容视图的left
+    /// 内容容器视图的left
     func gx_containerLeft(container width: CGFloat) -> CGFloat {
         if self.gx_messageStatus == .sending {
             if self.gx_chatType == .single {

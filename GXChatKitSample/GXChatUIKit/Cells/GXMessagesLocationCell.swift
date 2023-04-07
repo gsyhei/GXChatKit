@@ -12,7 +12,7 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
     /// 气泡imageView
     public var mediaView: UIView?
     
-    /// 文本容器
+    /// 位置文本容器
     public lazy var locationContentView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
@@ -20,7 +20,7 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
         return view
     }()
 
-    /// 文本Label
+    /// 位置文本Label
     public lazy var locationTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear

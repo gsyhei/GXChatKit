@@ -13,12 +13,13 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     /// 播放按钮
     public lazy var playButton: UIButton = {
         let button = UIButton(type: .custom)
+        button.backgroundColor = .clear
         button.frame = CGRect(origin: .zero, size: GXCHATC.audioPlaySize)
         button.addTarget(self, action: #selector(playButtonClicked(_:)), for: .touchUpInside)
         
         return button
     }()
-    /// 文本Label
+    /// 时长文本Label
     public lazy var audioTimeLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear

@@ -16,6 +16,9 @@
 		963E75C829DCC9BD00A6D9C6 /* GXMessagesCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75C729DCC9BD00A6D9C6 /* GXMessagesCardContent.swift */; };
 		963E75CA29DCCDC300A6D9C6 /* GXMessagesCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75C929DCCDC300A6D9C6 /* GXMessagesCardLayout.swift */; };
 		963E75CC29DCDC4500A6D9C6 /* GXMessagesCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75CB29DCDC4500A6D9C6 /* GXMessagesCardCell.swift */; };
+		963E75CE29E00F1400A6D9C6 /* GXMessagesFileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75CD29E00F1400A6D9C6 /* GXMessagesFileContent.swift */; };
+		963E75D029E0132600A6D9C6 /* GXMessagesFileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75CF29E0132600A6D9C6 /* GXMessagesFileLayout.swift */; };
+		963E75D229E016FF00A6D9C6 /* GXMessagesFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75D129E016FF00A6D9C6 /* GXMessagesFileCell.swift */; };
 		96495C4429C1A1170055C19A /* GXAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96495C4329C1A1170055C19A /* GXAudioManager.swift */; };
 		96495C4629C1E4F20055C19A /* voip_call_noice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4529C1E4F20055C19A /* voip_call_noice.wav */; };
 		96495C4A29C1EE4F0055C19A /* redpacket_sound_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */; };
@@ -150,6 +153,9 @@
 		963E75C729DCC9BD00A6D9C6 /* GXMessagesCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesCardContent.swift; sourceTree = "<group>"; };
 		963E75C929DCCDC300A6D9C6 /* GXMessagesCardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesCardLayout.swift; sourceTree = "<group>"; };
 		963E75CB29DCDC4500A6D9C6 /* GXMessagesCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesCardCell.swift; sourceTree = "<group>"; };
+		963E75CD29E00F1400A6D9C6 /* GXMessagesFileContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesFileContent.swift; sourceTree = "<group>"; };
+		963E75CF29E0132600A6D9C6 /* GXMessagesFileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesFileLayout.swift; sourceTree = "<group>"; };
+		963E75D129E016FF00A6D9C6 /* GXMessagesFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesFileCell.swift; sourceTree = "<group>"; };
 		96495C4329C1A1170055C19A /* GXAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXAudioManager.swift; sourceTree = "<group>"; };
 		96495C4529C1E4F20055C19A /* voip_call_noice.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = voip_call_noice.wav; sourceTree = "<group>"; };
 		96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = redpacket_sound_open.wav; sourceTree = "<group>"; };
@@ -332,6 +338,7 @@
 				96A3C11429D2CBDD00ADBC65 /* GXMessagesCallCell.swift */,
 				96C7B37E29DB1E6F009A995B /* GXMessagesSystemCell.swift */,
 				963E75CB29DCDC4500A6D9C6 /* GXMessagesCardCell.swift */,
+				963E75D129E016FF00A6D9C6 /* GXMessagesFileCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -353,6 +360,7 @@
 				96C7B37429D8CD17009A995B /* GXMessagesForwardContent.swift */,
 				96C7B37A29DB1171009A995B /* GXMessagesSystemContent.swift */,
 				963E75C729DCC9BD00A6D9C6 /* GXMessagesCardContent.swift */,
+				963E75CD29E00F1400A6D9C6 /* GXMessagesFileContent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -388,6 +396,7 @@
 				96A3C13629D46EC500ADBC65 /* GXMessagesCallLayout.swift */,
 				96C7B37C29DB1AA1009A995B /* GXMessagesSystemLayout.swift */,
 				963E75C929DCCDC300A6D9C6 /* GXMessagesCardLayout.swift */,
+				963E75CF29E0132600A6D9C6 /* GXMessagesFileLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -831,10 +840,12 @@
 				9699576629752525001DCC17 /* GXMessagesVideoContent.swift in Sources */,
 				96A3C10D29D2C46700ADBC65 /* GXMessagesCallContent.swift in Sources */,
 				965FA5B8297055AC001D7633 /* UIImage+GXChat.swift in Sources */,
+				963E75D029E0132600A6D9C6 /* GXMessagesFileLayout.swift in Sources */,
 				969957762975A9D6001DCC17 /* GXMessagesBubbleFactory.swift in Sources */,
 				96C7B37B29DB1171009A995B /* GXMessagesSystemContent.swift in Sources */,
 				96A3C13529D46D6D00ADBC65 /* GXMessagesLocationLayout.swift in Sources */,
 				9699575C2974075F001DCC17 /* GXMessagesAvatar.swift in Sources */,
+				963E75CE29E00F1400A6D9C6 /* GXMessagesFileContent.swift in Sources */,
 				9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */,
 				96A3C13329D46D3C00ADBC65 /* GXMessagesVideoLayout.swift in Sources */,
 				9675963929D1C98800A4A11B /* GXMessagesLocationCell.swift in Sources */,
@@ -869,6 +880,7 @@
 				96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */,
 				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
 				96D431E929CEF63700EE97A1 /* GXMessagesTextView.swift in Sources */,
+				963E75D229E016FF00A6D9C6 /* GXMessagesFileCell.swift in Sources */,
 				96A3C12529D446D300ADBC65 /* GXMessagesContentProtocol.swift in Sources */,
 				96A36A7929C2E10400BD4506 /* GXUtilManager.swift in Sources */,
 				96A3C13129D46CC500ADBC65 /* GXMessagesPhotoLayout.swift in Sources */,

@@ -64,11 +64,11 @@ public class GXMessagesSystemCell: UITableViewCell, Reusable {
     }
     
     public func bindCell(item: GXMessagesItemData) {
-        guard let content = item.data.gx_messagesContent as? GXMessagesSystemContent else { return }
-        self.contentLabel.text = content.text
-        
         guard let layout = item.layout as? GXMessagesSystemLayout else { return }
         self.containerView.frame = layout.containerRect
         self.contentLabel.frame = layout.textRect
+        
+        guard let content = item.data.gx_messagesContent as? GXMessagesSystemContent else { return }
+        self.contentLabel.text = content.text        
     }
 }
