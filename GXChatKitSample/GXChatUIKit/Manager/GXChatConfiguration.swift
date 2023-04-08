@@ -228,7 +228,6 @@ public extension GXChatConfiguration {
         case file      = 6
         /// 红包
         case redPacket = 7
-        
         /// 语音通话
         case voiceCall = 8
         /// 视频通话
