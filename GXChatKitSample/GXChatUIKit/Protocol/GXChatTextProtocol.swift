@@ -30,4 +30,13 @@ public protocol GXChatTextProtocol {
     /// - Returns: 文本
     func gx_cardTypeName(contact: GXMessagesContactProtocol) -> String
     
+    /// 红包文本描述
+    /// - Returns: 文本
+    func gx_redPacketName() -> String
+    
+    /// 红包状态文本描述
+    /// - Parameter status: 红包状态
+    /// - Returns: 文本
+    func gx_redPacketStatusString(status: GXChatConfiguration.MessageRedPacketStatus) -> String
+    
 }

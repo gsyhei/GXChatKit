@@ -55,5 +55,19 @@ public class GXChatChineseText: GXChatTextProtocol {
         }
     }
     
+    public func gx_redPacketName() -> String {
+        return "自发红包"
+    }
+    
+    public func gx_redPacketStatusString(status: GXChatConfiguration.MessageRedPacketStatus) -> String {
+        switch status {
+        case .none:
+            return "未领取"
+        case .partReceive:
+            return "部分领取"
+        case .allReceive:
+            return "全部领取"
+        }
+    }
     
 }

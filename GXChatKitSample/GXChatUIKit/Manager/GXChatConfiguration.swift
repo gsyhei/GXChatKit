@@ -143,20 +143,37 @@ public class GXChatConfiguration: NSObject {
     /// 名片width比例
     public var cardMaxWidthScale: CGFloat = 0.8
     
-    /// 文件图尺寸
+    /// 文件icon尺寸
     public var fileIconSize: CGSize = CGSize(width: 40.0, height: 40.0)
     /// 文件icon颜色
     public var fileIconColor: UIColor = .systemOrange
-    /// 文件文本字体
+    /// 文件名字体
     public var fileNameFont: UIFont = .systemFont(ofSize: 13)
-    /// 文件文本颜色
+    /// 文件名颜色
     public var fileNameColor: UIColor = UIColor(hex: 0x333333)
-    /// 文件文本字体
+    /// 文件扩展名字体
     public var fileExtFont: UIFont = .boldSystemFont(ofSize: 13)
-    /// 文件文本颜色
+    /// 文件扩展名颜色
     public var fileExtColor: UIColor = .white
     /// 名片width比例
     public var fileMaxWidthScale: CGFloat = 0.8
+    
+    /// 红包气泡色
+    public var redPacketBubbleMaskColor: UIColor = UIColor(hex: 0xFF5B45)
+    /// 红包icon尺寸
+    public var redPacketIconSize: CGSize = CGSize(width: 32.0, height: 32.0)
+    /// 红包icon颜色
+    public var redPacketIconColor: UIColor = .systemOrange
+    /// 红包文本字体
+    public var redPacketTextFont: UIFont = .systemFont(ofSize: 15)
+    /// 红包文本颜色
+    public var redPacketTextColor: UIColor = .white
+    /// 红包状态字体
+    public var redPacketStatusFont: UIFont = .boldSystemFont(ofSize: 12)
+    /// 红包状态颜色
+    public var redPacketStatusColor: UIColor = .white
+    /// 红包width比例
+    public var redPacketMaxWidthScale: CGFloat = 0.8
     
     /// 语音播放扬声器模式
     public var audioPlaySpeaker: Bool = true
@@ -209,7 +226,6 @@ public extension GXChatConfiguration {
         case bCard     = 5
         /// 文件
         case file      = 6
-        
         /// 红包
         case redPacket = 7
         
@@ -273,6 +289,16 @@ public extension GXChatConfiguration {
         case interrupt = 3
         /// 已结束
         case finish    = 4
+    }
+    
+    /// 消息红包状态
+    enum MessageRedPacketStatus : Int {
+        /// 未领取
+        case none = 0
+        /// 部分领取
+        case partReceive = 1
+        /// 全部领取
+        case allReceive  = 2
     }
     
     /// 消息菜单

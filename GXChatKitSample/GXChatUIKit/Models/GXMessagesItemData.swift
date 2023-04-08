@@ -31,7 +31,12 @@ public class GXMessagesItemData: Equatable {
     
     public required init(data: GXMessagesDataProtocol) {
         self.data = data
-        if data.gx_messageType != .system {
+        
+        if data.gx_messageType == .redPacket {
+            self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName)
+            self.bubble = GXMessagesBubbleFactory.messagesRedPacketBubble(status: data.gx_messageStatus)
+        }
+        else if data.gx_messageType != .system {
             self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName)
             self.bubble = GXMessagesBubbleFactory.messagesBubble(status: data.gx_messageStatus)
         }
@@ -58,6 +63,8 @@ public class GXMessagesItemData: Equatable {
             self.layout = GXMessagesCardLayout(data: self.data)
         case .file:
             self.layout = GXMessagesFileLayout(data: self.data)
+        case .redPacket:
+            self.layout = GXMessagesRedPacketLayout(data: self.data)
             
         default: break
         }

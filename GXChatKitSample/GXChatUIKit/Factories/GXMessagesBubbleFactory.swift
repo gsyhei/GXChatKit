@@ -9,6 +9,7 @@ import UIKit
 import GXMessagesTableView
 
 public class GXMessagesBubbleFactory {
+    
     /// 得到GXMessagesBubble消息气泡对象
     /// - Parameters:
     ///   - color: 颜色
@@ -17,6 +18,16 @@ public class GXMessagesBubbleFactory {
     public class func messagesBubble(status: GXMessageStatus) -> GXMessagesBubble {
         return self.gx_messagesBubbleImage(status: status)
     }
+    
+    /// 得到GXMessagesBubble红包消息气泡对象
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - status: 消息状态
+    /// - Returns: GXMessagesBubble消息气泡对象
+    public class func messagesRedPacketBubble(status: GXMessageStatus) -> GXMessagesBubble {
+        return self.gx_messagesRedPacketBubbleImage(status: status)
+    }
+    
 }
 
 private extension GXMessagesBubbleFactory {
@@ -61,6 +72,94 @@ private extension GXMessagesBubbleFactory {
         }
         else {
             let color = GXCHATC.receivingBubbleMaskColor
+            if let beginBubbleImage = GXCHATC.bubbleBeginImage {
+                let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
+                if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
+                    if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
+                        messagesBubble.messageBeginBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
+                    }
+                }
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
+                    if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: darkeningkColor) {
+                        if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
+                            messagesBubble.messageBeginBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
+                        }
+                    }
+                }
+            }
+            if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
+                let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
+                if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
+                    if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
+                        messagesBubble.messageOngoingBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
+                    }
+                }
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
+                    if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: darkeningkColor) {
+                        if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
+                            messagesBubble.messageOngoingBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
+                        }
+                    }
+                }
+            }
+            if let bubbleEndImage = GXCHATC.bubbleEndImage {
+                let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
+                if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
+                    if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
+                        messagesBubble.messageEndBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
+                    }
+                }
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
+                    if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: darkeningkColor) {
+                        if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
+                            messagesBubble.messageEndBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
+                        }
+                    }
+                }
+            }
+        }
+        return messagesBubble
+    }
+    
+    class func gx_messagesRedPacketBubbleImage(status: GXMessageStatus) -> GXMessagesBubble {
+        let messagesBubble = GXMessagesBubble()
+        let color = GXCHATC.redPacketBubbleMaskColor
+        if status == .sending {
+            if let beginBubbleImage = GXCHATC.bubbleBeginImage {
+                let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
+                if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
+                    messagesBubble.messageBeginBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
+                }
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
+                    if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: darkeningkColor) {
+                        messagesBubble.messageBeginBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
+                    }
+                }
+            }
+            if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
+                let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
+                if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
+                    messagesBubble.messageOngoingBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
+                }
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
+                    if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: darkeningkColor) {
+                        messagesBubble.messageOngoingBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
+                    }
+                }
+            }
+            if let bubbleEndImage = GXCHATC.bubbleEndImage {
+                let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
+                if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
+                    messagesBubble.messageEndBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
+                }
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
+                    if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: darkeningkColor) {
+                        messagesBubble.messageEndBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
+                    }
+                }
+            }
+        }
+        else {
             if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
                 if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {

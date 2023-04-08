@@ -46,7 +46,8 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesSystemCell.self)
         self.tableView.register(cellType: GXMessagesCardCell.self)
         self.tableView.register(cellType: GXMessagesFileCell.self)
-
+        self.tableView.register(cellType: GXMessagesRedPacketCell.self)
+        
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
@@ -338,26 +339,26 @@ class ViewController: UIViewController {
         sectionData8.append(item: item39)
         self.list.append(sectionData8)
         
-        var data40 = GXMessagesTestData()
-        data40.date = Date().dateByAdding(days: 1)!
-        data40.showName = "你算什么男人"
-        data40.avatarID = "22"
-        data40.messageID = "126"
-        data40.messageContinuousStatus = .beginAndEnd
-        data40.messageStatus = .sending
-        data40.messageType = .bCard
-
-        let cardAvatar = GXMessagesAvatarFactory.messagesAvatar(text: user1.gx_displayName)
-        cardAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image:  UIImage(named: "avatar1"))
-
-        data40.messagesContentData = GXMessagesCardContent(contact: user1, avatar: cardAvatar)
-
-        let item40 = GXMessagesItemData(data: data40)
-        item40.updateMessagesAvatar(image: UIImage(named: "avatar2"))
-
-        let sectionData9 = GXMessagesSectionData(date: data40.date)
-        sectionData9.append(item: item40)
-        self.list.append(sectionData9)
+//        var data40 = GXMessagesTestData()
+//        data40.date = Date().dateByAdding(days: 1)!
+//        data40.showName = "你算什么男人"
+//        data40.avatarID = "22"
+//        data40.messageID = "126"
+//        data40.messageContinuousStatus = .beginAndEnd
+//        data40.messageStatus = .sending
+//        data40.messageType = .bCard
+//
+//        let cardAvatar = GXMessagesAvatarFactory.messagesAvatar(text: user1.gx_displayName)
+//        cardAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image:  UIImage(named: "avatar1"))
+//
+//        data40.messagesContentData = GXMessagesCardContent(contact: user1, avatar: cardAvatar)
+//
+//        let item40 = GXMessagesItemData(data: data40)
+//        item40.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+//
+//        let sectionData9 = GXMessagesSectionData(date: data40.date)
+//        sectionData9.append(item: item40)
+//        self.list.append(sectionData9)
         
         var data41 = GXMessagesTestData()
         data41.date = Date().dateByAdding(days: 1)!
@@ -365,7 +366,7 @@ class ViewController: UIViewController {
         data41.avatarID = "22"
         data41.messageID = "127"
         data41.messageContinuousStatus = .beginAndEnd
-        data41.messageStatus = .receiving
+        data41.messageStatus = .sending
         data41.messageType = .file
 //        let fileUrl = Bundle.main.path(forResource: "voicexinwen", ofType: "mp3")!
         let bundle = Bundle.gx_messagesAssetBundle
@@ -382,6 +383,23 @@ class ViewController: UIViewController {
         let sectionData10 = GXMessagesSectionData(date: data41.date)
         sectionData10.append(item: item41)
         self.list.append(sectionData10)
+        
+        var data42 = GXMessagesTestData()
+        data42.date = Date().dateByAdding(days: 1)!
+        data42.showName = "你算什么男人"
+        data42.avatarID = "22"
+        data42.messageID = "128"
+        data42.messageContinuousStatus = .beginAndEnd
+        data42.messageStatus = .receiving
+        data42.messageType = .redPacket
+
+        data42.messagesContentData = GXMessagesRedPacketContent(text: "恭喜发财，大吉大利", status: .none)
+        let item42 = GXMessagesItemData(data: data42)
+        item42.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+
+        let sectionData11 = GXMessagesSectionData(date: data42.date)
+        sectionData11.append(item: item42)
+        self.list.append(sectionData11)
         
     }
 }
@@ -452,6 +470,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             return cell
         case .file:
             let cell: GXMessagesFileCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
+            
+            return cell
+        case .redPacket:
+            let cell: GXMessagesRedPacketCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bindCell(item: item)
             
             return cell
