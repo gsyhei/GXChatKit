@@ -95,7 +95,7 @@ public class GXRichManager: NSObject {
         let attributes: [Attribute] = [.textColor(GXCHATC.forwardTextColor), .font(GXCHATC.forwardTextFont), .paragraphStyle(paragraphStyle)]
 
         let attributedString = NSMutableAttributedString()
-        let userString = GXCHATC.chatText.gx_forwardContentString() + "\n" + user.gx_displayName + "\n"
+        let userString = GXCHATC.chatText.gx_forwardContentString() + user.gx_displayName + "\n"
         let appendString = NSMutableAttributedString(string: userString)
         let range: NSRange = NSMakeRange(0, appendString.length)
         appendString.addAttributes(attributes, range: range)

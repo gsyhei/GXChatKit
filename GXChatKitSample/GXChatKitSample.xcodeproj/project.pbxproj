@@ -25,6 +25,8 @@
 		96495C4429C1A1170055C19A /* GXAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96495C4329C1A1170055C19A /* GXAudioManager.swift */; };
 		96495C4629C1E4F20055C19A /* voip_call_noice.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4529C1E4F20055C19A /* voip_call_noice.wav */; };
 		96495C4A29C1EE4F0055C19A /* redpacket_sound_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */; };
+		964A504529E5C5B3009D957F /* GXMessagesReplyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504429E5C5B3009D957F /* GXMessagesReplyContent.swift */; };
+		964A504729E5C71A009D957F /* GXMessagesReplyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504629E5C71A009D957F /* GXMessagesReplyLayout.swift */; };
 		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
 		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
 		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
@@ -165,6 +167,8 @@
 		96495C4329C1A1170055C19A /* GXAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXAudioManager.swift; sourceTree = "<group>"; };
 		96495C4529C1E4F20055C19A /* voip_call_noice.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = voip_call_noice.wav; sourceTree = "<group>"; };
 		96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = redpacket_sound_open.wav; sourceTree = "<group>"; };
+		964A504429E5C5B3009D957F /* GXMessagesReplyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyContent.swift; sourceTree = "<group>"; };
+		964A504629E5C71A009D957F /* GXMessagesReplyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyLayout.swift; sourceTree = "<group>"; };
 		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
 		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 				963E75C729DCC9BD00A6D9C6 /* GXMessagesCardContent.swift */,
 				963E75CD29E00F1400A6D9C6 /* GXMessagesFileContent.swift */,
 				963E75D329E1820300A6D9C6 /* GXMessagesRedPacketContent.swift */,
+				964A504429E5C5B3009D957F /* GXMessagesReplyContent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				963E75C929DCCDC300A6D9C6 /* GXMessagesCardLayout.swift */,
 				963E75CF29E0132600A6D9C6 /* GXMessagesFileLayout.swift */,
 				963E75D529E18C8E00A6D9C6 /* GXMessagesRedPacketLayout.swift */,
+				964A504629E5C71A009D957F /* GXMessagesReplyLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -860,6 +866,7 @@
 				963E75CE29E00F1400A6D9C6 /* GXMessagesFileContent.swift in Sources */,
 				9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */,
 				96A3C13329D46D3C00ADBC65 /* GXMessagesVideoLayout.swift in Sources */,
+				964A504729E5C71A009D957F /* GXMessagesReplyLayout.swift in Sources */,
 				9675963929D1C98800A4A11B /* GXMessagesLocationCell.swift in Sources */,
 				96A3C11329D2C85E00ADBC65 /* GXChatChineseText.swift in Sources */,
 				969957682975756A001DCC17 /* GXMessagesAvatarFactory.swift in Sources */,
@@ -882,6 +889,7 @@
 				965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */,
 				96C7B37529D8CD17009A995B /* GXMessagesForwardContent.swift in Sources */,
 				96A3C12829D446DF00ADBC65 /* GXChatTextProtocol.swift in Sources */,
+				964A504529E5C5B3009D957F /* GXMessagesReplyContent.swift in Sources */,
 				96A36A7729C2BFF500BD4506 /* GXMessagesAudioTrackView.swift in Sources */,
 				965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */,
 				96A3C12629D446D300ADBC65 /* GXMessagesDataProtocol.swift in Sources */,

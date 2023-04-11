@@ -47,12 +47,10 @@ public class GXMessagesBaseLayout: NSObject {
                 self.avatarRect = CGRect(origin: CGPoint(x: self.containerRect.maxX + GXCHATC.avatarMargin, y: avatarTop), size: GXCHATC.avatarSize)
             }
             if data.gx_isShowNickname {
-                let top = GXCHATC.bubbleTrailingInsets.top
-                let maxWidth = self.containerRect.width - GXCHATC.bubbleTrailingInsets.left - GXCHATC.bubbleTrailingInsets.right
-                let maxHeight = GXCHATC.nicknameFont.lineHeight
-                let nameSize = data.gx_senderDisplayName.size(size: CGSize(width: maxWidth, height: maxHeight), font: GXCHATC.nicknameFont)
-                let left = self.containerRect.width - GXCHATC.bubbleTrailingInsets.right - nameSize.width
-                self.nicknameRect = CGRect(x: left, y: top, width: nameSize.width, height: nameSize.height)
+                let left = GXCHATC.bubbleTrailingInsets.left, top =  GXCHATC.bubbleTrailingInsets.top
+                let width = self.containerRect.width - GXCHATC.bubbleTrailingInsets.left - GXCHATC.bubbleTrailingInsets.right
+                let height = GXCHATC.nicknameFont.lineHeight
+                self.nicknameRect = CGRect(x: left, y: top, width: width, height: height)
             }
             let timeSize = data.gx_messageTime.size(size: self.containerRect.size, font: GXCHATC.timeFont)
             let top = self.containerRect.height - GXCHATC.bubbleTrailingInsets.bottom - timeSize.height
@@ -66,10 +64,9 @@ public class GXMessagesBaseLayout: NSObject {
             }
             if data.gx_isShowNickname {
                 let left = GXCHATC.bubbleLeadingInsets.left, top =  GXCHATC.bubbleLeadingInsets.top
-                let maxWidth = self.containerRect.width - GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
-                let maxHeight = GXCHATC.nicknameFont.lineHeight
-                let nameSize = data.gx_senderDisplayName.size(size: CGSize(width: maxWidth, height: maxHeight), font: GXCHATC.nicknameFont)
-                self.nicknameRect = CGRect(x: left, y: top, width: nameSize.width, height: nameSize.height)
+                let width = self.containerRect.width - GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
+                let height = GXCHATC.nicknameFont.lineHeight
+                self.nicknameRect = CGRect(x: left, y: top, width: width, height: height)
             }
             let timeSize = data.gx_messageTime.size(size: self.containerRect.size, font: GXCHATC.timeFont)
             let top = self.containerRect.height - GXCHATC.bubbleLeadingInsets.bottom - timeSize.height

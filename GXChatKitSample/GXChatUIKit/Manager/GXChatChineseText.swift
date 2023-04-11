@@ -10,7 +10,7 @@ import UIKit
 public class GXChatChineseText: GXChatTextProtocol {
     
     public func gx_forwardContentString() -> String {
-        return GXLS("转发自")
+        return GXLS("转发自：\n")
     }
     
     public func gx_sectionHeaderString(date: Date) -> String {

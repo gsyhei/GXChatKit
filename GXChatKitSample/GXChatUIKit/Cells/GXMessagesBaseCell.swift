@@ -136,7 +136,6 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         if item.data.gx_isShowNickname {
             self.messageBubbleNameLabel.isHidden = false
             self.messageBubbleNameLabel.frame = item.layout.nicknameRect
-            self.messageBubbleNameLabel.textAlignment = .left
             self.messageBubbleNameLabel.text = item.data.gx_senderDisplayName
         }
         self.messageBubbleTimeLabel.frame = item.layout.timeRect
@@ -144,10 +143,12 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleTimeLabel.text = item.data.gx_messageTime
         
         if item.data.gx_messageStatus == .sending {
+            self.messageBubbleNameLabel.textAlignment = .right
             self.messageBubbleNameLabel.textColor = GXCHATC.sendingNicknameColor
             self.messageBubbleTimeLabel.textColor = GXCHATC.sendingTimeColor
         }
         else {
+            self.messageBubbleNameLabel.textAlignment = .left
             self.messageBubbleNameLabel.textColor = GXCHATC.receivingNicknameColor
             self.messageBubbleTimeLabel.textColor = GXCHATC.receivingTimeColor
         }

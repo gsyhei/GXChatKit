@@ -63,7 +63,7 @@ public class GXChatConfiguration: NSObject {
     public var groupChatReceivingShowNickname: Bool = true
 
     /// 昵称字体
-    public var nicknameFont: UIFont = .boldSystemFont(ofSize: 15)
+    public var nicknameFont: UIFont = .boldSystemFont(ofSize: 14)
     /// 昵称下面的行间距
     public var nicknameLineSpacing: CGFloat = 4.0
     /// 发送方昵称颜色
@@ -119,16 +119,6 @@ public class GXChatConfiguration: NSObject {
     /// 转发文本颜色
     public var forwardTextColor: UIColor = .systemPink
     
-    /// 回复文本字体
-    public var replyTextFont: UIFont = .boldSystemFont(ofSize: 14)
-    /// 回复文本颜色
-    public var replyTextColor: UIColor = .systemGreen
-    
-    /// 引用文本字体
-    public var quoteTextFont: UIFont = .boldSystemFont(ofSize: 14)
-    /// 引用文本颜色
-    public var quoteTextColor: UIColor = .systemGreen
-    
     /// 系统文本字体
     public var systemTextFont: UIFont = .systemFont(ofSize: 12)
     /// 系统文本颜色
@@ -161,7 +151,7 @@ public class GXChatConfiguration: NSObject {
     /// 红包气泡色
     public var redPacketBubbleMaskColor: UIColor = UIColor(hex: 0xFF5B45)
     /// 红包icon尺寸
-    public var redPacketIconSize: CGSize = CGSize(width: 32.0, height: 32.0)
+    public var redPacketIconSize: CGSize = CGSize(width: 40.0, height: 40.0)
     /// 红包icon颜色
     public var redPacketIconColor: UIColor = .systemOrange
     /// 红包文本字体
@@ -174,6 +164,19 @@ public class GXChatConfiguration: NSObject {
     public var redPacketStatusColor: UIColor = .white
     /// 红包width比例
     public var redPacketMaxWidthScale: CGFloat = 0.8
+    
+    /// 回复内容背景颜色
+    public var replyBackgroundColor: UIColor = UIColor(hex: 0xFDFDFD88, useAlpha: true)
+    /// 回复垂直线条宽度
+    public var replyVLineWidth: CGFloat = 4.0
+    /// 回复对象icon尺寸
+    public var replyIconSize: CGSize = CGSize(width: 40.0, height: 40.0)
+    /// 回复对象文本内容颜色
+    public var replyContentColor: UIColor = UIColor(hex: 0x333333)
+    /// 回复对象类型名颜色
+    public var replyTypeNameColor: UIColor = UIColor(hex: 0x333333)
+    /// 回复对象内容/字体字体
+    public var replyContentFont: UIFont = .boldSystemFont(ofSize: 13)
     
     /// 语音播放扬声器模式
     public var audioPlaySpeaker: Bool = true
@@ -236,14 +239,10 @@ public extension GXChatConfiguration {
         case atText    = 10
         /// 转发消息
         case forward   = 11
-        
         /// 回复消息
         case reply     = 12
-        /// 引用消息
-        case quote     = 13
-        
         /// 系统消息
-        case system    = 14
+        case system    = 13
     }
     
     /// 消息状态
