@@ -22,7 +22,7 @@ public class GXMessagesTextLayout: GXMessagesBaseLayout {
             let maxTextSize = CGSizeMake(maxContentWidth, 10000)
             let displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
             if data.gx_isShowNickname {
-                var nickNameWidth = data.gx_senderDisplayName.height(width: maxContentWidth, font: GXCHATC.nicknameFont)
+                var nickNameWidth = data.gx_senderDisplayName.width(font: GXCHATC.nicknameFont)
                 nickNameWidth = min(nickNameWidth, maxContentWidth)
                 content.displaySize = CGSize(width: max(nickNameWidth, displaySize.width), height: displaySize.height)
             }
@@ -46,7 +46,7 @@ public class GXMessagesTextLayout: GXMessagesBaseLayout {
             let maxTextSize = CGSizeMake(maxContentWidth, 10000)
             let displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
             if data.gx_isShowNickname {
-                var nickNameWidth = data.gx_senderDisplayName.height(width: maxContentWidth, font: GXCHATC.nicknameFont)
+                var nickNameWidth = data.gx_senderDisplayName.width(font: GXCHATC.nicknameFont)
                 nickNameWidth = min(nickNameWidth, maxContentWidth)
                 content.displaySize = CGSize(width: max(nickNameWidth, displaySize.width), height: displaySize.height)
             }
@@ -70,7 +70,7 @@ public class GXMessagesTextLayout: GXMessagesBaseLayout {
             let maxTextSize = CGSizeMake(maxContentWidth, 10000)
             let displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
             if data.gx_isShowNickname {
-                var nickNameWidth = data.gx_senderDisplayName.height(width: maxContentWidth, font: GXCHATC.nicknameFont)
+                var nickNameWidth = data.gx_senderDisplayName.width(font: GXCHATC.nicknameFont)
                 nickNameWidth = min(nickNameWidth, maxContentWidth)
                 content.displaySize = CGSize(width: max(nickNameWidth, displaySize.width), height: displaySize.height)
             }

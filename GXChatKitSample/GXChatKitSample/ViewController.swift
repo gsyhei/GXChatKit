@@ -122,7 +122,7 @@ class ViewController: UIViewController {
         data11.messageContinuousStatus = .begin
         data11.messageStatus = .receiving
         data11.messageType = .text
-        data11.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        data11.messagesContentData = GXMessagesTextContent(text: "什么东东啊")
         
         let item11 = GXMessagesItemData(data: data11)
         item11.updateMessagesAvatar(image: UIImage(named: "avatar2"))
