@@ -39,4 +39,9 @@ public protocol GXChatTextProtocol {
     /// - Returns: 文本
     func gx_redPacketStatusString(status: GXChatConfiguration.MessageRedPacketStatus) -> String
     
+    /// 回复消息类型文本描述（包含类型：phote、video、audio、call）
+    /// - Parameter type: 消息类型
+    /// - Returns: 文本
+    func gx_replyContentTypeString(type: GXChatConfiguration.MessageType) -> String
+    
 }

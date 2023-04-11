@@ -25,8 +25,8 @@ public class GXMessagesCardLayout: GXMessagesBaseLayout {
         content.displaySize = CGSize(width: contentWidth, height: contentHeight)
     
         let contentPoint = data.gx_contentPoint
-        self.avatarRect = CGRect(origin: contentPoint, size: GXCHATC.avatarSize)
-        let cardNamePoint = CGPoint(x: self.avatarRect.maxX + 10, y: contentPoint.y)
+        self.cardAvatarRect = CGRect(origin: contentPoint, size: GXCHATC.avatarSize)
+        let cardNamePoint = CGPoint(x: self.cardAvatarRect.maxX + 10, y: contentPoint.y)
         let cardNameSize = CGSize(width: contentWidth - GXCHATC.avatarSize.width - 10, height: GXCHATC.avatarSize.height)
         self.cardNameRect = CGRect(origin: cardNamePoint, size: cardNameSize)
         

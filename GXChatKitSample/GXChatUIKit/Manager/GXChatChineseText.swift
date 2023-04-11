@@ -69,5 +69,22 @@ public class GXChatChineseText: GXChatTextProtocol {
             return "全部领取"
         }
     }
+
+    public func gx_replyContentTypeString(type: GXChatConfiguration.MessageType) -> String {
+        switch type {
+        case .phote:
+            return "[图片]"
+        case .video:
+            return "[视频]"
+        case .audio:
+            return "[语音]"
+        case .voiceCall:
+            return "[语音通话]"
+        case .videoCall:
+            return "[视频通话]"
+        default:
+            return ""
+        }
+    }
     
 }

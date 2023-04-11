@@ -339,26 +339,26 @@ class ViewController: UIViewController {
         sectionData8.append(item: item39)
         self.list.append(sectionData8)
         
-//        var data40 = GXMessagesTestData()
-//        data40.date = Date().dateByAdding(days: 1)!
-//        data40.showName = "你算什么男人"
-//        data40.avatarID = "22"
-//        data40.messageID = "126"
-//        data40.messageContinuousStatus = .beginAndEnd
-//        data40.messageStatus = .sending
-//        data40.messageType = .bCard
-//
-//        let cardAvatar = GXMessagesAvatarFactory.messagesAvatar(text: user1.gx_displayName)
-//        cardAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image:  UIImage(named: "avatar1"))
-//
-//        data40.messagesContentData = GXMessagesCardContent(contact: user1, avatar: cardAvatar)
-//
-//        let item40 = GXMessagesItemData(data: data40)
-//        item40.updateMessagesAvatar(image: UIImage(named: "avatar2"))
-//
-//        let sectionData9 = GXMessagesSectionData(date: data40.date)
-//        sectionData9.append(item: item40)
-//        self.list.append(sectionData9)
+        var data40 = GXMessagesTestData()
+        data40.date = Date().dateByAdding(days: 1)!
+        data40.showName = "你算什么男人"
+        data40.avatarID = "22"
+        data40.messageID = "126"
+        data40.messageContinuousStatus = .beginAndEnd
+        data40.messageStatus = .sending
+        data40.messageType = .bCard
+
+        let cardAvatar = GXMessagesAvatarFactory.messagesAvatar(text: user1.gx_displayName)
+        cardAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image: UIImage(named: "avatar1"))
+
+        data40.messagesContentData = GXMessagesCardContent(contact: user1, avatar: cardAvatar)
+
+        let item40 = GXMessagesItemData(data: data40)
+        item40.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+
+        let sectionData9 = GXMessagesSectionData(date: data40.date)
+        sectionData9.append(item: item40)
+        self.list.append(sectionData9)
         
         var data41 = GXMessagesTestData()
         data41.date = Date().dateByAdding(days: 1)!

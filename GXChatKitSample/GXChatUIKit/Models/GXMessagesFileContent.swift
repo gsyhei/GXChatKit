@@ -18,7 +18,7 @@ public class GXMessagesFileContent: GXMessagesContentProtocol {
     /// 下载地址
     public var downloadUrl: URL?
     /// 文件名
-    public var fileName: String?
+    public var fileName: String
     /// 扩展名
     public var fileExt: String?
 
