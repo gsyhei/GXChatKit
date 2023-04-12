@@ -11,6 +11,7 @@ public class GXMessagesReplyLayout: GXMessagesBaseLayout {
     public var replyContentRect: CGRect = .zero
     public var replyVLineRect: CGRect = .zero
     public var replyIconRect: CGRect = .zero
+    public var replyFileExtRect: CGRect = .zero
     public var replyNameRect: CGRect = .zero
     public var replyTextRect: CGRect = .zero
     public var textRect: CGRect = .zero
@@ -25,10 +26,11 @@ public class GXMessagesReplyLayout: GXMessagesBaseLayout {
         let contentPoint = data.gx_contentPoint
         self.replyVLineRect = CGRect(origin: contentPoint, size: CGSizeMake(GXCHATC.replyVLineWidth, GXCHATC.replyIconSize.height))
         
-        var contentLeft = self.replyVLineRect.width + 10.0
+        var contentLeft = self.replyVLineRect.width + 5.0
         if content.isShowIcon {
             self.replyIconRect = CGRect(origin: CGPoint(x: contentPoint.x + contentLeft, y: contentPoint.y), size: GXCHATC.replyIconSize)
-            contentLeft += (GXCHATC.replyIconSize.width + 10.0)
+            self.replyFileExtRect = self.replyIconRect.inset(by: UIEdgeInsets(top: 6, left: 0, bottom: 0, right: 0))
+            contentLeft += (GXCHATC.replyIconSize.width + 5.0)
         }
         
         let replyNameWidth = content.replyData.gx_senderDisplayName.width(font: GXCHATC.nicknameFont)
@@ -49,12 +51,14 @@ public class GXMessagesReplyLayout: GXMessagesBaseLayout {
         }
         content.displaySize = CGSize(width: max(contentWidth, displaySize.width), height: displaySize.height)
         
-        self.replyNameRect = CGRect(x: contentLeft, y: contentPoint.y, width: contentWidth, height: GXCHATC.replyIconSize.height/2)
-        self.replyTextRect = CGRect(x: contentLeft, y: self.replyNameRect.maxY, width: contentWidth, height: GXCHATC.replyIconSize.height/2)
+        let replyNameTop = contentPoint.y + GXCHATC.replyIconSize.height/2 - GXCHATC.nicknameFont.lineHeight - 1.0
+        self.replyNameRect = CGRect(x: contentPoint.x + contentLeft, y: replyNameTop, width: contentWidth - contentLeft, height: GXCHATC.nicknameFont.lineHeight)
+        let replyTextTop =  contentPoint.y + GXCHATC.replyIconSize.height/2 + 1.0
+        self.replyTextRect = CGRect(x: contentPoint.x + contentLeft, y: replyTextTop, width: contentWidth - contentLeft, height: GXCHATC.replyContentFont.lineHeight)
         self.replyContentRect = CGRect(origin: contentPoint, size: CGSize(width: contentWidth, height: GXCHATC.replyIconSize.height))
-        self.textRect = CGRect(origin: CGPoint(x: contentPoint.x, y: self.replyContentRect.maxY + 4.0), size: content.displaySize)
+        self.textRect = CGRect(origin: CGPoint(x: contentPoint.x, y: self.replyContentRect.maxY + 6.0), size: content.displaySize)
         
-        var containerHeight = self.textRect.maxY + GXCHATC.bubbleLeadingInsets.bottom
+        let containerHeight = self.textRect.maxY + GXCHATC.bubbleLeadingInsets.bottom
         let containerWidth = contentWidth + GXCHATC.bubbleLeadingInsets.left + GXCHATC.bubbleLeadingInsets.right
         self.updateBaseLayout(data: data, containerSize: CGSizeMake(containerWidth, containerHeight))
     }

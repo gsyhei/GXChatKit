@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesCardCell.self)
         self.tableView.register(cellType: GXMessagesFileCell.self)
         self.tableView.register(cellType: GXMessagesRedPacketCell.self)
-        
+        self.tableView.register(cellType: GXMessagesReplyCell.self)
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
         self.tableView.sectionHeaderHeight = 30.0
@@ -401,6 +401,23 @@ class ViewController: UIViewController {
         sectionData11.append(item: item42)
         self.list.append(sectionData11)
         
+        var data43 = GXMessagesTestData()
+        data43.date = Date().dateByAdding(days: 1)!
+        data43.showName = "你算什么男人"
+        data43.avatarID = "22"
+        data43.messageID = "129"
+        data43.messageContinuousStatus = .beginAndEnd
+        data43.messageStatus = .receiving
+        data43.messageType = .reply
+
+        data43.messagesContentData = GXMessagesReplyContent(text: text, users: [user1, user2], replyData: data41)
+        let item43 = GXMessagesItemData(data: data43)
+        item43.updateMessagesAvatar(image: UIImage(named: "avatar2"))
+
+        let sectionData12 = GXMessagesSectionData(date: data43.date)
+        sectionData12.append(item: item43)
+        self.list.append(sectionData12)
+        
     }
 }
 
@@ -478,10 +495,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
             cell.bindCell(item: item)
             
             return cell
+        case .reply:
+            let cell: GXMessagesReplyCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.bindCell(item: item)
             
-        default: break
+            return cell
         }
-        return UITableViewCell ()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

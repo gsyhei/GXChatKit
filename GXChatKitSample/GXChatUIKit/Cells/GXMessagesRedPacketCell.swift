@@ -13,7 +13,7 @@ public class GXMessagesRedPacketCell: GXMessagesBaseCell {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage.gx_bundleAssetImage(name: "redEnvelope")?.withRenderingMode(.alwaysTemplate)
+        imageView.image = .gx_redPacketIconImage?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = GXCHATC.redPacketIconColor
 
         return imageView

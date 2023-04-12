@@ -142,7 +142,7 @@ public class GXChatConfiguration: NSObject {
     /// 文件名颜色
     public var fileNameColor: UIColor = UIColor(hex: 0x333333)
     /// 文件扩展名字体
-    public var fileExtFont: UIFont = .boldSystemFont(ofSize: 13)
+    public var fileExtFont: UIFont = .boldSystemFont(ofSize: 11)
     /// 文件扩展名颜色
     public var fileExtColor: UIColor = .white
     /// 名片width比例
@@ -166,17 +166,17 @@ public class GXChatConfiguration: NSObject {
     public var redPacketMaxWidthScale: CGFloat = 0.8
     
     /// 回复内容背景颜色
-    public var replyBackgroundColor: UIColor = UIColor(hex: 0xFDFDFD88, useAlpha: true)
+    public var replyBackgroundColor: UIColor = UIColor(hex: 0xF5F5F5)
     /// 回复垂直线条宽度
-    public var replyVLineWidth: CGFloat = 4.0
+    public var replyVLineWidth: CGFloat = 3.0
     /// 回复对象icon尺寸
     public var replyIconSize: CGSize = CGSize(width: 40.0, height: 40.0)
     /// 回复对象文本内容颜色
-    public var replyContentColor: UIColor = UIColor(hex: 0x333333)
+    public var replyContentColor: UIColor = .darkGray
     /// 回复对象类型名颜色
-    public var replyTypeNameColor: UIColor = UIColor(hex: 0x333333)
+    public var replyTypeNameColor: UIColor = .gray
     /// 回复对象内容/字体字体
-    public var replyContentFont: UIFont = .boldSystemFont(ofSize: 13)
+    public var replyContentFont: UIFont = .systemFont(ofSize: 12)
     
     /// 语音播放扬声器模式
     public var audioPlaySpeaker: Bool = true

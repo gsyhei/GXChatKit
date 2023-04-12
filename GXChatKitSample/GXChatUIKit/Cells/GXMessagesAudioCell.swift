@@ -115,12 +115,10 @@ extension GXMessagesAudioCell {
     
     private func gx_updatePlayButton(content: GXMessagesAudioContent) {
         if content.isPlaying {
-            let image = UIImage(systemName: "pause.circle.fill")
-            self.playButton.setBackgroundImage(image, for: .normal)
+            self.playButton.setBackgroundImage(.gx_audioPauseImage, for: .normal)
         }
         else {
-            let image = UIImage(systemName: "play.circle.fill")
-            self.playButton.setBackgroundImage(image, for: .normal)
+            self.playButton.setBackgroundImage(.gx_audioPlayImage, for: .normal)
         }
     }
     

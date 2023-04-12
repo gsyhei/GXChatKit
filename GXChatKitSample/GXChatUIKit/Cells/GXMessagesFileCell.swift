@@ -12,9 +12,9 @@ public class GXMessagesFileCell: GXMessagesBaseCell {
     public lazy var fileIconIView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = .clear
-        imageView.image = UIImage.gx_bundleAssetImage(name: "file")?.withRenderingMode(.alwaysTemplate)
+        imageView.image = .gx_fileIconImage?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = GXCHATC.fileIconColor
-
+        
         return imageView
     }()
     /// 文件扩展名Label

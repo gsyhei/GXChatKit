@@ -61,10 +61,10 @@ public class GXMessagesCallCell: GXMessagesBaseCell {
         guard let content = item.data.gx_messagesContent as? GXMessagesCallContent else { return }
         self.titleLabel.text = content.text
         if item.data.gx_messageType == .voiceCall {
-            self.iconIView.image = UIImage(systemName: "phone.down")
+            self.iconIView.image = .gx_callVoiceImage
         }
         else if item.data.gx_messageType == .videoCall {
-            self.iconIView.image = UIImage(systemName: "video")
+            self.iconIView.image = .gx_callVideoImage
         }
         if item.data.gx_messageStatus == .sending {
             self.iconIView.transform = CGAffineTransform(rotationAngle: CGFloat.pi)

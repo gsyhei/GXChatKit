@@ -15,9 +15,8 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
     /// 播放按钮
     public lazy var playButton: UIButton = {
         let button = UIButton(type: .custom)
-        let image = UIImage(systemName: "play.circle")
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        button.setBackgroundImage(image, for: .normal)
+        button.setBackgroundImage(.gx_videoPlayImage, for: .normal)
         button.backgroundColor = .clear
         button.tintColor = .white
         button.layer.shadowOpacity = 0.3

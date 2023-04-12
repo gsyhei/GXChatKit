@@ -65,8 +65,8 @@ public class GXMessagesItemData: Equatable {
             self.layout = GXMessagesFileLayout(data: self.data)
         case .redPacket:
             self.layout = GXMessagesRedPacketLayout(data: self.data)
-            
-        default: break
+        case .reply:
+            self.layout = GXMessagesReplyLayout(data: self.data)
         }
     }
     

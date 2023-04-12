@@ -27,6 +27,8 @@
 		96495C4A29C1EE4F0055C19A /* redpacket_sound_open.wav in Resources */ = {isa = PBXBuildFile; fileRef = 96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */; };
 		964A504529E5C5B3009D957F /* GXMessagesReplyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504429E5C5B3009D957F /* GXMessagesReplyContent.swift */; };
 		964A504729E5C71A009D957F /* GXMessagesReplyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504629E5C71A009D957F /* GXMessagesReplyLayout.swift */; };
+		964A504929E73805009D957F /* GXMessagesReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504829E73805009D957F /* GXMessagesReplyCell.swift */; };
+		964A504B29E73C97009D957F /* UIImage+GXResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504A29E73C97009D957F /* UIImage+GXResource.swift */; };
 		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
 		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
 		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
@@ -169,6 +171,8 @@
 		96495C4929C1EE4F0055C19A /* redpacket_sound_open.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = redpacket_sound_open.wav; sourceTree = "<group>"; };
 		964A504429E5C5B3009D957F /* GXMessagesReplyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyContent.swift; sourceTree = "<group>"; };
 		964A504629E5C71A009D957F /* GXMessagesReplyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyLayout.swift; sourceTree = "<group>"; };
+		964A504829E73805009D957F /* GXMessagesReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyCell.swift; sourceTree = "<group>"; };
+		964A504A29E73C97009D957F /* UIImage+GXResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GXResource.swift"; sourceTree = "<group>"; };
 		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
 		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				965FA5B7297055AC001D7633 /* UIImage+GXChat.swift */,
 				9699576D29757CD1001DCC17 /* Bundle+GXChat.swift */,
 				9699577729767567001DCC17 /* UIColor+GXChat.swift */,
+				964A504A29E73C97009D957F /* UIImage+GXResource.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				963E75CB29DCDC4500A6D9C6 /* GXMessagesCardCell.swift */,
 				963E75D129E016FF00A6D9C6 /* GXMessagesFileCell.swift */,
 				963E75D729E196FC00A6D9C6 /* GXMessagesRedPacketCell.swift */,
+				964A504829E73805009D957F /* GXMessagesReplyCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -870,6 +876,7 @@
 				9675963929D1C98800A4A11B /* GXMessagesLocationCell.swift in Sources */,
 				96A3C11329D2C85E00ADBC65 /* GXChatChineseText.swift in Sources */,
 				969957682975756A001DCC17 /* GXMessagesAvatarFactory.swift in Sources */,
+				964A504929E73805009D957F /* GXMessagesReplyCell.swift in Sources */,
 				96D13EFF29BDA6F900BF4B80 /* GXMessagesSectionData.swift in Sources */,
 				96C7B37F29DB1E6F009A995B /* GXMessagesSystemCell.swift in Sources */,
 				9699575A2973E698001DCC17 /* GXMessagesItemData.swift in Sources */,
@@ -878,6 +885,7 @@
 				9699577829767567001DCC17 /* UIColor+GXChat.swift in Sources */,
 				963E75CA29DCCDC300A6D9C6 /* GXMessagesCardLayout.swift in Sources */,
 				96D13EFD29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift in Sources */,
+				964A504B29E73C97009D957F /* UIImage+GXResource.swift in Sources */,
 				968B917329C941A100F6113B /* GXChatConfiguration.swift in Sources */,
 				96A3C11729D43ECF00ADBC65 /* GXMessagesAtContent.swift in Sources */,
 				96A3C11529D2CBDD00ADBC65 /* GXMessagesCallCell.swift in Sources */,

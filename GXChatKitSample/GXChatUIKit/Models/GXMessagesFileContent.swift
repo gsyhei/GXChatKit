@@ -25,13 +25,13 @@ public class GXMessagesFileContent: GXMessagesContentProtocol {
     public required init(fileUrl: URL) {
         self.fileUrl = fileUrl
         self.fileName = fileUrl.lastPathComponent
-        self.fileExt = fileUrl.pathExtension
+        self.fileExt = fileUrl.pathExtension.uppercased()
     }
     
     public required init(downloadUrl: URL) {
         self.downloadUrl = downloadUrl
         self.fileName = downloadUrl.lastPathComponent
-        self.fileExt = downloadUrl.pathExtension
+        self.fileExt = downloadUrl.pathExtension.uppercased()
     }
     
 }
