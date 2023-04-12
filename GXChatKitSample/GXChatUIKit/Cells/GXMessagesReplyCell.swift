@@ -160,7 +160,6 @@ public class GXMessagesReplyCell: GXMessagesBaseCell {
             self.replyIconIView.image = .gx_redPacketIconImage?.withRenderingMode(.alwaysTemplate)
             self.replyIconIView.tintColor = GXCHATC.redPacketIconColor
         }
-        
     }
     
 }
