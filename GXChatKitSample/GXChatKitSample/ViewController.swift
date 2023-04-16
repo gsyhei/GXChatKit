@@ -277,13 +277,13 @@ class ViewController: UIViewController {
         self.list.append(sectionData5)
         
         
-        let user1 = GXTextUser()
+        var user1 = GXTestUser()
         user1.userId = "11"
         user1.userName = "抬头45度仰望天空"
-        let user2 = GXTextUser()
+        var user2 = GXTestUser()
         user2.userId = "22"
         user2.userName = "你算什么男人"
-        let user3 = GXTextUser()
+        var user3 = GXTestUser()
         user3.userId = "33"
         user3.userName = "这样也好"
         let users = [user1, user2, user3]

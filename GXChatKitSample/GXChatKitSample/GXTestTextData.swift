@@ -9,8 +9,18 @@ import UIKit
 import GXChatUIKit
 import GXMessagesTableView
 
-public struct GXMessagesTestData: GXMessagesDataProtocol {
-    
+struct GXMessagesTestData {
+    var date: Date = Date()
+    var showName: String = "抬头45度仰望天空"
+    var messageID: String = ""
+    var avatarID: String = ""
+    var messageContinuousStatus: GXMessageContinuousStatus = .begin
+    var messageStatus: GXMessageStatus = .sending
+    var messageType: GXChatConfiguration.MessageType = .text
+    var messagesContentData: GXMessagesContentProtocol? = nil
+}
+
+extension GXMessagesTestData: GXMessagesDataProtocol {
     public var gx_groupId: String? {
         return nil
     }
@@ -70,19 +80,15 @@ public struct GXMessagesTestData: GXMessagesDataProtocol {
     public var gx_senderId: String {
         return self.avatarID
     }
-    
-    var date: Date = Date()
-    var showName: String = "抬头45度仰望天空"
-    var messageID: String = ""
-    var avatarID: String = ""
-    var messageContinuousStatus: GXMessageContinuousStatus = .begin
-    var messageStatus: GXMessageStatus = .sending
-    var messageType: GXChatConfiguration.MessageType = .text
-    var messagesContentData: GXMessagesContentProtocol? = nil
 }
 
-class GXTextUser: GXMessagesUserProtocol {
-    
+struct GXTestUser {
+    var userId: String = ""
+    var userName: String = ""
+    var userUrl: NSURL? = nil
+}
+
+extension GXTestUser: GXMessagesUserProtocol {
     var gx_id: String {
         return userId
     }
@@ -94,9 +100,4 @@ class GXTextUser: GXMessagesUserProtocol {
     var gx_avatarUrl: NSURL? {
         return userUrl
     }
-    
-    var userId: String = ""
-    var userName: String = ""
-    var userUrl: NSURL? = nil
-
 }

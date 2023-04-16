@@ -8,11 +8,11 @@
 import Foundation
 
 public protocol GXMessagesContactProtocol {
-    /// 用户ID
+    /// 联系人ID
     var gx_id: String { get }
-    /// 用户显示名称
+    /// 显示名称
     var gx_displayName: String { get }
-    /// 用户头像
+    /// 联系人头像
     var gx_avatarUrl: NSURL? { get }
 }
 
