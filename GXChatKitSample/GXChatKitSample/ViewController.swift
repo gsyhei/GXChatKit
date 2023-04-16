@@ -431,7 +431,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
         if let avatarButton = avatar as? UIButton {
             let item = self.list[indexPath.section].items[indexPath.row]
             if item.data.gx_isShowAvatar {
-                GXMessagesBaseCell.updateAvatar(item: item, avatarButton: avatarButton)
+                avatarButton.removeTarget(nil, action: nil, for: .allEvents)
+                avatarButton.setImage(item.avatar?.avatarImage, for: .normal)
+                avatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
             }
             else {
                 avatarButton.isHidden = true
