@@ -24,10 +24,6 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         return textView
     }()
 
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

@@ -35,8 +35,9 @@ public extension UIImage {
     /// 当前image生成指定颜色的mask图
     /// - Parameter maskColor: mask色
     /// - Returns: 指定颜色的mask图
-    func gx_imageMasked(maskColor: UIColor) -> UIImage? {
+    func gx_imageMasked(color: UIColor?) -> UIImage? {
         guard let cgImage = self.cgImage else {return nil}
+        guard let maskColor = color else {return self}
 
         let frame = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, self.scale)

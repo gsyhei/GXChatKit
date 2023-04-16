@@ -38,33 +38,33 @@ private extension GXMessagesBubbleFactory {
             let color = GXCHATC.sendingBubbleMaskColor
             if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
-                if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = beginBubbleImage.gx_imageMasked(color: color) {
                     messagesBubble.messageBeginBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = beginBubbleImage.gx_imageMasked(color: darkeningkColor) {
                         messagesBubble.messageBeginBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                     }
                 }
             }
             if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
-                if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleOngoingImage.gx_imageMasked(color: color) {
                     messagesBubble.messageOngoingBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleOngoingImage.gx_imageMasked(color: darkeningkColor) {
                         messagesBubble.messageOngoingBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                     }
                 }
             }
             if let bubbleEndImage = GXCHATC.bubbleEndImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
-                if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleEndImage.gx_imageMasked(color: color) {
                     messagesBubble.messageEndBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleEndImage.gx_imageMasked(color: darkeningkColor) {
                         messagesBubble.messageEndBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                     }
                 }
@@ -74,13 +74,13 @@ private extension GXMessagesBubbleFactory {
             let color = GXCHATC.receivingBubbleMaskColor
             if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
-                if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = beginBubbleImage.gx_imageMasked(color: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                         messagesBubble.messageBeginBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                     }
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = beginBubbleImage.gx_imageMasked(color: darkeningkColor) {
                         if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                             messagesBubble.messageBeginBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                         }
@@ -89,13 +89,13 @@ private extension GXMessagesBubbleFactory {
             }
             if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
-                if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleOngoingImage.gx_imageMasked(color: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                         messagesBubble.messageOngoingBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                     }
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleOngoingImage.gx_imageMasked(color: darkeningkColor) {
                         if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                             messagesBubble.messageOngoingBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                         }
@@ -104,13 +104,13 @@ private extension GXMessagesBubbleFactory {
             }
             if let bubbleEndImage = GXCHATC.bubbleEndImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
-                if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleEndImage.gx_imageMasked(color: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                         messagesBubble.messageEndBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                     }
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleEndImage.gx_imageMasked(color: darkeningkColor) {
                         if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                             messagesBubble.messageEndBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                         }
@@ -127,33 +127,33 @@ private extension GXMessagesBubbleFactory {
         if status == .sending {
             if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
-                if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = beginBubbleImage.gx_imageMasked(color: color) {
                     messagesBubble.messageBeginBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = beginBubbleImage.gx_imageMasked(color: darkeningkColor) {
                         messagesBubble.messageBeginBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                     }
                 }
             }
             if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
-                if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleOngoingImage.gx_imageMasked(color: color) {
                     messagesBubble.messageOngoingBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleOngoingImage.gx_imageMasked(color: darkeningkColor) {
                         messagesBubble.messageOngoingBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                     }
                 }
             }
             if let bubbleEndImage = GXCHATC.bubbleEndImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
-                if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleEndImage.gx_imageMasked(color: color) {
                     messagesBubble.messageEndBubbleImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleEndImage.gx_imageMasked(color: darkeningkColor) {
                         messagesBubble.messageEndBubbleHighlightedImage = self.gx_stretchableImage(image: maskImage, capInsets: capInsets)
                     }
                 }
@@ -162,13 +162,13 @@ private extension GXMessagesBubbleFactory {
         else {
             if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
-                if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = beginBubbleImage.gx_imageMasked(color: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                         messagesBubble.messageBeginBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                     }
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = beginBubbleImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = beginBubbleImage.gx_imageMasked(color: darkeningkColor) {
                         if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                             messagesBubble.messageBeginBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                         }
@@ -177,13 +177,13 @@ private extension GXMessagesBubbleFactory {
             }
             if let bubbleOngoingImage = GXCHATC.bubbleOngoingImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleOngoingImage.size)
-                if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleOngoingImage.gx_imageMasked(color: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                         messagesBubble.messageOngoingBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                     }
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleOngoingImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleOngoingImage.gx_imageMasked(color: darkeningkColor) {
                         if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                             messagesBubble.messageOngoingBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                         }
@@ -192,13 +192,13 @@ private extension GXMessagesBubbleFactory {
             }
             if let bubbleEndImage = GXCHATC.bubbleEndImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: bubbleEndImage.size)
-                if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: color) {
+                if let maskImage = bubbleEndImage.gx_imageMasked(color: color) {
                     if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                         messagesBubble.messageEndBubbleImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                     }
                 }
-                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.12) {
-                    if let maskImage = bubbleEndImage.gx_imageMasked(maskColor: darkeningkColor) {
+                if let darkeningkColor = color.gx_colorByDarkeningColor(value: 0.2) {
+                    if let maskImage = bubbleEndImage.gx_imageMasked(color: darkeningkColor) {
                         if let flippedImage = self.gx_horizontallyFlippedImage(image: maskImage) {
                             messagesBubble.messageEndBubbleHighlightedImage = self.gx_stretchableImage(image: flippedImage, capInsets: capInsets)
                         }

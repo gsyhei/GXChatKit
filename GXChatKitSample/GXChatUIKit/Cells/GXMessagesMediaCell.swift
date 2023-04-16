@@ -9,8 +9,13 @@ import UIKit
 
 public class GXMessagesMediaCell: GXMessagesBaseCell {
     
-    /// 气泡imageView
-    public var mediaView: UIView?
+    /// 媒体图片
+    public lazy var mediaImageView: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.backgroundColor = .clear
+
+        return imageView
+    }()
     
     /// 播放按钮
     public lazy var playButton: UIButton = {
@@ -28,10 +33,15 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         
         return button
     }()
-
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    
+    /// highlighted效果
+    public lazy var highlightedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0.0, alpha: 0.2)
+        view.isHidden = true
+        
+        return view
+    }()
 
     public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -45,13 +55,19 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         super.prepareForReuse()
         
         self.playButton.isHidden = true
-        self.mediaView?.removeFromSuperview()
+        self.mediaImageView.image = nil
+        self.highlightedView.isHidden = true
     }
     
     public override func createSubviews() {
         super.createSubviews()
         
+        self.messageBubbleImageView.addSubview(self.mediaImageView)
         self.messageBubbleContainerView.addSubview(self.playButton)
+        self.highlightedView.frame = self.mediaImageView.bounds
+        self.highlightedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.mediaImageView.addSubview(self.highlightedView)
+        
         self.messageBubbleNameLabel.layer.shadowOpacity = 1.0
         self.messageBubbleNameLabel.layer.shadowRadius = 2.0
         self.messageBubbleNameLabel.layer.shadowColor = UIColor.black.cgColor
@@ -75,37 +91,25 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         if let content = item.data.gx_messagesContent as? GXMessagesPhotoContent {
             guard let layout = item.layout as? GXMessagesPhotoLayout else { return }
 
-            if let itemMediaView = content.mediaView {
-                self.messageBubbleImageView.addSubview(itemMediaView)
-                self.mediaView = itemMediaView
-            }
-            else {
-                let itemMediaView = UIImageView(frame: layout.imageRect)
-                itemMediaView.image = content.thumbnailImage
-                itemMediaView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)
-                self.messageBubbleImageView.addSubview(itemMediaView)
-                self.mediaView = itemMediaView
-                content.mediaView = itemMediaView
-            }
+            self.mediaImageView.frame = layout.imageRect
+            self.mediaImageView.image = content.thumbnailImage
+            self.mediaImageView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)
         }
         else if let content = item.data.gx_messagesContent as? GXMessagesVideoContent {
             guard let layout = item.layout as? GXMessagesVideoLayout else { return }
 
-            if let itemMediaView = content.mediaView {
-                self.messageBubbleImageView.addSubview(itemMediaView)
-                self.mediaView = itemMediaView
-            }
-            else {
-                let itemMediaView = UIImageView(frame: layout.imageRect)
-                itemMediaView.image = content.thumbnailImage
-                itemMediaView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)
-                self.messageBubbleImageView.addSubview(itemMediaView)
-                self.mediaView = itemMediaView
-                content.mediaView = itemMediaView
-            }
+            self.mediaImageView.frame = layout.imageRect
+            self.mediaImageView.image = content.thumbnailImage
+            self.mediaImageView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)
+            
             self.playButton.isHidden = false
             self.playButton.center = self.messageBubbleImageView.center
         }
+    }
+    
+    public override func setChecked(_ checked: Bool) {
+        super.setChecked(checked)
+        self.highlightedView.isHidden = !checked
     }
 
 }

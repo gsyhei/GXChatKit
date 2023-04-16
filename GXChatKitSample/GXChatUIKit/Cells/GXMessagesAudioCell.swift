@@ -40,10 +40,6 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         NotificationCenter.default.removeObserver(self)
     }
     
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

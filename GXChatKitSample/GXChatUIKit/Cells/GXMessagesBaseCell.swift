@@ -81,7 +81,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     open override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        self.messageBubbleImageView.isHighlighted = highlighted
+        self.setChecked(highlighted)
     }
     
     open override func prepareForReuse() {
@@ -153,12 +153,9 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
             self.messageBubbleTimeLabel.textColor = GXCHATC.receivingTimeColor
         }
     }
-}
 
-public extension GXMessagesBaseCell {
-    class func updateAvatar(item: GXMessagesItemData, avatarButton: UIButton) {
-        avatarButton.setImage(item.avatar?.avatarImage, for: .normal)
-        avatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
+    public func setChecked(_ checked: Bool) {
+        self.messageBubbleImageView.isHighlighted = checked
     }
     
 }
