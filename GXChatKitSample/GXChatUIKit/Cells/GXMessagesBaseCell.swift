@@ -81,14 +81,8 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     open override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        self.setChecked(highlighted)
-        
-        if highlighted {
-            self.messageBubbleContainerView.transform = .init(scaleX: 0.95, y: 0.95)
-        }
-        else {
-            self.messageBubbleContainerView.transform = .identity
-        }
+//        self.setChecked(highlighted)
+        self.updateHighlighted(highlighted, animated: animated)
     }
     
     open override func prepareForReuse() {
@@ -168,14 +162,20 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     public func setChecked(_ checked: Bool) {
         self.messageBubbleImageView.isHighlighted = checked
     }
-    
-    open override var canBecomeFirstResponder: Bool { return true }
-    
 }
 
 extension GXMessagesBaseCell {
     
+    private func updateHighlighted(_ highlighted: Bool, animated: Bool) {
+        let transform: CGAffineTransform = highlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
+        UIView.animate(withDuration: 0.25) {
+            self.messageBubbleContainerView.transform = transform
+        }
+    }
+    
     @objc func longPressGestureRecognizer(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        
+        if gestureRecognizer.state == .began {
+            NSLog("longPressGestureRecognizer began")
+        }
     }
 }
