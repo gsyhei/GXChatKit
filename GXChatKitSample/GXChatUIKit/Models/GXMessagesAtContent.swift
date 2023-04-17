@@ -24,9 +24,6 @@ public class GXMessagesAtContent: GXMessagesContentProtocol {
         self.text = text
         self.users = users
         self.attributedText = GXRichManager.atAttributedText(string: text, users: users)
-        
-        let string = GXRichManager.text(attributedString: self.attributedText)
-        NSLog("GXMessagesAtContent: \(string)")
     }
     
 }

@@ -21,6 +21,9 @@ public class GXMessagesTextContent: GXMessagesContentProtocol {
     public required init(text: String) {
         self.text = text
         self.attributedText = GXRichManager.attributedText(string: text)
+        
+        let string = GXRichManager.text(attributedString: self.attributedText)
+        NSLog("GXMessagesTextContent: \(string)")
     }
 }
    

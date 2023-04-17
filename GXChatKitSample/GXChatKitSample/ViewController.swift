@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         data1.messageContinuousStatus = .begin
         data1.messageStatus = .sending
         data1.messageType = .text
-        let text = "也不知道说什么！7867868765765765656556565656测试网址https://www.baidu.com，" +
+        let text = "[鬼脸]也不知道说什么！7867868765765765656556565656测试网址https://www.baidu.com，" +
         "测试电话0755-89776672，测试手机号18826763432，" +
         "测试表情[微笑][厌恶][鬼脸]。" +
         "邮箱：22872347834@qq.com"

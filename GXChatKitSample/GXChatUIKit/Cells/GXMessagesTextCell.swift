@@ -6,20 +6,15 @@
 //
 
 import UIKit
+import YYText
 
 public class GXMessagesTextCell: GXMessagesBaseCell {
     
     /// 文本Label
-    public lazy var contentTextView: GXMessagesTextView = {
-        let textView = GXMessagesTextView()
+    public lazy var contentTextView: YYLabel = {
+        let textView = YYLabel()
         textView.backgroundColor = .clear
-        textView.font = GXCHATC.textFont
-        textView.textColor = GXCHATC.textColor
-        textView.textContainerInset = .zero
-        textView.textContainer.lineFragmentPadding = 0
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        textView.dataDetectorTypes = .all
+        textView.numberOfLines = 0
         
         return textView
     }()
@@ -31,7 +26,7 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
     open override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.contentTextView.text = nil
+        self.contentTextView.attributedText = nil
     }
     
     public override func createSubviews() {
@@ -43,6 +38,7 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         super.bindCell(item: item)
                 
         guard let layout = item.layout as? GXMessagesTextLayout else { return }
+        self.contentTextView.textLayout = layout.textLayout
         self.contentTextView.frame = layout.textRect
         
         if let content = item.data.gx_messagesContent as? GXMessagesTextContent {

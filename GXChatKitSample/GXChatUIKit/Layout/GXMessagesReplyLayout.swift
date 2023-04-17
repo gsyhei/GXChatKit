@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YYText
 
 public class GXMessagesReplyLayout: GXMessagesBaseLayout {
     public var replyContentRect: CGRect = .zero
@@ -15,7 +16,8 @@ public class GXMessagesReplyLayout: GXMessagesBaseLayout {
     public var replyNameRect: CGRect = .zero
     public var replyTextRect: CGRect = .zero
     public var textRect: CGRect = .zero
-    
+    public var textLayout: YYTextLayout?
+
     public override func updateLayout(data: GXMessagesDataProtocol) {
         guard let content = data.gx_messagesContent as? GXMessagesReplyContent else { return }
         
@@ -42,7 +44,8 @@ public class GXMessagesReplyLayout: GXMessagesBaseLayout {
         let attributedText = NSMutableAttributedString(attributedString: content.attributedText)
         attributedText.append(NSAttributedString(string: data.gx_messageTime))
         let maxTextSize = CGSizeMake(maxContentWidth, 10000)
-        let displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
+        self.textLayout = GXRichManager.textLayout(maxSize: maxTextSize, text: attributedText)
+        let displaySize =  self.textLayout!.textBoundingSize
         contentWidth = max(contentWidth, min(maxContentWidth, displaySize.width))
         
         if data.gx_isShowNickname {

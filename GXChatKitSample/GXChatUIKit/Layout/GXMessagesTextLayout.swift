@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import YYText
 
 public class GXMessagesTextLayout: GXMessagesBaseLayout {
     
+    public var textLayout: YYTextLayout?
     public var textRect: CGRect = .zero
 
     public override func updateLayout(data: GXMessagesDataProtocol) {
@@ -20,7 +22,8 @@ public class GXMessagesTextLayout: GXMessagesBaseLayout {
             let attributedText = NSMutableAttributedString(attributedString: content.attributedText)
             attributedText.append(NSAttributedString(string: data.gx_messageTime))
             let maxTextSize = CGSizeMake(maxContentWidth, 10000)
-            let displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
+            self.textLayout = GXRichManager.textLayout(maxSize: maxTextSize, text: attributedText)
+            let displaySize =  self.textLayout!.textBoundingSize
             if data.gx_isShowNickname {
                 var nickNameWidth = data.gx_senderDisplayName.width(font: GXCHATC.nicknameFont)
                 nickNameWidth = min(nickNameWidth, maxContentWidth)
@@ -44,7 +47,8 @@ public class GXMessagesTextLayout: GXMessagesBaseLayout {
             let attributedText = NSMutableAttributedString(attributedString: content.attributedText)
             attributedText.append(NSAttributedString(string: data.gx_messageTime))
             let maxTextSize = CGSizeMake(maxContentWidth, 10000)
-            let displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
+            self.textLayout = GXRichManager.textLayout(maxSize: maxTextSize, text: attributedText)
+            let displaySize =  self.textLayout!.textBoundingSize
             if data.gx_isShowNickname {
                 var nickNameWidth = data.gx_senderDisplayName.width(font: GXCHATC.nicknameFont)
                 nickNameWidth = min(nickNameWidth, maxContentWidth)
@@ -68,7 +72,8 @@ public class GXMessagesTextLayout: GXMessagesBaseLayout {
             let attributedText = NSMutableAttributedString(attributedString: content.attributedText)
             attributedText.append(NSAttributedString(string: data.gx_messageTime))
             let maxTextSize = CGSizeMake(maxContentWidth, 10000)
-            let displaySize = attributedText.boundingRect(with: maxTextSize, options: .usesLineFragmentOrigin, context: nil).size
+            self.textLayout = GXRichManager.textLayout(maxSize: maxTextSize, text: attributedText)
+            let displaySize =  self.textLayout!.textBoundingSize
             if data.gx_isShowNickname {
                 var nickNameWidth = data.gx_senderDisplayName.width(font: GXCHATC.nicknameFont)
                 nickNameWidth = min(nickNameWidth, maxContentWidth)

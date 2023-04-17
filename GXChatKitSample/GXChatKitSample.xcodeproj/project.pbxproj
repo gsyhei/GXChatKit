@@ -29,7 +29,6 @@
 		964A504729E5C71A009D957F /* GXMessagesReplyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504629E5C71A009D957F /* GXMessagesReplyLayout.swift */; };
 		964A504929E73805009D957F /* GXMessagesReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504829E73805009D957F /* GXMessagesReplyCell.swift */; };
 		964A504B29E73C97009D957F /* UIImage+GXResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A504A29E73C97009D957F /* UIImage+GXResource.swift */; };
-		964CE28E29EDDD1400C225FE /* YYLabel+GXChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CE28D29EDDD1400C225FE /* YYLabel+GXChat.swift */; };
 		965FA5B0296C3AEC001D7633 /* GXChatUIKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */; };
 		965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */; };
 		965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */; };
@@ -174,7 +173,6 @@
 		964A504629E5C71A009D957F /* GXMessagesReplyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyLayout.swift; sourceTree = "<group>"; };
 		964A504829E73805009D957F /* GXMessagesReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyCell.swift; sourceTree = "<group>"; };
 		964A504A29E73C97009D957F /* UIImage+GXResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GXResource.swift"; sourceTree = "<group>"; };
-		964CE28D29EDDD1400C225FE /* YYLabel+GXChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YYLabel+GXChat.swift"; sourceTree = "<group>"; };
 		965FA5AF296C3AEC001D7633 /* GXChatUIKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GXChatUIKit.bundle; sourceTree = "<group>"; };
 		965FA5B32970439B001D7633 /* GXMessagesBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCell.swift; sourceTree = "<group>"; };
 		965FA5B42970439B001D7633 /* GXMessagesTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesTextCell.swift; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 				9699576D29757CD1001DCC17 /* Bundle+GXChat.swift */,
 				9699577729767567001DCC17 /* UIColor+GXChat.swift */,
 				964A504A29E73C97009D957F /* UIImage+GXResource.swift */,
-				964CE28D29EDDD1400C225FE /* YYLabel+GXChat.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -893,7 +890,6 @@
 				96A3C11729D43ECF00ADBC65 /* GXMessagesAtContent.swift in Sources */,
 				96A3C11529D2CBDD00ADBC65 /* GXMessagesCallCell.swift in Sources */,
 				96A3C13729D46EC500ADBC65 /* GXMessagesCallLayout.swift in Sources */,
-				964CE28E29EDDD1400C225FE /* YYLabel+GXChat.swift in Sources */,
 				96A3C12F29D4628A00ADBC65 /* GXMessagesAudioLayout.swift in Sources */,
 				96A3C12D29D4609B00ADBC65 /* GXMessagesTextLayout.swift in Sources */,
 				96198E6029BD31C1005C42A2 /* GXMessagesMediaCell.swift in Sources */,

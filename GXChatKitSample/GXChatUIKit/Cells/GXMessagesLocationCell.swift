@@ -26,13 +26,14 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
     }()
     
     /// 位置文本Label
-    public lazy var locationTextView: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .clear
-        textView.font = GXCHATC.locationTextFont
-        textView.textColor = .white
+    public lazy var locationTextLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.numberOfLines = 0
+        label.font = GXCHATC.locationTextFont
+        label.textColor = .white
 
-        return textView
+        return label
     }()
     
     /// highlighted效果
@@ -65,7 +66,7 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
                 
         self.messageBubbleImageView.addSubview(self.mediaImageView)
         self.mediaImageView.addSubview(self.locationContentView)
-        self.locationContentView.addSubview(self.locationTextView)
+        self.locationContentView.addSubview(self.locationTextLabel)
         self.highlightedView.frame = self.mediaImageView.bounds
         self.highlightedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.mediaImageView.addSubview(self.highlightedView)
@@ -86,12 +87,12 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
         self.messageBubbleTimeLabel.textColor = .white
 
         guard let layout = item.layout as? GXMessagesLocationLayout else { return }
-        self.locationTextView.frame = layout.locationTitleRect
+        self.locationTextLabel.frame = layout.locationTitleRect
         self.locationContentView.frame = layout.locationContentRect
         self.mediaImageView.frame = layout.imageRect
         
         guard let content = item.data.gx_messagesContent as? GXMessagesLocationContent else { return }
-        self.locationTextView.text = content.locationTitle
+        self.locationTextLabel.text = content.locationTitle
         self.mediaImageView.image = content.locationImage
         
         self.mediaImageView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)

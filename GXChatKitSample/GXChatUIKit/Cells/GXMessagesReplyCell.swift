@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YYText
 
 public class GXMessagesReplyCell: GXMessagesBaseCell {
     /// 回复内容的容器
@@ -63,16 +64,10 @@ public class GXMessagesReplyCell: GXMessagesBaseCell {
     }()
     
     /// 文本Label
-    public lazy var contentTextView: GXMessagesTextView = {
-        let textView = GXMessagesTextView()
+    public lazy var contentTextView: YYLabel = {
+        let textView = YYLabel()
         textView.backgroundColor = .clear
-        textView.font = GXCHATC.textFont
-        textView.textColor = GXCHATC.textColor
-        textView.textContainerInset = .zero
-        textView.textContainer.lineFragmentPadding = 0
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        textView.dataDetectorTypes = .all
+        textView.numberOfLines = 0
         
         return textView
     }()
@@ -92,7 +87,7 @@ public class GXMessagesReplyCell: GXMessagesBaseCell {
         self.replyFileExtLabel.text = nil
         self.replyNameLabel.text = nil
         self.replyTextLabel.text = nil
-        self.contentTextView.text = nil
+        self.contentTextView.attributedText = nil
         self.replyIconIView.isHidden = true
         self.replyFileExtLabel.isHidden = true
         self.replyIconIView.tintColor = nil
@@ -116,6 +111,7 @@ public class GXMessagesReplyCell: GXMessagesBaseCell {
         self.replyNameLabel.textColor = self.messageBubbleNameLabel.textColor
                 
         guard let layout = item.layout as? GXMessagesReplyLayout else { return }
+        self.contentTextView.textLayout = layout.textLayout
         self.replyContentView.frame = layout.replyContentRect
         self.replyVLineView.frame = layout.replyVLineRect
         self.replyIconIView.frame = layout.replyIconRect
