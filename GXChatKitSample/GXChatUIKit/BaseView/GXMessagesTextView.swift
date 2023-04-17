@@ -9,6 +9,17 @@ import UIKit
 
 public class GXMessagesTextView: UITextView {
     
+    public override var attributedText: NSAttributedString! {
+        didSet {
+            if let gesRecognizers = self.gestureRecognizers {
+                for subGesture in gesRecognizers {
+                    subGesture.cancelsTouchesInView = false
+                }
+            }
+        }
+    }
+    
+    
     // required to prevent blue background selection from any situation
     public override var selectedTextRange: UITextRange? {
         get { return nil }
@@ -16,6 +27,9 @@ public class GXMessagesTextView: UITextView {
     }
     
     public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        gestureRecognizer.cancelsTouchesInView = false
+        
+        
         if gestureRecognizer is UIPanGestureRecognizer {
             // required for compatibility with isScrollEnabled
             return super.gestureRecognizerShouldBegin(gestureRecognizer)
@@ -37,5 +51,11 @@ public class GXMessagesTextView: UITextView {
 //        gestureRecognizer.isEnabled = false
         return false
     }
-    
+
+}
+
+extension GXMessagesTextView: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

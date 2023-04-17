@@ -527,6 +527,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
         
     }
     
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        
+    }
+    
 }
 
 extension ViewController: UIScrollViewDelegate {
