@@ -106,9 +106,13 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleContainerView.addSubview(self.messageBubbleNameLabel)
         self.messageBubbleContainerView.addSubview(self.messageBubbleTimeLabel)
         
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGestureRecognizer(_:)))
-        longPress.minimumPressDuration = 1.0
-        self.messageBubbleContainerView.addGestureRecognizer(longPress)
+        let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGestureRecognizer(_:)))
+        longPressGR.minimumPressDuration = 1.0
+        self.messageBubbleContainerView.addGestureRecognizer(longPressGR)
+        
+        let panGR = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureRecognizer(_:)))
+        panGR.delegate = self
+        self.contentView.addGestureRecognizer(panGR)
     }
     
     public func bindCell(item: GXMessagesItemData) {
@@ -162,9 +166,16 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     public func setChecked(_ checked: Bool) {
         self.messageBubbleImageView.isHighlighted = checked
     }
+    
+    
 }
 
 extension GXMessagesBaseCell {
+    
+    // MARK: - UIGestureRecognizerDelegate
+    open override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
     
     private func updateHighlighted(_ highlighted: Bool, animated: Bool) {
         let transform: CGAffineTransform = highlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
@@ -178,4 +189,9 @@ extension GXMessagesBaseCell {
             NSLog("longPressGestureRecognizer began")
         }
     }
+    
+    @objc func panGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
+        
+    }
+    
 }

@@ -32,6 +32,21 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
     public override func createSubviews() {
         super.createSubviews()
         self.messageBubbleContainerView.addSubview(self.contentTextView)
+        
+        self.contentTextView.highlightTapAction = {[weak self] containerView, text, range, rect in
+            guard let `self` = self else { return }
+            let attributed = text.attributedSubstring(from: range)
+            if let textHighlight = attributed.yy_attributes?[YYTextHighlightAttributeName] as? YYTextHighlight {
+                guard let type = textHighlight.userInfo?[GXRichManager.highlightKey] as? GXRichManager.HighlightType else { return }
+                
+                if type == .user, let userId = textHighlight.userInfo?[GXRichManager.userIdKey] as? String {
+                    NSLog("highlightTapAction type: \(type), userId: \(userId)")
+                }
+                else {
+                    NSLog("highlightTapAction type: \(type), \(attributed.string)")
+                }
+            }
+        }
     }
 
     public override func bindCell(item: GXMessagesItemData) {
@@ -50,20 +65,6 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         else if let content = item.data.gx_messagesContent as? GXMessagesForwardContent {
             self.contentTextView.attributedText = content.attributedText
         }
-    }
-    
-}
-
-extension GXMessagesTextCell: UITextViewDelegate {
-    
-    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        if URL.absoluteString .hasPrefix(GXCHAT_LINK_PREFIX) && interaction == .invokeDefaultAction {
-            let userId = URL.absoluteString.substring(from: GXCHAT_LINK_PREFIX.count)
-            NSLog("UITextView shouldInteractWith: userId = \(userId)")
-            
-            return false
-        }
-        return true
     }
     
 }

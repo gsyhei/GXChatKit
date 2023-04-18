@@ -16,6 +16,7 @@ public class GXRichManager: NSObject {
     
     public static let emojiKey = "emojiKey"
     public static let highlightKey = "highlKey"
+    public static let userIdKey = "userIdKey"
 
     class func textLayout(maxSize: CGSize, text: NSAttributedString) -> YYTextLayout {
         let modifier = YYTextLinePositionSimpleModifier()
@@ -40,7 +41,7 @@ public class GXRichManager: NSObject {
         if let urlExpression = try? NSRegularExpression(pattern: GXCHATC.urlRegularExpression) {
             let highlight = YYTextHighlight(backgroundColor: GXCHATC.textBackgroudColor)
             highlight.setColor(GXCHATC.textHighlightColor)
-            highlight.userInfo = [GXRichManager.highlightKey: HighlightType.url]
+            highlight.userInfo = [highlightKey: HighlightType.url]
             urlExpression.enumerateMatches(in: string, range: NSMakeRange(0, string.count)) { result, flags, stop in
                 if let range = result?.range, flags != .internalError {
                     attributed.yy_setColor(GXCHATC.textHighlightColor, range: range)
@@ -51,7 +52,7 @@ public class GXRichManager: NSObject {
         if let phoneExpression = try? NSRegularExpression(pattern: GXCHATC.phoneRegularExpression) {
             let highlight = YYTextHighlight(backgroundColor: GXCHATC.textBackgroudColor)
             highlight.setColor(GXCHATC.textHighlightColor)
-            highlight.userInfo = [GXRichManager.highlightKey: HighlightType.phone]
+            highlight.userInfo = [highlightKey: HighlightType.phone]
             phoneExpression.enumerateMatches(in: string, range: NSMakeRange(0, string.count)) { result, flags, stop in
                 if let range = result?.range, flags != .internalError {
                     attributed.yy_setColor(GXCHATC.textHighlightColor, range: range)
@@ -62,7 +63,7 @@ public class GXRichManager: NSObject {
         if let emailExpression = try? NSRegularExpression(pattern: GXCHATC.emailRegularExpression) {
             let highlight = YYTextHighlight(backgroundColor: GXCHATC.textBackgroudColor)
             highlight.setColor(GXCHATC.textHighlightColor)
-            highlight.userInfo = [GXRichManager.highlightKey: HighlightType.email]
+            highlight.userInfo = [highlightKey: HighlightType.email]
             emailExpression.enumerateMatches(in: string, range: NSMakeRange(0, string.count)) { result, flags, stop in
                 if let range = result?.range, flags != .internalError {
                     attributed.yy_setColor(GXCHATC.textHighlightColor, range: range)
@@ -124,6 +125,7 @@ public class GXRichManager: NSObject {
             
             let highlight = YYTextHighlight(backgroundColor: GXCHATC.textBackgroudColor)
             highlight.setColor(GXCHATC.textHighlightColor)
+            highlight.userInfo = [highlightKey: HighlightType.user, userIdKey: user.gx_id]
             appendString.yy_setTextHighlight(highlight, range: range)
             attributedString.append(appendString)
         }
@@ -170,7 +172,7 @@ public class GXRichManager: NSObject {
         for index in 0..<count {
             let subAttr = attributedString.attributedSubstring(from: NSRange(location: index, length: 1))
             if let attachment = subAttr.yy_attributes?[YYTextAttachmentAttributeName] as? YYTextAttachment {
-                if let emojiStr = attachment.userInfo?[GXRichManager.emojiKey] as? String {
+                if let emojiStr = attachment.userInfo?[emojiKey] as? String {
                     mutableString.append(emojiStr)
                 }
             }
@@ -190,6 +192,7 @@ public extension GXRichManager {
         case url   = 0
         case phone = 1
         case email = 2
+        case user  = 3
     }
     
 }
