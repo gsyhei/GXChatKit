@@ -53,6 +53,14 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         return button
     }()
     
+    /// 回复侧滑标志
+    public lazy var replyIndicatorView: GXMessagesReplyIndicatorView = {
+        let frame = CGRect(origin: CGPoint(x: 20, y: 20), size: CGSize(width: 40, height: 40))
+        let view = GXMessagesReplyIndicatorView(frame: frame)
+
+        return view
+    }()
+    
     //MARK: - GXMessagesAvatarCellProtocol
     
     public var avatar: UIView {
@@ -167,7 +175,6 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleImageView.isHighlighted = checked
     }
     
-    
 }
 
 extension GXMessagesBaseCell {
@@ -191,7 +198,18 @@ extension GXMessagesBaseCell {
     }
     
     @objc func panGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
+        NSLog("panGestureRecognizer state: \(gestureRecognizer.state)")
         
+        switch gestureRecognizer.state {
+        case .began:
+            self.addSubview(self.replyIndicatorView)
+            self.replyIndicatorView.startAnimation()
+
+        case .ended, .cancelled, .failed:
+            self.replyIndicatorView.removeFromSuperview()
+            
+        default: break
+        }
     }
     
 }

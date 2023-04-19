@@ -37,4 +37,7 @@ public extension UIImage {
         return UIImage.gx_bundleAssetImage(name: "redEnvelope")
     }
     
+    static var gx_replyIconImage: UIImage? {
+        return UIImage(systemName: "arrowshape.turn.up.left.fill")
+    }
 }
