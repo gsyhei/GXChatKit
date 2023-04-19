@@ -9,21 +9,24 @@ import UIKit
 
 public class GXMessagesReplyIndicatorView: UIView {
     
-    public var lineWidth: CGFloat = 4.0 {
-        didSet {
-            self.setNeedsDisplay()
-        }
-    }
+    public var isShowAnimated = false
     
     public var progress: CGFloat = 0 {
         didSet {
             self.alpha = self.progress
+            let scale = 0.3 + self.progress * 0.7
+            self.transform = CGAffineTransform(scaleX: scale, y: scale)
             self.setNeedsDisplay()
         }
     }
     
-    /// reply icon
-    public lazy var replyIconView: UIImageView = {
+    private var lineWidth: CGFloat = GXCHATC.replyIndicatorLineWidth * SCREEN_SCALE {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+        
+    private lazy var replyIconView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.backgroundColor = .clear
         imageView.image = .gx_replyIconImage?.withRenderingMode(.alwaysTemplate)
@@ -32,7 +35,7 @@ public class GXMessagesReplyIndicatorView: UIView {
         return imageView
     }()
     
-    public lazy var displayLink: CADisplayLink = {
+    private lazy var displayLink: CADisplayLink = {
         let link = CADisplayLink(target: self, selector: #selector(displayLinkTick(link:)))
         if #available(iOS 15.0, *) {
             link.preferredFrameRateRange = CAFrameRateRange(minimum: 60, maximum: 60)
@@ -42,8 +45,14 @@ public class GXMessagesReplyIndicatorView: UIView {
         return link
     }()
     
-    public lazy var linkSpeed: CGFloat = {
-        return (self.frame.width/2 * SCREEN_SCALE - 4.0) / 30
+    private lazy var linkSpeed: CGFloat = {
+        let radius = (self.frame.width/2 - GXCHATC.replyIndicatorLineWidth) * SCREEN_SCALE
+        
+        return radius / (60.0 * 0.3)
+    }()
+    
+    private lazy var generator: UIImpactFeedbackGenerator = {
+        return UIImpactFeedbackGenerator(style: .heavy)
     }()
     
     deinit {
@@ -59,25 +68,32 @@ public class GXMessagesReplyIndicatorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func createSubviews() {
-        self.backgroundColor = UIColor.systemBlue
+    private func createSubviews() {
+        self.backgroundColor = GXCHATC.replyIndicatorbackgroudColor
         self.layer.masksToBounds = true
         self.layer.cornerRadius = self.frame.height/2
         self.replyIconView.frame = self.bounds.insetBy(dx: 10.0, dy: 10.0)
         self.addSubview(replyIconView)
-        
-        self.progress = 1.0
     }
     
-    public func startAnimation() {
-        self.lineWidth = 4.0
+    public func reset() {
+        self.progress = 0.0
+        self.isShowAnimated = false
+        self.lineWidth = GXCHATC.replyIndicatorLineWidth * SCREEN_SCALE
+        self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+    }
+    
+    public func showAnimation() {
+        guard !self.isShowAnimated else { return }
+        self.isShowAnimated = true
+        self.generator.impactOccurred()
         self.displayLink.add(to: RunLoop.main, forMode: .common)
     }
 
     public override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(self.lineWidth)
-        context?.setStrokeColor(UIColor.systemGreen.cgColor)
+        context?.setStrokeColor(GXCHATC.replyIndicatorCircularColor.cgColor)
         context?.setLineCap(.butt)
         let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
         let radius = rect.height / 2

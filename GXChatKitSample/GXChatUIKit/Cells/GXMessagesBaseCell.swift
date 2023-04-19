@@ -55,7 +55,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     /// 回复侧滑标志
     public lazy var replyIndicatorView: GXMessagesReplyIndicatorView = {
-        let frame = CGRect(origin: CGPoint(x: 20, y: 20), size: CGSize(width: 40, height: 40))
+        let frame = CGRect(origin: .zero, size: GXCHATC.replyIndicatorSize)
         let view = GXMessagesReplyIndicatorView(frame: frame)
 
         return view
@@ -198,17 +198,50 @@ extension GXMessagesBaseCell {
     }
     
     @objc func panGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
-        NSLog("panGestureRecognizer state: \(gestureRecognizer.state)")
-        
         switch gestureRecognizer.state {
         case .began:
-            self.addSubview(self.replyIndicatorView)
-            self.replyIndicatorView.startAnimation()
-
-        case .ended, .cancelled, .failed:
-            self.replyIndicatorView.removeFromSuperview()
+            self.replyIndicatorView.reset()
+            let point = CGPoint(x: self.frame.maxX, y: (self.height - self.replyIndicatorView.height)/2)
+            self.replyIndicatorView.origin = point
+            self.contentView.addSubview(self.replyIndicatorView)
+        case .cancelled, .failed:
+            self.endReplyIndicatorMoveAnimation()
+        case .ended:
+            self.endReplyIndicatorMoveAnimation()
             
+        case .changed:
+            let movePoint = gestureRecognizer.translation(in: gestureRecognizer.view)
+            self.updateSafeCurrentPoint(movePoint)
+            gestureRecognizer.setTranslation(.zero, in: gestureRecognizer.view)
         default: break
+        }
+    }
+    
+    private func updateSafeCurrentPoint(_ movePoint: CGPoint) {
+        var moveX = movePoint.x
+        let currentLeft = self.contentView.left
+        if movePoint.x < 0 && currentLeft <= -GXCHATC.replyIndicatorMoveMaxWidth {
+            moveX = -0.1
+        }
+        var moveLeft = self.contentView.left + moveX
+        if moveLeft <= -GXCHATC.replyIndicatorMoveMaxWidth {
+            self.replyIndicatorView.showAnimation()
+        }
+        else if moveLeft > 0 {
+            moveLeft = 0
+        }
+        self.contentView.left = moveLeft
+        var progress = abs(moveLeft) / GXCHATC.replyIndicatorMoveMaxWidth
+        progress = progress > 1.0 ? 1.0 : progress
+        self.replyIndicatorView.progress = progress
+    }
+    
+    private func endReplyIndicatorMoveAnimation() {
+        UIView.animate(withDuration: 0.3) {
+            self.contentView.left = 0
+            self.replyIndicatorView.reset()
+        } completion: { finish in
+            self.replyIndicatorView.removeFromSuperview()
         }
     }
     

@@ -203,6 +203,17 @@ public class GXChatConfiguration: NSObject {
     /// 位置文本字体
     public var locationTextFont: UIFont = .systemFont(ofSize: 13)
     
+    /// 回复侧滑指示器尺寸
+    public var replyIndicatorSize: CGSize = CGSize(width: 40.0, height: 40.0)
+    /// 回复侧滑指示器进度线条宽度
+    public var replyIndicatorLineWidth: CGFloat = 2.0
+    /// 回复侧滑指示器移动最大距离
+    public var replyIndicatorMoveMaxWidth: CGFloat = 40.0
+    /// 回复侧滑指示器圆环颜色
+    public var replyIndicatorCircularColor: UIColor = UIColor(hex: 0x04B9854)
+    /// 回复侧滑指示器背景颜色
+    public var replyIndicatorbackgroudColor: UIColor = UIColor(hex: 0x04B985488, useAlpha: true)
+
 }
 
 public extension GXChatConfiguration {
