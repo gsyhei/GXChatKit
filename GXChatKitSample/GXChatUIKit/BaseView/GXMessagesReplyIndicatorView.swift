@@ -9,6 +9,19 @@ import UIKit
 
 public class GXMessagesReplyIndicatorView: UIView {
     
+    public var lineWidth: CGFloat = 4.0 {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    public var progress: CGFloat = 0 {
+        didSet {
+            self.alpha = self.progress
+            self.setNeedsDisplay()
+        }
+    }
+    
     /// reply icon
     public lazy var replyIconView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -21,9 +34,21 @@ public class GXMessagesReplyIndicatorView: UIView {
     
     public lazy var displayLink: CADisplayLink = {
         let link = CADisplayLink(target: self, selector: #selector(displayLinkTick(link:)))
-        
+        if #available(iOS 15.0, *) {
+            link.preferredFrameRateRange = CAFrameRateRange(minimum: 60, maximum: 60)
+        } else {
+            link.preferredFramesPerSecond = 60
+        }
         return link
     }()
+    
+    public lazy var linkSpeed: CGFloat = {
+        return (self.frame.width/2 * SCREEN_SCALE - 4.0) / 30
+    }()
+    
+    deinit {
+        self.displayLink.invalidate()
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,20 +69,8 @@ public class GXMessagesReplyIndicatorView: UIView {
         self.progress = 1.0
     }
     
-    public var lineWidth: CGFloat = 4.0 {
-        didSet {
-            
-        }
-    }
-    
-    public var progress: CGFloat = 0 {
-        didSet {
-            self.backgroundColor = UIColor.systemBlue.withAlphaComponent(self.progress)
-            self.setNeedsDisplay()
-        }
-    }
-    
     public func startAnimation() {
+        self.lineWidth = 4.0
         self.displayLink.add(to: RunLoop.main, forMode: .common)
     }
 
@@ -65,7 +78,7 @@ public class GXMessagesReplyIndicatorView: UIView {
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(self.lineWidth)
         context?.setStrokeColor(UIColor.systemGreen.cgColor)
-        context?.setLineCap(.round)
+        context?.setLineCap(.butt)
         let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
         let radius = rect.height / 2
         let startAngle = -CGFloat.pi / 2
@@ -76,12 +89,9 @@ public class GXMessagesReplyIndicatorView: UIView {
     }
 
     @objc func displayLinkTick(link: CADisplayLink) {
-        self.lineWidth += 2.0
-        self.setNeedsDisplay()
-        
-        if self.lineWidth >= self.frame.width {
+        self.lineWidth += self.linkSpeed
+        if self.lineWidth >= self.frame.width/2 * SCREEN_SCALE {
             link.remove(from: RunLoop.main, forMode: .common)
-            link.invalidate()
         }
     }
 }
