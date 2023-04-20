@@ -1,7 +1,7 @@
 PODS:
   - FPSLabel (1.0.1)
   - GXCategories (1.0.5)
-  - GXMessagesTableView (1.0.3):
+  - GXMessagesTableView (1.0.4):
     - GXCategories
     - GXRefresh
   - GXRefresh (1.1.2)
@@ -33,7 +33,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   FPSLabel: a6386de76a8fa767102bcb2c18b7c605a3ac3d75
   GXCategories: 911f8094403c17a8dd2c4f6a1fb87cfc45d39a96
-  GXMessagesTableView: 5d09e450425a7b1c4f4f5fc060927d6655f8fec9
+  GXMessagesTableView: f84f2ba84dfe9e3b42a1c6298703c8dbe33848af
   GXRefresh: d8c64ca667f1daad0f332cd6066023714fc0da6d
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   SwiftyAttributes: 6d7386e90ac611b6acac8b59e38f34bfa4621c80
