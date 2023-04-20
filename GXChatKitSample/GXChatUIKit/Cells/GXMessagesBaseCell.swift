@@ -61,6 +61,12 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         return view
     }()
     
+    /// Pan手势锁
+    private var isPanLock: Bool = false
+    /// 悬浮头像
+    private var hoverAvatar: UIView?
+    private var hoverAvatarRect: CGRect = .zero
+
     //MARK: - GXMessagesAvatarCellProtocol
     
     public var avatar: UIView {
@@ -100,6 +106,8 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageAvatarButton.setImage(nil, for: .normal)
         self.messageAvatarButton.setImage(nil, for: .highlighted)
         self.messageBubbleNameLabel.isHidden = true
+        self.hoverAvatar = nil
+        self.isPanLock = false
     }
     
     public func createSubviews() {
@@ -181,6 +189,9 @@ extension GXMessagesBaseCell {
     
     // MARK: - UIGestureRecognizerDelegate
     open override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if otherGestureRecognizer is UIPanGestureRecognizer {
+            return !self.isPanLock
+        }
         return true
     }
     
@@ -200,14 +211,11 @@ extension GXMessagesBaseCell {
     @objc func panGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case .began:
-            self.replyIndicatorView.reset()
-            let point = CGPoint(x: self.frame.maxX, y: (self.height - self.replyIndicatorView.height)/2)
-            self.replyIndicatorView.origin = point
-            self.contentView.addSubview(self.replyIndicatorView)
+            self.panStateBegan()
         case .cancelled, .failed:
-            self.endReplyIndicatorMoveAnimation()
+            self.panStateEndAnimation()
         case .ended:
-            self.endReplyIndicatorMoveAnimation()
+            self.panStateEndAnimation()
             
         case .changed:
             let movePoint = gestureRecognizer.translation(in: gestureRecognizer.view)
@@ -216,8 +224,27 @@ extension GXMessagesBaseCell {
         default: break
         }
     }
+        
+    private func panStateBegan() {
+        self.isPanLock = true
+        self.replyIndicatorView.reset()
+        let point = CGPoint(x: self.frame.maxX, y: (self.height - self.replyIndicatorView.height)/2)
+        self.replyIndicatorView.origin = point
+        self.contentView.addSubview(self.replyIndicatorView)
+        
+        if let table = self.superview as? GXMessagesTableView {
+            if let indexPath = table.indexPath(for: self) {
+                if indexPath == table.avatarToCellIndexPath {
+                    self.hoverAvatar = table.hoverToCellAvatar
+                    self.hoverAvatarRect = table.hoverToCellAvatar?.frame ?? .zero
+                }
+            }
+        }
+    }
     
     private func updateSafeCurrentPoint(_ movePoint: CGPoint) {
+        guard abs(movePoint.x) > abs(movePoint.y) else { return }
+        
         var moveX = movePoint.x
         let currentLeft = self.contentView.left
         if movePoint.x < 0 && currentLeft <= -GXCHATC.replyIndicatorMoveMaxWidth {
@@ -234,14 +261,21 @@ extension GXMessagesBaseCell {
         var progress = abs(moveLeft) / GXCHATC.replyIndicatorMoveMaxWidth
         progress = progress > 1.0 ? 1.0 : progress
         self.replyIndicatorView.progress = progress
+        
+        if let letHoverAvatar = self.hoverAvatar {
+            letHoverAvatar.left = moveLeft
+        }
     }
     
-    private func endReplyIndicatorMoveAnimation() {
+    private func panStateEndAnimation() {
+        self.isPanLock = false
         UIView.animate(withDuration: 0.3) {
             self.contentView.left = 0
+            self.hoverAvatar?.frame = self.hoverAvatarRect
             self.replyIndicatorView.reset()
         } completion: { finish in
             self.replyIndicatorView.removeFromSuperview()
+            self.hoverAvatar = nil
         }
     }
     

@@ -13,6 +13,7 @@ public class GXMessagesReplyIndicatorView: UIView {
     
     public var progress: CGFloat = 0 {
         didSet {
+            NSLog("progress =========== \(progress)")
             self.alpha = self.progress
             let scale = 0.3 + self.progress * 0.7
             self.transform = CGAffineTransform(scaleX: scale, y: scale)
@@ -20,7 +21,7 @@ public class GXMessagesReplyIndicatorView: UIView {
         }
     }
     
-    private var lineWidth: CGFloat = GXCHATC.replyIndicatorLineWidth * SCREEN_SCALE {
+    private var lineWidth: CGFloat = GXCHATC.replyIndicatorLineWidth {
         didSet {
             self.setNeedsDisplay()
         }
@@ -46,7 +47,7 @@ public class GXMessagesReplyIndicatorView: UIView {
     }()
     
     private lazy var linkSpeed: CGFloat = {
-        let radius = (self.frame.width/2 - GXCHATC.replyIndicatorLineWidth) * SCREEN_SCALE
+        let radius = self.frame.width - GXCHATC.replyIndicatorLineWidth
         
         return radius / (60.0 * 0.3)
     }()
@@ -79,7 +80,7 @@ public class GXMessagesReplyIndicatorView: UIView {
     public func reset() {
         self.progress = 0.0
         self.isShowAnimated = false
-        self.lineWidth = GXCHATC.replyIndicatorLineWidth * SCREEN_SCALE
+        self.lineWidth = GXCHATC.replyIndicatorLineWidth
         self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
     }
     
@@ -106,7 +107,7 @@ public class GXMessagesReplyIndicatorView: UIView {
 
     @objc func displayLinkTick(link: CADisplayLink) {
         self.lineWidth += self.linkSpeed
-        if self.lineWidth >= self.frame.width/2 * SCREEN_SCALE {
+        if self.lineWidth >= self.frame.width {
             link.remove(from: RunLoop.main, forMode: .common)
         }
     }

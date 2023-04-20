@@ -206,7 +206,7 @@ public class GXChatConfiguration: NSObject {
     /// 回复侧滑指示器尺寸
     public var replyIndicatorSize: CGSize = CGSize(width: 40.0, height: 40.0)
     /// 回复侧滑指示器进度线条宽度
-    public var replyIndicatorLineWidth: CGFloat = 2.0
+    public var replyIndicatorLineWidth: CGFloat = 4.0
     /// 回复侧滑指示器移动最大距离
     public var replyIndicatorMoveMaxWidth: CGFloat = 40.0
     /// 回复侧滑指示器圆环颜色
