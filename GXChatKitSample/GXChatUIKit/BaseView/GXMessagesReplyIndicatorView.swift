@@ -13,7 +13,6 @@ public class GXMessagesReplyIndicatorView: UIView {
     
     public var progress: CGFloat = 0 {
         didSet {
-            NSLog("progress =========== \(progress)")
             self.alpha = self.progress
             let scale = 0.3 + self.progress * 0.7
             self.transform = CGAffineTransform(scaleX: scale, y: scale)
@@ -77,11 +76,11 @@ public class GXMessagesReplyIndicatorView: UIView {
         self.addSubview(replyIconView)
     }
     
-    public func reset() {
+    public func reset(end: Bool = false) {
         self.progress = 0.0
         self.isShowAnimated = false
         self.lineWidth = GXCHATC.replyIndicatorLineWidth
-        self.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+        self.transform = end ? CGAffineTransform(scaleX: 0.3, y: 0.3) : .identity
     }
     
     public func showAnimation() {

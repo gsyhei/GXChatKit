@@ -216,7 +216,7 @@ extension GXMessagesBaseCell {
             self.panStateEndAnimation()
         case .ended:
             self.panStateEndAnimation()
-            
+            break
         case .changed:
             let movePoint = gestureRecognizer.translation(in: gestureRecognizer.view)
             self.updateSafeCurrentPoint(movePoint)
@@ -228,10 +228,18 @@ extension GXMessagesBaseCell {
     private func panStateBegan() {
         self.isPanLock = true
         self.replyIndicatorView.reset()
-        let point = CGPoint(x: self.frame.maxX, y: (self.height - self.replyIndicatorView.height)/2)
-        self.replyIndicatorView.origin = point
+        if let data = self.item?.data, data.gx_messageStatus == .sending {
+            let left = self.frame.maxX + 10.0
+            let point = CGPoint(x: left, y: (self.height - self.replyIndicatorView.height)/2)
+            self.replyIndicatorView.origin = point
+        }
+        else {
+            let left = self.frame.maxX
+            let point = CGPoint(x: left, y: (self.height - self.replyIndicatorView.height)/2)
+            self.replyIndicatorView.origin = point
+        }
         self.contentView.addSubview(self.replyIndicatorView)
-        
+
         if let table = self.superview as? GXMessagesTableView {
             if let indexPath = table.indexPath(for: self) {
                 if indexPath == table.avatarToCellIndexPath {
@@ -245,25 +253,29 @@ extension GXMessagesBaseCell {
     private func updateSafeCurrentPoint(_ movePoint: CGPoint) {
         guard abs(movePoint.x) > abs(movePoint.y) else { return }
         
+        var moveMaxWidth = GXCHATC.replyIndicatorMoveMaxWidth
+        if let data = self.item?.data, data.gx_messageStatus == .sending {
+            moveMaxWidth = GXCHATC.replyIndicatorMoveMaxWidth + 10.0
+        }
         var moveX = movePoint.x
         let currentLeft = self.contentView.left
-        if movePoint.x < 0 && currentLeft <= -GXCHATC.replyIndicatorMoveMaxWidth {
+        if movePoint.x < 0 && currentLeft <= -moveMaxWidth {
             moveX = -0.1
         }
-        var moveLeft = self.contentView.left + moveX
-        if moveLeft <= -GXCHATC.replyIndicatorMoveMaxWidth {
+        var moveLeft = currentLeft + moveX
+        if moveLeft <= -moveMaxWidth {
             self.replyIndicatorView.showAnimation()
         }
         else if moveLeft > 0 {
             moveLeft = 0
         }
         self.contentView.left = moveLeft
-        var progress = abs(moveLeft) / GXCHATC.replyIndicatorMoveMaxWidth
+        var progress = abs(moveLeft) / moveMaxWidth
         progress = progress > 1.0 ? 1.0 : progress
         self.replyIndicatorView.progress = progress
         
         if let letHoverAvatar = self.hoverAvatar {
-            letHoverAvatar.left = moveLeft
+            letHoverAvatar.left = self.hoverAvatarRect.minX + moveLeft
         }
     }
     
@@ -272,7 +284,7 @@ extension GXMessagesBaseCell {
         UIView.animate(withDuration: 0.3) {
             self.contentView.left = 0
             self.hoverAvatar?.frame = self.hoverAvatarRect
-            self.replyIndicatorView.reset()
+            self.replyIndicatorView.reset(end: true)
         } completion: { finish in
             self.replyIndicatorView.removeFromSuperview()
             self.hoverAvatar = nil
