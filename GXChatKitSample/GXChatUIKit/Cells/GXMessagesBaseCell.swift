@@ -11,6 +11,9 @@ import GXMessagesTableView
 
 open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
+    /// 代理
+    public weak var delegate: GXMessagesBaseCellProtocol?
+    
     /// 消息数据
     public weak var item: GXMessagesItemData?
     
@@ -131,6 +134,11 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.contentView.addGestureRecognizer(panGR)
     }
     
+    public func bindCell(item: GXMessagesItemData, delegate: GXMessagesBaseCellProtocol?) {
+        self.delegate = delegate
+        self.bindCell(item: item)
+    }
+    
     public func bindCell(item: GXMessagesItemData) {
         self.item = item
         switch item.data.gx_messageContinuousStatus {
@@ -179,10 +187,14 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         }
     }
 
-    public func setChecked(_ checked: Bool) {
+    @objc public func setChecked(_ checked: Bool) {
         self.messageBubbleImageView.isHighlighted = checked
     }
     
+    public func showChecked() {
+        self.setChecked(true)
+        self.perform(#selector(setChecked(_:)), with: false, afterDelay: 2.0)
+    }
 }
 
 extension GXMessagesBaseCell {
