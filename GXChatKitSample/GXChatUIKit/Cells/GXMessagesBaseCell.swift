@@ -208,6 +208,22 @@ extension GXMessagesBaseCell {
         return true
     }
     
+    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let pan = gestureRecognizer as? UIPanGestureRecognizer {
+            if self.isEditing {
+                return false
+            }
+            let translation = pan.translation(in: pan.view)
+            if abs(translation.y) > abs(translation.x) {
+                return false
+            }
+            if let table = self.superview as? GXMessagesTableView {
+                return !table.isDecelerating
+            }
+        }
+        return super.gestureRecognizerShouldBegin(gestureRecognizer)
+    }
+    
     private func updateHighlighted(_ highlighted: Bool, animated: Bool) {
         let transform: CGAffineTransform = highlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
         UIView.animate(withDuration: 0.25) {
@@ -293,6 +309,12 @@ extension GXMessagesBaseCell {
     }
     
     private func panStateEndAnimation() {
+        if self.replyIndicatorView.progress == 1.0 {
+            NSLog("panStateEnd Reply true")
+        }
+        else {
+            NSLog("panStateEnd Reply false")
+        }
         self.isPanLock = false
         UIView.animate(withDuration: 0.3) {
             self.contentView.left = 0
