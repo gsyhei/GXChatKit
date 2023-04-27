@@ -53,6 +53,8 @@ public class GXChatConfiguration: NSObject {
     /// 群组接收方是否显示头像
     public var groupChatReceivingShowAvatar: Bool = true
     
+    /// 昵称是否只在连续状态开始显示
+    public var showContinuousBeginNickname: Bool = true
     /// 单聊发送方是否显示昵称
     public var singleChatSendingShowNickname: Bool = true
     /// 单聊接收方是否显示昵称

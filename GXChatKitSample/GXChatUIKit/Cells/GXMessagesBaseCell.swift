@@ -141,16 +141,17 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     public func bindCell(item: GXMessagesItemData) {
         self.item = item
-        switch item.data.gx_messageContinuousStatus {
-        case .begin:
-            self.messageBubbleImageView.image = item.bubble?.messageBeginBubbleImage
-            self.messageBubbleImageView.highlightedImage = item.bubble?.messageBeginBubbleHighlightedImage
-        case .ongoing:
-            self.messageBubbleImageView.image = item.bubble?.messageOngoingBubbleImage
-            self.messageBubbleImageView.highlightedImage = item.bubble?.messageOngoingBubbleHighlightedImage
-        case .end, .beginAndEnd:
+        if item.data.gx_continuousEnd {
             self.messageBubbleImageView.image = item.bubble?.messageEndBubbleImage
             self.messageBubbleImageView.highlightedImage = item.bubble?.messageEndBubbleHighlightedImage
+        }
+        else if item.data.gx_continuousBegin {
+            self.messageBubbleImageView.image = item.bubble?.messageBeginBubbleImage
+            self.messageBubbleImageView.highlightedImage = item.bubble?.messageBeginBubbleHighlightedImage
+        }
+        else {
+            self.messageBubbleImageView.image = item.bubble?.messageOngoingBubbleImage
+            self.messageBubbleImageView.highlightedImage = item.bubble?.messageOngoingBubbleHighlightedImage
         }
         self.messageBubbleContainerView.frame = item.layout.containerRect
         
@@ -164,7 +165,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
                 self.messageAvatarButton.setImage(item.avatar?.avatarImage, for: .normal)
                 self.messageAvatarButton.setImage(item.avatar?.avatarHighlightedImage, for: .highlighted)
             }
-            self.messageAvatarButton.isHidden = (item.data.gx_messageContinuousStatus != .end && item.data.gx_messageContinuousStatus != .beginAndEnd)
+            self.messageAvatarButton.isHidden = !item.data.gx_continuousEnd
         }
         if item.data.gx_isShowNickname {
             self.messageBubbleNameLabel.isHidden = false

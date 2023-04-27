@@ -13,8 +13,6 @@ public protocol GXMessagesDataProtocol: GXMessagesAvatarDataProtocol  {
     var gx_messageId: String { get }
     /// 群ID（不是群则为nil）
     var gx_groupId: String? { get }
-    /// 发送方ID
-    var gx_senderId: String { get }
     /// 发送方显示名称
     var gx_senderDisplayName: String { get }
     /// 发送方头像
@@ -59,6 +57,9 @@ public extension GXMessagesDataProtocol {
     
     /// 昵称是否显示
     var gx_isShowNickname: Bool {
+        if GXCHATC.showContinuousBeginNickname {
+            guard self.gx_continuousBegin else { return false }
+        }
         if self.gx_messageStatus == .sending {
             if self.gx_chatType == .single {
                 return GXCHATC.singleChatSendingShowNickname

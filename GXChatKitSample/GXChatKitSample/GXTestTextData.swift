@@ -14,7 +14,8 @@ struct GXMessagesTestData {
     var showName: String = "抬头45度仰望天空"
     var messageID: String = ""
     var avatarID: String = ""
-    var messageContinuousStatus: GXMessageContinuousStatus = .begin
+    var continuousBegin: Bool = false
+    var continuousEnd: Bool = false
     var messageStatus: GXMessageStatus = .sending
     var messageType: GXChatConfiguration.MessageType = .text
     var messagesContentData: GXMessagesContentProtocol? = nil
@@ -69,8 +70,22 @@ extension GXMessagesTestData: GXMessagesDataProtocol {
     
     //MARK: - GXMessagesAvatarDataSource
     
-    public var gx_messageContinuousStatus: GXMessageContinuousStatus {
-        return self.messageContinuousStatus
+    public var gx_continuousBegin: Bool {
+        set {
+            self.continuousBegin = newValue
+        }
+        get {
+            return self.continuousBegin
+        }
+    }
+    
+    public var gx_continuousEnd: Bool {
+        set {
+            self.continuousEnd = newValue
+        }
+        get {
+            return self.continuousEnd
+        }
     }
     
     public var gx_messageStatus: GXMessageStatus {

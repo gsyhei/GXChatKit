@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         data1.showName = "抬头45度仰望天空"
         data1.avatarID = "11"
         data1.messageID = "111"
-        data1.messageContinuousStatus = .begin
+        data1.gx_continuousBegin = true
         data1.messageStatus = .sending
         data1.messageType = .text
         let text = "[鬼脸]也不知道说什么！7867868765765765656556565656测试网址https://www.baidu.com，" +
@@ -88,7 +88,6 @@ class ViewController: UIViewController {
         data2.showName = "抬头45度仰望天空"
         data2.avatarID = "11"
         data2.messageID = "112"
-        data2.messageContinuousStatus = .ongoing
         data2.messageStatus = .sending
         data2.messageType = .text
         data2.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
@@ -102,7 +101,7 @@ class ViewController: UIViewController {
         data3.showName = "抬头45度仰望天空"
         data3.avatarID = "11"
         data3.messageID = "113"
-        data3.messageContinuousStatus = .end
+        data3.gx_continuousEnd = true
         data3.messageStatus = .sending
         data3.messageType = .phote
         data3.messagesContentData = GXMessagesPhotoContent(thumbnailImage: UIImage(named: "testphoto"))
@@ -119,7 +118,7 @@ class ViewController: UIViewController {
         data11.showName = "你算什么男人"
         data11.avatarID = "22"
         data11.messageID = "114"
-        data11.messageContinuousStatus = .begin
+        data11.gx_continuousBegin = true
         data11.messageStatus = .receiving
         data11.messageType = .text
         data11.messagesContentData = GXMessagesTextContent(text: "什么东东啊")
@@ -135,7 +134,6 @@ class ViewController: UIViewController {
         data22.showName = "你算什么男人"
         data22.avatarID = "22"
         data22.messageID = "115"
-        data22.messageContinuousStatus = .ongoing
         data22.messageStatus = .receiving
         data22.messageType = .text
         data22.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
@@ -149,7 +147,7 @@ class ViewController: UIViewController {
         data33.showName = "你算什么男人"
         data33.avatarID = "22"
         data33.messageID = "116"
-        data33.messageContinuousStatus = .end
+        data33.gx_continuousEnd = true
         data33.messageStatus = .receiving
         data33.messageType = .video
         data33.messagesContentData = GXMessagesVideoContent(thumbnailImage: UIImage(named: "testphoto"))
@@ -166,7 +164,7 @@ class ViewController: UIViewController {
         data13.showName = "你算什么男人"
         data13.avatarID = "22"
         data13.messageID = "117"
-        data13.messageContinuousStatus = .begin
+        data13.gx_continuousBegin = true
         data13.messageStatus = .receiving
         data13.messageType = .text
         data13.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
@@ -182,7 +180,6 @@ class ViewController: UIViewController {
         data23.showName = "你算什么男人"
         data23.avatarID = "22"
         data23.messageID = "118"
-        data23.messageContinuousStatus = .ongoing
         data23.messageStatus = .receiving
         data23.messageType = .text
         data23.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
@@ -196,7 +193,7 @@ class ViewController: UIViewController {
         data34.showName = "你算什么男人"
         data34.avatarID = "22"
         data34.messageID = "119"
-        data34.messageContinuousStatus = .end
+        data34.gx_continuousEnd = true
         data34.messageStatus = .receiving
         data34.messageType = .video
         data34.messagesContentData = GXMessagesVideoContent(thumbnailImage: UIImage(named: "testphoto"))
@@ -210,7 +207,8 @@ class ViewController: UIViewController {
         data24.showName = "这样也好"
         data24.avatarID = "33"
         data24.messageID = "120"
-        data24.messageContinuousStatus = .beginAndEnd
+        data24.gx_continuousBegin = true
+        data24.gx_continuousEnd = true
         data24.messageStatus = .receiving
         data24.messageType = .text
         data24.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
@@ -227,7 +225,7 @@ class ViewController: UIViewController {
         data44.showName = "你算什么男人"
         data44.avatarID = "22"
         data44.messageID = "121"
-        data44.messageContinuousStatus = .begin
+        data44.gx_continuousBegin = true
         data44.messageStatus = .receiving
         data44.messageType = .audio
         let urlString = Bundle.main.path(forResource: "voicexinwen", ofType: "mp3")!
@@ -246,7 +244,7 @@ class ViewController: UIViewController {
         data35.showName = "你算什么男人"
         data35.avatarID = "22"
         data35.messageID = "122"
-        data35.messageContinuousStatus = .end
+        data35.gx_continuousEnd = true
         data35.messageStatus = .receiving
         data35.messageType = .location
         let locationTitle = "广东省深圳市南山区南山村正街正三坊168号6栋618"
@@ -264,7 +262,8 @@ class ViewController: UIViewController {
         data36.showName = "你算什么男人"
         data36.avatarID = "22"
         data36.messageID = "123"
-        data36.messageContinuousStatus = .beginAndEnd
+        data36.gx_continuousBegin = true
+        data36.gx_continuousEnd = true
         data36.messageStatus = .receiving
         data36.messageType = .videoCall
         data36.messagesContentData = GXMessagesCallContent(duration: 100, status: .interrupt, messagesStatus: data36.messageStatus)
@@ -293,7 +292,8 @@ class ViewController: UIViewController {
         data37.showName = "你算什么男人"
         data37.avatarID = "22"
         data37.messageID = "124"
-        data37.messageContinuousStatus = .beginAndEnd
+        data37.gx_continuousBegin = true
+        data37.gx_continuousEnd = true
         data37.messageStatus = .receiving
         data37.messageType = .atText
         data37.messagesContentData = GXMessagesAtContent(text: text, users: users)
@@ -310,7 +310,8 @@ class ViewController: UIViewController {
         data38.showName = "你算什么男人"
         data38.avatarID = "22"
         data38.messageID = "124"
-        data38.messageContinuousStatus = .beginAndEnd
+        data38.gx_continuousBegin = true
+        data38.gx_continuousEnd = true
         data38.messageStatus = .receiving
         data38.messageType = .forward
         data38.messagesContentData = GXMessagesForwardContent(text: text, user: user3)
@@ -327,7 +328,8 @@ class ViewController: UIViewController {
         data39.showName = "你算什么男人"
         data39.avatarID = "22"
         data39.messageID = "125"
-        data39.messageContinuousStatus = .beginAndEnd
+        data39.gx_continuousBegin = true
+        data39.gx_continuousEnd = true
         data39.messageStatus = .receiving
         data39.messageType = .system
 //        let systemText = "'这样也好'邀请了'抬头45度仰望天空'加入群聊，请注意'抬头45度仰望天空'与群里其他人都不是好友关系。"
@@ -344,7 +346,8 @@ class ViewController: UIViewController {
         data40.showName = "你算什么男人"
         data40.avatarID = "22"
         data40.messageID = "126"
-        data40.messageContinuousStatus = .beginAndEnd
+        data40.gx_continuousBegin = true
+        data40.gx_continuousEnd = true
         data40.messageStatus = .sending
         data40.messageType = .bCard
 
@@ -365,7 +368,8 @@ class ViewController: UIViewController {
         data41.showName = "你算什么男人"
         data41.avatarID = "22"
         data41.messageID = "127"
-        data41.messageContinuousStatus = .beginAndEnd
+        data41.gx_continuousBegin = true
+        data41.gx_continuousEnd = true
         data41.messageStatus = .sending
         data41.messageType = .file
 //        let fileUrl = Bundle.main.path(forResource: "voicexinwen", ofType: "mp3")!
@@ -389,7 +393,8 @@ class ViewController: UIViewController {
         data42.showName = "你算什么男人"
         data42.avatarID = "22"
         data42.messageID = "128"
-        data42.messageContinuousStatus = .beginAndEnd
+        data42.gx_continuousBegin = true
+        data42.gx_continuousEnd = true
         data42.messageStatus = .receiving
         data42.messageType = .redPacket
 
@@ -406,7 +411,8 @@ class ViewController: UIViewController {
         data43.showName = "你算什么男人"
         data43.avatarID = "22"
         data43.messageID = "129"
-        data43.messageContinuousStatus = .beginAndEnd
+        data43.gx_continuousBegin = true
+        data43.gx_continuousEnd = true
         data43.messageStatus = .receiving
         data43.messageType = .reply
 

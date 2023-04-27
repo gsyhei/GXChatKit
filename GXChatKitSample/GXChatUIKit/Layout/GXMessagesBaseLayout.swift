@@ -26,19 +26,17 @@ public class GXMessagesBaseLayout: NSObject {
     
     public func updateBaseLayout(data: GXMessagesDataProtocol, containerSize: CGSize) {
         let containerLeft = data.gx_containerLeft(container: containerSize.width)
-        switch data.gx_messageContinuousStatus {
-        case .begin:
+        if data.gx_continuousBegin {
             self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMaxLineSpacing), size: containerSize)
-            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMinLineSpacing
-        case .ongoing:
+        }
+        else {
             self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMinLineSpacing), size: containerSize)
+        }
+        if data.gx_continuousEnd {
+            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMaxLineSpacing
+        }
+        else {
             self.cellHeight = self.containerRect.maxY + GXCHATC.cellMinLineSpacing
-        case .end:
-            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMinLineSpacing), size: containerSize)
-            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMaxLineSpacing
-        case .beginAndEnd:
-            self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMaxLineSpacing), size: containerSize)
-            self.cellHeight = self.containerRect.maxY + GXCHATC.cellMaxLineSpacing
         }
         
         if data.gx_messageStatus == .sending {
