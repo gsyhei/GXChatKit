@@ -63,6 +63,10 @@ public class GXUtilManager: NSObject {
         }
     }
     
+    
+    /// 时间格式化
+    /// - Parameter duration: 持续时间
+    /// - Returns: 格式化字符串
     public class func gx_timeString(duration: Int) -> String {
         let hour   = duration / 3600
         let minute = duration / 60 % 60
@@ -75,6 +79,11 @@ public class GXUtilManager: NSObject {
         }
     }
     
+    /// 重设图片尺寸
+    /// - Parameters:
+    ///   - size: 实际size
+    ///   - maxSize: 最大size
+    /// - Returns: 重设后的size
     public class func gx_imageResize(size: CGSize, maxSize: CGSize) -> CGSize {
         if size.width < maxSize.width && size.height < maxSize.height {
             return size
@@ -91,6 +100,8 @@ public class GXUtilManager: NSObject {
         
         return resize
     }
+    
+    
 
 }
 
