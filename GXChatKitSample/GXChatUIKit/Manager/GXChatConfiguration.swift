@@ -68,6 +68,8 @@ public class GXChatConfiguration: NSObject {
     public var nicknameFont: UIFont = .boldSystemFont(ofSize: 14)
     /// 昵称下面的行间距
     public var nicknameLineSpacing: CGFloat = 4.0
+    /// 自动设置昵称颜色
+    public var isAutoSetupNicknameColor: Bool = true
     /// 发送方昵称颜色
     public var sendingNicknameColor: UIColor = .systemBlue
     /// 接收方昵称颜色

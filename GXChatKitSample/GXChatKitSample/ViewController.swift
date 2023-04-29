@@ -66,7 +66,7 @@ class ViewController: UIViewController {
     public func updateDatas() {
         var data1 = GXMessagesTestData()
         data1.date = Date().dateByAdding(days: -2)!
-        data1.showName = "抬头45度仰望天空"
+        data1.showName = "发疯了吧"
         data1.avatarID = "11"
         data1.messageID = "111"
         data1.gx_continuousBegin = true
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         
         var data2 = GXMessagesTestData()
         data2.date = Date().dateByAdding(days: -2)!
-        data2.showName = "抬头45度仰望天空"
+        data2.showName = "发疯了吧"
         data2.avatarID = "11"
         data2.messageID = "112"
         data2.messageStatus = .sending
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         
         var data3 = GXMessagesTestData()
         data3.date = Date().dateByAdding(days: -2)!
-        data3.showName = "抬头45度仰望天空"
+        data3.showName = "发疯了吧"
         data3.avatarID = "11"
         data3.messageID = "113"
         data3.gx_continuousEnd = true
@@ -278,7 +278,7 @@ class ViewController: UIViewController {
         
         var user1 = GXTestUser()
         user1.userId = "11"
-        user1.userName = "抬头45度仰望天空"
+        user1.userName = "发疯了吧"
         var user2 = GXTestUser()
         user2.userId = "22"
         user2.userName = "你算什么男人"
@@ -351,7 +351,7 @@ class ViewController: UIViewController {
         data40.messageStatus = .sending
         data40.messageType = .bCard
 
-        let cardAvatar = GXMessagesAvatarFactory.messagesAvatar(text: user1.gx_displayName)
+        let cardAvatar = GXMessagesAvatarFactory.messagesAvatar(name: user1.gx_displayName)
         cardAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image: UIImage(named: "avatar1"))
 
         data40.messagesContentData = GXMessagesCardContent(contact: user1, avatar: cardAvatar)

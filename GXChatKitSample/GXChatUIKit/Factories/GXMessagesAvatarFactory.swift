@@ -14,9 +14,9 @@ public class GXMessagesAvatarFactory {
     ///   - text: 文本
     ///   - image: 图片
     /// - Returns: 头像数据模型
-    public class func messagesAvatar(text: String, image: UIImage? = nil) -> GXMessagesAvatar {
+    public class func messagesAvatar(name: String, image: UIImage? = nil) -> GXMessagesAvatar {
         let messagesAvatar = GXMessagesAvatar()
-        messagesAvatar.avatarPlaceholderImage = GXMessagesAvatarFactory.circularAvatarPlaceholderImage(text: text)
+        messagesAvatar.avatarPlaceholderImage = GXMessagesAvatarFactory.circularAvatarPlaceholderImage(name: name)
         if let avatarImage = image {
             messagesAvatar.avatarImage = GXMessagesAvatarFactory.circularAvatarImage(image: avatarImage)
             messagesAvatar.avatarHighlightedImage = GXMessagesAvatarFactory.circularAvatarHighlightedImage(image: avatarImage)
@@ -52,10 +52,10 @@ public class GXMessagesAvatarFactory {
     /// 圆形占位头像
     /// - Parameter image: 图片
     /// - Returns: 高亮头像图
-    public class func circularAvatarPlaceholderImage(text: String) -> UIImage? {
+    public class func circularAvatarPlaceholderImage(name: String) -> UIImage? {
         let avatarSize = GXCHATC.avatarSize
         let font = UIFont.boldSystemFont(ofSize: 20)
-        let title = (text.count > 0) ? text[0] : ""
+        let title = (name.count > 0) ? name[0] : ""
         let image = UIImage.gx_textImage(title, size: avatarSize, backgroundColor: .orange, textColor: .white, font: font)
         guard let textImage = image else { return nil }
         

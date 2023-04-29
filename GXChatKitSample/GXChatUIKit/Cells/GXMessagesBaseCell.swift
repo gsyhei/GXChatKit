@@ -17,6 +17,9 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     /// 消息数据
     public weak var item: GXMessagesItemData?
     
+    /// 气泡对象
+    public var bubble: GXMessagesBubble?
+    
     /// 气泡上边的Label（群昵称）
     public lazy var messageBubbleNameLabel: UILabel = {
         let label = UILabel()
@@ -116,6 +119,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     public func createSubviews() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
+        
         self.contentView.backgroundColor = .clear
         self.contentView.addSubview(self.messageAvatarButton)
         self.contentView.addSubview(self.messageBubbleContainerView)
@@ -141,17 +145,24 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     public func bindCell(item: GXMessagesItemData) {
         self.item = item
-        if item.data.gx_continuousEnd {
-            self.messageBubbleImageView.image = item.bubble?.messageEndBubbleImage
-            self.messageBubbleImageView.highlightedImage = item.bubble?.messageEndBubbleHighlightedImage
-        }
-        else if item.data.gx_continuousBegin {
-            self.messageBubbleImageView.image = item.bubble?.messageBeginBubbleImage
-            self.messageBubbleImageView.highlightedImage = item.bubble?.messageBeginBubbleHighlightedImage
+        
+        if item.data.gx_messageType == .redPacket {
+            self.bubble = GXMessagesBubbleFactory.messagesRedPacketBubble(status: item.data.gx_messageStatus)
         }
         else {
-            self.messageBubbleImageView.image = item.bubble?.messageOngoingBubbleImage
-            self.messageBubbleImageView.highlightedImage = item.bubble?.messageOngoingBubbleHighlightedImage
+            self.bubble = GXMessagesBubbleFactory.messagesBubble(status: item.data.gx_messageStatus)
+        }
+        if item.data.gx_continuousEnd {
+            self.messageBubbleImageView.image = self.bubble?.messageEndBubbleImage
+            self.messageBubbleImageView.highlightedImage = self.bubble?.messageEndBubbleHighlightedImage
+        }
+        else if item.data.gx_continuousBegin {
+            self.messageBubbleImageView.image = self.bubble?.messageBeginBubbleImage
+            self.messageBubbleImageView.highlightedImage = self.bubble?.messageBeginBubbleHighlightedImage
+        }
+        else {
+            self.messageBubbleImageView.image = self.bubble?.messageOngoingBubbleImage
+            self.messageBubbleImageView.highlightedImage = self.bubble?.messageOngoingBubbleHighlightedImage
         }
         self.messageBubbleContainerView.frame = item.layout.containerRect
         
@@ -178,12 +189,20 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         
         if item.data.gx_messageStatus == .sending {
             self.messageBubbleNameLabel.textAlignment = .right
-            self.messageBubbleNameLabel.textColor = GXCHATC.sendingNicknameColor
+            if let hexString = item.dispalyNameHexString {
+                self.messageBubbleNameLabel.textColor = UIColor(hexString: hexString)
+            } else {
+                self.messageBubbleNameLabel.textColor = GXCHATC.sendingNicknameColor
+            }
             self.messageBubbleTimeLabel.textColor = GXCHATC.sendingTimeColor
         }
         else {
             self.messageBubbleNameLabel.textAlignment = .left
-            self.messageBubbleNameLabel.textColor = GXCHATC.receivingNicknameColor
+            if let hexString = item.dispalyNameHexString {
+                self.messageBubbleNameLabel.textColor = UIColor(hexString: hexString)
+            } else {
+                self.messageBubbleNameLabel.textColor = GXCHATC.receivingNicknameColor
+            }
             self.messageBubbleTimeLabel.textColor = GXCHATC.receivingTimeColor
         }
     }

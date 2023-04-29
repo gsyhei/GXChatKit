@@ -9,11 +9,14 @@ import UIKit
 import GXMessagesTableView
 
 public class GXMessagesItemData: Equatable {
+    /// 数据
     public var data: GXMessagesDataProtocol
+    /// 布局
     public var layout: GXMessagesBaseLayout!
-
+    /// 头像
     public var avatar: GXMessagesAvatar?
-    public var bubble: GXMessagesBubble?
+    /// 显示名称的颜色hex
+    public var dispalyNameHexString: String?
 
     public static func == (lhs: GXMessagesItemData, rhs: GXMessagesItemData) -> Bool {
         if lhs.data.gx_chatType == .group {
@@ -32,13 +35,14 @@ public class GXMessagesItemData: Equatable {
     public required init(data: GXMessagesDataProtocol) {
         self.data = data
         
+        if GXCHATC.isAutoSetupNicknameColor {
+            self.dispalyNameHexString = data.gx_displayNameHexString
+        }
         if data.gx_messageType == .redPacket {
-            self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName)
-            self.bubble = GXMessagesBubbleFactory.messagesRedPacketBubble(status: data.gx_messageStatus)
+            self.avatar = GXMessagesAvatarFactory.messagesAvatar(name: data.gx_senderDisplayName)
         }
         else if data.gx_messageType != .system {
-            self.avatar = GXMessagesAvatarFactory.messagesAvatar(text: data.gx_senderDisplayName)
-            self.bubble = GXMessagesBubbleFactory.messagesBubble(status: data.gx_messageStatus)
+            self.avatar = GXMessagesAvatarFactory.messagesAvatar(name: data.gx_senderDisplayName)
         }
         self.updateLayout()
     }

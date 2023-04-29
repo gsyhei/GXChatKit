@@ -155,4 +155,32 @@ public extension GXMessagesDataProtocol {
         }
     }
     
+    /// 根据现实名称生成hexString
+    var gx_displayNameHexString: String {
+        let pinying = self.gx_senderDisplayName.transformToPinYinInitial(isUppercase: true)
+        var hexString = "#"
+        for i in 0..<pinying.count {
+            let charStr = pinying[i]
+            let charAscii = charStr.cString(using: .ascii)
+            if let charSub = charAscii?.first {
+                if i == 2 || i == 3 {
+                    hexString += String(format: "%X", charSub % 8)
+                }
+                else {
+                    hexString += String(format: "%X", charSub % 16)
+                }
+            }
+        }
+        if hexString.count > 7 {
+            hexString = hexString.substring(to: 7)
+        }
+        else {
+            for _ in hexString.count..<7 {
+                hexString += "0"
+            }
+        }
+        
+        return hexString
+    }
+    
 }

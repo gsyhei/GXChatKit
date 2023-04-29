@@ -27,7 +27,7 @@ public class GXMessagesCardContent: GXMessagesContentProtocol {
             self.cardAvatar = cardAvatar
         }
         else {
-            self.cardAvatar = GXMessagesAvatarFactory.messagesAvatar(text: contact.gx_displayName)
+            self.cardAvatar = GXMessagesAvatarFactory.messagesAvatar(name: contact.gx_displayName)
         }
     }
     
