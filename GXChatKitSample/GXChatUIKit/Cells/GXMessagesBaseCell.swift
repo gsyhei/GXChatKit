@@ -55,7 +55,8 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     public lazy var messageAvatarButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .clear
-
+        button.addTarget(self, action: #selector(self.messageAvatarButtonClicked(_:)), for: .touchUpInside)
+        
         return button
     }()
     
@@ -101,7 +102,6 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     open override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-//        self.setChecked(highlighted)
         self.updateHighlighted(highlighted, animated: animated)
     }
     
@@ -213,7 +213,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     public func showChecked() {
         self.setChecked(true)
-        self.perform(#selector(setChecked(_:)), with: false, afterDelay: 2.0)
+        self.perform(#selector(setChecked(_:)), with: false, afterDelay: 1.0)
     }
 }
 
@@ -250,9 +250,13 @@ extension GXMessagesBaseCell {
         }
     }
     
+    @objc func messageAvatarButtonClicked(_ sender: Any) {
+        self.delegate?.messagesCell(self, didAvatarTapAt: self.item)
+    }
+    
     @objc func longPressGestureRecognizer(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
-            NSLog("longPressGestureRecognizer began")
+            self.delegate?.messagesCell(self, didLongPressAt: self.item)
         }
     }
     
@@ -329,10 +333,7 @@ extension GXMessagesBaseCell {
     
     private func panStateEndAnimation() {
         if self.replyIndicatorView.progress == 1.0 {
-            NSLog("panStateEnd Reply true")
-        }
-        else {
-            NSLog("panStateEnd Reply false")
+            self.delegate?.messagesCell(self, didSwipeAt: self.item)
         }
         self.isPanLock = false
         UIView.animate(withDuration: 0.3) {

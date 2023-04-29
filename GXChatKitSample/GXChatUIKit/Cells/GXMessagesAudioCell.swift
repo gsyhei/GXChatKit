@@ -105,6 +105,17 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
             self.gx_playAudio(isPlay: true)
         }
     }
+    
+    public func gx_playAudio(isPlay: Bool) {
+        self.playButton.isUserInteractionEnabled = false
+        if isPlay {
+            GXAudioManager.shared.playAudio(item: self.item)
+        }
+        else {
+            GXAudioManager.shared.pauseAudio()
+        }
+        self.playButton.isUserInteractionEnabled = true
+    }
 }
 
 extension GXMessagesAudioCell {
@@ -118,23 +129,10 @@ extension GXMessagesAudioCell {
         }
     }
     
-    private func gx_playAudio(isPlay: Bool) {
-        if isPlay {
-            GXAudioManager.shared.playAudio(item: self.item)
-        }
-        else {
-            GXAudioManager.shared.pauseAudio()
-        }
-    }
-    
     //MARK: - UIButton Clicked
     
     @objc func playButtonClicked(_ sender: Any?) {
-        guard let content = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
-
-        self.playButton.isUserInteractionEnabled = false
-        self.gx_playAudio(isPlay: !content.isPlaying)
-        self.playButton.isUserInteractionEnabled = true
+        self.delegate?.messagesCell(self, didContentTapAt: self.item)
     }
 
     //MARK: - NSNotification

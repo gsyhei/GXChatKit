@@ -11,6 +11,7 @@ import FPSLabel
 class ViewController: UIViewController {
     
     private var list: [GXMessagesSectionData] = []
+    private var currentReplyIndexPath: IndexPath?
     
     private lazy var tableView: GXMessagesTableView = {
         let tv = GXMessagesTableView(frame: self.view.bounds, style: .plain)
@@ -416,7 +417,7 @@ class ViewController: UIViewController {
         data43.messageStatus = .receiving
         data43.messageType = .reply
 
-        data43.messagesContentData = GXMessagesReplyContent(text: text, users: [user1, user2], replyData: data41)
+        data43.messagesContentData = GXMessagesReplyContent(text: text, users: [user1, user2], replyData: data1)
         let item43 = GXMessagesItemData(data: data43)
         item43.updateMessagesAvatar(image: UIImage(named: "avatar2"))
 
@@ -460,53 +461,53 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
         switch item.data.gx_messageType {
         case .text, .atText, .forward:
             let cell: GXMessagesTextCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
+            cell.bindCell(item: item, delegate: self)
             
             return cell
         case .phote, .video:
             let cell: GXMessagesMediaCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         case .audio:
             let cell: GXMessagesAudioCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         case .location:
             let cell: GXMessagesLocationCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         case .voiceCall, .videoCall:
             let cell: GXMessagesCallCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         case .system:
             let cell: GXMessagesSystemCell = tableView.dequeueReusableCell(for: indexPath)
             cell.bindCell(item: item)
-            
+
             return cell
         case .bCard:
             let cell: GXMessagesCardCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         case .file:
             let cell: GXMessagesFileCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         case .redPacket:
             let cell: GXMessagesRedPacketCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         case .reply:
             let cell: GXMessagesReplyCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.bindCell(item: item)
-            
+            cell.bindCell(item: item, delegate: self)
+
             return cell
         }
     }
@@ -535,6 +536,60 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     
 }
 
+extension ViewController: GXMessagesBaseCellProtocol {
+    
+    func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didAvatarTapAt item: GXChatUIKit.GXMessagesItemData?) {
+        NSLog("cell didAvatarTapAt \(String(describing: item?.data.gx_messageType))")
+    }
+    
+    func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didLongPressAt item: GXChatUIKit.GXMessagesItemData?) {
+        NSLog("cell didLongPressAt \(String(describing: item?.data.gx_messageType))")
+    }
+    
+    func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didContentTapAt item: GXChatUIKit.GXMessagesItemData?) {
+        guard let data = item?.data else { return }
+        if data.gx_messageType == .audio {
+            guard let content = data.gx_messagesContent as? GXMessagesAudioContent else { return }
+            guard let audioCell = cell as? GXMessagesAudioCell else { return }
+            if let filePath = content.fileURL?.absoluteString {
+                if FileManager.default.fileExists(atPath: filePath) {
+                    audioCell.gx_playAudio(isPlay: !content.isPlaying)
+                }
+            }
+        }
+        else if data.gx_messageType == .video {
+            
+        }
+        else if data.gx_messageType == .reply {
+            guard let content = data.gx_messagesContent as? GXMessagesReplyContent else { return }
+            for section in 0..<self.list.count {
+                let sectionData = self.list[section]
+                for row in 0..<sectionData.items.count {
+                    let rowItem = sectionData.items[row]
+                    if rowItem.data.gx_messageId == content.replyData.gx_messageId {
+                        self.currentReplyIndexPath = IndexPath(row: row, section: section); break
+                    }
+                }
+            }
+            if let currentIndexPath = self.currentReplyIndexPath {
+                self.tableView.scrollToRow(at: currentIndexPath, at: .middle, animated: true)
+                let cell = self.tableView.cellForRow(at: currentIndexPath) as? GXMessagesBaseCell
+                cell?.showChecked()
+            }
+        }
+        NSLog("cell didContentTapAt \(String(describing: item?.data.gx_messageType))")
+    }
+    
+    func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didSwipeAt item: GXChatUIKit.GXMessagesItemData?) {
+        NSLog("cell didSwipeAt \(String(describing: item?.data.gx_messageType))")
+    }
+    
+    func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didTapAt item: GXChatUIKit.GXMessagesItemData?, type: GXChatUIKit.GXRichManager.HighlightType, value: String) {
+        NSLog("cell didTapAt \(String(describing: item?.data.gx_messageType)), type: \(type), value: \(value)")
+    }
+    
+}
+
 extension ViewController: UIScrollViewDelegate {
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.tableView.gx_scrollBeginDragging()
@@ -542,6 +597,12 @@ extension ViewController: UIScrollViewDelegate {
     
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         self.tableView.gx_scrollEndDragging()
+        
+        if let currentIndexPath = self.currentReplyIndexPath {
+            self.currentReplyIndexPath = nil
+            let cell = self.tableView.cellForRow(at: currentIndexPath) as? GXMessagesBaseCell
+            cell?.showChecked()
+        }
     }
     
     public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

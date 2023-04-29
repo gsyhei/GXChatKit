@@ -40,10 +40,10 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
                 guard let type = textHighlight.userInfo?[GXRichManager.highlightKey] as? GXRichManager.HighlightType else { return }
                 
                 if type == .user, let userId = textHighlight.userInfo?[GXRichManager.userIdKey] as? String {
-                    NSLog("highlightTapAction type: \(type), userId: \(userId)")
+                    self.delegate?.messagesCell(self, didTapAt: self.item, type: type, value: userId)
                 }
                 else {
-                    NSLog("highlightTapAction type: \(type), \(attributed.string)")
+                    self.delegate?.messagesCell(self, didTapAt: self.item, type: type, value: attributed.string)
                 }
             }
         }

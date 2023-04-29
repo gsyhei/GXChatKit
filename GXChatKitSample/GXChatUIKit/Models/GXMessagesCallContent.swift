@@ -15,11 +15,11 @@ public class GXMessagesCallContent: GXMessagesContentProtocol {
     public var displaySize: CGSize = .zero
     
     /// 文本
-    private(set) var text: String
+    public var text: String
     /// 通话时长
-    private(set) var duration: TimeInterval = 0
+    public var duration: TimeInterval = 0
     /// 通话状态
-    private(set) var status: GXChatConfiguration.MessageCallStatus
+    public var status: GXChatConfiguration.MessageCallStatus
     
     public required init(duration: TimeInterval, status: GXChatConfiguration.MessageCallStatus, messagesStatus: GXMessageStatus) {
         self.duration = duration

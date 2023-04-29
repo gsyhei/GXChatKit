@@ -28,9 +28,9 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         button.layer.shadowRadius = 5.0
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = .zero
-        button.isUserInteractionEnabled = false
         button.isHidden = true
-        
+        button.addTarget(self, action: #selector(playButtonClicked(_:)), for: .touchUpInside)
+
         return button
     }()
     
@@ -112,4 +112,12 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         self.highlightedView.isHidden = !checked
     }
 
+}
+
+extension GXMessagesMediaCell {
+    //MARK: - UIButton Clicked
+    
+    @objc func playButtonClicked(_ sender: Any?) {
+        self.delegate?.messagesCell(self, didContentTapAt: self.item)
+    }
 }

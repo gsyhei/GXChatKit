@@ -10,11 +10,12 @@ import YYText
 
 public class GXMessagesReplyCell: GXMessagesBaseCell {
     /// 回复内容的容器
-    public lazy var replyContentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = GXCHATC.replyBackgroundColor
-        
-        return view
+    public lazy var replyContentView: UIControl = {
+        let button = UIControl()
+        button.backgroundColor = GXCHATC.replyBackgroundColor
+        button.addTarget(self, action: #selector(replyContentClicked(_:)), for: .touchUpInside)
+
+        return button
     }()
     
     /// 回复垂直线条
@@ -111,10 +112,10 @@ public class GXMessagesReplyCell: GXMessagesBaseCell {
                 guard let type = textHighlight.userInfo?[GXRichManager.highlightKey] as? GXRichManager.HighlightType else { return }
                 
                 if type == .user, let userId = textHighlight.userInfo?[GXRichManager.userIdKey] as? String {
-                    NSLog("highlightTapAction type: \(type), userId: \(userId)")
+                    self.delegate?.messagesCell(self, didTapAt: self.item, type: type, value: userId)
                 }
                 else {
-                    NSLog("highlightTapAction type: \(type), \(attributed.string)")
+                    self.delegate?.messagesCell(self, didTapAt: self.item, type: type, value: attributed.string)
                 }
             }
         }
@@ -177,5 +178,13 @@ public class GXMessagesReplyCell: GXMessagesBaseCell {
         super.setChecked(checked)
         let color: UIColor = checked ? .clear : GXCHATC.replyBackgroundColor
         self.replyContentView.backgroundColor = color
+    }
+}
+
+extension GXMessagesReplyCell {
+    //MARK: - UIButton Clicked
+    
+    @objc func replyContentClicked(_ sender: Any?) {
+        self.delegate?.messagesCell(self, didContentTapAt: self.item)
     }
 }

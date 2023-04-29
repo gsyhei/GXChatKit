@@ -19,15 +19,15 @@ public class GXMessagesLocationContent: GXMessagesMediaContentProtocol {
     public var displaySize: CGSize = .zero
 
     /// 位置图
-    private(set) var locationImage: UIImage?
+    public var locationImage: UIImage?
     /// 位置图下载地址
-    private(set) var locationImageURL: URL?
+    public var locationImageURL: URL?
     /// 本地存储地址
-    private(set) var fileURL: URL?
+    public var fileURL: URL?
     /// 坐标
-    private(set) var coordinate: CLLocationCoordinate2D
+    public var coordinate: CLLocationCoordinate2D
     /// 位置名称
-    private(set) var locationTitle: String
+    public var locationTitle: String
     
     public required init(coordinate: CLLocationCoordinate2D, locationTitle: String, locationImage: UIImage?, fileURL: URL? = nil) {
         self.coordinate = coordinate

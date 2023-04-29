@@ -18,13 +18,13 @@ public class GXMessagesPhotoContent: GXMessagesMediaContentProtocol {
     public var displaySize: CGSize = .zero
     
     /// 下载地址
-    private(set) var imageURL: URL?
+    public var imageURL: URL?
     /// 缩略图下载地址
-    private(set) var thumbnailImageURL: URL?
+    public var thumbnailImageURL: URL?
     /// 本地存储地址
-    private(set) var fileURL: URL?
+    public var fileURL: URL?
     /// 缩略图
-    private(set) var thumbnailImage: UIImage?
+    public var thumbnailImage: UIImage?
     
     public required init(thumbnailImageURL: URL, imageURL: URL? = nil, displaySize: CGSize) {
         self.thumbnailImageURL = thumbnailImageURL
