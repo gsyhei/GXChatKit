@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftyAttributes
 import YYText
 
 //REGULAREXPRESSION(UserHandleRegularExpression, @"@[\\u4e00-\\u9fa5\\w\\-]+")
@@ -114,7 +113,10 @@ public class GXRichManager: NSObject {
     class func atAttributedText(string: String, users: [GXMessagesUserProtocol]) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
-        let attributes: [Attribute] = [.textColor(GXCHATC.atTextColor), .font(GXCHATC.atTextFont), .paragraphStyle(paragraphStyle)]
+        var attributes: Dictionary<NSAttributedString.Key, Any> = [:]
+        attributes[NSAttributedString.Key.foregroundColor] = GXCHATC.atTextColor
+        attributes[NSAttributedString.Key.font] = GXCHATC.atTextFont
+        attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
 
         let attributedString = NSMutableAttributedString()
         for user in users {
@@ -147,7 +149,10 @@ public class GXRichManager: NSObject {
     class func forwardAttributedText(string: String, user: GXMessagesUserProtocol) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
-        let attributes: [Attribute] = [.textColor(GXCHATC.forwardTextColor), .font(GXCHATC.forwardTextFont), .paragraphStyle(paragraphStyle)]
+        var attributes: Dictionary<NSAttributedString.Key, Any> = [:]
+        attributes[NSAttributedString.Key.foregroundColor] = GXCHATC.atTextColor
+        attributes[NSAttributedString.Key.font] = GXCHATC.atTextFont
+        attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
 
         let attributedString = NSMutableAttributedString()
         let userString = GXCHATC.chatText.gx_forwardContentString() + user.gx_displayName + "\n"

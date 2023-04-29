@@ -1,6 +1,6 @@
 PODS:
   - FPSLabel (1.0.1)
-  - GXCategories (1.0.5)
+  - GXCategories (1.0.8)
   - GXMessagesTableView (1.0.5):
     - GXCategories
     - GXRefresh
@@ -10,14 +10,12 @@ PODS:
     - Reusable/View (= 4.1.2)
   - Reusable/Storyboard (4.1.2)
   - Reusable/View (4.1.2)
-  - SwiftyAttributes (5.3.0)
   - YYText (1.0.7)
 
 DEPENDENCIES:
   - FPSLabel
   - GXMessagesTableView
   - Reusable
-  - SwiftyAttributes
   - YYText
 
 SPEC REPOS:
@@ -27,18 +25,16 @@ SPEC REPOS:
     - GXMessagesTableView
     - GXRefresh
     - Reusable
-    - SwiftyAttributes
     - YYText
 
 SPEC CHECKSUMS:
   FPSLabel: a6386de76a8fa767102bcb2c18b7c605a3ac3d75
-  GXCategories: 911f8094403c17a8dd2c4f6a1fb87cfc45d39a96
+  GXCategories: ae5f99b606e64c88c67e635566d3456a896d837c
   GXMessagesTableView: 7f9d743aa907ad5cee913589df00e4d099263b85
   GXRefresh: d8c64ca667f1daad0f332cd6066023714fc0da6d
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
-  SwiftyAttributes: 6d7386e90ac611b6acac8b59e38f34bfa4621c80
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 7c8f8788ab0df98940a2118e62be94d719df1b62
+PODFILE CHECKSUM: 07e158b88a4dbbe174c54ab37191dce801b9ff80
 
 COCOAPODS: 1.11.3
