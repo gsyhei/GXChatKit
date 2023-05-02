@@ -13,6 +13,13 @@ class ViewController: UIViewController {
     private var list: [GXMessagesSectionData] = []
     private var currentReplyIndexPath: IndexPath?
     
+    private lazy var animationDelegate: GXMessagesMenuAnimationDelegate = {
+        let animationDelegate = GXMessagesMenuAnimationDelegate()
+        animationDelegate.configureTransition(self, interacted: false)
+        
+        return animationDelegate
+    }()
+    
     private lazy var tableView: GXMessagesTableView = {
         let tv = GXMessagesTableView(frame: self.view.bounds, style: .plain)
         tv.dataSource = self
@@ -536,13 +543,28 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     
 }
 
-extension ViewController: GXMessagesBaseCellProtocol {
+extension ViewController: GXMessagesBaseCellDelegate {
     
     func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didAvatarTapAt item: GXChatUIKit.GXMessagesItemData?) {
         NSLog("cell didAvatarTapAt \(String(describing: item?.data.gx_messageType))")
     }
     
     func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didLongPressAt item: GXChatUIKit.GXMessagesItemData?) {
+        guard let data = item?.data else { return }
+        
+        let oldTransform: CGAffineTransform = cell.messageBubbleContainerView.transform
+        cell.messageBubbleContainerView.transform = .identity
+        guard let preview = cell.messageBubbleContainerView.snapshotView(afterScreenUpdates: false) else { return }
+        preview.transform = oldTransform
+        
+        let rectForTable = cell.convert(cell.messageBubbleContainerView.frame, to: self.tableView)
+        let rectForView = self.tableView.convert(rectForTable, to: self.view)
+        let vc = GXMessagesCellPreviewController(data: data, preview: preview, originalRect: rectForView)
+        self.animationDelegate.bubbleView = cell.messageBubbleContainerView
+        vc.transitioningDelegate = self.animationDelegate
+        vc.modalPresentationStyle = .custom
+        self.present(vc, animated: true, completion: nil)
+        
         NSLog("cell didLongPressAt \(String(describing: item?.data.gx_messageType))")
     }
     

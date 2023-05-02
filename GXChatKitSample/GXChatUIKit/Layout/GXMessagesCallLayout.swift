@@ -12,7 +12,7 @@ public class GXMessagesCallLayout: GXMessagesBaseLayout {
     public var textRect: CGRect = .zero
     public var iconRect: CGRect = .zero
     
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesCallContent else { return }
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
         let maxContainerWidth = SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth

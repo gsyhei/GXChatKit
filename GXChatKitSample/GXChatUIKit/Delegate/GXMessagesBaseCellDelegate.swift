@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol GXMessagesBaseCellProtocol: NSObjectProtocol {
+public protocol GXMessagesBaseCellDelegate: NSObjectProtocol {
     
     /// 点击Cell头像
     /// - Parameters:

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GXMessagesForwardContent: GXMessagesContentProtocol {
+public class GXMessagesForwardContent: GXMessagesContentDelegate {
     // MARK: - GXMessagesContentData
     
     /// 显示区域尺寸
@@ -18,9 +18,9 @@ public class GXMessagesForwardContent: GXMessagesContentProtocol {
     /// 富文本字符串
     public var attributedText: NSAttributedString
     /// 转发来至用户
-    public var user: GXMessagesUserProtocol
+    public var user: GXMessagesUserDelegate
     
-    public required init(text: String, user: GXMessagesUserProtocol) {
+    public required init(text: String, user: GXMessagesUserDelegate) {
         self.text = text
         self.user = user
         self.attributedText = GXRichManager.forwardAttributedText(string: text, user: user)

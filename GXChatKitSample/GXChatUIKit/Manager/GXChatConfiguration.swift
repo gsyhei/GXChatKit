@@ -10,7 +10,7 @@ import UIKit
 public class GXChatConfiguration: NSObject {
     
     /// 文本代理
-    public var chatText: GXChatTextProtocol = GXChatChineseText()
+    public var chatText: GXChatTextDelegate = GXChatChineseText()
     
     //MARK: - Base
     

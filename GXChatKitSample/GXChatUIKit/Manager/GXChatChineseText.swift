@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GXChatChineseText: GXChatTextProtocol {
+public class GXChatChineseText: GXChatTextDelegate {
     
     public func gx_forwardContentString() -> String {
         return "转发自：\n"
@@ -46,8 +46,8 @@ public class GXChatChineseText: GXChatTextProtocol {
         }
     }
     
-    public func gx_cardTypeName(contact: GXMessagesContactProtocol) -> String {
-        if contact is GXMessagesUserProtocol {
+    public func gx_cardTypeName(contact: GXMessagesContactDelegate) -> String {
+        if contact is GXMessagesUserDelegate {
             return "个人名片"
         }
         else {

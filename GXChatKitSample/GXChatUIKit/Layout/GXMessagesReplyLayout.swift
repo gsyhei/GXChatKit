@@ -18,7 +18,7 @@ public class GXMessagesReplyLayout: GXMessagesBaseLayout {
     public var textRect: CGRect = .zero
     public var textLayout: YYTextLayout?
 
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesReplyContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right

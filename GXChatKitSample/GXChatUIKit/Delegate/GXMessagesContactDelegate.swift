@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol GXMessagesContactProtocol {
+public protocol GXMessagesContactDelegate {
     /// 联系人ID
     var gx_id: String { get }
     /// 显示名称
@@ -16,8 +16,8 @@ public protocol GXMessagesContactProtocol {
     var gx_avatarUrl: NSURL? { get }
 }
 
-public protocol GXMessagesUserProtocol: GXMessagesContactProtocol {
+public protocol GXMessagesUserDelegate: GXMessagesContactDelegate {
 }
 
-public protocol GXMessagesGroupProtocol: GXMessagesContactProtocol {
+public protocol GXMessagesGroupDelegate: GXMessagesContactDelegate {
 }

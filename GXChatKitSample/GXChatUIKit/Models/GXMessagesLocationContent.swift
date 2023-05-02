@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-public class GXMessagesLocationContent: GXMessagesMediaContentProtocol {
+public class GXMessagesLocationContent: GXMessagesMediaContentDelegate {
     // MARK: - GXMessagesMediaContentProtocol
     
     /// 媒体视图

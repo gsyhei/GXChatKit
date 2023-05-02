@@ -12,7 +12,7 @@ import GXMessagesTableView
 open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     
     /// 代理
-    public weak var delegate: GXMessagesBaseCellProtocol?
+    public weak var delegate: GXMessagesBaseCellDelegate?
     
     /// 消息数据
     public weak var item: GXMessagesItemData?
@@ -130,7 +130,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleContainerView.addSubview(self.messageBubbleTimeLabel)
         
         let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGestureRecognizer(_:)))
-        longPressGR.minimumPressDuration = 1.0
+        longPressGR.minimumPressDuration = 0.6
         self.messageBubbleContainerView.addGestureRecognizer(longPressGR)
         
         let panGR = UIPanGestureRecognizer(target: self, action: #selector(self.panGestureRecognizer(_:)))
@@ -138,7 +138,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.contentView.addGestureRecognizer(panGR)
     }
     
-    public func bindCell(item: GXMessagesItemData, delegate: GXMessagesBaseCellProtocol?) {
+    public func bindCell(item: GXMessagesItemData, delegate: GXMessagesBaseCellDelegate?) {
         self.delegate = delegate
         self.bindCell(item: item)
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol GXChatTextProtocol {
+public protocol GXChatTextDelegate {
     
     /// 获取转发自文本
     /// - Returns: 文本
@@ -28,7 +28,7 @@ public protocol GXChatTextProtocol {
     /// 名片类型名称
     /// - Parameter contact: 名片联系人对象
     /// - Returns: 文本
-    func gx_cardTypeName(contact: GXMessagesContactProtocol) -> String
+    func gx_cardTypeName(contact: GXMessagesContactDelegate) -> String
     
     /// 红包文本描述
     /// - Returns: 文本

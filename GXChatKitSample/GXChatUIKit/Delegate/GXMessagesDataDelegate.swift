@@ -8,7 +8,7 @@
 import Foundation
 import GXMessagesTableView
 
-public protocol GXMessagesDataProtocol: GXMessagesAvatarDataProtocol  {
+public protocol GXMessagesDataDelegate: GXMessagesAvatarDataProtocol  {
     /// 消息唯一ID
     var gx_messageId: String { get }
     /// 群ID（不是群则为nil）
@@ -30,10 +30,10 @@ public protocol GXMessagesDataProtocol: GXMessagesAvatarDataProtocol  {
     /// 消息读取状态
     var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
     /// 消息内容
-    var gx_messagesContent: GXMessagesContentProtocol? { get }
+    var gx_messagesContent: GXMessagesContentDelegate? { get }
 }
 
-public extension GXMessagesDataProtocol {
+public extension GXMessagesDataDelegate {
     
     /// 头像是否显示
     var gx_isShowAvatar: Bool {

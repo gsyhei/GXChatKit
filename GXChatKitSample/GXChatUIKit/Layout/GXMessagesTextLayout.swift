@@ -13,7 +13,7 @@ public class GXMessagesTextLayout: GXMessagesBaseLayout {
     public var textLayout: YYTextLayout?
     public var textRect: CGRect = .zero
 
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
         let maxContainerWidth = SCREEN_WIDTH - data.gx_avatarContentWidth - hookWidth
         let maxContentWidth = maxContainerWidth - GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right

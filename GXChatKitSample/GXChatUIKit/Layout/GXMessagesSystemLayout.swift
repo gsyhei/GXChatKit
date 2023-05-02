@@ -11,7 +11,7 @@ public class GXMessagesSystemLayout: GXMessagesBaseLayout {
     
     public var textRect: CGRect = .zero
 
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesSystemContent else { return }
         
         let maxContainerWidth = SCREEN_WIDTH - GXCHATC.systemCellInserts.left - GXCHATC.systemCellInserts.right

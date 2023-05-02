@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GXMessagesSystemContent: GXMessagesContentProtocol {
+public class GXMessagesSystemContent: GXMessagesContentDelegate {
     // MARK: - GXMessagesContentData
     
     /// 显示区域尺寸

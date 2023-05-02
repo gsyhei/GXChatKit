@@ -13,19 +13,28 @@ public class GXMessagesCellPreviewController: UIViewController {
     private let tableWidth: CGFloat = 200.0
     private let itemHeight: CGFloat = 44.0
     
-    public var messageData: GXMessagesDataProtocol
+    public var messageData: GXMessagesDataDelegate
     public var preview: UIView
     public var originalRect: CGRect
-    public var currentRect: CGRect!
-    private var itemTypes: [[GXChatConfiguration.MessageMenuType]]!
-    private var tableRect: CGRect = .zero
+    
+    public var currentRect: CGRect = .zero
+    public var itemTypes: [[GXChatConfiguration.MessageMenuType]] = []
+    public var tableRect: CGRect = .zero
+    
+    private lazy var backgroudView: UIVisualEffectView = {
+        let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.frame = self.view.bounds
+        
+        return view
+    }()
 
-    public init(data: GXMessagesDataProtocol, preview: UIView, originalRect: CGRect) {
+
+    public init(data: GXMessagesDataDelegate, preview: UIView, originalRect: CGRect) {
         self.messageData = data
         self.preview = preview
         self.originalRect = originalRect
         super.init(nibName: nil, bundle: nil)
-        self.setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -34,6 +43,8 @@ public class GXMessagesCellPreviewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setupLayout()
         self.setupViewController()
     }
     
@@ -83,16 +94,27 @@ private extension GXMessagesCellPreviewController {
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
         if self.messageData.gx_messageSendStatus == .sending {
             let left = self.originalRect.origin.x
-            self.tableRect = CGRect(x: left, y: 0, width: self.tableWidth, height: tableHeight)
+            self.tableRect = CGRect(x: left, y: tableTop, width: self.tableWidth, height: tableHeight)
         }
         else {
             let left = self.originalRect.origin.x + hookWidth
-            self.tableRect = CGRect(x: left, y: 0, width: self.tableWidth, height: tableHeight)
+            self.tableRect = CGRect(x: left, y: tableTop, width: self.tableWidth, height: tableHeight)
         }
     }
     
     func setupViewController() {
+        self.view.backgroundColor = .clear
         
+        self.view.addSubview(self.backgroudView)
+        self.preview.frame = self.currentRect
+        self.view.addSubview(self.preview)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureRecognizer(_:)))
+        self.backgroudView.addGestureRecognizer(tap)
+    }
+    
+    @objc func tapGestureRecognizer(_ tap: UITapGestureRecognizer) {
+        self.dismiss(animated: true)
     }
     
 }

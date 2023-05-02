@@ -11,7 +11,7 @@ public class GXMessagesPhotoLayout: GXMessagesBaseLayout {
     
     public var imageRect: CGRect = .zero
 
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesPhotoContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right

@@ -15,7 +15,7 @@ public class GXMessagesRedPacketLayout: GXMessagesBaseLayout {
     public var rpLineRect: CGRect = .zero
     public var rpNameRect: CGRect = .zero
     
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesRedPacketContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right

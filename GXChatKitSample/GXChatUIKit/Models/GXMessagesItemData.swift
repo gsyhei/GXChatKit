@@ -10,7 +10,7 @@ import GXMessagesTableView
 
 public class GXMessagesItemData: Equatable {
     /// 数据
-    public var data: GXMessagesDataProtocol
+    public var data: GXMessagesDataDelegate
     /// 布局
     public var layout: GXMessagesBaseLayout!
     /// 头像
@@ -32,7 +32,7 @@ public class GXMessagesItemData: Equatable {
         }
     }
     
-    public required init(data: GXMessagesDataProtocol) {
+    public required init(data: GXMessagesDataDelegate) {
         self.data = data
         
         if GXCHATC.isAutoSetupNicknameColor {

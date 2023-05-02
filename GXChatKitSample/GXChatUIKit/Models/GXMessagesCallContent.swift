@@ -8,7 +8,7 @@
 import UIKit
 import GXMessagesTableView
 
-public class GXMessagesCallContent: GXMessagesContentProtocol {
+public class GXMessagesCallContent: GXMessagesContentDelegate {
     // MARK: - GXMessagesContentData
     
     /// 显示区域尺寸

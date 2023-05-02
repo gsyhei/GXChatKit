@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-public class GXMessagesAudioContent: GXMessagesMediaContentProtocol {
+public class GXMessagesAudioContent: GXMessagesMediaContentDelegate {
     // MARK: - GXMessagesMediaContentProtocol
     
     /// 媒体视图

@@ -13,7 +13,7 @@ public class GXMessagesAudioLayout: GXMessagesBaseLayout {
     public var audioTrackRect: CGRect = .zero
     public var audioTimeRect: CGRect = .zero
     
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right

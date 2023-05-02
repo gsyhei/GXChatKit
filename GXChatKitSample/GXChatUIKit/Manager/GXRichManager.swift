@@ -110,7 +110,7 @@ public class GXRichManager: NSObject {
     ///   - attributedString: 文本消息的富文本
     ///   - users: @用户组
     /// - Returns: 富文本消息
-    class func atAttributedText(string: String, users: [GXMessagesUserProtocol]) -> NSAttributedString {
+    class func atAttributedText(string: String, users: [GXMessagesUserDelegate]) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
         var attributes: Dictionary<NSAttributedString.Key, Any> = [:]
@@ -146,7 +146,7 @@ public class GXRichManager: NSObject {
     ///   - attributedString: 文本消息的富文本
     ///   - user: 转发来至用户
     /// - Returns: 富文本消息
-    class func forwardAttributedText(string: String, user: GXMessagesUserProtocol) -> NSAttributedString {
+    class func forwardAttributedText(string: String, user: GXMessagesUserDelegate) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = GXCHATC.textLineSpacing
         var attributes: Dictionary<NSAttributedString.Key, Any> = [:]

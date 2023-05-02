@@ -13,7 +13,7 @@ public class GXMessagesLocationLayout: GXMessagesBaseLayout {
     public var locationContentRect: CGRect = .zero
     public var locationTitleRect: CGRect = .zero
 
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesLocationContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right

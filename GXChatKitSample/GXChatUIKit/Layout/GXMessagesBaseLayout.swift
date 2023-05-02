@@ -15,16 +15,16 @@ public class GXMessagesBaseLayout: NSObject {
     public var timeRect: CGRect = .zero
     public var cellHeight: CGFloat = 0
     
-    public required init(data: GXMessagesDataProtocol) {
+    public required init(data: GXMessagesDataDelegate) {
         super.init()
         self.updateLayout(data: data)
     }
     
-    public func updateLayout(data: GXMessagesDataProtocol) {
+    public func updateLayout(data: GXMessagesDataDelegate) {
         
     }
     
-    public func updateBaseLayout(data: GXMessagesDataProtocol, containerSize: CGSize) {
+    public func updateBaseLayout(data: GXMessagesDataDelegate, containerSize: CGSize) {
         let containerLeft = data.gx_containerLeft(container: containerSize.width)
         if data.gx_continuousBegin {
             self.containerRect = CGRect(origin: CGPoint(x: containerLeft, y: GXCHATC.cellMaxLineSpacing), size: containerSize)

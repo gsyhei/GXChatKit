@@ -18,10 +18,10 @@ struct GXMessagesTestData {
     var continuousEnd: Bool = false
     var messageStatus: GXMessageStatus = .sending
     var messageType: GXChatConfiguration.MessageType = .text
-    var messagesContentData: GXMessagesContentProtocol? = nil
+    var messagesContentData: GXMessagesContentDelegate? = nil
 }
 
-extension GXMessagesTestData: GXMessagesDataProtocol {
+extension GXMessagesTestData: GXMessagesDataDelegate {
     public var gx_groupId: String? {
         return nil
     }
@@ -64,7 +64,7 @@ extension GXMessagesTestData: GXMessagesDataProtocol {
         return .allRead
     }
     
-    public var gx_messagesContent: GXMessagesContentProtocol? {
+    public var gx_messagesContent: GXMessagesContentDelegate? {
         return self.messagesContentData
     }
     
@@ -103,7 +103,7 @@ struct GXTestUser {
     var userUrl: NSURL? = nil
 }
 
-extension GXTestUser: GXMessagesUserProtocol {
+extension GXTestUser: GXMessagesUserDelegate {
     var gx_id: String {
         return userId
     }

@@ -14,7 +14,7 @@ public class GXMessagesFileLayout: GXMessagesBaseLayout {
     public var fileExtRect: CGRect = .zero
     public var fileLineRect: CGRect = .zero
 
-    public override func updateLayout(data: GXMessagesDataProtocol) {
+    public override func updateLayout(data: GXMessagesDataDelegate) {
         guard let content = data.gx_messagesContent as? GXMessagesFileContent else { return }
         
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right

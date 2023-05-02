@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GXMessagesReplyContent: GXMessagesContentProtocol {
+public class GXMessagesReplyContent: GXMessagesContentDelegate {
     // MARK: - GXMessagesContentData
     
     /// 显示区域尺寸
@@ -22,11 +22,11 @@ public class GXMessagesReplyContent: GXMessagesContentProtocol {
     /// 回复对象是否显示icon
     public var isShowIcon: Bool = false
     /// @At用户
-    public var users: [GXMessagesUserProtocol]
+    public var users: [GXMessagesUserDelegate]
     /// 回复data
-    public var replyData: GXMessagesDataProtocol
+    public var replyData: GXMessagesDataDelegate
 
-    public required init(text: String, users: [GXMessagesUserProtocol] = [], replyData: GXMessagesDataProtocol) {
+    public required init(text: String, users: [GXMessagesUserDelegate] = [], replyData: GXMessagesDataDelegate) {
         self.text = text
         self.users = users
         if users.count > 0 {
@@ -40,7 +40,7 @@ public class GXMessagesReplyContent: GXMessagesContentProtocol {
         self.isShowIcon = self.isShowIcon(replyData: replyData)
     }
     
-    private func isShowIcon(replyData: GXMessagesDataProtocol) -> Bool {
+    private func isShowIcon(replyData: GXMessagesDataDelegate) -> Bool {
         switch replyData.gx_messageType {
         case .phote, .video, .location, .bCard, .file, .redPacket:
             return true
@@ -49,7 +49,7 @@ public class GXMessagesReplyContent: GXMessagesContentProtocol {
         }
     }
     
-    private func replyContentText(replyData: GXMessagesDataProtocol) -> String {
+    private func replyContentText(replyData: GXMessagesDataDelegate) -> String {
         if let content = replyData.gx_messagesContent as? GXMessagesTextContent {
             return content.text
         }
