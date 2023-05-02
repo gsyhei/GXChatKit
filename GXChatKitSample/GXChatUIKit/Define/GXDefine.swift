@@ -41,10 +41,6 @@ private func StatusBarHeight() -> CGFloat {
     }
 }
 
-public func GXLS(_ string: String) -> String {
-    return NSLocalizedString(string, comment: "")
-}
-
 public var GXSafeAreaInsets: UIEdgeInsets {
     if let safeAreaInsets = UIApplication.shared.delegate?.window??.rootViewController?.view.safeAreaInsets {
         return safeAreaInsets

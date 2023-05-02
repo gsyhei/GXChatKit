@@ -10,15 +10,15 @@ import UIKit
 public class GXChatChineseText: GXChatTextProtocol {
     
     public func gx_forwardContentString() -> String {
-        return GXLS("转发自：\n")
+        return "转发自：\n"
     }
     
     public func gx_sectionHeaderString(date: Date) -> String {
         if date.isToday {
-            return GXLS("今天")
+            return "今天"
         }
         else if date.isYesterday {
-            return GXLS("昨天")
+            return "昨天"
         }
         else if NSCalendar.current.isDate(date, equalTo: Date(), toGranularity: .month) {
             return date.string(format: "M月d日")      //英文版简写date.string(format: "MMMM d")
@@ -84,6 +84,53 @@ public class GXChatChineseText: GXChatTextProtocol {
             return "[视频通话]"
         default:
             return ""
+        }
+    }
+    
+//    enum MessageMenuType: Int {
+//        /// 回复
+//        case repply  = 0
+//        /// 复制
+//        case copy    = 1
+//        /// 转发
+//        case forward = 2
+//        /// 编辑
+//        case edit    = 3
+//        /// 保存
+//        case save    = 4
+//        /// 收藏
+//        case collect = 5
+//        /// 撤回
+//        case revoke  = 6
+//        /// 删除
+//        case delete  = 7
+//        /// 举报
+//        case report  = 8
+//        /// 选择
+//        case select  = 9
+//    }
+    public func gx_menuTypeString(type: GXChatConfiguration.MessageMenuType) -> String {
+        switch type {
+        case .repply:
+            return "回复"
+        case .copy:
+            return "复制"
+        case .forward:
+            return "转发"
+        case .edit:
+            return "编辑"
+        case .save:
+            return "保存"
+        case .collect:
+            return "收藏"
+        case .revoke:
+            return "撤回"
+        case .delete:
+            return "删除"
+        case .report:
+            return "举报"
+        case .select:
+            return "选择"
         }
     }
     

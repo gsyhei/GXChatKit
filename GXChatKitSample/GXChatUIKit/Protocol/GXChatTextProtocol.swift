@@ -44,4 +44,8 @@ public protocol GXChatTextProtocol {
     /// - Returns: 文本
     func gx_replyContentTypeString(type: GXChatConfiguration.MessageType) -> String
     
+    /// 消息长按菜单类型文本描述
+    /// - Parameter type: 消息类型
+    /// - Returns: 文本
+    func gx_menuTypeString(type: GXChatConfiguration.MessageMenuType) -> String
 }

@@ -88,6 +88,7 @@
 		96D30AE22956F5EE00AFBB90 /* GXChatUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */; };
 		96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; };
 		96D30AE72956F5EE00AFBB90 /* GXChatUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96E2949B29FF9980006899E1 /* GXMessagesCellPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E2949A29FF9980006899E1 /* GXMessagesCellPreviewController.swift */; };
 		96E3CDCC29F4A25C000A05D6 /* GXMessagesBaseCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E3CDCB29F4A25C000A05D6 /* GXMessagesBaseCellProtocol.swift */; };
 		96E5D43C29C571D9005AB5C9 /* voicexinwen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96E5D43B29C571D9005AB5C9 /* voicexinwen.mp3 */; };
 		96F92C9029C41C70009E30F4 /* GXMessagesAudioContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F92C8F29C41C70009E30F4 /* GXMessagesAudioContent.swift */; };
@@ -237,6 +238,7 @@
 		96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GXChatUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30ADA2956F5ED00AFBB90 /* GXChatUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXChatUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatUIKitTests.swift; sourceTree = "<group>"; };
+		96E2949A29FF9980006899E1 /* GXMessagesCellPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesCellPreviewController.swift; sourceTree = "<group>"; };
 		96E3CDCB29F4A25C000A05D6 /* GXMessagesBaseCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesBaseCellProtocol.swift; sourceTree = "<group>"; };
 		96E5D43B29C571D9005AB5C9 /* voicexinwen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicexinwen.mp3; sourceTree = "<group>"; };
 		96F92C8F29C41C70009E30F4 /* GXMessagesAudioContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioContent.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				9699577129757F2D001DCC17 /* GXMessagesViewController.swift */,
+				96E2949A29FF9980006899E1 /* GXMessagesCellPreviewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */,
 				9699576229750CFF001DCC17 /* GXMessagesTextContent.swift in Sources */,
 				963E75D229E016FF00A6D9C6 /* GXMessagesFileCell.swift in Sources */,
+				96E2949B29FF9980006899E1 /* GXMessagesCellPreviewController.swift in Sources */,
 				96A3C12529D446D300ADBC65 /* GXMessagesContentProtocol.swift in Sources */,
 				96A36A7929C2E10400BD4506 /* GXUtilManager.swift in Sources */,
 				96A3C13129D46CC500ADBC65 /* GXMessagesPhotoLayout.swift in Sources */,
