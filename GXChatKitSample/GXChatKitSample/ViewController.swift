@@ -553,6 +553,7 @@ extension ViewController: GXMessagesBaseCellDelegate {
         guard let data = item?.data else { return }
         
         let oldTransform: CGAffineTransform = cell.messageBubbleContainerView.transform
+        cell.isHighlighted = false
         cell.messageBubbleContainerView.transform = .identity
         guard let preview = cell.messageBubbleContainerView.snapshotView(afterScreenUpdates: false) else { return }
         preview.transform = oldTransform

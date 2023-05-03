@@ -124,7 +124,6 @@ extension GXMessagesMenuAnimationDelegate {
         guard let toVC = transitionContext.viewController(forKey: .to) as? GXMessagesCellPreviewController else { return }
         toVC.view.alpha = 0.0
         toVC.preview.isHidden = true
-        self.bubbleView?.isHidden = true
         transitionContext.containerView.addSubview(toVC.view)
         
         guard let preview = toVC.preview.snapshotView(afterScreenUpdates: false) else { return }
@@ -133,8 +132,11 @@ extension GXMessagesMenuAnimationDelegate {
         transitionContext.containerView.addSubview(preview)
         var transform: CGAffineTransform = .identity
         transform = transform.translatedBy(x: 0, y: (toVC.currentRect.minY - toVC.originalRect.minY))
+        self.bubbleView?.isHidden = true
         
+        toVC.tableView.transform = .init(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext)) {
+            toVC.tableView.transform = .identity
             preview.transform = transform
             toVC.view.alpha = 1.0
         } completion: { (finished) in
@@ -154,6 +156,7 @@ extension GXMessagesMenuAnimationDelegate {
         transitionContext.containerView.addSubview(preview)
 
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext)) {
+            fromVC.tableView.transform = .init(scaleX: 0.1, y: 0.1)
             preview.frame = fromVC.originalRect
             fromVC.view.alpha = 0.0
         } completion: { (finished) in

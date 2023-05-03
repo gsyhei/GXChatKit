@@ -8,7 +8,7 @@
 import UIKit
 
 public class GXMessagesCellPreviewController: UIViewController {
-    private let lineSpacing: CGFloat = 12.0
+    private let lineSpacing: CGFloat = 10.0
     private let headerHeight: CGFloat = 12.0
     private let tableWidth: CGFloat = 200.0
     private let itemHeight: CGFloat = 44.0
@@ -28,7 +28,20 @@ public class GXMessagesCellPreviewController: UIViewController {
         
         return view
     }()
-
+    
+    public lazy var tableView: UITableView = {
+        let tv = UITableView(frame: self.view.bounds, style: .grouped)
+//        tv.dataSource = self
+//        tv.delegate = self
+        tv.backgroundColor = UIColor(hex: 0xEFEFEF)
+        tv.separatorInset = .zero
+        tv.layer.masksToBounds = true
+        tv.layer.cornerRadius = 20.0
+        tv.layer.borderWidth = 0.5
+        tv.layer.borderColor = UIColor.lightGray.cgColor
+        
+        return tv
+    }()
 
     public init(data: GXMessagesDataDelegate, preview: UIView, originalRect: CGRect) {
         self.messageData = data
@@ -50,30 +63,6 @@ public class GXMessagesCellPreviewController: UIViewController {
     
 }
 
-/// 消息菜单
-//enum MessageMenuType: Int {
-//    /// 回复
-//    case repply  = 0
-//    /// 复制
-//    case copy    = 1
-//    /// 转发
-//    case forward = 2
-//    /// 编辑
-//    case edit    = 3
-//    /// 保存
-//    case save    = 4
-//    /// 收藏
-//    case collect = 5
-//    /// 撤回
-//    case revoke  = 6
-//    /// 删除
-//    case delete  = 7
-//    /// 举报
-//    case report  = 8
-//    /// 选择
-//    case select  = 9
-//}
-
 private extension GXMessagesCellPreviewController {
     func setupLayout() {
         self.itemTypes = [[.repply, .forward, .collect, .report, .delete], [.select]]
@@ -90,14 +79,14 @@ private extension GXMessagesCellPreviewController {
         else {
             self.currentRect = self.originalRect
         }
-        let tableTop = self.currentRect.maxY + self.lineSpacing
+        let tableTop = self.currentRect.maxY + self.lineSpacing - 4.0
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
-        if self.messageData.gx_messageSendStatus == .sending {
-            let left = self.originalRect.origin.x
+        if self.messageData.gx_messageStatus == .receiving {
+            let left = self.originalRect.origin.x + hookWidth
             self.tableRect = CGRect(x: left, y: tableTop, width: self.tableWidth, height: tableHeight)
         }
         else {
-            let left = self.originalRect.origin.x + hookWidth
+            let left = self.originalRect.maxX - self.tableWidth - hookWidth
             self.tableRect = CGRect(x: left, y: tableTop, width: self.tableWidth, height: tableHeight)
         }
     }
@@ -108,6 +97,8 @@ private extension GXMessagesCellPreviewController {
         self.view.addSubview(self.backgroudView)
         self.preview.frame = self.currentRect
         self.view.addSubview(self.preview)
+        self.tableView.frame = self.tableRect
+        self.view.addSubview(self.tableView)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureRecognizer(_:)))
         self.backgroudView.addGestureRecognizer(tap)
