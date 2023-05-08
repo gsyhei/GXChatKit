@@ -35,7 +35,7 @@
                     <rect key="frame" x="121" y="93" width="216" height="206"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" systemColor="systemBlueColor"/>
-                    <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="default" variableValue="1"/>
+                    <imageReference key="image" image="arrowshape.turn.up.left.2" catalog="system" symbolScale="default" variableValue="1"/>
                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l4P-Fz-HNs">
@@ -56,7 +56,7 @@
         </view>
     </objects>
     <resources>
-        <image name="checkmark.circle" catalog="system" width="128" height="123"/>
+        <image name="arrowshape.turn.up.left.2" catalog="system" width="128" height="86"/>
         <image name="video" catalog="system" width="128" height="82"/>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

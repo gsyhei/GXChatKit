@@ -11,7 +11,7 @@ import Reusable
 public class GXMessagesCellPreviewController: UIViewController {
     private let lineSpacing: CGFloat = 10.0
     private let headerHeight: CGFloat = 8.0
-    private let tableWidth: CGFloat = 200.0
+    private let tableWidth: CGFloat = SCREEN_WIDTH/2
     private let itemHeight: CGFloat = 44.0
     
     public var messageData: GXMessagesDataDelegate
@@ -35,9 +35,9 @@ public class GXMessagesCellPreviewController: UIViewController {
         tv.dataSource = self
         tv.delegate = self
         tv.backgroundColor = .clear
-        tv.separatorColor = UIColor(hex: 0xD1D1D1)
-        tv.layer.borderWidth = 1.0
-        tv.layer.borderColor = UIColor(white: 0.8, alpha: 0.3).cgColor
+        tv.separatorColor = UIColor(hex: 0xB1B1B1)
+        tv.layer.borderWidth = 0.5
+        tv.layer.borderColor = UIColor(white: 0.5, alpha: 0.3).cgColor
         tv.layer.masksToBounds = true
         tv.layer.cornerRadius = 16.0
         tv.configuration(separatorLeft: true)
@@ -61,6 +61,7 @@ public class GXMessagesCellPreviewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupTypes()
         self.setupLayout()
         self.setupViewController()
     }
@@ -69,31 +70,35 @@ public class GXMessagesCellPreviewController: UIViewController {
 
 private extension GXMessagesCellPreviewController {
     
-//    enum MessageMenuType: Int {
-//        /// 回复
-//        case repply  = 0
-//        /// 复制
-//        case copy    = 1
-//        /// 转发
-//        case forward = 2
-//        /// 编辑
-//        case edit    = 3
-//        /// 保存
-//        case save    = 4
-//        /// 收藏
-//        case collect = 5
-//        /// 撤回
-//        case revoke  = 6
-//        /// 删除
-//        case delete  = 7
-//        /// 举报
-//        case report  = 8
-//        /// 选择
-//        case select  = 9
-//    }
+    func setupTypes() {
+        //self.itemTypes = [[.repply, .copy, .forward, .edit, .save, .collect, .revoke, .report, .delete], [.select]]
+        var types: [GXChatConfiguration.MessageMenuType] = []
+        if self.messageData.gx_messageSendStatus == .failure {
+            types.append(.delete)
+        }
+        else {
+            types.append(.repply)
+            types.append(.forward)
+            types.append(.collect)
+            if self.messageData.gx_messageType == .text || self.messageData.gx_messageType == .atText {
+                types.append(.copy)
+                if self.messageData.gx_messageStatus == .sending {
+                    types.append(.edit)
+                }
+            }
+            if self.messageData.gx_messageType == .phote || self.messageData.gx_messageType == .video {
+                types.append(.save)
+                types.append(.report)
+            }
+            if self.messageData.gx_messageStatus == .sending {
+                types.append(.revoke)
+            }
+            types.append(.delete)
+        }
+        self.itemTypes = [types, [.select]]
+    }
+    
     func setupLayout() {
-        self.itemTypes = [[.repply, .copy, .forward, .edit, .save, .collect, .revoke, .report, .delete], [.select]]
-        
         var tableHeight: CGFloat = CGFloat(self.itemTypes.count - 1) * self.headerHeight
         for types in self.itemTypes {
             tableHeight += self.itemHeight * CGFloat(types.count)

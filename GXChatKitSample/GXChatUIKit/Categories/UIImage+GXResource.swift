@@ -56,7 +56,7 @@ public extension UIImage {
         case .collect:
             return UIImage(systemName: "star")
         case .revoke:
-            return UIImage(systemName: "delete.left")
+            return UIImage(systemName: "arrowshape.turn.up.left.2")
         case .delete:
             return UIImage(systemName: "trash")
         case .report:
