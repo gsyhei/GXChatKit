@@ -331,10 +331,10 @@ public extension GXChatConfiguration {
         case collect = 5
         /// 撤回
         case revoke  = 6
-        /// 删除
-        case delete  = 7
         /// 举报
-        case report  = 8
+        case report  = 7
+        /// 删除
+        case delete  = 8
         /// 选择
         case select  = 9
     }

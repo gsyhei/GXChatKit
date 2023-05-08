@@ -40,4 +40,29 @@ public extension UIImage {
     static var gx_replyIconImage: UIImage? {
         return UIImage(systemName: "arrowshape.turn.up.left.fill")
     }
+
+    static func gx_cellPreviewIconImage(type: GXChatConfiguration.MessageMenuType) -> UIImage? {
+        switch type {
+        case .repply:
+            return UIImage(systemName: "arrowshape.turn.up.left")
+        case .copy:
+            return UIImage(systemName: "doc.on.doc")
+        case .forward:
+            return UIImage(systemName: "arrowshape.turn.up.right")
+        case .edit:
+            return UIImage(systemName: "square.and.pencil")
+        case .save:
+            return UIImage(systemName: "square.and.arrow.down")
+        case .collect:
+            return UIImage(systemName: "star")
+        case .revoke:
+            return UIImage(systemName: "delete.left")
+        case .delete:
+            return UIImage(systemName: "trash")
+        case .report:
+            return UIImage(systemName: "exclamationmark.circle")
+        case .select:
+            return UIImage(systemName: "checkmark.circle")
+        }
+    }
 }

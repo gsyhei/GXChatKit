@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import Reusable
 
 public class GXMessagesCellPreviewController: UIViewController {
     private let lineSpacing: CGFloat = 10.0
-    private let headerHeight: CGFloat = 12.0
+    private let headerHeight: CGFloat = 8.0
     private let tableWidth: CGFloat = 200.0
     private let itemHeight: CGFloat = 44.0
     
@@ -30,15 +31,18 @@ public class GXMessagesCellPreviewController: UIViewController {
     }()
     
     public lazy var tableView: UITableView = {
-        let tv = UITableView(frame: self.view.bounds, style: .grouped)
-//        tv.dataSource = self
-//        tv.delegate = self
-        tv.backgroundColor = UIColor(hex: 0xEFEFEF)
-        tv.separatorInset = .zero
+        let tv = UITableView(frame: self.view.bounds, style: .plain)
+        tv.dataSource = self
+        tv.delegate = self
+        tv.backgroundColor = .clear
+        tv.separatorColor = UIColor(hex: 0xD1D1D1)
+        tv.layer.borderWidth = 1.0
+        tv.layer.borderColor = UIColor(white: 0.8, alpha: 0.3).cgColor
         tv.layer.masksToBounds = true
-        tv.layer.cornerRadius = 20.0
-        tv.layer.borderWidth = 0.5
-        tv.layer.borderColor = UIColor.lightGray.cgColor
+        tv.layer.cornerRadius = 16.0
+        tv.configuration(separatorLeft: true)
+        tv.isScrollEnabled = false
+        tv.register(cellType: GXMessagesCellPreviewCell.self)
         
         return tv
     }()
@@ -64,14 +68,39 @@ public class GXMessagesCellPreviewController: UIViewController {
 }
 
 private extension GXMessagesCellPreviewController {
+    
+//    enum MessageMenuType: Int {
+//        /// 回复
+//        case repply  = 0
+//        /// 复制
+//        case copy    = 1
+//        /// 转发
+//        case forward = 2
+//        /// 编辑
+//        case edit    = 3
+//        /// 保存
+//        case save    = 4
+//        /// 收藏
+//        case collect = 5
+//        /// 撤回
+//        case revoke  = 6
+//        /// 删除
+//        case delete  = 7
+//        /// 举报
+//        case report  = 8
+//        /// 选择
+//        case select  = 9
+//    }
     func setupLayout() {
-        self.itemTypes = [[.repply, .forward, .collect, .report, .delete], [.select]]
+        self.itemTypes = [[.repply, .copy, .forward, .edit, .save, .collect, .revoke, .report, .delete], [.select]]
+        
         var tableHeight: CGFloat = CGFloat(self.itemTypes.count - 1) * self.headerHeight
         for types in self.itemTypes {
             tableHeight += self.itemHeight * CGFloat(types.count)
         }
         let bottomHeight = tableHeight + self.lineSpacing * 2
-        let bottomTop = self.view.frame.height - bottomHeight
+        let safeBottom = self.view.currentWindow()?.safeAreaInsets.bottom ?? 0
+        let bottomTop = self.view.frame.height - bottomHeight - safeBottom
         if self.originalRect.maxY > bottomTop {
             self.currentRect = self.originalRect
             self.currentRect.origin.y = bottomTop - self.originalRect.height
@@ -106,6 +135,106 @@ private extension GXMessagesCellPreviewController {
     
     @objc func tapGestureRecognizer(_ tap: UITapGestureRecognizer) {
         self.dismiss(animated: true)
+    }
+    
+}
+
+extension GXMessagesCellPreviewController: UITableViewDataSource, UITableViewDelegate {
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return self.itemTypes.count
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.itemTypes[section].count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: GXMessagesCellPreviewCell = tableView.dequeueReusableCell(for: indexPath)
+        let type = self.itemTypes[indexPath.section][indexPath.row]
+        cell.bindCell(type: type)
+        
+        return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0.9, alpha: 0.5)
+        
+        return view
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.itemHeight
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 { return CGFloat.leastNonzeroMagnitude }
+        
+        return self.headerHeight
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
+    
+}
+
+public class GXMessagesCellPreviewCell: UITableViewCell, Reusable {
+    
+    public lazy var typeLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.font = GXCHATC.textFont
+        
+        return label
+    }()
+    
+    public lazy var iconIView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.backgroundColor = UIColor(white: 1.0, alpha: 0.7)
+        self.contentView.addSubview(self.typeLabel)
+        self.contentView.addSubview(self.iconIView)
+    }
+        
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        guard self.frame != .zero else { return }
+        
+        let margin: CGFloat = 16.0, iconSize: CGFloat = 20.0
+        let iconTop = (self.frame.height - iconSize)/2
+        let iconLeft = self.frame.width - iconSize - margin
+        self.iconIView.frame = CGRect(x: iconLeft, y: iconTop, width: iconSize, height: iconSize)
+        
+        let labelTop = (self.frame.height - GXCHATC.textFont.lineHeight)/2
+        let labelWidth = self.frame.width - (self.frame.width - self.iconIView.frame.minX) - margin * 2
+        self.typeLabel.frame = CGRect(x: margin, y: labelTop, width: labelWidth, height: GXCHATC.textFont.lineHeight)
+    }
+    
+    public func bindCell(type: GXChatConfiguration.MessageMenuType) {
+        self.typeLabel.text = GXCHATC.chatText.gx_menuTypeString(type: type)
+        self.iconIView.image = UIImage.gx_cellPreviewIconImage(type: type)
+        
+        if type == .delete {
+            self.iconIView.tintColor = .systemRed
+            self.typeLabel.textColor = .systemRed
+        }
+        else {
+            self.iconIView.tintColor = .black
+            self.typeLabel.textColor = .black
+        }
     }
     
 }
