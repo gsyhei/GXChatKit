@@ -65,14 +65,14 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         let frame = CGRect(origin: .zero, size: GXCHATC.replyIndicatorSize)
         let view = GXMessagesReplyIndicatorView(frame: frame)
         view.actionBlock = {[weak self] in
-            self?.generator.impactOccurred()
+            self?.generator.impactOccurred(intensity: 1.0)
         }
         return view
     }()
     
     /// 震动对象
     private lazy var generator: UIImpactFeedbackGenerator = {
-        return UIImpactFeedbackGenerator(style: .heavy)
+        return UIImpactFeedbackGenerator(style: .rigid)
     }()
     
     /// Pan手势锁
