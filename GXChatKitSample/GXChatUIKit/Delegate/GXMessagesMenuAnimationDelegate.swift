@@ -126,7 +126,7 @@ extension GXMessagesMenuAnimationDelegate {
         toVC.preview.isHidden = true
         transitionContext.containerView.addSubview(toVC.view)
         
-        guard let preview = toVC.preview.snapshotView(afterScreenUpdates: false) else { return }
+        guard let preview = self.bubbleView?.snapshotView(afterScreenUpdates: false) else { return }
         preview.frame = toVC.originalRect
         preview.transform = toVC.preview.transform
         transitionContext.containerView.addSubview(preview)

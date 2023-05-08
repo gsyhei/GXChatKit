@@ -11,6 +11,8 @@ public class GXMessagesReplyIndicatorView: UIView {
     
     public var isShowAnimated = false
     
+    public var actionBlock: GXActionBlock?
+    
     public var progress: CGFloat = 0 {
         didSet {
             self.alpha = self.progress
@@ -86,7 +88,7 @@ public class GXMessagesReplyIndicatorView: UIView {
     public func showAnimation() {
         guard !self.isShowAnimated else { return }
         self.isShowAnimated = true
-        self.generator.impactOccurred()
+        self.actionBlock?()
         self.displayLink.add(to: RunLoop.main, forMode: .common)
     }
 

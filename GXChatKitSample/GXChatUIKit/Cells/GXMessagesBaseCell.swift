@@ -64,8 +64,15 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     public lazy var replyIndicatorView: GXMessagesReplyIndicatorView = {
         let frame = CGRect(origin: .zero, size: GXCHATC.replyIndicatorSize)
         let view = GXMessagesReplyIndicatorView(frame: frame)
-
+        view.actionBlock = {[weak self] in
+            self?.generator.impactOccurred()
+        }
         return view
+    }()
+    
+    /// 震动对象
+    private lazy var generator: UIImpactFeedbackGenerator = {
+        return UIImpactFeedbackGenerator(style: .heavy)
     }()
     
     /// Pan手势锁
@@ -256,6 +263,7 @@ extension GXMessagesBaseCell {
     
     @objc func longPressGestureRecognizer(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
+            self.generator.impactOccurred()
             self.delegate?.messagesCell(self, didLongPressAt: self.item)
         }
     }
