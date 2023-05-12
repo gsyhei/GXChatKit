@@ -20,6 +20,13 @@ public extension UIImage {
         
         return UIImage(contentsOfFile: imagePath)
     }
+    class func gx_bundleAssetImage(name: String, type: String) -> UIImage? {
+        let bundle = Bundle.gx_messagesAssetBundle
+        let path = bundle?.path(forResource: name, ofType: type, inDirectory: "images")
+        guard let imagePath = path else { return nil }
+        
+        return UIImage(contentsOfFile: imagePath)
+    }
     
     /// 内部表情图
     /// - Parameter name: 图片名

@@ -50,10 +50,14 @@ public class GXMessagesBaseLayout: NSObject {
                 let height = GXCHATC.nicknameFont.lineHeight
                 self.nicknameRect = CGRect(x: left, y: top, width: width, height: height)
             }
-            let timeSize = data.gx_messageTime.size(size: self.containerRect.size, font: GXCHATC.timeFont)
+            let timeSize = data.gx_timeAttributedText?.boundingRect(with: self.containerRect.size, options: .usesLineFragmentOrigin, context: nil).size ?? .zero
             let top = self.containerRect.height - GXCHATC.bubbleTrailingInsets.bottom - timeSize.height
             let left = self.containerRect.width - GXCHATC.bubbleTrailingInsets.right - timeSize.width
-            self.timeRect = CGRect(x: left, y: top, width: timeSize.width, height: timeSize.height)
+            if data.gx_messageReadingStatus == .read {
+                self.timeRect = CGRect(x: left, y: top + 2.0, width: timeSize.width, height: timeSize.height)
+            } else {
+                self.timeRect = CGRect(x: left, y: top, width: timeSize.width, height: timeSize.height)
+            }
         }
         else {
             if data.gx_isShowAvatar {
@@ -66,10 +70,14 @@ public class GXMessagesBaseLayout: NSObject {
                 let height = GXCHATC.nicknameFont.lineHeight
                 self.nicknameRect = CGRect(x: left, y: top, width: width, height: height)
             }
-            let timeSize = data.gx_messageTime.size(size: self.containerRect.size, font: GXCHATC.timeFont)
+            let timeSize = data.gx_timeAttributedText?.boundingRect(with: self.containerRect.size, options: .usesLineFragmentOrigin, context: nil).size ?? .zero
             let top = self.containerRect.height - GXCHATC.bubbleLeadingInsets.bottom - timeSize.height
             let left = self.containerRect.width - GXCHATC.bubbleLeadingInsets.right - timeSize.width
-            self.timeRect = CGRect(x: left, y: top, width: timeSize.width, height: timeSize.height)
+            if data.gx_messageReadingStatus == .read {
+                self.timeRect = CGRect(x: left, y: top + 2.0, width: timeSize.width, height: timeSize.height)
+            } else {
+                self.timeRect = CGRect(x: left, y: top, width: timeSize.width, height: timeSize.height)
+            }
         }
     }
 }

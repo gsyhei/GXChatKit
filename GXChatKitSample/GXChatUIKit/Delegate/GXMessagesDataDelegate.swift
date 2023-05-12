@@ -31,6 +31,8 @@ public protocol GXMessagesDataDelegate: GXMessagesAvatarDataProtocol  {
     var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
     /// 消息内容
     var gx_messagesContent: GXMessagesContentDelegate? { get }
+    /// 消息显示时间富文本
+    var gx_timeAttributedText: NSAttributedString? { set get }
 }
 
 public extension GXMessagesDataDelegate {

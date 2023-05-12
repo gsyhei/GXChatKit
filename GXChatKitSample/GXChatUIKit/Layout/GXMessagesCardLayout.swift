@@ -42,8 +42,9 @@ public class GXMessagesCardLayout: GXMessagesBaseLayout {
         self.updateBaseLayout(data: data, containerSize: CGSizeMake(containerWidth, containerHeight))
         
         let cardTypeWidth = content.cardTypeName.size(size: CGSizeMake(1000, GXCHATC.textFont.lineHeight), font: GXCHATC.textFont).width
-        let cardTypePoint = CGPoint(x:contentPoint.x, y: self.timeRect.minY)
         let cardTypeSize = CGSize(width: cardTypeWidth, height: GXCHATC.timeFont.lineHeight)
+        let cardTypeTop = self.timeRect.minY + (self.timeRect.height - GXCHATC.timeFont.lineHeight)/2
+        let cardTypePoint = CGPoint(x:contentPoint.x, y: cardTypeTop)
         self.cardTypeRect = CGRect(origin: cardTypePoint, size: cardTypeSize)
     }
     

@@ -7,6 +7,7 @@
 
 import UIKit
 import YYText
+import GXMessagesTableView
 
 //REGULAREXPRESSION(UserHandleRegularExpression, @"@[\\u4e00-\\u9fa5\\w\\-]+")
 //REGULAREXPRESSION(HashtagRegularExpression, @"#([\\u4e00-\\u9fa5\\w\\-]+)")
@@ -186,6 +187,56 @@ public class GXRichManager: NSObject {
             }
         }
         return mutableString as String
+    }
+    
+    /// 获取时间富文本
+    /// - Parameters:
+    ///   - time: 时间文本
+    ///   - status: 消息状态
+    ///   - readStatus: 读取状态
+    /// - Returns: 富文本
+    class func timeText(time: String, status: GXMessageStatus, readStatus: GXChatConfiguration.MessageReadingStatus) -> NSAttributedString {
+        var attributes: Dictionary<NSAttributedString.Key, Any> = [:]
+        attributes[NSAttributedString.Key.font] = GXCHATC.timeFont
+        if status == .sending {
+            attributes[NSAttributedString.Key.foregroundColor] = GXCHATC.sendingTimeColor
+        }
+        else {
+            attributes[NSAttributedString.Key.foregroundColor] = GXCHATC.receivingTimeColor
+        }
+        let attributedString = NSMutableAttributedString()
+        let appendString = NSMutableAttributedString(string: time)
+        let range: NSRange = NSMakeRange(0, appendString.length)
+        appendString.addAttributes(attributes, range: range)
+        attributedString.append(appendString)
+        guard status == .sending else { return attributedString }
+        
+        let bounds = CGRect(x: 0, y: -5, width: GXCHATC.timeFont.lineHeight + 5, height: GXCHATC.timeFont.lineHeight + 5)
+        if readStatus == .unread {
+            if let image = UIImage.gx_readCheckSingleImage?.gx_imageMasked(color: GXCHATC.sendingTimeColor) {
+                let attachment = NSTextAttachment(image: image)
+                attachment.bounds = bounds
+                let attachmentAtt = NSAttributedString(attachment: attachment)
+                attributedString.append(attachmentAtt)
+            }
+        }
+        else if readStatus == .read {
+            if let image = UIImage.gx_readCheckDoubleImage?.gx_imageMasked(color: GXCHATC.sendingTimeColor) {
+                let attachment = NSTextAttachment(image: image)
+                attachment.bounds = bounds
+                let attachmentAtt = NSAttributedString(attachment: attachment)
+                attributedString.append(attachmentAtt)
+            }
+        }
+        else {
+            if let image = UIImage.gx_loadingImage?.gx_imageMasked(color: GXCHATC.sendingTimeColor) {
+                let attachment = NSTextAttachment(image: image)
+                attachment.bounds = bounds
+                let attachmentAtt = NSAttributedString(attachment: attachment)
+                attributedString.append(attachmentAtt)
+            }
+        }
+        return attributedString
     }
     
 }

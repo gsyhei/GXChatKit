@@ -79,6 +79,7 @@ class ViewController: UIViewController {
         data1.messageID = "111"
         data1.gx_continuousBegin = true
         data1.messageStatus = .sending
+        data1.messageReadingStatus = .unread
         data1.messageType = .text
         let text = "[鬼脸]也不知道说什么！7867868765765765656556565656测试网址https://www.baidu.com，" +
         "测试电话0755-89776672，测试手机号18826763432，" +
@@ -97,6 +98,7 @@ class ViewController: UIViewController {
         data2.avatarID = "11"
         data2.messageID = "112"
         data2.messageStatus = .sending
+        data2.messageReadingStatus = .read
         data2.messageType = .text
         data2.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
         
@@ -111,6 +113,7 @@ class ViewController: UIViewController {
         data3.messageID = "113"
         data3.gx_continuousEnd = true
         data3.messageStatus = .sending
+        data3.messageReadingStatus = .read
         data3.messageType = .phote
         data3.messagesContentData = GXMessagesPhotoContent(thumbnailImage: UIImage(named: "testphoto"))
         

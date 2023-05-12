@@ -192,7 +192,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         }
         self.messageBubbleTimeLabel.frame = item.layout.timeRect
         self.messageBubbleTimeLabel.textAlignment = .right
-        self.messageBubbleTimeLabel.text = item.data.gx_messageTime
+        self.messageBubbleTimeLabel.attributedText = item.data.gx_timeAttributedText
         
         if item.data.gx_messageStatus == .sending {
             self.messageBubbleNameLabel.textAlignment = .right

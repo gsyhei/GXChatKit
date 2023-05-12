@@ -9,19 +9,22 @@ import UIKit
 import GXChatUIKit
 import GXMessagesTableView
 
-struct GXMessagesTestData {
+class GXMessagesTestData {
     var date: Date = Date()
     var showName: String = "抬头45度仰望天空"
     var messageID: String = ""
     var avatarID: String = ""
     var continuousBegin: Bool = false
     var continuousEnd: Bool = false
+    var messageReadingStatus: GXChatConfiguration.MessageReadingStatus = .none
     var messageStatus: GXMessageStatus = .sending
     var messageType: GXChatConfiguration.MessageType = .text
     var messagesContentData: GXMessagesContentDelegate? = nil
+    var timeAttributedText: NSAttributedString? = nil
 }
 
 extension GXMessagesTestData: GXMessagesDataDelegate {
+    
     public var gx_groupId: String? {
         return nil
     }
@@ -61,11 +64,20 @@ extension GXMessagesTestData: GXMessagesDataDelegate {
     }
     
     public var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus {
-        return .allRead
+        return self.messageReadingStatus
     }
     
     public var gx_messagesContent: GXMessagesContentDelegate? {
         return self.messagesContentData
+    }
+    
+    public var gx_timeAttributedText: NSAttributedString? {
+        get {
+            return self.timeAttributedText
+        }
+        set(newValue) {
+            self.timeAttributedText = newValue
+        }
     }
     
     //MARK: - GXMessagesAvatarDataSource

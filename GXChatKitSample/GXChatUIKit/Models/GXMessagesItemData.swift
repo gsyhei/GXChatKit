@@ -35,6 +35,7 @@ public class GXMessagesItemData: Equatable {
     public required init(data: GXMessagesDataDelegate) {
         self.data = data
         
+        self.data.gx_timeAttributedText = GXRichManager.timeText(time: data.gx_messageTime, status: data.gx_messageStatus, readStatus: data.gx_messageReadingStatus)
         if GXCHATC.isAutoSetupNicknameColor {
             self.dispalyNameHexString = data.gx_displayNameHexString
         }

@@ -287,8 +287,6 @@ public extension GXChatConfiguration {
         case unread  = 0
         /// 已读
         case read    = 1
-        /// 全部已读（群消息）
-        case allRead = 2
     }
     
     /// 消息通话状态
