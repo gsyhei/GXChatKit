@@ -46,7 +46,7 @@ public class GXMessagesRedPacketLayout: GXMessagesBaseLayout {
         let nameWidth = content.name.size(size: CGSizeMake(1000, GXCHATC.timeFont.lineHeight), font: GXCHATC.timeFont).width
         let nameSize = CGSize(width: nameWidth, height: GXCHATC.timeFont.lineHeight)
         let nameTop = self.timeRect.minY + (self.timeRect.height - GXCHATC.timeFont.lineHeight)/2
-        let namePoint = CGPoint(x:contentPoint.x, y: self.timeRect.minY)
+        let namePoint = CGPoint(x:contentPoint.x, y: nameTop)
         self.rpNameRect = CGRect(origin: namePoint, size: nameSize)
     }
     
