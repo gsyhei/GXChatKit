@@ -33,7 +33,12 @@ public extension UIImage {
         return UIImage(systemName: "arrowshape.turn.up.left.fill")
     }
     
+    static var gx_sendFailureImage: UIImage? {
+        return UIImage(systemName: "exclamationmark.circle")
+    }
+    
     static var gx_fileIconImage: UIImage? {
+        // return UIImage(systemName: "doc.fill")
         return UIImage.gx_bundleAssetImage(name: "file")
     }
     
@@ -47,10 +52,6 @@ public extension UIImage {
     
     static var gx_readCheckDoubleImage: UIImage? {
         return UIImage.gx_bundleAssetImage(name: "check_double")
-    }
-    
-    static var gx_loadingImage: UIImage? {
-        return UIImage.gx_bundleAssetImage(name: "loading", type: "gif")
     }
 
     static func gx_cellPreviewIconImage(type: GXChatConfiguration.MessageMenuType) -> UIImage? {

@@ -13,9 +13,9 @@ public typealias GXMessagesAvatarCellProtocol = UITableViewCell & GXMessagesAvat
 /// 消息状态
 public enum GXMessageStatus : Int {
     /// 发送
-    case sending   = 0
+    case send    = 0
     /// 接收
-    case receiving = 1
+    case receive = 1
 }
 
 /// 头像视图接口

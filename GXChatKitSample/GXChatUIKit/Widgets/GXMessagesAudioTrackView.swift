@@ -10,7 +10,7 @@ import GXMessagesTableView
 
 public class GXMessagesAudioTrackView: UIView {
     private var trackLayers: [CALayer] = []
-    private var messageStatus: GXMessageStatus = .sending
+    private var messageStatus: GXMessageStatus = .send
     private weak var audioContent: GXMessagesAudioContent?
     
     public override init(frame: CGRect) {
@@ -34,7 +34,7 @@ public class GXMessagesAudioTrackView: UIView {
         let layer = self.trackLayers[index]
         if animated {
             UIView.animate(withDuration: self.audioContent?.animateDuration ?? 0) {
-                if self.messageStatus == .sending {
+                if self.messageStatus == .send {
                     layer.backgroundColor = GXCHATC.audioSendingTimeColor.cgColor
                 } else {
                     layer.backgroundColor = GXCHATC.audioReceivingTimeColor.cgColor
@@ -42,7 +42,7 @@ public class GXMessagesAudioTrackView: UIView {
             }
         }
         else {
-            if self.messageStatus == .sending {
+            if self.messageStatus == .send {
                 layer.backgroundColor = GXCHATC.audioSendingTimeColor.cgColor
             } else {
                 layer.backgroundColor = GXCHATC.audioReceivingTimeColor.cgColor
@@ -52,7 +52,7 @@ public class GXMessagesAudioTrackView: UIView {
     
     public func gx_resetTracksLayer() {
         self.trackLayers.forEach {[weak self] layer in
-            if self?.messageStatus == .sending {
+            if self?.messageStatus == .send {
                 layer.backgroundColor = GXCHATC.audioSendingTimeHighlightColor.cgColor
             } else {
                 layer.backgroundColor = GXCHATC.audioReceivingTimeHighlightColor.cgColor
@@ -83,14 +83,14 @@ fileprivate extension GXMessagesAudioTrackView {
             let layer = CALayer()
             layer.frame = frame
             if index < content.currentPlayIndex {
-                if self.messageStatus == .sending {
+                if self.messageStatus == .send {
                     layer.backgroundColor = GXCHATC.audioSendingTimeColor.cgColor
                 } else {
                     layer.backgroundColor = GXCHATC.audioReceivingTimeColor.cgColor
                 }
             }
             else {
-                if self.messageStatus == .sending {
+                if self.messageStatus == .send {
                     layer.backgroundColor = GXCHATC.audioSendingTimeHighlightColor.cgColor
                 } else {
                     layer.backgroundColor = GXCHATC.audioReceivingTimeHighlightColor.cgColor

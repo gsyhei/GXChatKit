@@ -60,17 +60,17 @@ class GXMessagesTestCell: GXMessagesAvatarCellProtocol, Reusable {
     func bindCell(data: GXMessagesTestData) {
         self.avatarButton.setTitle(data.avatarID, for: .normal)
         self.avatarButton.isHidden = !data.gx_continuousEnd
-        if data.messageStatus == .receiving {
-            let size: CGFloat = 60.0
-            let rect = CGRect(x: 0, y: self.contentView.height - size, width: size, height: size)
-            self.avatarButton.frame = rect
-            self.avatarButton.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin]
-        }
-        else {
+        if data.messageStatus == .send {
             let size: CGFloat = 60.0
             let rect = CGRect(x: self.contentView.width - size, y: self.contentView.height - size, width: size, height: size)
             self.avatarButton.frame = rect
             self.avatarButton.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin]
+        }
+        else {
+            let size: CGFloat = 60.0
+            let rect = CGRect(x: 0, y: self.contentView.height - size, width: size, height: size)
+            self.avatarButton.frame = rect
+            self.avatarButton.autoresizingMask = [.flexibleRightMargin, .flexibleTopMargin]
         }
     }
 

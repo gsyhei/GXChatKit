@@ -24,7 +24,7 @@ public class GXMessagesCallLayout: GXMessagesBaseLayout {
         content.displaySize = CGSize(width: maxTextSize.width + 10.0 + iconSize.width, height: maxTextSize.height)
 
         let contentPoint = data.gx_contentPoint
-        if data.gx_messageStatus == .sending {
+        if data.gx_messageStatus == .send {
             self.textRect = CGRect(origin: contentPoint, size: textSize)
             self.iconRect = CGRect(origin: CGPoint(x: self.textRect.maxX + 10.0, y: contentPoint.y), size: iconSize)
         }

@@ -39,7 +39,7 @@ public class GXMessagesBaseLayout: NSObject {
             self.cellHeight = self.containerRect.maxY + GXCHATC.cellMinLineSpacing
         }
         
-        if data.gx_messageStatus == .sending {
+        if data.gx_messageStatus == .send {
             if data.gx_isShowAvatar {
                 let avatarTop = self.cellHeight - GXCHATC.avatarSize.height - 2.0
                 self.avatarRect = CGRect(origin: CGPoint(x: self.containerRect.maxX + GXCHATC.avatarMargin, y: avatarTop), size: GXCHATC.avatarSize)
@@ -53,10 +53,10 @@ public class GXMessagesBaseLayout: NSObject {
             let timeSize = data.gx_timeAttributedText?.boundingRect(with: self.containerRect.size, options: .usesLineFragmentOrigin, context: nil).size ?? .zero
             let top = self.containerRect.height - GXCHATC.bubbleTrailingInsets.bottom - timeSize.height
             let left = self.containerRect.width - GXCHATC.bubbleTrailingInsets.right - timeSize.width
-            if data.gx_messageReadingStatus == .read {
-                self.timeRect = CGRect(x: left, y: top + 2.0, width: timeSize.width, height: timeSize.height)
-            } else {
+            if data.gx_messageSendStatus == .none {
                 self.timeRect = CGRect(x: left, y: top, width: timeSize.width, height: timeSize.height)
+            } else {
+                self.timeRect = CGRect(x: left, y: top+2.0, width: timeSize.width, height: timeSize.height)
             }
         }
         else {
@@ -73,10 +73,10 @@ public class GXMessagesBaseLayout: NSObject {
             let timeSize = data.gx_timeAttributedText?.boundingRect(with: self.containerRect.size, options: .usesLineFragmentOrigin, context: nil).size ?? .zero
             let top = self.containerRect.height - GXCHATC.bubbleLeadingInsets.bottom - timeSize.height
             let left = self.containerRect.width - GXCHATC.bubbleLeadingInsets.right - timeSize.width
-            if data.gx_messageReadingStatus == .read {
-                self.timeRect = CGRect(x: left, y: top + 2.0, width: timeSize.width, height: timeSize.height)
-            } else {
+            if data.gx_messageSendStatus == .none {
                 self.timeRect = CGRect(x: left, y: top, width: timeSize.width, height: timeSize.height)
+            } else {
+                self.timeRect = CGRect(x: left, y: top+2.0, width: timeSize.width, height: timeSize.height)
             }
         }
     }

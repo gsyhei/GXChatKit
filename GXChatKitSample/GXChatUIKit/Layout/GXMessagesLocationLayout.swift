@@ -28,7 +28,7 @@ public class GXMessagesLocationLayout: GXMessagesBaseLayout {
         let locationContentSize = CGSize(width: contentSize.width, height: titleHeight + 10.0 + GXCHATC.bubbleTrailingInsets.bottom)
         let locationContentTop = contentSize.height - locationContentSize.height
         self.locationContentRect = CGRect(origin: CGPoint(x: 0, y: locationContentTop), size: locationContentSize)
-        if data.gx_messageStatus == .sending {
+        if data.gx_messageStatus == .send {
             let left = GXCHATC.bubbleTrailingInsets.left
             self.locationTitleRect = CGRect(x: left, y: 0, width: maxContentWidth, height: self.locationContentRect.height)
         }

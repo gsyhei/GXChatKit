@@ -15,7 +15,7 @@ public class GXMessagesReplyIndicatorView: UIView {
     
     public var progress: CGFloat = 0 {
         didSet {
-            self.alpha = self.progress
+//            self.alpha = self.progress
             let scale = 0.3 + self.progress * 0.7
             self.transform = CGAffineTransform(scaleX: scale, y: scale)
             self.setNeedsDisplay()

@@ -25,7 +25,7 @@ public class GXMessagesCallContent: GXMessagesContentDelegate {
         self.duration = duration
         self.status = status
         
-        var string = GXCHATC.chatText.gx_callContentString(status: status, isSending: (messagesStatus == .sending))
+        var string = GXCHATC.chatText.gx_callContentString(status: status, isSending: (messagesStatus == .send))
         if status == .interrupt || status == .finish {
             string = string + " " + GXUtilManager.gx_timeString(duration: Int(duration))
         }

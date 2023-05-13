@@ -16,8 +16,8 @@ class GXMessagesTestData {
     var avatarID: String = ""
     var continuousBegin: Bool = false
     var continuousEnd: Bool = false
-    var messageReadingStatus: GXChatConfiguration.MessageReadingStatus = .none
-    var messageStatus: GXMessageStatus = .sending
+    var messageSendStatus: GXChatConfiguration.MessageSendStatus = .none
+    var messageStatus: GXMessageStatus = .send
     var messageType: GXChatConfiguration.MessageType = .text
     var messagesContentData: GXMessagesContentDelegate? = nil
     var timeAttributedText: NSAttributedString? = nil
@@ -60,11 +60,7 @@ extension GXMessagesTestData: GXMessagesDataDelegate {
     }
     
     public var gx_messageSendStatus: GXChatConfiguration.MessageSendStatus {
-        return .success
-    }
-    
-    public var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus {
-        return self.messageReadingStatus
+        return self.messageSendStatus
     }
     
     public var gx_messagesContent: GXMessagesContentDelegate? {

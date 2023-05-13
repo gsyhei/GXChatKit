@@ -87,7 +87,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         }
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
         self.audioTimeLabel.frame = layout.audioTimeRect
-        if item.data.gx_messageStatus == .sending {
+        if item.data.gx_messageStatus == .send {
             self.dotView.backgroundColor = GXCHATC.audioSendingTimeColor
             self.playButton.tintColor = GXCHATC.audioSendingTimeColor
             self.audioTimeLabel.textColor = GXCHATC.audioSendingTimeColor

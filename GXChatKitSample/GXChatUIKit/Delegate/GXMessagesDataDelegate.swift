@@ -27,8 +27,6 @@ public protocol GXMessagesDataDelegate: GXMessagesAvatarDataProtocol  {
     var gx_messageType: GXChatConfiguration.MessageType { get }
     /// 消息发送状态
     var gx_messageSendStatus: GXChatConfiguration.MessageSendStatus { get }
-    /// 消息读取状态
-    var gx_messageReadingStatus: GXChatConfiguration.MessageReadingStatus { get }
     /// 消息内容
     var gx_messagesContent: GXMessagesContentDelegate? { get }
     /// 消息显示时间富文本
@@ -39,7 +37,7 @@ public extension GXMessagesDataDelegate {
     
     /// 头像是否显示
     var gx_isShowAvatar: Bool {
-        if self.gx_messageStatus == .sending {
+        if self.gx_messageStatus == .send {
             if self.gx_chatType == .single {
                 return GXCHATC.singleChatSendingShowAvatar
             }
@@ -62,7 +60,7 @@ public extension GXMessagesDataDelegate {
         if GXCHATC.showContinuousBeginNickname {
             guard self.gx_continuousBegin else { return false }
         }
-        if self.gx_messageStatus == .sending {
+        if self.gx_messageStatus == .send {
             if self.gx_chatType == .single {
                 return GXCHATC.singleChatSendingShowNickname
             }
@@ -83,10 +81,10 @@ public extension GXMessagesDataDelegate {
     /// 头像占用的width
     var gx_avatarContentWidth: CGFloat {
         var avatarContentWidth: CGFloat = GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
-        if self.gx_messageStatus == .sending && GXCHATC.singleChatSendingShowAvatar {
+        if self.gx_messageStatus == .send && GXCHATC.singleChatSendingShowAvatar {
             avatarContentWidth += GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
         }
-        else if self.gx_messageStatus == .receiving && GXCHATC.singleChatReceivingShowAvatar {
+        else if self.gx_messageStatus == .receive && GXCHATC.singleChatReceivingShowAvatar {
             avatarContentWidth += GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2
         }
         else {
@@ -98,7 +96,7 @@ public extension GXMessagesDataDelegate {
     /// 内容的point
     var gx_contentPoint: CGPoint {
         if self.gx_isShowNickname {
-            if self.gx_messageStatus == .sending {
+            if self.gx_messageStatus == .send {
                 let top = GXCHATC.bubbleTrailingInsets.top + GXCHATC.nicknameFont.lineHeight + GXCHATC.nicknameLineSpacing
                 return CGPoint(x: GXCHATC.bubbleTrailingInsets.left, y: top)
             }
@@ -108,7 +106,7 @@ public extension GXMessagesDataDelegate {
             }
         }
         else {
-            if self.gx_messageStatus == .sending {
+            if self.gx_messageStatus == .send {
                 return CGPoint(x: GXCHATC.bubbleTrailingInsets.left, y: GXCHATC.bubbleTrailingInsets.top)
             }
             else {
@@ -119,7 +117,7 @@ public extension GXMessagesDataDelegate {
     
     /// 内容容器视图的left
     func gx_containerLeft(container width: CGFloat) -> CGFloat {
-        if self.gx_messageStatus == .sending {
+        if self.gx_messageStatus == .send {
             if self.gx_chatType == .single {
                 if GXCHATC.singleChatSendingShowAvatar {
                     return SCREEN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) - width

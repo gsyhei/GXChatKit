@@ -210,13 +210,13 @@ public class GXChatConfiguration: NSObject {
     /// 回复侧滑指示器尺寸
     public var replyIndicatorSize: CGSize = CGSize(width: 40.0, height: 40.0)
     /// 回复侧滑指示器进度线条宽度
-    public var replyIndicatorLineWidth: CGFloat = 4.0
+    public var replyIndicatorLineWidth: CGFloat = 5.0
     /// 回复侧滑指示器移动最大距离
     public var replyIndicatorMoveMaxWidth: CGFloat = 60.0
     /// 回复侧滑指示器圆环颜色
-    public var replyIndicatorCircularColor: UIColor = UIColor(hex: 0x04B9854)
+    public var replyIndicatorCircularColor: UIColor = UIColor(white: 0.3, alpha: 0.3)
     /// 回复侧滑指示器背景颜色
-    public var replyIndicatorbackgroudColor: UIColor = UIColor(hex: 0x04B985488, useAlpha: true)
+    public var replyIndicatorbackgroudColor: UIColor = UIColor(white: 0.3, alpha: 0.2)
 
 }
 
@@ -261,32 +261,26 @@ public extension GXChatConfiguration {
         case system    = 13
     }
     
-    /// 消息状态
-    enum MessageStatus : Int {
-        /// 发送
-        case sending   = 0
-        /// 接收
-        case receiving = 1
-    }
+//    /// 消息状态
+//    enum MessageStatus : Int {
+//        /// 发送
+//        case sending   = 0
+//        /// 接收
+//        case receiving = 1
+//    }
     
     /// 消息发送状态
     enum MessageSendStatus : Int {
         /// 失败
-        case failure = 0
+        case failure = -1
+        /// 无
+        case none    = 0
         /// 发送中
         case sending = 1
-        /// 成功
-        case success = 2
-    }
-    
-    /// 消息读取状态
-    enum MessageReadingStatus: Int {
-        /// 无需读取
-        case none    = -1
         /// 未读
-        case unread  = 0
+        case unread  = 2
         /// 已读
-        case read    = 1
+        case read    = 3
     }
     
     /// 消息通话状态
@@ -365,6 +359,7 @@ public extension GXChatConfiguration {
         
         for emojiItem in emojiArray {
             if let tag = emojiItem["tag"] as? String, let file = emojiItem["file"] as? String {
+                
                 self.emojiJson.updateValue(file, forKey: tag)
             }
         }

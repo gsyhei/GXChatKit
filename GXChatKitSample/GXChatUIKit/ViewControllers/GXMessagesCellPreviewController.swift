@@ -82,7 +82,7 @@ private extension GXMessagesCellPreviewController {
             types.append(.collect)
             if self.messageData.gx_messageType == .text || self.messageData.gx_messageType == .atText {
                 types.append(.copy)
-                if self.messageData.gx_messageStatus == .sending {
+                if self.messageData.gx_messageStatus == .send {
                     types.append(.edit)
                 }
             }
@@ -90,7 +90,7 @@ private extension GXMessagesCellPreviewController {
                 types.append(.save)
                 types.append(.report)
             }
-            if self.messageData.gx_messageStatus == .sending {
+            if self.messageData.gx_messageStatus == .send {
                 types.append(.revoke)
             }
             types.append(.delete)
@@ -115,12 +115,12 @@ private extension GXMessagesCellPreviewController {
         }
         let tableTop = self.currentRect.maxY + self.lineSpacing - 4.0
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
-        if self.messageData.gx_messageStatus == .receiving {
-            let left = self.originalRect.origin.x + hookWidth
+        if self.messageData.gx_messageStatus == .send {
+            let left = self.originalRect.maxX - self.tableWidth - hookWidth
             self.tableRect = CGRect(x: left, y: tableTop, width: self.tableWidth, height: tableHeight)
         }
         else {
-            let left = self.originalRect.maxX - self.tableWidth - hookWidth
+            let left = self.originalRect.origin.x + hookWidth
             self.tableRect = CGRect(x: left, y: tableTop, width: self.tableWidth, height: tableHeight)
         }
     }

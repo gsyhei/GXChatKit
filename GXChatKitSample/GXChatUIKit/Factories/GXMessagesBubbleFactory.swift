@@ -34,7 +34,7 @@ private extension GXMessagesBubbleFactory {
     
     class func gx_messagesBubbleImage(status: GXMessageStatus) -> GXMessagesBubble {
         let messagesBubble = GXMessagesBubble()
-        if status == .sending {
+        if status == .send {
             let color = GXCHATC.sendingBubbleMaskColor
             if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
@@ -124,7 +124,7 @@ private extension GXMessagesBubbleFactory {
     class func gx_messagesRedPacketBubbleImage(status: GXMessageStatus) -> GXMessagesBubble {
         let messagesBubble = GXMessagesBubble()
         let color = GXCHATC.redPacketBubbleMaskColor
-        if status == .sending {
+        if status == .send {
             if let beginBubbleImage = GXCHATC.bubbleBeginImage {
                 let capInsets: UIEdgeInsets = self.gx_centerEdgeInsets(bubbleSize: beginBubbleImage.size)
                 if let maskImage = beginBubbleImage.gx_imageMasked(color: color) {

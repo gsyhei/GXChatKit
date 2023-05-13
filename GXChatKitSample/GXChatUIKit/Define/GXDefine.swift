@@ -54,4 +54,11 @@ public var GXSafeAreaInsets: UIEdgeInsets {
     return .zero
 }
 
-
+private var GXDateRunTime: CFAbsoluteTime = 0
+public func GXDateRunTimeBegin() {
+    GXDateRunTime = CFAbsoluteTimeGetCurrent()
+}
+public func GXDateRunTimeEnd() {
+    let time = CFAbsoluteTimeGetCurrent() - GXDateRunTime
+    NSLog("GXDateRun end time: \(time)")
+}

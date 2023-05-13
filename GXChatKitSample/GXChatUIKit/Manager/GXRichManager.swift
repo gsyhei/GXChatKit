@@ -17,7 +17,7 @@ public class GXRichManager: NSObject {
     public static let emojiKey = "emojiKey"
     public static let highlightKey = "highlKey"
     public static let userIdKey = "userIdKey"
-
+    
     class func textLayout(maxSize: CGSize, text: NSAttributedString) -> YYTextLayout {
         let modifier = YYTextLinePositionSimpleModifier()
         modifier.fixedLineHeight = GXCHATC.textFont.lineHeight + GXCHATC.textLineSpacing
@@ -94,7 +94,7 @@ public class GXRichManager: NSObject {
                         delegate.ascent = size.height + GXCHATC.textFont.descender
                         delegate.descent = -GXCHATC.textFont.descender;
                         attachmentAtt.yy_setRunDelegate(delegate.ctRunDelegate(), range: attachmentRange)
-
+                        
                         attributed.replaceCharacters(in: letResult.range, with: attachmentAtt)
                     }
                 }
@@ -118,7 +118,7 @@ public class GXRichManager: NSObject {
         attributes[NSAttributedString.Key.foregroundColor] = GXCHATC.atTextColor
         attributes[NSAttributedString.Key.font] = GXCHATC.atTextFont
         attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
-
+        
         let attributedString = NSMutableAttributedString()
         for user in users {
             let userString = "@" + user.gx_displayName + " "
@@ -154,7 +154,7 @@ public class GXRichManager: NSObject {
         attributes[NSAttributedString.Key.foregroundColor] = GXCHATC.atTextColor
         attributes[NSAttributedString.Key.font] = GXCHATC.atTextFont
         attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
-
+        
         let attributedString = NSMutableAttributedString()
         let userString = GXCHATC.chatText.gx_forwardContentString() + user.gx_displayName + "\n"
         let appendString = NSMutableAttributedString(string: userString)
@@ -195,10 +195,10 @@ public class GXRichManager: NSObject {
     ///   - status: 消息状态
     ///   - readStatus: 读取状态
     /// - Returns: 富文本
-    class func timeText(time: String, status: GXMessageStatus, readStatus: GXChatConfiguration.MessageReadingStatus) -> NSAttributedString {
+    class func timeText(time: String, status: GXMessageStatus, sendStatus: GXChatConfiguration.MessageSendStatus) -> NSAttributedString {
         var attributes: Dictionary<NSAttributedString.Key, Any> = [:]
         attributes[NSAttributedString.Key.font] = GXCHATC.timeFont
-        if status == .sending {
+        if status == .send {
             attributes[NSAttributedString.Key.foregroundColor] = GXCHATC.sendingTimeColor
         }
         else {
@@ -209,10 +209,10 @@ public class GXRichManager: NSObject {
         let range: NSRange = NSMakeRange(0, appendString.length)
         appendString.addAttributes(attributes, range: range)
         attributedString.append(appendString)
-        guard status == .sending else { return attributedString }
+        guard status == .send && sendStatus != .none else { return attributedString }
         
         let bounds = CGRect(x: 0, y: -5, width: GXCHATC.timeFont.lineHeight + 5, height: GXCHATC.timeFont.lineHeight + 5)
-        if readStatus == .unread {
+        if sendStatus == .unread {
             if let image = UIImage.gx_readCheckSingleImage?.gx_imageMasked(color: GXCHATC.sendingTimeColor) {
                 let attachment = NSTextAttachment(image: image)
                 attachment.bounds = bounds
@@ -220,7 +220,7 @@ public class GXRichManager: NSObject {
                 attributedString.append(attachmentAtt)
             }
         }
-        else if readStatus == .read {
+        else if sendStatus == .read {
             if let image = UIImage.gx_readCheckDoubleImage?.gx_imageMasked(color: GXCHATC.sendingTimeColor) {
                 let attachment = NSTextAttachment(image: image)
                 attachment.bounds = bounds
@@ -228,13 +228,19 @@ public class GXRichManager: NSObject {
                 attributedString.append(attachmentAtt)
             }
         }
-        else {
-            if let image = UIImage.gx_loadingImage?.gx_imageMasked(color: GXCHATC.sendingTimeColor) {
+        else if sendStatus == .failure {
+            if let image = UIImage.gx_sendFailureImage?.gx_imageMasked(color: .systemRed) {
                 let attachment = NSTextAttachment(image: image)
                 attachment.bounds = bounds
                 let attachmentAtt = NSAttributedString(attachment: attachment)
                 attributedString.append(attachmentAtt)
             }
+        }
+        else if sendStatus == .sending {
+            let attachment = NSTextAttachment(image: UIImage())
+            attachment.bounds = bounds
+            let attachmentAtt = NSAttributedString(attachment: attachment)
+            attributedString.append(attachmentAtt)
         }
         return attributedString
     }

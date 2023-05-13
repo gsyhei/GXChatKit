@@ -194,7 +194,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         self.messageBubbleTimeLabel.textAlignment = .right
         self.messageBubbleTimeLabel.attributedText = item.data.gx_timeAttributedText
         
-        if item.data.gx_messageStatus == .sending {
+        if item.data.gx_messageStatus == .send {
             self.messageBubbleNameLabel.textAlignment = .right
             if let hexString = item.dispalyNameHexString {
                 self.messageBubbleNameLabel.textColor = UIColor(hexString: hexString)
@@ -236,6 +236,7 @@ extension GXMessagesBaseCell {
     
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let pan = gestureRecognizer as? UIPanGestureRecognizer {
+            guard self.item?.data.gx_messageSendStatus != .failure else { return false }
             if self.isEditing {
                 return false
             }
@@ -288,7 +289,7 @@ extension GXMessagesBaseCell {
     private func panStateBegan() {
         self.isPanLock = true
         self.replyIndicatorView.reset()
-        if let data = self.item?.data, data.gx_messageStatus == .sending {
+        if let data = self.item?.data, data.gx_messageStatus == .send {
             let left = self.frame.maxX + 10.0
             let point = CGPoint(x: left, y: (self.height - self.replyIndicatorView.height)/2)
             self.replyIndicatorView.origin = point
@@ -314,7 +315,7 @@ extension GXMessagesBaseCell {
         guard abs(movePoint.x) > abs(movePoint.y) else { return }
         
         var moveMaxWidth = GXCHATC.replyIndicatorMoveMaxWidth
-        if let data = self.item?.data, data.gx_messageStatus == .sending {
+        if let data = self.item?.data, data.gx_messageStatus == .send {
             moveMaxWidth = GXCHATC.replyIndicatorMoveMaxWidth + 10.0
         }
         var moveX = movePoint.x

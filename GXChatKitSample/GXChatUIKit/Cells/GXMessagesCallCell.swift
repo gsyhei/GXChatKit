@@ -66,7 +66,7 @@ public class GXMessagesCallCell: GXMessagesBaseCell {
         else if item.data.gx_messageType == .videoCall {
             self.iconIView.image = .gx_callVideoImage
         }
-        if item.data.gx_messageStatus == .sending {
+        if item.data.gx_messageStatus == .send {
             self.iconIView.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         }
     }
