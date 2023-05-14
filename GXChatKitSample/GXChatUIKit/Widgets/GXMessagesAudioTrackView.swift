@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import GXMessagesTableView
 
 public class GXMessagesAudioTrackView: UIView {
     private var trackLayers: [CALayer] = []
-    private var messageStatus: GXMessageStatus = .send
+    private var messageStatus: GXChatConfiguration.MessageStatus = .send
     private weak var audioContent: GXMessagesAudioContent?
     
     public override init(frame: CGRect) {
@@ -22,7 +21,7 @@ public class GXMessagesAudioTrackView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func gx_updateAudio(content: GXMessagesAudioContent, status: GXMessageStatus) {
+    public func gx_updateAudio(content: GXMessagesAudioContent, status: GXChatConfiguration.MessageStatus) {
         self.audioContent = content
         self.messageStatus = status
         self.setupSubviews()

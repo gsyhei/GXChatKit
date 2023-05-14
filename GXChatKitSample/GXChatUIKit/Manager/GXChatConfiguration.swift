@@ -261,13 +261,13 @@ public extension GXChatConfiguration {
         case system    = 13
     }
     
-//    /// 消息状态
-//    enum MessageStatus : Int {
-//        /// 发送
-//        case sending   = 0
-//        /// 接收
-//        case receiving = 1
-//    }
+    /// 消息状态
+    enum MessageStatus : Int {
+        /// 发送
+        case send    = 0
+        /// 接收
+        case receive = 1
+    }
     
     /// 消息发送状态
     enum MessageSendStatus : Int {

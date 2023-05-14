@@ -7,7 +7,6 @@
 
 import UIKit
 import YYText
-import GXMessagesTableView
 
 //REGULAREXPRESSION(UserHandleRegularExpression, @"@[\\u4e00-\\u9fa5\\w\\-]+")
 //REGULAREXPRESSION(HashtagRegularExpression, @"#([\\u4e00-\\u9fa5\\w\\-]+)")
@@ -195,7 +194,7 @@ public class GXRichManager: NSObject {
     ///   - status: 消息状态
     ///   - readStatus: 读取状态
     /// - Returns: 富文本
-    class func timeText(time: String, status: GXMessageStatus, sendStatus: GXChatConfiguration.MessageSendStatus) -> NSAttributedString {
+    class func timeText(time: String, status: GXChatConfiguration.MessageStatus, sendStatus: GXChatConfiguration.MessageSendStatus) -> NSAttributedString {
         var attributes: Dictionary<NSAttributedString.Key, Any> = [:]
         attributes[NSAttributedString.Key.font] = GXCHATC.timeFont
         if status == .send {

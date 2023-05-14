@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GXMessagesTableView
 
 public class GXMessagesCallContent: GXMessagesContentDelegate {
     // MARK: - GXMessagesContentData
@@ -21,7 +20,7 @@ public class GXMessagesCallContent: GXMessagesContentDelegate {
     /// 通话状态
     public var status: GXChatConfiguration.MessageCallStatus
     
-    public required init(duration: TimeInterval, status: GXChatConfiguration.MessageCallStatus, messagesStatus: GXMessageStatus) {
+    public required init(duration: TimeInterval, status: GXChatConfiguration.MessageCallStatus, messagesStatus: GXChatConfiguration.MessageStatus) {
         self.duration = duration
         self.status = status
         

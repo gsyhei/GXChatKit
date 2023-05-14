@@ -25,6 +25,8 @@ public protocol GXMessagesDataDelegate: GXMessagesAvatarDataProtocol  {
     var gx_chatType: GXChatConfiguration.ChatType { get }
     /// 消息类型
     var gx_messageType: GXChatConfiguration.MessageType { get }
+    /// 消息收发状态
+    var gx_messageStatus: GXChatConfiguration.MessageStatus { get }
     /// 消息发送状态
     var gx_messageSendStatus: GXChatConfiguration.MessageSendStatus { get }
     /// 消息内容

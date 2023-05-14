@@ -7,7 +7,6 @@
 
 import UIKit
 import GXChatUIKit
-import GXMessagesTableView
 
 class GXMessagesTestData {
     var date: Date = Date()
@@ -17,7 +16,7 @@ class GXMessagesTestData {
     var continuousBegin: Bool = false
     var continuousEnd: Bool = false
     var messageSendStatus: GXChatConfiguration.MessageSendStatus = .none
-    var messageStatus: GXMessageStatus = .send
+    var messageStatus: GXChatConfiguration.MessageStatus = .send
     var messageType: GXChatConfiguration.MessageType = .text
     var messagesContentData: GXMessagesContentDelegate? = nil
     var timeAttributedText: NSAttributedString? = nil
@@ -96,7 +95,7 @@ extension GXMessagesTestData: GXMessagesDataDelegate {
         }
     }
     
-    public var gx_messageStatus: GXMessageStatus {
+    public var gx_messageStatus: GXChatConfiguration.MessageStatus {
         return self.messageStatus
     }
     

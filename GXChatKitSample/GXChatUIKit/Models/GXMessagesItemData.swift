@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GXMessagesTableView
 
 public class GXMessagesItemData: Equatable {
     /// 数据

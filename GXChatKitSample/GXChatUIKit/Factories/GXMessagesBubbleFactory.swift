@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GXMessagesTableView
 
 public class GXMessagesBubbleFactory {
     
@@ -15,7 +14,7 @@ public class GXMessagesBubbleFactory {
     ///   - color: 颜色
     ///   - status: 消息状态
     /// - Returns: GXMessagesBubble消息气泡对象
-    public class func messagesBubble(status: GXMessageStatus) -> GXMessagesBubble {
+    public class func messagesBubble(status: GXChatConfiguration.MessageStatus) -> GXMessagesBubble {
         return self.gx_messagesBubbleImage(status: status)
     }
     
@@ -24,7 +23,7 @@ public class GXMessagesBubbleFactory {
     ///   - color: 颜色
     ///   - status: 消息状态
     /// - Returns: GXMessagesBubble消息气泡对象
-    public class func messagesRedPacketBubble(status: GXMessageStatus) -> GXMessagesBubble {
+    public class func messagesRedPacketBubble(status: GXChatConfiguration.MessageStatus) -> GXMessagesBubble {
         return self.gx_messagesRedPacketBubbleImage(status: status)
     }
     
@@ -32,7 +31,7 @@ public class GXMessagesBubbleFactory {
 
 private extension GXMessagesBubbleFactory {
     
-    class func gx_messagesBubbleImage(status: GXMessageStatus) -> GXMessagesBubble {
+    class func gx_messagesBubbleImage(status: GXChatConfiguration.MessageStatus) -> GXMessagesBubble {
         let messagesBubble = GXMessagesBubble()
         if status == .send {
             let color = GXCHATC.sendingBubbleMaskColor
@@ -121,7 +120,7 @@ private extension GXMessagesBubbleFactory {
         return messagesBubble
     }
     
-    class func gx_messagesRedPacketBubbleImage(status: GXMessageStatus) -> GXMessagesBubble {
+    class func gx_messagesRedPacketBubbleImage(status: GXChatConfiguration.MessageStatus) -> GXMessagesBubble {
         let messagesBubble = GXMessagesBubble()
         let color = GXCHATC.redPacketBubbleMaskColor
         if status == .send {
