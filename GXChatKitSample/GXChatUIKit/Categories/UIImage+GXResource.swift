@@ -74,6 +74,8 @@ public extension UIImage {
             return UIImage(systemName: "trash")
         case .report:
             return UIImage(systemName: "exclamationmark.circle")
+        case .resend:
+            return UIImage(systemName: "arrow.up.circle")
         case .select:
             return UIImage(systemName: "checkmark.circle")
         }

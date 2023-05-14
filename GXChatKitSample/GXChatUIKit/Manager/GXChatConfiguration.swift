@@ -327,8 +327,10 @@ public extension GXChatConfiguration {
         case report  = 7
         /// 删除
         case delete  = 8
+        /// 重发
+        case resend  = 9
         /// 选择
-        case select  = 9
+        case select  = 10
     }
     
     /// 消息事件

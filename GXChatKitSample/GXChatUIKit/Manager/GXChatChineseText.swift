@@ -86,29 +86,7 @@ public class GXChatChineseText: GXChatTextDelegate {
             return ""
         }
     }
-    
-//    enum MessageMenuType: Int {
-//        /// 回复
-//        case repply  = 0
-//        /// 复制
-//        case copy    = 1
-//        /// 转发
-//        case forward = 2
-//        /// 编辑
-//        case edit    = 3
-//        /// 保存
-//        case save    = 4
-//        /// 收藏
-//        case collect = 5
-//        /// 撤回
-//        case revoke  = 6
-//        /// 删除
-//        case delete  = 7
-//        /// 举报
-//        case report  = 8
-//        /// 选择
-//        case select  = 9
-//    }
+
     public func gx_menuTypeString(type: GXChatConfiguration.MessageMenuType) -> String {
         switch type {
         case .repply:
@@ -129,6 +107,8 @@ public class GXChatChineseText: GXChatTextDelegate {
             return "删除"
         case .report:
             return "举报"
+        case .resend:
+            return "重发"
         case .select:
             return "选择"
         }

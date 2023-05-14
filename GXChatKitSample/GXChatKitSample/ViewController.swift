@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         data1.date = Date().dateByAdding(days: -2)!
         data1.showName = "发疯了吧"
         data1.avatarID = "11"
-        data1.messageID = "111"
+        data1.messageID = "110"
         data1.gx_continuousBegin = true
         data1.messageStatus = .send
         data1.messageSendStatus = .sending
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
         data2.date = Date().dateByAdding(days: -2)!
         data2.showName = "发疯了吧"
         data2.avatarID = "11"
-        data2.messageID = "112"
+        data2.messageID = "111"
         data2.messageStatus = .send
         data2.messageSendStatus = .unread
         data2.messageType = .text
@@ -105,6 +105,19 @@ class ViewController: UIViewController {
         let item2 = GXMessagesItemData(data: data2)
 //        item2.updateMessagesAvatar(image: UIImage(named: "avatar1"))
         sectionData.append(item: item2)
+        
+        var data02 = GXMessagesTestData()
+        data02.date = Date().dateByAdding(days: -2)!
+        data02.showName = "发疯了吧"
+        data02.avatarID = "11"
+        data02.messageID = "112"
+        data02.messageStatus = .send
+        data02.messageSendStatus = .failure
+        data02.messageType = .text
+        data02.messagesContentData = GXMessagesTextContent(text: "啊撒大声地黄金卡山东科技哈萨打卡机阿克苏记得哈手机打开,啊时间跨度黄金卡手动滑稽卡卡手打合计。")
+        
+        let item02 = GXMessagesItemData(data: data02)
+        sectionData.append(item: item02)
         
         var data3 = GXMessagesTestData()
         data3.date = Date().dateByAdding(days: -2)!

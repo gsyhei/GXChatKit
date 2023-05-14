@@ -74,6 +74,7 @@ private extension GXMessagesCellPreviewController {
         //self.itemTypes = [[.repply, .copy, .forward, .edit, .save, .collect, .revoke, .report, .delete], [.select]]
         var types: [GXChatConfiguration.MessageMenuType] = []
         if self.messageData.gx_messageSendStatus == .failure {
+            types.append(.resend)
             types.append(.delete)
         }
         else {
