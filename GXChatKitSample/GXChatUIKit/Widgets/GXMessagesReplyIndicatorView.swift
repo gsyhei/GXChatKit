@@ -96,7 +96,7 @@ public class GXMessagesReplyIndicatorView: UIView {
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(self.lineWidth)
         context?.setStrokeColor(GXCHATC.replyIndicatorCircularColor.cgColor)
-        context?.setLineCap(.butt)
+        context?.setLineCap(.round)
         let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
         let radius = rect.height / 2
         let startAngle = -CGFloat.pi / 2

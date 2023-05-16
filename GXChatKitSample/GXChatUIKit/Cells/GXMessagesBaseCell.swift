@@ -70,6 +70,12 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
         return view
     }()
     
+    /// 发送动画视图
+    public lazy var clockView: GXMessagesClockView = {
+        let view = GXMessagesClockView(frame: .zero)
+        return view
+    }()
+    
     /// 震动对象
     private lazy var generator: UIImpactFeedbackGenerator = {
         return UIImpactFeedbackGenerator(style: .rigid)
@@ -115,6 +121,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
     open override func prepareForReuse() {
         super.prepareForReuse()
         
+        self.clockView.removeFromSuperview()
         self.messageAvatarButton.isHidden = true
         self.messageAvatarButton.setImage(nil, for: .normal)
         self.messageAvatarButton.setImage(nil, for: .highlighted)
@@ -202,6 +209,10 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
                 self.messageBubbleNameLabel.textColor = GXCHATC.sendingNicknameColor
             }
             self.messageBubbleTimeLabel.textColor = GXCHATC.sendingTimeColor
+            if item.data.gx_messageSendStatus == .sending {
+                self.clockView.frame = item.layout.clockRect
+                self.messageBubbleContainerView.addSubview(self.clockView)
+            }
         }
         else {
             self.messageBubbleNameLabel.textAlignment = .left

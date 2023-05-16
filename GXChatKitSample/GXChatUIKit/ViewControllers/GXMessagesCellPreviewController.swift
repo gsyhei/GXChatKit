@@ -77,6 +77,12 @@ private extension GXMessagesCellPreviewController {
             types.append(.resend)
             types.append(.delete)
         }
+        else if self.messageData.gx_messageSendStatus == .sending {
+            if self.messageData.gx_messageType == .text || self.messageData.gx_messageType == .atText {
+                types.append(.copy)
+            }
+            types.append(.select)
+        }
         else {
             types.append(.repply)
             types.append(.forward)

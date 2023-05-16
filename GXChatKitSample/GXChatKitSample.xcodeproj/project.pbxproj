@@ -84,6 +84,7 @@
 		96D30AE22956F5EE00AFBB90 /* GXChatUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */; };
 		96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; };
 		96D30AE72956F5EE00AFBB90 /* GXChatUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96DE0E6F2A141C5E00C88C47 /* GXMessagesClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE0E6E2A141C5E00C88C47 /* GXMessagesClockView.swift */; };
 		96E2949B29FF9980006899E1 /* GXMessagesCellPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E2949A29FF9980006899E1 /* GXMessagesCellPreviewController.swift */; };
 		96E294A22A00FC86006899E1 /* GXMessagesDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E2949D2A00FC86006899E1 /* GXMessagesDataDelegate.swift */; };
 		96E294A32A00FC86006899E1 /* GXMessagesContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E2949E2A00FC86006899E1 /* GXMessagesContactDelegate.swift */; };
@@ -235,6 +236,7 @@
 		96D30AD12956F5ED00AFBB90 /* GXChatUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GXChatUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30ADA2956F5ED00AFBB90 /* GXChatUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GXChatUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D30AE12956F5EE00AFBB90 /* GXChatUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXChatUIKitTests.swift; sourceTree = "<group>"; };
+		96DE0E6E2A141C5E00C88C47 /* GXMessagesClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesClockView.swift; sourceTree = "<group>"; };
 		96E2949A29FF9980006899E1 /* GXMessagesCellPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesCellPreviewController.swift; sourceTree = "<group>"; };
 		96E2949D2A00FC86006899E1 /* GXMessagesDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesDataDelegate.swift; sourceTree = "<group>"; };
 		96E2949E2A00FC86006899E1 /* GXMessagesContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesContactDelegate.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 			children = (
 				96B3D46B2A08FBE400AA1144 /* GXMessagesReplyIndicatorView.swift */,
 				96B3D46C2A08FBE400AA1144 /* GXMessagesAudioTrackView.swift */,
+				96DE0E6E2A141C5E00C88C47 /* GXMessagesClockView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 				96C7B37529D8CD17009A995B /* GXMessagesForwardContent.swift in Sources */,
 				964A504529E5C5B3009D957F /* GXMessagesReplyContent.swift in Sources */,
 				965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */,
+				96DE0E6F2A141C5E00C88C47 /* GXMessagesClockView.swift in Sources */,
 				9699576C29757C39001DCC17 /* GXChatUIKit.docc in Sources */,
 				96C7B37729D8D3B9009A995B /* GXRichManager.swift in Sources */,
 				96E294A22A00FC86006899E1 /* GXMessagesDataDelegate.swift in Sources */,

@@ -13,6 +13,7 @@ public class GXMessagesBaseLayout: NSObject {
     public var avatarRect: CGRect = .zero
     public var nicknameRect: CGRect = .zero
     public var timeRect: CGRect = .zero
+    public var clockRect: CGRect = .zero
     public var cellHeight: CGFloat = 0
     
     public required init(data: GXMessagesDataDelegate) {
@@ -58,6 +59,10 @@ public class GXMessagesBaseLayout: NSObject {
             } else {
                 self.timeRect = CGRect(x: left, y: top+2.0, width: timeSize.width, height: timeSize.height)
             }
+            let clockLeft = self.timeRect.maxX - timeSize.height
+            let clockSize = GXCHATC.timeFont.lineHeight + 3.0
+            let clockTop = top + (timeSize.height - clockSize)
+            self.clockRect = CGRect(x: clockLeft, y: clockTop, width: clockSize, height: clockSize)
         }
         else {
             if data.gx_isShowAvatar {
