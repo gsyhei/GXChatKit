@@ -9,7 +9,14 @@ import UIKit
 import Reusable
 import GXMessagesTableView
 
-open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable {
+open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying {
+    public func copy(with zone: NSZone? = nil) -> Any {
+        let cell = type(of: self).init(frame: self.frame)
+        if let nonullItem = self.item {
+            cell.bindCell(item: nonullItem)
+        }
+        return cell
+    }
     
     /// 代理
     public weak var delegate: GXMessagesBaseCellDelegate?

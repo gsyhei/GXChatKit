@@ -573,7 +573,7 @@ extension ViewController: GXMessagesBaseCellDelegate {
         cell.messageBubbleContainerView.transform = .identity
         guard let preview = cell.messageBubbleContainerView.snapshotView(afterScreenUpdates: false) else { return }
         preview.transform = oldTransform
-        
+
         let rectForTable = cell.convert(cell.messageBubbleContainerView.frame, to: self.tableView)
         let rectForView = self.tableView.convert(rectForTable, to: self.view)
         let vc = GXMessagesCellPreviewController(data: data, preview: preview, originalRect: rectForView)

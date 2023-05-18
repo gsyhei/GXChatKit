@@ -81,7 +81,7 @@ private extension GXMessagesCellPreviewController {
             if self.messageData.gx_messageType == .text || self.messageData.gx_messageType == .atText {
                 types.append(.copy)
             }
-            types.append(.select)
+            types.append(.delete)
         }
         else {
             types.append(.repply)
@@ -111,11 +111,17 @@ private extension GXMessagesCellPreviewController {
             tableHeight += self.itemHeight * CGFloat(types.count)
         }
         let bottomHeight = tableHeight + self.lineSpacing * 2
-        let safeBottom = self.view.currentWindow()?.safeAreaInsets.bottom ?? 0
-        let bottomTop = self.view.frame.height - bottomHeight - safeBottom
+        let safeAreaInsets = self.view.currentWindow()?.safeAreaInsets ?? .zero
+        let bottomTop = self.view.frame.height - bottomHeight - safeAreaInsets.bottom
+        let allHeight = bottomHeight + self.currentRect.height
+        let viewHeight = self.view.frame.height - safeAreaInsets.top - safeAreaInsets.bottom
         if self.originalRect.maxY > bottomTop {
             self.currentRect = self.originalRect
             self.currentRect.origin.y = bottomTop - self.originalRect.height
+        }
+        else if allHeight < viewHeight && self.originalRect.minY < safeAreaInsets.top {
+            self.currentRect = self.originalRect
+            self.currentRect.origin.y = safeAreaInsets.top
         }
         else {
             self.currentRect = self.originalRect

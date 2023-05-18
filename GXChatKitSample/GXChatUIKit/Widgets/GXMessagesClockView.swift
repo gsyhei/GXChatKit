@@ -70,8 +70,9 @@ public class GXMessagesClockView: UIView {
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         animation.fromValue = 0.001
         animation.toValue = Double.pi * 2.0
-        animation.duration = duration;
+        animation.duration = duration
         animation.repeatCount = Float(CGFloat.greatestFiniteMagnitude)
+        animation.delegate = self
         
         return animation
     }
@@ -86,5 +87,15 @@ public class GXMessagesClockView: UIView {
         let path = UIBezierPath(roundedRect: roundedRect, cornerRadius: radius)
         context?.addPath(path.cgPath)
         context?.strokePath()
+    }
+}
+
+extension GXMessagesClockView: CAAnimationDelegate {
+    public func animationDidStart(_ anim: CAAnimation) {
+        NSLog("animationDidStart: \(anim)")
+    }
+    
+    public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        NSLog("animationDidStop: \(anim), flag: \(flag)")
     }
 }
