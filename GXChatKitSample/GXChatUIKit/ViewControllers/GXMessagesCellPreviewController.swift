@@ -22,6 +22,14 @@ public class GXMessagesCellPreviewController: UIViewController {
     public var itemTypes: [[GXChatConfiguration.MessageMenuType]] = []
     public var tableRect: CGRect = .zero
     
+    public var actionBlock: ((GXMessagesDataDelegate, GXChatConfiguration.MessageMenuType) -> Void)?
+    
+    public lazy var animationDelegate: GXMessagesMenuAnimationDelegate = {
+        let animationDelegate = GXMessagesMenuAnimationDelegate()
+        
+        return animationDelegate
+    }()
+    
     private lazy var backgroudView: UIVisualEffectView = {
         let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
         let view = UIVisualEffectView(effect: blurEffect)
@@ -102,7 +110,9 @@ public class GXMessagesCellPreviewController: UIViewController {
         guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
         self.tableView.deselectRow(at: indexPath, animated: false)
         
-        NSLog("Selected indexPath: \(indexPath.description)")
+        let type = self.itemTypes[indexPath.section][indexPath.row]
+        self.actionBlock?(self.messageData, type)
+        self.dismiss(animated: true)
     }
     public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.tableView.deselectAll(animated: false)

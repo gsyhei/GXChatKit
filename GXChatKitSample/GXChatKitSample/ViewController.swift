@@ -577,6 +577,9 @@ extension ViewController: GXMessagesBaseCellDelegate {
         let rectForView = self.tableView.convert(rectForTable, to: self.view)
         let preview = copyCell.messageBubbleContainerView
         let vc = GXMessagesCellPreviewController(data: data, preview: preview, originalRect: rectForView)
+        vc.actionBlock = { (messageData, type) in
+            NSLog("GXMessagesCellPreviewController actionBlock type: \(type)")
+        }
         vc.transitioningDelegate = self.animationDelegate
         vc.modalPresentationStyle = .custom
         self.present(vc, animated: true, completion: nil)
