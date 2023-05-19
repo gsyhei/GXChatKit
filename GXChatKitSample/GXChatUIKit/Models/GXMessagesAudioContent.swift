@@ -8,16 +8,13 @@
 import UIKit
 import AVFoundation
 
-public class GXMessagesAudioContent: GXMessagesMediaContentDelegate {
-    // MARK: - GXMessagesMediaContentProtocol
-    
-    /// 媒体视图
-    public var mediaView: UIView?
-    /// 媒体占位视图
-    public var mediaPlaceholderView: UIView?
+public class GXMessagesAudioContent: GXMessagesContentDelegate {
+    // MARK: - GXMessagesContentDelegate
+
     /// 显示区域尺寸
     public var displaySize: CGSize = .zero
-    
+    /// 缓存音轨视图
+    public var trackView: UIView?
     /// 下载地址
     public var audioURL: URL?
     /// 本地存储地址

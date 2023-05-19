@@ -8,7 +8,7 @@
 import UIKit
 
 public class GXMessagesTextContent: GXMessagesContentDelegate {
-    // MARK: - GXMessagesContentData
+    // MARK: - GXMessagesContentDelegate
     
     /// 显示区域尺寸
     public var displaySize: CGSize = .zero

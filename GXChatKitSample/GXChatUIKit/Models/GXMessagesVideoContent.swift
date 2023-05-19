@@ -7,13 +7,9 @@
 
 import UIKit
 
-public class GXMessagesVideoContent: GXMessagesMediaContentDelegate {
-    // MARK: - GXMessagesMediaContentProtocol
+public class GXMessagesVideoContent: GXMessagesContentDelegate {
+    // MARK: - GXMessagesContentDelegate
     
-    /// 媒体视图
-    public var mediaView: UIView?
-    /// 媒体占位视图
-    public var mediaPlaceholderView: UIView?
     /// 显示区域尺寸
     public var displaySize: CGSize = .zero
     

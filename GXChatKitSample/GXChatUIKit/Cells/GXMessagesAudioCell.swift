@@ -8,6 +8,13 @@
 import UIKit
 
 public class GXMessagesAudioCell: GXMessagesBaseCell {
+    public override func copy(with zone: NSZone? = nil) -> Any {
+        let cell = type(of: self).init(frame: self.frame)
+        if let nonullItem = self.item {
+            cell.updateCell(item: nonullItem, isCacheTrack: false)
+        }
+        return cell
+    }
     /// 语音音轨视图
     public weak var trackView: GXMessagesAudioTrackView?
     /// 播放按钮
@@ -67,22 +74,34 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     }
     
     public override func bindCell(item: GXMessagesItemData) {
+        self.updateCell(item: item, isCacheTrack: true)
+    }
+    
+    public func updateCell(item: GXMessagesItemData, isCacheTrack: Bool) {
         super.bindCell(item: item)
+        
         guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         guard let layout = item.layout as? GXMessagesAudioLayout else { return }
 
         self.playButton.frame = CGRect(origin: layout.playButtonRect.origin, size: GXCHATC.audioPlaySize)
         self.gx_updatePlayButton(content: content)
-
-        if let itemMediaView = content.mediaView as? GXMessagesAudioTrackView {
-            self.messageBubbleContainerView.addSubview(itemMediaView)
-            self.trackView = itemMediaView
+        if isCacheTrack {
+            if let itemMediaView = content.trackView as? GXMessagesAudioTrackView {
+                self.messageBubbleContainerView.addSubview(itemMediaView)
+                self.trackView = itemMediaView
+            }
+            else {
+                let trackView = GXMessagesAudioTrackView(frame: layout.audioTrackRect)
+                trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
+                self.messageBubbleContainerView.addSubview(trackView)
+                content.trackView = trackView
+                self.trackView = trackView
+            }
         }
         else {
             let trackView = GXMessagesAudioTrackView(frame: layout.audioTrackRect)
             trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
             self.messageBubbleContainerView.addSubview(trackView)
-            content.mediaView = trackView
             self.trackView = trackView
         }
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
