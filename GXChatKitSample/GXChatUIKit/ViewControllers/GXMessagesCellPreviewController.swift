@@ -42,11 +42,12 @@ public class GXMessagesCellPreviewController: UIViewController {
         tv.layer.cornerRadius = 16.0
         tv.configuration(separatorLeft: true)
         tv.isScrollEnabled = false
+        tv.isUserInteractionEnabled = false
         tv.register(cellType: GXMessagesCellPreviewCell.self)
         
         return tv
     }()
-
+    
     public init(data: GXMessagesDataDelegate, preview: UIView, originalRect: CGRect) {
         self.messageData = data
         self.preview = preview
@@ -65,10 +66,50 @@ public class GXMessagesCellPreviewController: UIViewController {
         self.setupLayout()
         self.setupViewController()
     }
-    
+
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let viewPoint = touch.location(in: self.view)
+        guard self.tableRect.contains(viewPoint) else { return }
+        
+        let point = self.view.convert(viewPoint, to: self.tableView)
+        guard let indexPath = self.tableView.indexPathForRow(at: point) else { return }
+        
+        self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    }
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let viewPoint = touch.location(in: self.view)
+        
+        if self.tableRect.contains(viewPoint) {
+            let point = self.view.convert(viewPoint, to: self.tableView)
+            guard let indexPath = self.tableView.indexPathForRow(at: point) else { return }
+            if let oldIndexPath = self.tableView.indexPathForSelectedRow {
+                if oldIndexPath != indexPath {
+                    self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                }
+            }
+            else {
+                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
+        }
+        else {
+            guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
+            self.tableView.deselectRow(at: indexPath, animated: false)
+        }
+    }
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
+        self.tableView.deselectRow(at: indexPath, animated: false)
+        
+        NSLog("Selected indexPath: \(indexPath.description)")
+    }
+    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.tableView.deselectAll(animated: false)
+    }
 }
 
-private extension GXMessagesCellPreviewController {
+extension GXMessagesCellPreviewController: UIGestureRecognizerDelegate {
     
     func setupTypes() {
         //self.itemTypes = [[.repply, .copy, .forward, .edit, .save, .collect, .revoke, .report, .delete], [.select]]
@@ -141,7 +182,7 @@ private extension GXMessagesCellPreviewController {
     func setupViewController() {
         self.view.backgroundColor = .clear
         self.preview.isUserInteractionEnabled = false
-
+        
         self.view.addSubview(self.backgroudView)
         self.preview.frame = self.currentRect
         self.view.addSubview(self.preview)
@@ -149,13 +190,18 @@ private extension GXMessagesCellPreviewController {
         self.view.addSubview(self.tableView)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureRecognizer(_:)))
+        tap.delegate = self
         self.backgroudView.addGestureRecognizer(tap)
     }
-    
+        
     @objc func tapGestureRecognizer(_ tap: UITapGestureRecognizer) {
         self.dismiss(animated: true)
     }
     
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let point = gestureRecognizer.location(in: self.view)
+        return !self.tableRect.contains(point)
+    }
 }
 
 extension GXMessagesCellPreviewController: UITableViewDataSource, UITableViewDelegate {
@@ -195,7 +241,6 @@ extension GXMessagesCellPreviewController: UITableViewDataSource, UITableViewDel
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.leastNonzeroMagnitude
     }
-    
 }
 
 public class GXMessagesCellPreviewCell: UITableViewCell, Reusable {
@@ -216,6 +261,10 @@ public class GXMessagesCellPreviewCell: UITableViewCell, Reusable {
         return imageView
     }()
     
+    private lazy var generator: UIImpactFeedbackGenerator = {
+        return UIImpactFeedbackGenerator(style: .light)
+    }()
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -223,9 +272,17 @@ public class GXMessagesCellPreviewCell: UITableViewCell, Reusable {
         self.contentView.addSubview(self.typeLabel)
         self.contentView.addSubview(self.iconIView)
     }
-        
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func setSelected(_ selected: Bool, animated: Bool) {
+        let oldSelected = self.isSelected
+        super.setSelected(selected, animated: animated)
+        if oldSelected != selected {
+            self.generator.impactOccurred()
+        }
     }
     
     public override func layoutSubviews() {
