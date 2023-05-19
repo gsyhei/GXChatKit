@@ -10,6 +10,9 @@ import Reusable
 import GXMessagesTableView
 
 open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying {
+    deinit {
+        NSLog("GXMessagesBaseCell deinit")
+    }
     public func copy(with zone: NSZone? = nil) -> Any {
         let cell = type(of: self).init(frame: self.frame)
         if let nonullItem = self.item {

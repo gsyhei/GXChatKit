@@ -568,16 +568,15 @@ extension ViewController: GXMessagesBaseCellDelegate {
     func messagesCell(_ cell: GXChatUIKit.GXMessagesBaseCell, didLongPressAt item: GXChatUIKit.GXMessagesItemData?) {
         guard let data = item?.data else { return }
         
-        let oldTransform: CGAffineTransform = cell.messageBubbleContainerView.transform
+        self.animationDelegate.bubbleView = cell.messageBubbleContainerView
+        self.animationDelegate.transform = cell.messageBubbleContainerView.transform
         cell.isHighlighted = false
-        cell.messageBubbleContainerView.transform = .identity
-        guard let preview = cell.messageBubbleContainerView.snapshotView(afterScreenUpdates: false) else { return }
-        preview.transform = oldTransform
+        guard let copyCell = cell.copy() as? GXMessagesBaseCell else { return }
 
         let rectForTable = cell.convert(cell.messageBubbleContainerView.frame, to: self.tableView)
         let rectForView = self.tableView.convert(rectForTable, to: self.view)
+        let preview = copyCell.messageBubbleContainerView
         let vc = GXMessagesCellPreviewController(data: data, preview: preview, originalRect: rectForView)
-        self.animationDelegate.bubbleView = cell.messageBubbleContainerView
         vc.transitioningDelegate = self.animationDelegate
         vc.modalPresentationStyle = .custom
         self.present(vc, animated: true, completion: nil)

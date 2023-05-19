@@ -9,6 +9,7 @@ import UIKit
 
 public class GXMessagesMenuAnimationDelegate: NSObject, UIGestureRecognizerDelegate {
     public weak var bubbleView: UIView?
+    public var transform: CGAffineTransform?
     /// 目标视图控制器
     weak var presentingViewController: UIViewController?
     /// 是否打开手势返回
@@ -128,7 +129,7 @@ extension GXMessagesMenuAnimationDelegate {
         
         guard let preview = self.bubbleView?.snapshotView(afterScreenUpdates: false) else { return }
         preview.frame = toVC.originalRect
-        preview.transform = toVC.preview.transform
+        preview.transform = self.transform ?? .identity
         transitionContext.containerView.addSubview(preview)
         var transform: CGAffineTransform = .identity
         transform = transform.translatedBy(x: 0, y: (toVC.currentRect.minY - toVC.originalRect.minY))

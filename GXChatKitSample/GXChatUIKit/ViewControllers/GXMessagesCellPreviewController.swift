@@ -140,7 +140,8 @@ private extension GXMessagesCellPreviewController {
     
     func setupViewController() {
         self.view.backgroundColor = .clear
-        
+        self.preview.isUserInteractionEnabled = false
+
         self.view.addSubview(self.backgroudView)
         self.preview.frame = self.currentRect
         self.view.addSubview(self.preview)
