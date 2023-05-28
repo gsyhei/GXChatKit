@@ -28,10 +28,6 @@ public class GXMessagesAudioContent: GXMessagesContentDelegate {
     public var tracks: [Int]?
     /// 是否正在播放
     public var isPlaying: Bool = false
-    /// 单个音轨动画时长
-    public var animateDuration: TimeInterval = 0
-    /// 当前动画count
-    public var currentPlayIndex: Int = 0
     /// 当前播放时间
     public var currentPlayDuration: TimeInterval = 0
     

@@ -37,6 +37,10 @@ public extension UIImage {
         return UIImage(systemName: "exclamationmark.circle")
     }
     
+    static var gx_circleFillImage: UIImage? {
+        return UIImage(systemName: "circle.fill")
+    }
+    
     static var gx_fileIconImage: UIImage? {
         // return UIImage(systemName: "doc.fill")
         return UIImage.gx_bundleAssetImage(name: "file")

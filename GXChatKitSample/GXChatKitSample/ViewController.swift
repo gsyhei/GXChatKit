@@ -592,7 +592,7 @@ extension ViewController: GXMessagesBaseCellDelegate {
         if data.gx_messageType == .audio {
             guard let content = data.gx_messagesContent as? GXMessagesAudioContent else { return }
             guard let audioCell = cell as? GXMessagesAudioCell else { return }
-            if let filePath = content.fileURL?.absoluteString {
+            if let filePath = content.fileURL?.relativePath {
                 if FileManager.default.fileExists(atPath: filePath) {
                     audioCell.gx_playAudio(isPlay: !content.isPlaying)
                 }

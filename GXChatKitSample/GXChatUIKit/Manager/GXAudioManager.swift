@@ -33,7 +33,7 @@ public class GXAudioManager: NSObject {
 }
 
 public extension GXAudioManager {
-    func playAudio(item: GXMessagesItemData?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
+    func playAudio(item: GXMessagesItemData?, fileTypeHint utiString: String? = nil) {
         guard let newItem = item else { return }
         if self.audioItem == newItem {
             guard let content = item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
@@ -41,6 +41,7 @@ public extension GXAudioManager {
                 if !player.isPlaying {
                     self.gx_playRemoveObserver()
                     content.isPlaying = true
+                    player.currentTime = content.currentPlayDuration
                     player.play()
                     NotificationCenter.default.post(name: GXAudioManager.audioPlayNotification, object: item)
                     self.gx_playAddObserver()
@@ -70,16 +71,12 @@ public extension GXAudioManager {
             self.audioPlayer = audioPlayer
         }
         guard let player = audioPlayer else { return }
+        player.currentTime = time
         var isPlayer = false
         let isPrepare: Bool = player.prepareToPlay()
         if isPrepare {
             if !player.isPlaying {
-                if time == 0 {
-                    isPlayer = player.play()
-                }
-                else {
-                    isPlayer = player.play(atTime: time)
-                }
+                isPlayer = player.play()
             }
             content.isPlaying = isPlayer
             if isPlayer {
@@ -103,16 +100,12 @@ public extension GXAudioManager {
             self.audioPlayer = audioPlayer
         }
         guard let player = audioPlayer else { return }
+        player.currentTime = time
         var isPlayer = false
         let isPrepare: Bool = player.prepareToPlay()
         if isPrepare {
             if !player.isPlaying {
-                if time == 0 {
-                    isPlayer = player.play()
-                }
-                else {
-                    isPlayer = player.play(atTime: time)
-                }
+                isPlayer = player.play()
             }
             content.isPlaying = isPlayer
             if isPlayer {
@@ -143,7 +136,6 @@ public extension GXAudioManager {
         
         content.isPlaying = false
         content.currentPlayDuration = 0
-        content.currentPlayIndex = 0
         NotificationCenter.default.post(name: GXAudioManager.audioStopNotification, object: item)
 
         self.gx_playRemoveObserver()
@@ -161,12 +153,10 @@ extension GXAudioManager: AVAudioPlayerDelegate {
         guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         guard let trackCount = content.tracks?.count, trackCount > 0 else { return }
 
-        let milliseconds: Int = Int(content.animateDuration * 1000.0)
         let codeTimer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
-        codeTimer.schedule(wallDeadline: .now(), repeating: .milliseconds(milliseconds))
+        codeTimer.schedule(wallDeadline: .now(), repeating: .milliseconds(30))
         codeTimer.setEventHandler(handler: {
             content.currentPlayDuration = self.currentTime
-            content.currentPlayIndex = Int(self.currentTime / content.animateDuration) + 1
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: GXAudioManager.audioPlayProgressNotification, object: item)
             }

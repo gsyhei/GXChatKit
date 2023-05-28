@@ -16,7 +16,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         return cell
     }
     /// 语音音轨视图
-    public weak var trackView: GXMessagesAudioTrackView?
+    public weak var trackView: GXMessagesAudioTrack?
     /// 播放按钮
     public lazy var playButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -86,12 +86,12 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         self.playButton.frame = CGRect(origin: layout.playButtonRect.origin, size: GXCHATC.audioPlaySize)
         self.gx_updatePlayButton(content: content)
         if isCacheTrack {
-            if let itemMediaView = content.trackView as? GXMessagesAudioTrackView {
+            if let itemMediaView = content.trackView as? GXMessagesAudioTrack {
                 self.messageBubbleContainerView.addSubview(itemMediaView)
                 self.trackView = itemMediaView
             }
             else {
-                let trackView = GXMessagesAudioTrackView(frame: layout.audioTrackRect)
+                let trackView = GXMessagesAudioTrack(frame: layout.audioTrackRect)
                 trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
                 self.messageBubbleContainerView.addSubview(trackView)
                 content.trackView = trackView
@@ -99,7 +99,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
             }
         }
         else {
-            let trackView = GXMessagesAudioTrackView(frame: layout.audioTrackRect)
+            let trackView = GXMessagesAudioTrack(frame: layout.audioTrackRect)
             trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
             self.messageBubbleContainerView.addSubview(trackView)
             self.trackView = trackView
@@ -119,8 +119,16 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         self.dotView.left = self.audioTimeLabel.right
         self.dotView.centerY = self.audioTimeLabel.centerY
         
+        self.trackView?.downBlock = {[weak self] in
+            guard let `self` = self else { return }
+            self.gx_playAudio(isPlay: false)
+        }
+        self.trackView?.changeBlock = {[weak self] time in
+            guard let `self` = self else { return }
+            self.audioTimeLabel.text = String(format: "0:%02d", Int(time))
+        }
         if content.isPlaying {
-            self.trackView?.gx_layerAnimation(index: content.currentPlayIndex - 1, animated: false)
+            self.trackView?.gx_resetPlayDuration()
             self.gx_playAudio(isPlay: true)
         }
     }
@@ -171,7 +179,7 @@ extension GXMessagesAudioCell {
 
         self.gx_updatePlayButton(content: content)
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
-        self.trackView?.gx_resetTracksLayer()
+        self.trackView?.gx_resetPlayDuration()
     }
     
     @objc func audioPause(notification: NSNotification) {
@@ -189,7 +197,7 @@ extension GXMessagesAudioCell {
         guard let content = notiItem.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
-        self.trackView?.gx_layerAnimation(index: (content.currentPlayIndex - 1), animated: true)
+        self.trackView?.gx_resetPlayDuration()
     }
     
 }

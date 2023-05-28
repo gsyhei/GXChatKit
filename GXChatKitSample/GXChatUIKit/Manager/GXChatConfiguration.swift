@@ -188,13 +188,13 @@ public class GXChatConfiguration: NSObject {
     /// 语音的音轨最大值
     public var audioTrackMaxVakue: CGFloat = 255.0
     /// 语音播放按钮尺寸
-    public var audioPlaySize: CGSize = CGSize(width: 50.0, height: 50.0)
+    public var audioPlaySize: CGSize = CGSize(width: 46.0, height: 46.0)
     /// 语音播放峰值间隔
     public var audioSpacing: CGFloat = 2.0
     /// 语音播放峰值宽度
     public var audioItemWidth: CGFloat = 3.0
     /// 语音播放峰值最小高度
-    public var audioMinHeight: CGFloat = 2.0
+    public var audioMinHeight: CGFloat = 3.0
     /// 发送方语音时间颜色
     public var audioSendingTimeColor: UIColor = UIColor(hex: 0x02A603)
     /// 发送方语音浅色

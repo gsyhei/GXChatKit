@@ -62,8 +62,9 @@
 		96A3C13529D46D6D00ADBC65 /* GXMessagesLocationLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13429D46D6D00ADBC65 /* GXMessagesLocationLayout.swift */; };
 		96A3C13729D46EC500ADBC65 /* GXMessagesCallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3C13629D46EC500ADBC65 /* GXMessagesCallLayout.swift */; };
 		96B3D46D2A08FBE400AA1144 /* GXMessagesReplyIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3D46B2A08FBE400AA1144 /* GXMessagesReplyIndicatorView.swift */; };
-		96B3D46E2A08FBE400AA1144 /* GXMessagesAudioTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3D46C2A08FBE400AA1144 /* GXMessagesAudioTrackView.swift */; };
 		96B4FA6529BFA44400AA9384 /* TestXibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B4FA6429BFA44400AA9384 /* TestXibView.xib */; };
+		96C350352A23E23B0030203A /* GXMessagesAudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C350342A23E23B0030203A /* GXMessagesAudioTrack.swift */; };
+		96C350372A23F67C0030203A /* GXMessagesSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C350362A23F67C0030203A /* GXMessagesSlider.swift */; };
 		96C7B37529D8CD17009A995B /* GXMessagesForwardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C7B37429D8CD17009A995B /* GXMessagesForwardContent.swift */; };
 		96C7B37729D8D3B9009A995B /* GXRichManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C7B37629D8D3B9009A995B /* GXRichManager.swift */; };
 		96C7B37B29DB1171009A995B /* GXMessagesSystemContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C7B37A29DB1171009A995B /* GXMessagesSystemContent.swift */; };
@@ -211,8 +212,9 @@
 		96A3C13429D46D6D00ADBC65 /* GXMessagesLocationLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesLocationLayout.swift; sourceTree = "<group>"; };
 		96A3C13629D46EC500ADBC65 /* GXMessagesCallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesCallLayout.swift; sourceTree = "<group>"; };
 		96B3D46B2A08FBE400AA1144 /* GXMessagesReplyIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesReplyIndicatorView.swift; sourceTree = "<group>"; };
-		96B3D46C2A08FBE400AA1144 /* GXMessagesAudioTrackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioTrackView.swift; sourceTree = "<group>"; };
 		96B4FA6429BFA44400AA9384 /* TestXibView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestXibView.xib; sourceTree = "<group>"; };
+		96C350342A23E23B0030203A /* GXMessagesAudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioTrack.swift; sourceTree = "<group>"; };
+		96C350362A23F67C0030203A /* GXMessagesSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSlider.swift; sourceTree = "<group>"; };
 		96C7B37429D8CD17009A995B /* GXMessagesForwardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesForwardContent.swift; sourceTree = "<group>"; };
 		96C7B37629D8D3B9009A995B /* GXRichManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXRichManager.swift; sourceTree = "<group>"; };
 		96C7B37A29DB1171009A995B /* GXMessagesSystemContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesSystemContent.swift; sourceTree = "<group>"; };
@@ -424,8 +426,9 @@
 			isa = PBXGroup;
 			children = (
 				96B3D46B2A08FBE400AA1144 /* GXMessagesReplyIndicatorView.swift */,
-				96B3D46C2A08FBE400AA1144 /* GXMessagesAudioTrackView.swift */,
+				96C350342A23E23B0030203A /* GXMessagesAudioTrack.swift */,
 				96DE0E6E2A141C5E00C88C47 /* GXMessagesClockView.swift */,
+				96C350362A23F67C0030203A /* GXMessagesSlider.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -883,7 +886,6 @@
 				96C7B37B29DB1171009A995B /* GXMessagesSystemContent.swift in Sources */,
 				96A3C13529D46D6D00ADBC65 /* GXMessagesLocationLayout.swift in Sources */,
 				9699575C2974075F001DCC17 /* GXMessagesAvatar.swift in Sources */,
-				96B3D46E2A08FBE400AA1144 /* GXMessagesAudioTrackView.swift in Sources */,
 				963E75CE29E00F1400A6D9C6 /* GXMessagesFileContent.swift in Sources */,
 				9699577229757F2D001DCC17 /* GXMessagesViewController.swift in Sources */,
 				96A3C13329D46D3C00ADBC65 /* GXMessagesVideoLayout.swift in Sources */,
@@ -903,6 +905,7 @@
 				96D13EFD29BDA61A00BF4B80 /* GXMessagesSectionHeader.swift in Sources */,
 				964A504B29E73C97009D957F /* UIImage+GXResource.swift in Sources */,
 				968B917329C941A100F6113B /* GXChatConfiguration.swift in Sources */,
+				96C350372A23F67C0030203A /* GXMessagesSlider.swift in Sources */,
 				96A3C11729D43ECF00ADBC65 /* GXMessagesAtContent.swift in Sources */,
 				96A3C11529D2CBDD00ADBC65 /* GXMessagesCallCell.swift in Sources */,
 				96A3C13729D46EC500ADBC65 /* GXMessagesCallLayout.swift in Sources */,
@@ -912,6 +915,7 @@
 				9699576E29757CD1001DCC17 /* Bundle+GXChat.swift in Sources */,
 				965FA5B62970439B001D7633 /* GXMessagesTextCell.swift in Sources */,
 				96C7B37529D8CD17009A995B /* GXMessagesForwardContent.swift in Sources */,
+				96C350352A23E23B0030203A /* GXMessagesAudioTrack.swift in Sources */,
 				964A504529E5C5B3009D957F /* GXMessagesReplyContent.swift in Sources */,
 				965FA5B52970439B001D7633 /* GXMessagesBaseCell.swift in Sources */,
 				96DE0E6F2A141C5E00C88C47 /* GXMessagesClockView.swift in Sources */,
