@@ -101,8 +101,6 @@ public class GXUtilManager: NSObject {
         return resize
     }
     
-    
-
 }
 
 private extension GXUtilManager {
