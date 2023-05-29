@@ -13,7 +13,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         let cell = type(of: self).init(frame: self.frame)
         if let nonullItem = self.item {
             cell.updateCell(item: nonullItem, isCacheTrack: false)
-            cell.gx_updateAudioTrack()
+            cell.gx_updateTrackView()
         }
         return cell
     }
@@ -27,6 +27,26 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         button.addTarget(self, action: #selector(playButtonClicked(_:)), for: .touchUpInside)
         
         return button
+    }()
+    /// 播放速率按钮
+    public lazy var rateButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.backgroundColor = .gray
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = GXCHATC.nicknameFont
+        button.frame = CGRect(origin: .zero, size: GXCHATC.audioRateSize)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = GXCHATC.audioRateSize.height/2
+        button.addTarget(self, action: #selector(rateButtonClicked(_:)), for: .touchUpInside)
+
+        return button
+    }()
+    /// 加载动画
+    public lazy var indicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .medium)
+        view.tintColor = .gray
+        
+        return view
     }()
     /// 时长文本Label
     public lazy var audioTimeLabel: UILabel = {
@@ -58,11 +78,13 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         
         self.audioTimeLabel.text = nil
         self.trackView?.removeFromSuperview()
+        self.gx_downloadAudio(isLoading: false)
     }
     
     public override func createSubviews() {
         super.createSubviews()
         self.messageBubbleContainerView.addSubview(self.playButton)
+        self.messageBubbleContainerView.addSubview(self.rateButton)
         self.messageBubbleContainerView.addSubview(self.audioTimeLabel)
         self.messageBubbleContainerView.addSubview(self.dotView)
         self.addObserver()
@@ -82,10 +104,13 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
     public func updateCell(item: GXMessagesItemData, isCacheTrack: Bool) {
         super.bindCell(item: item)
         
-        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         guard let layout = item.layout as? GXMessagesAudioLayout else { return }
+        self.playButton.frame = layout.playButtonRect
+        self.rateButton.frame = layout.audioRateRect
+        self.audioTimeLabel.frame = layout.audioTimeRect
 
-        self.playButton.frame = CGRect(origin: layout.playButtonRect.origin, size: GXCHATC.audioPlaySize)
+        guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
+
         self.gx_updatePlayButton(content: content)
         if isCacheTrack {
             if let itemMediaView = content.trackView as? GXMessagesAudioTrack {
@@ -107,7 +132,6 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
             self.trackView = trackView
         }
         self.audioTimeLabel.text = String(format: "0:%02d", Int(content.duration - content.currentPlayDuration))
-        self.audioTimeLabel.frame = layout.audioTimeRect
         if item.data.gx_messageStatus == .send {
             self.dotView.backgroundColor = GXCHATC.audioSendingTimeColor
             self.playButton.tintColor = GXCHATC.audioSendingTimeColor
@@ -120,6 +144,8 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         }
         self.dotView.left = self.audioTimeLabel.right
         self.dotView.centerY = self.audioTimeLabel.centerY
+        
+        self.rateButton.setTitle(String(format: "%.1fX", content.rate), for: .normal)
         
         self.trackView?.downBlock = {[weak self] in
             guard let `self` = self else { return }
@@ -153,15 +179,40 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         guard content.tracks == nil else { return }
         guard let fileUrl = content.fileURL else { return }
 
+        self.gx_downloadAudio(isLoading: true)
         let asset = AVAsset(url: fileUrl)
         GXUtilManager.gx_cutAudioTrackList(asset: asset, count: content.trackCount, height: GXCHATC.audioTrackMaxVakue) {[weak self] tracks in
             guard let `self` = self else { return }
-            guard let currentContent = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
-            currentContent.tracks = tracks
-            guard let messageStatus = self.item?.data.gx_messageStatus else { return }
-            self.trackView?.gx_updateAudio(content: currentContent, status: messageStatus)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                self.gx_updateTrackView(tracks: tracks)
+                self.gx_downloadAudio(isLoading: false)
+            }
         }
     }
+    
+    public func gx_updateTrackView(tracks: [Int]? = nil) {
+        guard let content = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
+        if let letTracks = tracks {
+            content.tracks = letTracks
+        }
+        guard let status = self.item?.data.gx_messageStatus else { return }
+        self.trackView?.gx_updateAudio(content: content, status: status)
+    }
+    
+    public func gx_downloadAudio(isLoading: Bool) {
+        if isLoading {
+            self.playButton.isHidden = true
+            self.messageBubbleContainerView.addSubview(self.indicatorView)
+            self.indicatorView.startAnimating()
+            self.indicatorView.center = self.playButton.center
+        }
+        else {
+            self.playButton.isHidden = false
+            self.indicatorView.stopAnimating()
+            self.indicatorView.removeFromSuperview()
+        }
+    }
+    
 }
 
 extension GXMessagesAudioCell {
@@ -179,6 +230,15 @@ extension GXMessagesAudioCell {
     
     @objc func playButtonClicked(_ sender: Any?) {
         self.delegate?.messagesCell(self, didContentTapAt: self.item)
+    }
+    
+    @objc func rateButtonClicked(_ sender: Any?) {
+        guard let content = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
+        var rate = content.rate + 0.5
+        if rate > 2.0 { rate = 1.0 }
+        content.rate = rate
+        self.rateButton.setTitle(String(format: "%.1fX", content.rate), for: .normal)
+        GXAudioManager.shared.updateRate(item: self.item)
     }
 
     //MARK: - NSNotification

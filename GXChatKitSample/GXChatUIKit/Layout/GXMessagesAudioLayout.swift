@@ -11,6 +11,7 @@ public class GXMessagesAudioLayout: GXMessagesBaseLayout {
 
     public var playButtonRect: CGRect = .zero
     public var audioTrackRect: CGRect = .zero
+    public var audioRateRect: CGRect = .zero
     public var audioTimeRect: CGRect = .zero
     
     public override func updateLayout(data: GXMessagesDataDelegate) {
@@ -22,7 +23,7 @@ public class GXMessagesAudioLayout: GXMessagesBaseLayout {
         
         let contentWidth = maxContainerWidth
         content.displaySize = CGSize(width: contentWidth, height: GXCHATC.audioPlaySize.height)
-        var audioTrackWidth = contentWidth - GXCHATC.audioPlaySize.width * 2 - 30
+        var audioTrackWidth = contentWidth - GXCHATC.audioPlaySize.width - GXCHATC.audioRateSize.width - 20
         let count = audioTrackWidth / (GXCHATC.audioSpacing + GXCHATC.audioItemWidth)
         content.trackCount = Int(count)
         audioTrackWidth = CGFloat(content.trackCount) * (GXCHATC.audioSpacing + GXCHATC.audioItemWidth) - GXCHATC.audioSpacing
@@ -32,6 +33,9 @@ public class GXMessagesAudioLayout: GXMessagesBaseLayout {
         self.playButtonRect = CGRect(origin: contentPoint, size: GXCHATC.audioPlaySize)
         let audioTrackTop = self.playButtonRect.minY + (self.playButtonRect.height - audioTrackSize.height)/2
         self.audioTrackRect = CGRect(origin: CGPoint(x: self.playButtonRect.maxX + 10.0, y: audioTrackTop), size: audioTrackSize)
+        
+        let audioRateTop = self.playButtonRect.minY + (self.playButtonRect.height - GXCHATC.audioRateSize.height)/2
+        self.audioRateRect = CGRect(origin: CGPoint(x: self.audioTrackRect.maxX + 10.0, y: audioRateTop), size: GXCHATC.audioRateSize)
 
         var containerHeight = content.displaySize.height + GXCHATC.timeFont.lineHeight
         containerHeight += (GXCHATC.bubbleLeadingInsets.top + GXCHATC.bubbleLeadingInsets.bottom)

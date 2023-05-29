@@ -30,6 +30,8 @@ public class GXMessagesAudioContent: GXMessagesContentDelegate {
     public var tracks: [Int]?
     /// 是否正在播放
     public var isPlaying: Bool = false
+    /// 播放速度
+    public var rate: Float = 1.0
     /// 当前播放时间
     public var currentPlayDuration: TimeInterval = 0
     

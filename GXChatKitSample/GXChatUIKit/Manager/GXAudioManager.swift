@@ -38,6 +38,7 @@ public extension GXAudioManager {
         if self.audioItem == newItem {
             guard let content = item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
             if let player = self.audioPlayer {
+                player.rate = content.rate
                 if !player.isPlaying {
                     self.gx_playRemoveObserver()
                     content.isPlaying = true
@@ -49,18 +50,18 @@ public extension GXAudioManager {
             }
             else {
                 self.audioItem = newItem
-                self.playAudio(url: content.fileURL, time: content.currentPlayDuration)
+                self.playAudio(url: content.fileURL, time: content.currentPlayDuration, rate: content.rate)
             }
         }
         else {
             self.stopAudio()
             self.audioItem = newItem
             guard let content = item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
-            self.playAudio(url: content.fileURL, time: content.currentPlayDuration)
+            self.playAudio(url: content.fileURL, time: content.currentPlayDuration, rate: content.rate)
         }
     }
     
-    func playAudio(url: URL?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
+    func playAudio(url: URL?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0, rate: Float = 1.0) {
         guard let item = self.audioItem else { return }
         guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
@@ -68,10 +69,12 @@ public extension GXAudioManager {
             guard let audioUrl = url else { return }
             let audioPlayer = try? AVAudioPlayer(contentsOf: audioUrl, fileTypeHint: utiString)
             audioPlayer?.delegate = self
+            audioPlayer?.enableRate = true
             self.audioPlayer = audioPlayer
         }
         guard let player = audioPlayer else { return }
         player.currentTime = time
+        player.rate = rate
         var isPlayer = false
         let isPrepare: Bool = player.prepareToPlay()
         if isPrepare {
@@ -89,7 +92,7 @@ public extension GXAudioManager {
         }
     }
     
-    func playAudio(data: Data?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0) {
+    func playAudio(data: Data?, fileTypeHint utiString: String? = nil, time: TimeInterval = 0, rate: Float = 1.0) {
         guard let item = self.audioItem else { return }
         guard let content = item.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         
@@ -97,10 +100,12 @@ public extension GXAudioManager {
             guard let audioData = data else { return }
             let audioPlayer = try? AVAudioPlayer(data: audioData, fileTypeHint: utiString)
             audioPlayer?.delegate = self
+            audioPlayer?.enableRate = true
             self.audioPlayer = audioPlayer
         }
         guard let player = audioPlayer else { return }
         player.currentTime = time
+        player.rate = rate
         var isPlayer = false
         let isPrepare: Bool = player.prepareToPlay()
         if isPrepare {
@@ -143,6 +148,15 @@ public extension GXAudioManager {
             self.audioPlayer?.stop()
         }
         self.audioPlayer = nil
+    }
+    
+    func updateRate(item: GXMessagesItemData?) {
+        guard let newItem = item else { return }
+        guard self.audioItem == newItem else { return }
+        guard let content = item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
+        if let player = audioPlayer, player.isPlaying {
+            self.audioPlayer?.rate = content.rate
+        }
     }
 }
 

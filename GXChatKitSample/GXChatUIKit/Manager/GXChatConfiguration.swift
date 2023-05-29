@@ -189,6 +189,8 @@ public class GXChatConfiguration: NSObject {
     public var audioTrackMaxVakue: CGFloat = 255.0
     /// 语音播放按钮尺寸
     public var audioPlaySize: CGSize = CGSize(width: 46.0, height: 46.0)
+    /// 语音播放速率按钮尺寸
+    public var audioRateSize: CGSize = CGSize(width: 46.0, height: 30.0)
     /// 语音播放峰值间隔
     public var audioSpacing: CGFloat = 2.0
     /// 语音播放峰值宽度
