@@ -53,13 +53,15 @@ public class GXUtilManager: NSObject {
     ///   - height: 缩放高度最大值
     ///   - completion: 结果回调
     public class func gx_cutAudioTrackList(asset: AVAsset, count: Int, height: CGFloat, completion: @escaping (([Int]) -> Void)) {
-        GXUtilManager.gx_assetTrack(asset: asset) { track in
-            GXUtilManager.gx_recorderData(asset: asset, assetTrack: track, completion: { data in
-                let audioList = GXUtilManager.gx_filterAudioData(count: count, height: height, audioData: data)
-                DispatchQueue.main.async {
-                    completion(audioList)
-                }
-            })
+        DispatchQueue.global(qos: .background).async {
+            GXUtilManager.gx_assetTrack(asset: asset) { track in
+                GXUtilManager.gx_recorderData(asset: asset, assetTrack: track, completion: { data in
+                    let audioList = GXUtilManager.gx_filterAudioData(count: count, height: height, audioData: data)
+                    DispatchQueue.main.async {
+                        completion(audioList)
+                    }
+                })
+            }
         }
     }
     
@@ -104,14 +106,14 @@ public class GXUtilManager: NSObject {
 }
 
 private extension GXUtilManager {
-
+    
     class func gx_filterAudioData(count: Int, height: CGFloat, audioData: Data?) -> [Int] {
         guard let data = audioData else { return [] }
         
         let sampleCount: Int = Int(data.count / MemoryLayout<Int16>.size)
         let binSize: Int = sampleCount / count
         let bytes = data.bytes
-        var maxSample: Int = 0, minSample: Int = -1
+        var maxSample: Int = 0
         let length = sampleCount / binSize
         var filteredSamplesMA: [Int] = []
         for index in 0..<length {
@@ -123,12 +125,10 @@ private extension GXUtilManager {
             let value = GXUtilManager.gx_maxValueInArray(values: sampleBin, size: binSize)
             filteredSamplesMA.append(Int(value))
             maxSample = max(maxSample, value)
-            if minSample == -1 { minSample = value }
-            minSample = min(minSample, value)
         }
-        let scaleFactor = height / CGFloat(maxSample - minSample)
+        let scaleFactor = height / CGFloat(maxSample)
         for index in 0..<filteredSamplesMA.count {
-            filteredSamplesMA[index] = Int(CGFloat(filteredSamplesMA[index] - minSample) * scaleFactor)
+            filteredSamplesMA[index] = Int(CGFloat(filteredSamplesMA[index]) * scaleFactor)
         }
         NSLog("filteredSamplesMA count = \(filteredSamplesMA.count), %@", filteredSamplesMA.description)
         
@@ -149,25 +149,23 @@ private extension GXUtilManager {
         reader.add(output)
         reader.startReading()
         var data = Data()
-        DispatchQueue.global(qos: .background).async {
-            while (reader.status == .reading) {
+        while (reader.status == .reading) {
+            autoreleasepool {
                 if let sampleBuffer = output.copyNextSampleBuffer(),
                    let blockBUfferRef = CMSampleBufferGetDataBuffer(sampleBuffer) {
-                    autoreleasepool {
-                        let length = CMBlockBufferGetDataLength(blockBUfferRef)
-                        let sampleBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
-                        CMBlockBufferCopyDataBytes(blockBUfferRef, atOffset: 0, dataLength: length, destination: sampleBytes)
-                        data.append(sampleBytes, count: length)
-                        CMSampleBufferInvalidate(sampleBuffer)
-                    }
+                    let length = CMBlockBufferGetDataLength(blockBUfferRef)
+                    let sampleBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
+                    CMBlockBufferCopyDataBytes(blockBUfferRef, atOffset: 0, dataLength: length, destination: sampleBytes)
+                    data.append(sampleBytes, count: length)
+                    CMSampleBufferInvalidate(sampleBuffer)
                 }
             }
-            if (reader.status == .completed) {
-                completion(data)
-            }
-            else {
-                completion(nil)
-            }
+        }
+        if (reader.status == .completed) {
+            completion(data)
+        }
+        else {
+            completion(nil)
         }
     }
     
@@ -187,14 +185,14 @@ private extension GXUtilManager {
     }
     
     class func gx_maxValueInArray(values: UnsafeMutablePointer<UInt16>, size: Int) -> Int {
-        let minSize = min(size/50, 50)
-        let length = size / minSize
+        let length = 10
+        let minSize = size / length
         var maxValue: Int = 0
         for index in 0..<length {
             let value = values[index * minSize]
             maxValue += Int(value)
         }
-        return maxValue / minSize
+        return maxValue / length
     }
     
 }

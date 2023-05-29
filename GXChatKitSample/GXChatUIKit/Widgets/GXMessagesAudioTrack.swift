@@ -20,15 +20,16 @@ public class GXMessagesAudioTrack: UIView {
        return layer
     }()
     
-    private lazy var maskLayer: CALayer = {
-        let layer = CALayer()
-        layer.backgroundColor = UIColor.clear.cgColor
-        layer.masksToBounds = true
-       return layer
+    private lazy var maskBackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        view.masksToBounds = true
+       return view
     }()
     
     private lazy var maskSlider: GXMessagesSlider = {
         let slider = GXMessagesSlider()
+        slider.value = 0
         slider.addTarget(self, action: #selector(maskSliderChange(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(maskSliderDown(_:)), for: .touchDown)
         return slider
@@ -37,10 +38,18 @@ public class GXMessagesAudioTrack: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .clear
+        self.layer.addSublayer(self.backLayer)
+        self.addSubview(self.maskSlider)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        self.backLayer.frame = self.bounds
+        self.maskSlider.frame = self.bounds
     }
     
     public func gx_updateAudio(content: GXMessagesAudioContent, status: GXChatConfiguration.MessageStatus) {
@@ -54,9 +63,8 @@ public class GXMessagesAudioTrack: UIView {
             var rect = self.bounds
             let width = content.currentPlayDuration/content.duration * self.frame.width
             rect.size.width = width
-            self.maskLayer.frame = rect
             self.maskSlider.value = Float(content.currentPlayDuration)
-            NSLog("content.currentPlayDuration: \(content.currentPlayDuration)")
+            self.maskBackView.frame = rect
         }
     }
 }
@@ -64,14 +72,7 @@ public class GXMessagesAudioTrack: UIView {
 fileprivate extension GXMessagesAudioTrack {
     
     private func setupSubviews() {
-        
-        self.backLayer.frame = self.bounds
-        self.maskLayer.frame = .zero
-        self.maskSlider.frame = self.bounds
-
-        self.layer.addSublayer(self.backLayer)
-        self.layer.addSublayer(self.maskLayer)
-        self.addSubview(self.maskSlider)
+        self.addSubview(self.maskBackView)
         self.gx_resetPlayDuration()
         
         guard let content = self.audioContent else { return }
@@ -110,7 +111,7 @@ fileprivate extension GXMessagesAudioTrack {
             } else {
                 maskLayer.backgroundColor = GXCHATC.audioReceivingTimeColor.cgColor
             }
-            self.maskLayer.addSublayer(maskLayer)
+            self.maskBackView.layer.addSublayer(maskLayer)
         }
     }
     

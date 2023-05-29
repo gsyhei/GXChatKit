@@ -253,9 +253,11 @@ class ViewController: UIViewController {
         data44.messageStatus = .receive
         data44.messageType = .audio
         let urlString = Bundle.main.path(forResource: "voicexinwen", ofType: "mp3")!
+//        let urlString = Bundle.main.path(forResource: "redpacket_sound_open", ofType: "wav")!
         let url = URL(fileURLWithPath: urlString)
-        let tracks = [120, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 0, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 255]
-        data44.messagesContentData = GXMessagesAudioContent(fileURL: url, duration: 12, tracks: tracks)
+//        let tracks = [120, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 0, 30, 50, 60, 80, 120, 200, 255, 230, 180, 150, 90, 255]
+        data44.messagesContentData = GXMessagesAudioContent(fileURL: url, duration: 12)
+//        data44.messagesContentData = GXMessagesAudioContent(fileURL: url, duration: 1)
 
         let item44 = GXMessagesItemData(data: data44)
         item44.updateMessagesAvatar(image: UIImage(named: "avatar2"))

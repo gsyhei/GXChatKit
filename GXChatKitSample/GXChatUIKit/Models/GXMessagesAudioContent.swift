@@ -24,6 +24,8 @@ public class GXMessagesAudioContent: GXMessagesContentDelegate {
 
     /// 持续时间
     public var duration: TimeInterval = 0
+    /// 音轨数量
+    public var trackCount: Int = 0
     /// 音轨数组
     public var tracks: [Int]?
     /// 是否正在播放
@@ -31,13 +33,13 @@ public class GXMessagesAudioContent: GXMessagesContentDelegate {
     /// 当前播放时间
     public var currentPlayDuration: TimeInterval = 0
     
-    public required init(audioURL: URL?, duration: TimeInterval, tracks: [Int]) {
+    public required init(audioURL: URL?, duration: TimeInterval, tracks: [Int]? = nil) {
         self.audioURL = audioURL
         self.duration = duration
         self.tracks = tracks
     }
     
-    public required init(fileURL: URL?, duration: TimeInterval, tracks: [Int]) {
+    public required init(fileURL: URL?, duration: TimeInterval, tracks: [Int]? = nil) {
         self.fileURL = fileURL
         self.duration = duration
         self.tracks = tracks

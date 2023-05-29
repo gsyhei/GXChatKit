@@ -20,17 +20,18 @@ public class GXMessagesAudioLayout: GXMessagesBaseLayout {
         var maxContainerWidth = SCREEN_MIN_WIDTH - (GXCHATC.avatarSize.width + GXCHATC.avatarMargin*2) * 2 - hookWidth
         maxContainerWidth -= (GXCHATC.bubbleLeadingInsets.left + GXCHATC.bubbleLeadingInsets.right)
         
-        let count = content.tracks?.count ?? 0
-        let width = CGFloat(count) * (GXCHATC.audioSpacing + GXCHATC.audioItemWidth)
-        let audioSize = CGSize(width: width, height: 30)
-        
-        let contentWidth = width + 10 + GXCHATC.audioPlaySize.width
+        let contentWidth = maxContainerWidth
         content.displaySize = CGSize(width: contentWidth, height: GXCHATC.audioPlaySize.height)
-        
+        var audioTrackWidth = contentWidth - GXCHATC.audioPlaySize.width * 2 - 30
+        let count = audioTrackWidth / (GXCHATC.audioSpacing + GXCHATC.audioItemWidth)
+        content.trackCount = Int(count)
+        audioTrackWidth = CGFloat(content.trackCount) * (GXCHATC.audioSpacing + GXCHATC.audioItemWidth) - GXCHATC.audioSpacing
+        let audioTrackSize = CGSize(width: audioTrackWidth, height: 30)
+                
         let contentPoint = data.gx_contentPoint
         self.playButtonRect = CGRect(origin: contentPoint, size: GXCHATC.audioPlaySize)
-        let audioTrackTop = self.playButtonRect.minY + (self.playButtonRect.height - audioSize.height)/2
-        self.audioTrackRect = CGRect(origin: CGPoint(x: self.playButtonRect.maxX + 10.0, y: audioTrackTop), size: audioSize)
+        let audioTrackTop = self.playButtonRect.minY + (self.playButtonRect.height - audioTrackSize.height)/2
+        self.audioTrackRect = CGRect(origin: CGPoint(x: self.playButtonRect.maxX + 10.0, y: audioTrackTop), size: audioTrackSize)
 
         var containerHeight = content.displaySize.height + GXCHATC.timeFont.lineHeight
         containerHeight += (GXCHATC.bubbleLeadingInsets.top + GXCHATC.bubbleLeadingInsets.bottom)

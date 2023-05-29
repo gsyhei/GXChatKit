@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import AVFoundation
 
 public class GXMessagesAudioCell: GXMessagesBaseCell {
     public override func copy(with zone: NSZone? = nil) -> Any {
         let cell = type(of: self).init(frame: self.frame)
         if let nonullItem = self.item {
             cell.updateCell(item: nonullItem, isCacheTrack: false)
+            cell.gx_updateAudioTrack()
         }
         return cell
     }
@@ -92,7 +94,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
             }
             else {
                 let trackView = GXMessagesAudioTrack(frame: layout.audioTrackRect)
-                trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
+//                trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
                 self.messageBubbleContainerView.addSubview(trackView)
                 content.trackView = trackView
                 self.trackView = trackView
@@ -100,7 +102,7 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         }
         else {
             let trackView = GXMessagesAudioTrack(frame: layout.audioTrackRect)
-            trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
+//            trackView.gx_updateAudio(content: content, status: item.data.gx_messageStatus)
             self.messageBubbleContainerView.addSubview(trackView)
             self.trackView = trackView
         }
@@ -131,6 +133,8 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
             self.trackView?.gx_resetPlayDuration()
             self.gx_playAudio(isPlay: true)
         }
+        
+        self.gx_updateAudioTrack()
     }
     
     public func gx_playAudio(isPlay: Bool) {
@@ -142,6 +146,21 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
             GXAudioManager.shared.pauseAudio()
         }
         self.playButton.isUserInteractionEnabled = true
+    }
+    
+    public func gx_updateAudioTrack() {
+        guard let content = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
+        guard content.tracks == nil else { return }
+        guard let fileUrl = content.fileURL else { return }
+
+        let asset = AVAsset(url: fileUrl)
+        GXUtilManager.gx_cutAudioTrackList(asset: asset, count: content.trackCount, height: GXCHATC.audioTrackMaxVakue) {[weak self] tracks in
+            guard let `self` = self else { return }
+            guard let currentContent = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
+            currentContent.tracks = tracks
+            guard let messageStatus = self.item?.data.gx_messageStatus else { return }
+            self.trackView?.gx_updateAudio(content: currentContent, status: messageStatus)
+        }
     }
 }
 
