@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         tv.backgroundColor = UIColor(hex: 0xEFEFEF)
         tv.separatorStyle = .none
 //        tv.allowsSelection = false
+        tv.allowsSelectionDuringEditing = true
         
         return tv
     }()
@@ -71,12 +72,19 @@ class ViewController: UIViewController {
         self.tableView.reloadData()
         
         
-        let right = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.editItemTapped))
+        let right = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(self.editItemTapped))
         self.navigationItem.rightBarButtonItem = right
     }
     
     @objc func editItemTapped() {
-        self.tableView.setEditing(true, animated: true)
+        if self.tableView.isEditing {
+            self.tableView.setEditing(false, animated: true)
+            self.navigationItem.rightBarButtonItem?.title = "Edit"
+        }
+        else {
+            self.tableView.setEditing(true, animated: true)
+            self.navigationItem.rightBarButtonItem?.title = "Cancel"
+        }
     }
     
     public func updateDatas() {
@@ -565,6 +573,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("cell didSelectRowAt \(indexPath.description)")
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        NSLog("cell willBeginEditingRowAt \(indexPath.description)")
+    }
+    
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        NSLog("cell didEndEditingRowAt \(indexPath?.description)")
     }
     
 }

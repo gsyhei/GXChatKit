@@ -118,6 +118,8 @@ extension GXMessagesMediaCell {
     //MARK: - UIButton Clicked
     
     @objc func playButtonClicked(_ sender: Any?) {
+        guard !self.isEditing else { return }
+
         self.delegate?.messagesCell(self, didContentTapAt: self.item)
     }
 }

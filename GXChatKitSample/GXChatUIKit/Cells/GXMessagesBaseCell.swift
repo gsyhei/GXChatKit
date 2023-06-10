@@ -140,7 +140,11 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying
     public func createSubviews() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
-        
+        let imageView = UIImageView(image: UIImage.gx_checkmarkImage(false))
+        imageView.frame = CGRect(x: -40, y: 0, width: 40, height: 40)
+        imageView.tintColor = .systemBlue
+        self.contentView.addSubview(imageView)
+
         self.contentView.backgroundColor = .clear
         self.contentView.addSubview(self.messageAvatarButton)
         self.contentView.addSubview(self.messageBubbleContainerView)
@@ -241,20 +245,6 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying
         self.perform(#selector(setBubbleHighlighted(_:)), with: false, afterDelay: 1.0)
     }
     
-    public func setCustomEditing(editing: Bool, animated: Bool) {
-        let left = editing ? 60.0:0.0
-        if animated {
-            self.isUserInteractionEnabled = false
-            UIView.animate(withDuration: 0.25) {
-                self.contentView.left = left
-            } completion: { finished in
-                self.isUserInteractionEnabled = true
-            }
-        }
-        else {
-            self.contentView.left = left
-        }
-    }
 }
 
 extension GXMessagesBaseCell {
@@ -288,10 +278,14 @@ extension GXMessagesBaseCell {
 private extension GXMessagesBaseCell {
     
     @objc func messageAvatarButtonClicked(_ sender: Any) {
+        guard !self.isEditing else { return }
+
         self.delegate?.messagesCell(self, didAvatarTapAt: self.item)
     }
     
     @objc func longPressGestureRecognizer(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        guard !self.isEditing else { return }
+
         if gestureRecognizer.state == .began {
             self.generator.impactOccurred()
             self.delegate?.messagesCell(self, didLongPressAt: self.item)
@@ -299,6 +293,8 @@ private extension GXMessagesBaseCell {
     }
     
     @objc func panGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
+        guard !self.isEditing else { return }
+
         switch gestureRecognizer.state {
         case .began:
             self.panStateBegan()

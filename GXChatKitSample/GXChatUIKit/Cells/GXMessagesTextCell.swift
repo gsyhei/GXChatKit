@@ -35,6 +35,8 @@ public class GXMessagesTextCell: GXMessagesBaseCell {
         
         self.contentTextView.highlightTapAction = {[weak self] containerView, text, range, rect in
             guard let `self` = self else { return }
+            guard !self.isEditing else { return }
+
             let attributed = text.attributedSubstring(from: range)
             if let textHighlight = attributed.yy_attributes?[YYTextHighlightAttributeName] as? YYTextHighlight {
                 guard let type = textHighlight.userInfo?[GXRichManager.highlightKey] as? GXRichManager.HighlightType else { return }
