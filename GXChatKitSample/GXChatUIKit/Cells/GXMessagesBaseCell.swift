@@ -232,13 +232,28 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying
         }
     }
 
-    @objc public func setChecked(_ checked: Bool) {
+    @objc public func setBubbleHighlighted(_ checked: Bool) {
         self.messageBubbleImageView.isHighlighted = checked
     }
     
-    public func showChecked() {
-        self.setChecked(true)
-        self.perform(#selector(setChecked(_:)), with: false, afterDelay: 1.0)
+    public func showAutoHighlighted() {
+        self.setBubbleHighlighted(true)
+        self.perform(#selector(setBubbleHighlighted(_:)), with: false, afterDelay: 1.0)
+    }
+    
+    public func setCustomEditing(editing: Bool, animated: Bool) {
+        let left = editing ? 60.0:0.0
+        if animated {
+            self.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.25) {
+                self.contentView.left = left
+            } completion: { finished in
+                self.isUserInteractionEnabled = true
+            }
+        }
+        else {
+            self.contentView.left = left
+        }
     }
 }
 
@@ -268,13 +283,9 @@ extension GXMessagesBaseCell {
         }
         return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
-    
-    private func updateHighlighted(_ highlighted: Bool, animated: Bool) {
-        let transform: CGAffineTransform = highlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
-        UIView.animate(withDuration: 0.25) {
-            self.messageBubbleContainerView.transform = transform
-        }
-    }
+}
+
+private extension GXMessagesBaseCell {
     
     @objc func messageAvatarButtonClicked(_ sender: Any) {
         self.delegate?.messagesCell(self, didAvatarTapAt: self.item)
@@ -303,8 +314,15 @@ extension GXMessagesBaseCell {
         default: break
         }
     }
+    
+    func updateHighlighted(_ highlighted: Bool, animated: Bool) {
+        let transform: CGAffineTransform = highlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
+        UIView.animate(withDuration: 0.25) {
+            self.messageBubbleContainerView.transform = transform
+        }
+    }
         
-    private func panStateBegan() {
+    func panStateBegan() {
         self.isPanLock = true
         self.replyIndicatorView.reset()
         if let data = self.item?.data, data.gx_messageStatus == .send {
@@ -329,7 +347,7 @@ extension GXMessagesBaseCell {
         }
     }
     
-    private func updateSafeCurrentPoint(_ movePoint: CGPoint) {
+    func updateSafeCurrentPoint(_ movePoint: CGPoint) {
         guard abs(movePoint.x) > abs(movePoint.y) else { return }
         
         var moveMaxWidth = GXCHATC.replyIndicatorMoveMaxWidth
@@ -358,7 +376,7 @@ extension GXMessagesBaseCell {
         }
     }
     
-    private func panStateEndAnimation() {
+    func panStateEndAnimation() {
         if self.replyIndicatorView.progress == 1.0 {
             self.delegate?.messagesCell(self, didSwipeAt: self.item)
         }

@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         tv.datalist = self
         tv.backgroundColor = UIColor(hex: 0xEFEFEF)
         tv.separatorStyle = .none
+//        tv.allowsSelection = false
         
         return tv
     }()
@@ -69,6 +70,13 @@ class ViewController: UIViewController {
         self.updateDatas()
         self.tableView.reloadData()
         
+        
+        let right = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.editItemTapped))
+        self.navigationItem.rightBarButtonItem = right
+    }
+    
+    @objc func editItemTapped() {
+        self.tableView.setEditing(true, animated: true)
     }
     
     public func updateDatas() {
@@ -556,7 +564,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        NSLog("cell didSelectRowAt \(indexPath.description)")
     }
     
 }
@@ -617,7 +625,10 @@ extension ViewController: GXMessagesBaseCellDelegate {
             if let currentIndexPath = self.currentReplyIndexPath {
                 self.tableView.scrollToRow(at: currentIndexPath, at: .middle, animated: true)
                 let cell = self.tableView.cellForRow(at: currentIndexPath) as? GXMessagesBaseCell
-                cell?.showChecked()
+                if let letCell = cell {
+                    self.currentReplyIndexPath = nil
+                    letCell.showAutoHighlighted()
+                }
             }
         }
         NSLog("cell didContentTapAt \(String(describing: item?.data.gx_messageType))")
@@ -644,7 +655,7 @@ extension ViewController: UIScrollViewDelegate {
         if let currentIndexPath = self.currentReplyIndexPath {
             self.currentReplyIndexPath = nil
             let cell = self.tableView.cellForRow(at: currentIndexPath) as? GXMessagesBaseCell
-            cell?.showChecked()
+            cell?.showAutoHighlighted()
         }
     }
     

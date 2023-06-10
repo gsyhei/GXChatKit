@@ -174,8 +174,8 @@ public class GXMessagesReplyCell: GXMessagesBaseCell {
         }
     }
     
-    public override func setChecked(_ checked: Bool) {
-        super.setChecked(checked)
+    public override func setBubbleHighlighted(_ checked: Bool) {
+        super.setBubbleHighlighted(checked)
         let color: UIColor = checked ? .clear : GXCHATC.replyBackgroundColor
         self.replyContentView.backgroundColor = color
     }

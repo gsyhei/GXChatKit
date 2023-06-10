@@ -107,8 +107,8 @@ public class GXMessagesMediaCell: GXMessagesBaseCell {
         }
     }
     
-    public override func setChecked(_ checked: Bool) {
-        super.setChecked(checked)
+    public override func setBubbleHighlighted(_ checked: Bool) {
+        super.setBubbleHighlighted(checked)
         self.highlightedView.isHidden = !checked
     }
 

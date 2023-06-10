@@ -98,8 +98,8 @@ public class GXMessagesLocationCell: GXMessagesBaseCell {
         self.mediaImageView.setMaskImage(self.messageBubbleImageView.image, dx: 1.0, dy: 1.0)
     }
 
-    public override func setChecked(_ checked: Bool) {
-        super.setChecked(checked)
+    public override func setBubbleHighlighted(_ checked: Bool) {
+        super.setBubbleHighlighted(checked)
         self.highlightedView.isHidden = !checked
     }
     

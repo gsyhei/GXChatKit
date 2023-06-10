@@ -57,6 +57,15 @@ public extension UIImage {
     static var gx_readCheckDoubleImage: UIImage? {
         return UIImage.gx_bundleAssetImage(name: "check_double")
     }
+    
+    static func gx_checkmarkImage(_ checked: Bool) -> UIImage? {
+        if checked {
+            return UIImage(systemName: "checkmark.circle.fill")
+        }
+        else {
+            return UIImage(systemName: "circle")
+        }
+    }
 
     static func gx_cellPreviewIconImage(type: GXChatConfiguration.MessageMenuType) -> UIImage? {
         switch type {
