@@ -8,7 +8,6 @@ target 'GXChatUIKit' do
   # Pods for GXChatUIKit
 
   pod 'GXMessagesTableView'
-  pod 'Reusable'
   pod 'YYText'
 
 end
@@ -20,7 +19,6 @@ target 'GXChatKitSample' do
   # Pods for GXChatUIKit
 
   pod 'GXMessagesTableView'
-  pod 'Reusable'
   pod 'FPSLabel'
   
 end

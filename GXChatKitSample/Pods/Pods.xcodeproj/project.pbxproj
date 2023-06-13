@@ -76,6 +76,7 @@
 		901CF0FE03645DA89AF1F8FEB20E171D /* GXRefreshBaseFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6510CC205D1A68D422B85A2E12F68A2B /* GXRefreshBaseFooter.swift */; };
 		917C4219AB282CAB1655A7A7BC486703 /* YYTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A3740ABCFD93F611CB7C99D0969FC5 /* YYTextInput.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		945F1FB5BFCB09C42BBA6F3ED4BFBD0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79D324C865D0B168E9A80946C39BA06 /* Foundation.framework */; };
+		96A1FE382A35B6D60084BC8D /* GXMessagesAvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1FE372A35B6D60084BC8D /* GXMessagesAvatarCell.swift */; };
 		96ED3FA2E413C555E980C5BCD1F74081 /* GXMessagesLoadHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D261AB44220B5997FDC4703AD2169E /* GXMessagesLoadHeader.swift */; };
 		97FEBDA7FC83211CF88B6C542E0B687F /* UIView+YYText.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A79C7AED52554BA7D4695A9723BB6F /* UIView+YYText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9825E641B0265B8EF331603AD7F755C4 /* UIApplication+GXAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A5B6C7929B96EF9AE57C55CD00D04 /* UIApplication+GXAdd.swift */; };
@@ -330,6 +331,7 @@
 		911CBD0AE99F25BBEEB517712C7AD136 /* NSAttributedString+YYText.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+YYText.m"; path = "YYText/Utility/NSAttributedString+YYText.m"; sourceTree = "<group>"; };
 		915E2D4595620D61D04DA632129C6EB8 /* GXRefresh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GXRefresh.debug.xcconfig; sourceTree = "<group>"; };
 		9622F1EA938756A399DF4249723590E9 /* GXRefresh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GXRefresh.release.xcconfig; sourceTree = "<group>"; };
+		96A1FE372A35B6D60084BC8D /* GXMessagesAvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GXMessagesAvatarCell.swift; path = GXMessagesTableView/GXMessagesAvatarCell.swift; sourceTree = "<group>"; };
 		99C9B0DEA94A804FCAC661015358C7C8 /* YYTextAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YYTextAttribute.h; path = YYText/String/YYTextAttribute.h; sourceTree = "<group>"; };
 		9A50C1496CE580468BFDD0B0C2379B08 /* YYTextAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYTextAttribute.m; path = YYText/String/YYTextAttribute.m; sourceTree = "<group>"; };
 		9C68A687791E76D9A9AD125E91AEED9D /* Pods-GXChatKitSample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GXChatKitSample-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 		355F683EC3B7B5AEFD7CE0AC542075F5 /* GXMessagesTableView */ = {
 			isa = PBXGroup;
 			children = (
+				96A1FE372A35B6D60084BC8D /* GXMessagesAvatarCell.swift */,
 				DD37EA4339A2F21FDFD1E27C15257B2D /* GXMessagesAvatarProtocol.swift */,
 				11D261AB44220B5997FDC4703AD2169E /* GXMessagesLoadHeader.swift */,
 				EC86BE31F0ABF57527BF84BE51A23FD0 /* GXMessagesLoadTableView.swift */,
@@ -1285,6 +1288,7 @@
 				211403B518F293E38F74A7C4DB09A65C /* GXMessagesLoadTableView.swift in Sources */,
 				1F1F6785EC903DF19427814D862656F8 /* GXMessagesTableView.swift in Sources */,
 				8F63952890FAF0917ED96F21CB4A06EB /* GXMessagesTableView-dummy.m in Sources */,
+				96A1FE382A35B6D60084BC8D /* GXMessagesAvatarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
