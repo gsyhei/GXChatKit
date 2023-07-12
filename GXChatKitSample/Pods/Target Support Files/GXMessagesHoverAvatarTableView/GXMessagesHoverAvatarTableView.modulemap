@@ -1,0 +1,6 @@
+framework module GXMessagesHoverAvatarTableView {
+  umbrella header "GXMessagesHoverAvatarTableView-umbrella.h"
+
+  export *
+  module * { export * }
+}

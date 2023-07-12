@@ -1,6 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/GXCategories/GXCategories.framework
-${BUILT_PRODUCTS_DIR}/GXMessagesTableView/GXMessagesTableView.framework
+${BUILT_PRODUCTS_DIR}/GXMessagesHoverAvatarTableView/GXMessagesHoverAvatarTableView.framework
 ${BUILT_PRODUCTS_DIR}/GXRefresh/GXRefresh.framework
 ${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework
 ${BUILT_PRODUCTS_DIR}/FPSLabel/FPSLabel.framework

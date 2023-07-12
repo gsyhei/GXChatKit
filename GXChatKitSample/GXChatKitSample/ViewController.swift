@@ -2,7 +2,7 @@
 
 import UIKit
 import Reusable
-import GXMessagesTableView
+import GXMessagesHoverAvatarTableView
 import GXChatUIKit
 import AVFoundation
 import CoreLocation
@@ -20,8 +20,8 @@ class ViewController: UIViewController {
         return animationDelegate
     }()
     
-    private lazy var tableView: GXMessagesTableView = {
-        let tv = GXMessagesTableView(frame: self.view.bounds, style: .plain)
+    private lazy var tableView: GXMessagesHoverAvatarTableView = {
+        let tv = GXMessagesHoverAvatarTableView(frame: self.view.bounds, style: .plain)
         tv.dataSource = self
         tv.delegate = self
         tv.datalist = self
@@ -469,7 +469,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesTableViewDatalist {
+extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessagesHoverAvatarTableViewDatalist {
     
     func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataProtocol {
         return self.list[indexPath.section].items[indexPath.row].data
@@ -584,7 +584,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, GXMessages
     }
     
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-        NSLog("cell didEndEditingRowAt \(indexPath?.description)")
+        NSLog("cell didEndEditingRowAt \(indexPath?.description ?? "")")
     }
     
 }

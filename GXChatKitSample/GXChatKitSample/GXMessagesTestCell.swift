@@ -7,9 +7,9 @@
 
 import UIKit
 import Reusable
-import GXMessagesTableView
+import GXMessagesHoverAvatarTableView
 
-class GXMessagesTestCell: GXMessagesAvatarCellProtocol, Reusable {
+class GXMessagesTestCell: GXMessagesAvatarCellProtocol {
     
     public var avatar: UIView {
         return self.avatarButton

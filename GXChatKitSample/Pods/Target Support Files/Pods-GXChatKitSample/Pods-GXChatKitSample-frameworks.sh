@@ -177,7 +177,7 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GXCategories/GXCategories.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/GXMessagesTableView/GXMessagesTableView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/GXMessagesHoverAvatarTableView/GXMessagesHoverAvatarTableView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GXRefresh/GXRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FPSLabel/FPSLabel.framework"
@@ -185,7 +185,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GXCategories/GXCategories.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/GXMessagesTableView/GXMessagesTableView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/GXMessagesHoverAvatarTableView/GXMessagesHoverAvatarTableView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GXRefresh/GXRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FPSLabel/FPSLabel.framework"

@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 public class GXUtilManager: NSObject {    
     /// 倒计时
@@ -53,8 +54,8 @@ public class GXUtilManager: NSObject {
     ///   - height: 缩放高度最大值
     ///   - completion: 结果回调
     public class func gx_cutAudioTrackList(asset: AVAsset, count: Int, height: CGFloat, completion: @escaping (([Int]) -> Void)) {
-        DispatchQueue.global(qos: .background).async {
-            GXUtilManager.gx_assetTrack(asset: asset) { track in
+        GXUtilManager.gx_assetTrack(asset: asset) { track in
+            DispatchQueue.global(qos: .default).async {
                 GXUtilManager.gx_recorderData(asset: asset, assetTrack: track, completion: { data in
                     let audioList = GXUtilManager.gx_filterAudioData(count: count, height: height, audioData: data)
                     DispatchQueue.main.async {
@@ -110,29 +111,30 @@ private extension GXUtilManager {
     class func gx_filterAudioData(count: Int, height: CGFloat, audioData: Data?) -> [Int] {
         guard let data = audioData else { return [] }
         
-        let sampleCount: Int = Int(data.count / MemoryLayout<Int16>.size)
-        let binSize: Int = sampleCount / count
-        let bytes = data.bytes
-        var maxSample: Int = 0
-        let length = sampleCount / binSize
         var filteredSamplesMA: [Int] = []
-        for index in 0..<length {
-            let i = index * binSize
-            let sampleBin = UnsafeMutablePointer<UInt16>.allocate(capacity: binSize)
-            for j in 0..<binSize {
-                sampleBin[j] = CFSwapInt16LittleToHost(UInt16(bytes[i + j]))
+        data.withUnsafeBytes({ (rawBufferPointer: UnsafeRawBufferPointer) -> Void in
+            let samples = rawBufferPointer.bindMemory(to: UInt16.self)
+            let sampleCount: Int = Int(data.count / MemoryLayout<Int16>.size)
+            let binSize: Int = sampleCount / count
+            var maxSample: Int = 0
+            let length = sampleCount / binSize
+            for index in 0..<length {
+                let i = index * binSize
+                let sampleBin = UnsafeMutablePointer<UInt16>.allocate(capacity: binSize)
+                for j in 0..<binSize {
+                    sampleBin[j] = CFSwapInt16LittleToHost(UInt16(samples[i + j]))
+                }
+                let value = GXUtilManager.gx_maxValueInArray(values: sampleBin, size: binSize)
+                filteredSamplesMA.append(Int(value))
+                maxSample = max(maxSample, value)
             }
-            let value = GXUtilManager.gx_maxValueInArray(values: sampleBin, size: binSize)
-            filteredSamplesMA.append(Int(value))
-            maxSample = max(maxSample, value)
-        }
-        let scaleFactor = height / CGFloat(maxSample)
-        for index in 0..<filteredSamplesMA.count {
-            filteredSamplesMA[index] = Int(CGFloat(filteredSamplesMA[index]) * scaleFactor)
-        }
-        NSLog("filteredSamplesMA count = \(filteredSamplesMA.count), %@", filteredSamplesMA.description)
-        
-        return filteredSamplesMA;
+            let scaleFactor = height / CGFloat(maxSample)
+            for index in 0..<filteredSamplesMA.count {
+                filteredSamplesMA[index] = Int(CGFloat(filteredSamplesMA[index]) * scaleFactor)
+            }
+            NSLog("filteredSamplesMA count = \(filteredSamplesMA.count), %@", filteredSamplesMA.description)
+        })
+        return filteredSamplesMA
     }
     
     class func gx_recorderData(asset: AVAsset, assetTrack: AVAssetTrack?, completion: @escaping ((Data?) -> Void)) {
@@ -150,15 +152,13 @@ private extension GXUtilManager {
         reader.startReading()
         var data = Data()
         while (reader.status == .reading) {
-            autoreleasepool {
-                if let sampleBuffer = output.copyNextSampleBuffer(),
-                   let blockBUfferRef = CMSampleBufferGetDataBuffer(sampleBuffer) {
-                    let length = CMBlockBufferGetDataLength(blockBUfferRef)
-                    let sampleBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
-                    CMBlockBufferCopyDataBytes(blockBUfferRef, atOffset: 0, dataLength: length, destination: sampleBytes)
-                    data.append(sampleBytes, count: length)
-                    CMSampleBufferInvalidate(sampleBuffer)
-                }
+            if let sampleBuffer = output.copyNextSampleBuffer(), let blockBUfferRef = CMSampleBufferGetDataBuffer(sampleBuffer) {
+                let length = CMBlockBufferGetDataLength(blockBUfferRef)
+                let sampleBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
+                CMBlockBufferCopyDataBytes(blockBUfferRef, atOffset: 0, dataLength: length, destination: sampleBytes)
+                data.append(sampleBytes, count: length)
+                CMSampleBufferInvalidate(sampleBuffer)
+                free(sampleBytes)
             }
         }
         if (reader.status == .completed) {
@@ -190,9 +190,11 @@ private extension GXUtilManager {
         var maxValue: Int = 0
         for index in 0..<length {
             let value = values[index * minSize]
-            maxValue += Int(value)
+            if abs(maxValue) < value {
+                maxValue = Int(value)
+            }
         }
-        return maxValue / length
+        return maxValue
     }
     
 }

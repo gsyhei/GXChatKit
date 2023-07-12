@@ -183,10 +183,10 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         let asset = AVAsset(url: fileUrl)
         GXUtilManager.gx_cutAudioTrackList(asset: asset, count: content.trackCount, height: GXCHATC.audioTrackMaxVakue) {[weak self] tracks in
             guard let `self` = self else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//            DispatchQueue.main.asyncAfter(deadline: .now()) {
                 self.gx_updateTrackView(tracks: tracks)
                 self.gx_downloadAudio(isLoading: false)
-            }
+//            }
         }
     }
     

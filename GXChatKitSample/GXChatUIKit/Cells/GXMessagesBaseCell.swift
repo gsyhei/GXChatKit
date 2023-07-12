@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import Reusable
-import GXMessagesTableView
+import GXMessagesHoverAvatarTableView
 
-open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying {
+open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, NSCopying {
     public func copy(with zone: NSZone? = nil) -> Any {
         let cell = type(of: self).init(frame: self.frame)
         if let nonullItem = self.item {
@@ -267,7 +266,7 @@ extension GXMessagesBaseCell {
             if abs(translation.y) > abs(translation.x) {
                 return false
             }
-            if let table = self.superview as? GXMessagesTableView {
+            if let table = self.superview as? GXMessagesHoverAvatarTableView {
                 return !table.isDecelerating
             }
         }
@@ -333,7 +332,7 @@ private extension GXMessagesBaseCell {
         }
         self.contentView.addSubview(self.replyIndicatorView)
 
-        if let table = self.superview as? GXMessagesTableView {
+        if let table = self.superview as? GXMessagesHoverAvatarTableView {
             if let indexPath = table.indexPath(for: self) {
                 if indexPath == table.avatarToCellIndexPath {
                     self.hoverAvatar = table.hoverToCellAvatar

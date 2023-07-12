@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GXMessagesTableView
+import GXMessagesHoverAvatarTableView
 
 public protocol GXMessagesDataDelegate: GXMessagesAvatarDataProtocol  {
     /// 消息唯一ID

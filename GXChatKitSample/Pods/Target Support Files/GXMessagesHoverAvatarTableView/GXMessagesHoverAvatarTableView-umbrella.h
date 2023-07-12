@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double GXMessagesTableViewVersionNumber;
-FOUNDATION_EXPORT const unsigned char GXMessagesTableViewVersionString[];
+FOUNDATION_EXPORT double GXMessagesHoverAvatarTableViewVersionNumber;
+FOUNDATION_EXPORT const unsigned char GXMessagesHoverAvatarTableViewVersionString[];
 
