@@ -290,7 +290,7 @@ public class GXMessagesCellPreviewCell: UITableViewCell, Reusable {
     public override func setSelected(_ selected: Bool, animated: Bool) {
         let oldSelected = self.isSelected
         super.setSelected(selected, animated: animated)
-        if oldSelected != selected {
+        if selected && oldSelected != selected {
             self.generator.impactOccurred()
         }
     }
