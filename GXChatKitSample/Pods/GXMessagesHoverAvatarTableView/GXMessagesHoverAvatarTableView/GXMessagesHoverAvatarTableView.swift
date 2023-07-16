@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Reusable
 
 public protocol GXMessagesHoverAvatarTableViewDatalist: NSObjectProtocol {
     func gx_tableView(_ tableView: UITableView, avatarDataForRowAt indexPath: IndexPath) -> GXMessagesAvatarDataProtocol
@@ -14,11 +13,7 @@ public protocol GXMessagesHoverAvatarTableViewDatalist: NSObjectProtocol {
 }
 
 public class GXMessagesHoverAvatarTableView: GXMessagesLoadTableView {
-    public static let GXEditNotification: NSNotification.Name = NSNotification.Name(rawValue: "audioPlayNotification")
-    public static let GXEditIsEditingKey: String = "GXEditIsEditingKey"
-    public static let GXEditIsAnimatedKey: String = "GXEditIsAnimatedKey"
-    public static let GXEditAnimateDuration: TimeInterval = 0.3
-    
+    // MARK: - hoverAvatar
     public weak var datalist: GXMessagesHoverAvatarTableViewDatalist?
     public var topDifference: CGFloat = 5.0
     public var avatarToCellIndexPath: IndexPath? {
@@ -35,8 +30,15 @@ public class GXMessagesHoverAvatarTableView: GXMessagesLoadTableView {
     private var hoverAvatarIndexPath: IndexPath?
     private var lastHiddenIndexPath: IndexPath?
     
-    private var gx_isEditing: Bool = false
+    // MARK: - editing
+    public static let GXEditNotification: NSNotification.Name = NSNotification.Name(rawValue: "audioPlayNotification")
+    public static let GXEditIsEditingKey: String = "GXEditIsEditingKey"
+    public static let GXEditIsAnimatedKey: String = "GXEditIsAnimatedKey"
+    public static let GXEditViewWidth: CGFloat = 44.0
+    public static let GXEditAnimateDuration: TimeInterval = 0.3
+    open var gx_isEditing: Bool = false
     private var gx_editingAnimated: Bool = false
+
 
     public override init(frame: CGRect, style: UITableView.Style) {
         super .init(frame: frame, style: style)
@@ -57,22 +59,38 @@ public class GXMessagesHoverAvatarTableView: GXMessagesLoadTableView {
         }
     }
     
+    public override func dequeueReusableCell(withIdentifier identifier: String) -> UITableViewCell? {
+        let cell = super.dequeueReusableCell(withIdentifier: identifier)
+        if let avatarCell = cell as? GXMessagesAvatarCellProtocol {
+            avatarCell.gx_isEditing = self.gx_isEditing
+        }
+        return cell
+    }
+    
+    public override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        if let avatarCell = cell as? GXMessagesAvatarCellProtocol {
+            avatarCell.gx_isEditing = self.gx_isEditing
+        }
+        return cell
+    }
+    
     public func gx_setEditing(_ editing: Bool, animated: Bool) {
         self.gx_isEditing = editing
+        if !editing && (self.indexPathsForSelectedRows?.count ?? 0) > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now()+GXMessagesHoverAvatarTableView.GXEditAnimateDuration) {
+                self.allowsMultipleSelection = editing
+                self.deselectAll(animated: false)
+            }
+        } else {
+            self.allowsMultipleSelection = editing
+            self.deselectAll(animated: false)
+        }
         let notificationObject = [GXMessagesHoverAvatarTableView.GXEditIsEditingKey: editing, GXMessagesHoverAvatarTableView.GXEditIsAnimatedKey: animated]
         NotificationCenter.default.post(name: GXMessagesHoverAvatarTableView.GXEditNotification, object: notificationObject)
         self.gx_editingAnimated = animated
         self.gx_changeContentOffset(self.contentOffset)
         self.gx_editingAnimated = false
-    }
-    
-    public func gx_dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath, cellType: T.Type = T.self) -> T
-      where T: Reusable {
-        let cell = self.dequeueReusableCell(for: indexPath, cellType: cellType)
-          if let avatarCell = cell as? GXMessagesAvatarCellProtocol {
-              avatarCell.gx_setEditing(self.gx_isEditing, animated: false)
-          }
-        return cell
     }
     
     public func gx_scrollBeginDragging() {
@@ -135,7 +153,7 @@ private extension GXMessagesHoverAvatarTableView {
         
         let preEndAvatarData = self.datalist?.gx_tableView(self, avatarDataForRowAt: preEndIndexPath)
         if preEndAvatarData?.gx_continuousEnd ?? false {
-            preEndCell.avatar.isHidden = false
+            preEndCell.gx_avatar.isHidden = false
         }
     }
     
@@ -144,10 +162,10 @@ private extension GXMessagesHoverAvatarTableView {
         
         let avatar = self.gx_dequeueReusableAvatar(cell)
         self.datalist?.gx_tableView(self, changeForRowAt: indexPath, avatar: avatar)
-        let avatarHeight = cell.height - cell.avatar.top
-        let avatarLeft = cell.avatar.left + cell.left + cell.contentView.left
+        let avatarHeight = cell.height - cell.gx_avatar.top
+        let avatarLeft = cell.gx_avatar.left + cell.left + cell.contentView.left
         let avatarOrigin = CGPoint(x: avatarLeft, y: cell.bottom - avatarHeight)
-        avatar.frame = CGRect(origin: avatarOrigin, size: cell.avatar.size)
+        avatar.frame = CGRect(origin: avatarOrigin, size: cell.gx_avatar.size)
         self.addSubview(avatar)
         self.hoverAvatarData = data
         self.hoverAvatar = avatar
@@ -156,14 +174,14 @@ private extension GXMessagesHoverAvatarTableView {
     
     func gx_setPointLastHoverAvatar(cell: GXMessagesAvatarCellProtocol, indexPath: IndexPath, data: GXMessagesAvatarDataProtocol) {
         if data.gx_continuousEnd {
-            cell.avatar.isHidden = true
+            cell.gx_avatar.isHidden = true
             self.lastHiddenIndexPath = indexPath
         }
         
         guard let avatar = self.hoverAvatar else { return }
-        let avatarLeft = cell.avatar.left + cell.left + cell.contentView.left
+        let avatarLeft = cell.gx_avatar.left + cell.left + cell.contentView.left
         if avatarLeft != avatar.left {
-            if self.gx_isEditing {
+            if self.gx_editingAnimated {
                 UIView.animate(withDuration: GXMessagesHoverAvatarTableView.GXEditAnimateDuration) {
                     avatar.left = avatarLeft
                 }
@@ -171,7 +189,7 @@ private extension GXMessagesHoverAvatarTableView {
                 avatar.left = avatarLeft
             }
         }
-        let avatarHeight = cell.height - cell.avatar.top + self.topDifference
+        let avatarHeight = cell.height - cell.gx_avatar.top + self.topDifference
         let cellRect = self.rectForRow(at: indexPath)
         let cellTop = cellRect.minY - self.contentOffset.y
         let cellBottom = cellRect.maxY - self.contentOffset.y
@@ -210,7 +228,7 @@ private extension GXMessagesHoverAvatarTableView {
             self.reusableAvatars.removeFirst()
             return avatar
         }
-        return cell.createAvatarView()
+        return cell.gx_createAvatarView()
     }
     
     func gx_scrollHeaderAnimate(header: UIView?, hidden: Bool) {

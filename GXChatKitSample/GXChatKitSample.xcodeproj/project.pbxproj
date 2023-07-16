@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F0C3FE9B864F211F30B6AC6 /* Pods_GXChatKitSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */; };
+		5C78949696D5ACAEE85D70BD /* Pods_GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4BBFFF75ABF747329177DF /* Pods_GXChatUIKit.framework */; };
 		96198E5E29BAD7AC005C42A2 /* GXDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96198E5D29BAD7AC005C42A2 /* GXDefine.swift */; };
 		96198E6029BD31C1005C42A2 /* GXMessagesMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */; };
 		96198E6229BD5781005C42A2 /* GXTestTextData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96198E6129BD5781005C42A2 /* GXTestTextData.swift */; };
 		9623D81F29B983B300BE0BFB /* GXMessagesTestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623D81E29B983B300BE0BFB /* GXMessagesTestCell.swift */; };
-		9639158D2962796F002974F7 /* Pods_GXChatUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */; };
 		963E75C829DCC9BD00A6D9C6 /* GXMessagesCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75C729DCC9BD00A6D9C6 /* GXMessagesCardContent.swift */; };
 		963E75CA29DCCDC300A6D9C6 /* GXMessagesCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75C929DCCDC300A6D9C6 /* GXMessagesCardLayout.swift */; };
 		963E75CC29DCDC4500A6D9C6 /* GXMessagesCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963E75CB29DCDC4500A6D9C6 /* GXMessagesCardCell.swift */; };
@@ -96,6 +95,7 @@
 		96E5D43C29C571D9005AB5C9 /* voicexinwen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96E5D43B29C571D9005AB5C9 /* voicexinwen.mp3 */; };
 		96F92C9029C41C70009E30F4 /* GXMessagesAudioContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F92C8F29C41C70009E30F4 /* GXMessagesAudioContent.swift */; };
 		96F92C9229C443D0009E30F4 /* GXMessagesAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F92C9129C443D0009E30F4 /* GXMessagesAudioCell.swift */; };
+		C3DDE3DB092DB1713D34F09A /* Pods_GXChatKitSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FBDE6AC1D273E35F96BE75D /* Pods_GXChatKitSample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,13 +151,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0A6D5F89763373089D9C1E97 /* Pods_GXMessagesTableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXMessagesTableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C4DFB93AB4668590E470782 /* Pods-GXMessagesTableView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXMessagesTableView.debug.xcconfig"; path = "Target Support Files/Pods-GXMessagesTableView/Pods-GXMessagesTableView.debug.xcconfig"; sourceTree = "<group>"; };
-		3FAEEC3E597AFF18CABE4A46 /* Pods-GXMessagesTableView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXMessagesTableView.release.xcconfig"; path = "Target Support Files/Pods-GXMessagesTableView/Pods-GXMessagesTableView.release.xcconfig"; sourceTree = "<group>"; };
-		62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.release.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.release.xcconfig"; sourceTree = "<group>"; };
-		6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.debug.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.debug.xcconfig"; sourceTree = "<group>"; };
-		7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatKitSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E1391BE07E11398B920985C /* Pods-GXChatKitSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.debug.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.debug.xcconfig"; sourceTree = "<group>"; };
+		48A196AE205DD5BFD9D0B455 /* Pods-GXChatUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.release.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.release.xcconfig"; sourceTree = "<group>"; };
+		5FBDE6AC1D273E35F96BE75D /* Pods_GXChatKitSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatKitSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96198E5D29BAD7AC005C42A2 /* GXDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GXDefine.swift; sourceTree = "<group>"; };
 		96198E5F29BD31C1005C42A2 /* GXMessagesMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesMediaCell.swift; sourceTree = "<group>"; };
 		96198E6129BD5781005C42A2 /* GXTestTextData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXTestTextData.swift; sourceTree = "<group>"; };
@@ -249,8 +245,9 @@
 		96E5D43B29C571D9005AB5C9 /* voicexinwen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicexinwen.mp3; sourceTree = "<group>"; };
 		96F92C8F29C41C70009E30F4 /* GXMessagesAudioContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioContent.swift; sourceTree = "<group>"; };
 		96F92C9129C443D0009E30F4 /* GXMessagesAudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GXMessagesAudioCell.swift; sourceTree = "<group>"; };
-		B9131207F5A8F7E5B5C652D9 /* Pods-GXChatKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.release.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.release.xcconfig"; sourceTree = "<group>"; };
-		ED6FFD8355B3816675448810 /* Pods-GXChatKitSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.debug.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.debug.xcconfig"; sourceTree = "<group>"; };
+		BA4BBFFF75ABF747329177DF /* Pods_GXChatUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GXChatUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F15612B0724F48549F92D3E8 /* Pods-GXChatUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatUIKit.debug.xcconfig"; path = "Target Support Files/Pods-GXChatUIKit/Pods-GXChatUIKit.debug.xcconfig"; sourceTree = "<group>"; };
+		FD6C6F0AB63E873FBC20F9ED /* Pods-GXChatKitSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GXChatKitSample.release.xcconfig"; path = "Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,7 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96D30AE62956F5EE00AFBB90 /* GXChatUIKit.framework in Frameworks */,
-				3F0C3FE9B864F211F30B6AC6 /* Pods_GXChatKitSample.framework in Frameworks */,
+				C3DDE3DB092DB1713D34F09A /* Pods_GXChatKitSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9639158D2962796F002974F7 /* Pods_GXChatUIKit.framework in Frameworks */,
+				5C78949696D5ACAEE85D70BD /* Pods_GXChatUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +440,7 @@
 				96D30AE02956F5EE00AFBB90 /* GXChatUIKitTests */,
 				96D30A8E2956F4F000AFBB90 /* Products */,
 				BD056F6E9D9E8EC329DB42AC /* Pods */,
-				A75D028A4BDE053BE82C2036 /* Frameworks */,
+				B895617F1AD75E66CEBEDA9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -539,12 +536,11 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		A75D028A4BDE053BE82C2036 /* Frameworks */ = {
+		B895617F1AD75E66CEBEDA9B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0A8628E22BB9F4121D8D3B27 /* Pods_GXChatUIKit.framework */,
-				7A270D126ED81AC0AD384808 /* Pods_GXChatKitSample.framework */,
-				0A6D5F89763373089D9C1E97 /* Pods_GXMessagesTableView.framework */,
+				5FBDE6AC1D273E35F96BE75D /* Pods_GXChatKitSample.framework */,
+				BA4BBFFF75ABF747329177DF /* Pods_GXChatUIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -552,12 +548,10 @@
 		BD056F6E9D9E8EC329DB42AC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */,
-				62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */,
-				ED6FFD8355B3816675448810 /* Pods-GXChatKitSample.debug.xcconfig */,
-				B9131207F5A8F7E5B5C652D9 /* Pods-GXChatKitSample.release.xcconfig */,
-				0C4DFB93AB4668590E470782 /* Pods-GXMessagesTableView.debug.xcconfig */,
-				3FAEEC3E597AFF18CABE4A46 /* Pods-GXMessagesTableView.release.xcconfig */,
+				3E1391BE07E11398B920985C /* Pods-GXChatKitSample.debug.xcconfig */,
+				FD6C6F0AB63E873FBC20F9ED /* Pods-GXChatKitSample.release.xcconfig */,
+				F15612B0724F48549F92D3E8 /* Pods-GXChatUIKit.debug.xcconfig */,
+				48A196AE205DD5BFD9D0B455 /* Pods-GXChatUIKit.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -579,12 +573,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96D30AB72956F4F200AFBB90 /* Build configuration list for PBXNativeTarget "GXChatKitSample" */;
 			buildPhases = (
-				183E1CE8D365A3E65AD7488F /* [CP] Check Pods Manifest.lock */,
+				51D8E9449F73B0324571E5D5 /* [CP] Check Pods Manifest.lock */,
 				96D30A892956F4F000AFBB90 /* Sources */,
 				96D30A8A2956F4F000AFBB90 /* Frameworks */,
 				96D30A8B2956F4F000AFBB90 /* Resources */,
 				96D30AEB2956F5EE00AFBB90 /* Embed Frameworks */,
-				96369031A167697B24086098 /* [CP] Embed Pods Frameworks */,
+				9298CDB7D68110E0088D7CB1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -636,7 +630,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96D30AE82956F5EE00AFBB90 /* Build configuration list for PBXNativeTarget "GXChatUIKit" */;
 			buildPhases = (
-				5B6962795790C31A11D988D7 /* [CP] Check Pods Manifest.lock */,
+				F04DAD7DD9BFA22A018CCA4E /* [CP] Check Pods Manifest.lock */,
 				96D30ACC2956F5ED00AFBB90 /* Headers */,
 				96D30ACD2956F5ED00AFBB90 /* Sources */,
 				96D30ACE2956F5ED00AFBB90 /* Frameworks */,
@@ -771,7 +765,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		183E1CE8D365A3E65AD7488F /* [CP] Check Pods Manifest.lock */ = {
+		51D8E9449F73B0324571E5D5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -793,7 +787,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5B6962795790C31A11D988D7 /* [CP] Check Pods Manifest.lock */ = {
+		9298CDB7D68110E0088D7CB1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F04DAD7DD9BFA22A018CCA4E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -813,23 +824,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		96369031A167697B24086098 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GXChatKitSample/Pods-GXChatKitSample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1111,7 +1105,7 @@
 		};
 		96D30AB82956F4F200AFBB90 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED6FFD8355B3816675448810 /* Pods-GXChatKitSample.debug.xcconfig */;
+			baseConfigurationReference = 3E1391BE07E11398B920985C /* Pods-GXChatKitSample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1142,7 +1136,7 @@
 		};
 		96D30AB92956F4F200AFBB90 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9131207F5A8F7E5B5C652D9 /* Pods-GXChatKitSample.release.xcconfig */;
+			baseConfigurationReference = FD6C6F0AB63E873FBC20F9ED /* Pods-GXChatKitSample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1249,7 +1243,7 @@
 		};
 		96D30AE92956F5EE00AFBB90 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D1AEAD9A0A58EE23AE8E3E0 /* Pods-GXChatUIKit.debug.xcconfig */;
+			baseConfigurationReference = F15612B0724F48549F92D3E8 /* Pods-GXChatUIKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -1285,7 +1279,7 @@
 		};
 		96D30AEA2956F5EE00AFBB90 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62F2C3A8FB2787DE880BE76A /* Pods-GXChatUIKit.release.xcconfig */;
+			baseConfigurationReference = 48A196AE205DD5BFD9D0B455 /* Pods-GXChatUIKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;

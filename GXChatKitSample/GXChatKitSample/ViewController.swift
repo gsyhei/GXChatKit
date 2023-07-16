@@ -27,8 +27,6 @@ class ViewController: UIViewController {
         tv.datalist = self
         tv.backgroundColor = UIColor(hex: 0xEFEFEF)
         tv.separatorStyle = .none
-//        tv.allowsSelection = false
-        tv.allowsSelectionDuringEditing = true
         
         return tv
     }()
@@ -77,12 +75,12 @@ class ViewController: UIViewController {
     }
     
     @objc func editItemTapped() {
-        if self.tableView.isEditing {
-            self.tableView.setEditing(false, animated: true)
+        if self.tableView.gx_isEditing {
+            self.tableView.gx_setEditing(false, animated: true)
             self.navigationItem.rightBarButtonItem?.title = "Edit"
         }
         else {
-            self.tableView.setEditing(true, animated: true)
+            self.tableView.gx_setEditing(true, animated: true)
             self.navigationItem.rightBarButtonItem?.title = "Cancel"
         }
     }

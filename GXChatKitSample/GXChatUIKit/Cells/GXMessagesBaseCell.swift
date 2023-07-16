@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Reusable
 import GXMessagesHoverAvatarTableView
 
-open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, NSCopying {
+open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying {
     public func copy(with zone: NSZone? = nil) -> Any {
         let cell = type(of: self).init(frame: self.frame)
         if let nonullItem = self.item {
@@ -95,11 +96,11 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, NSCopying {
 
     //MARK: - GXMessagesAvatarCellProtocol
     
-    public var avatar: UIView {
+    public var gx_avatar: UIView {
         return self.messageAvatarButton
     }
     
-    public func createAvatarView() -> UIView {
+    public func gx_createAvatarView() -> UIView {
         let button = UIButton(type: .custom)
         button.backgroundColor = .clear
 
@@ -123,6 +124,29 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, NSCopying {
         super.setHighlighted(highlighted, animated: animated)
         self.updateHighlighted(highlighted, animated: animated)
     }
+
+    open override func gx_setEditing(_ editing: Bool, animated: Bool) {
+        super.gx_setEditing(editing, animated: animated)
+        self.contentView.isUserInteractionEnabled = !editing
+        guard self.item?.data.gx_messageStatus == .receive else { return }
+        
+        var avatarViewFrame = self.item?.layout.avatarRect ?? CGRectZero
+        var contentViewFrame = self.item?.layout.containerRect ?? CGRectZero
+        if editing {
+            avatarViewFrame.origin.x += GXMessagesHoverAvatarTableView.GXEditViewWidth
+            contentViewFrame.origin.x += GXMessagesHoverAvatarTableView.GXEditViewWidth
+        }
+        if animated {
+            UIView.animate(withDuration: GXMessagesHoverAvatarTableView.GXEditAnimateDuration) {
+                self.messageAvatarButton.frame = avatarViewFrame
+                self.messageBubbleContainerView.frame = contentViewFrame
+            }
+        }
+        else {
+            self.messageAvatarButton.frame = avatarViewFrame
+            self.messageBubbleContainerView.frame = contentViewFrame
+        }
+    }
     
     open override func prepareForReuse() {
         super.prepareForReuse()
@@ -139,10 +163,6 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, NSCopying {
     public func createSubviews() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
-        let imageView = UIImageView(image: UIImage.gx_checkmarkImage(false))
-        imageView.frame = CGRect(x: -40, y: 0, width: 40, height: 40)
-        imageView.tintColor = .systemBlue
-        self.contentView.addSubview(imageView)
 
         self.contentView.backgroundColor = .clear
         self.contentView.addSubview(self.messageAvatarButton)
@@ -170,6 +190,12 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, NSCopying {
     public func bindCell(item: GXMessagesItemData) {
         self.item = item
         
+        var avatarViewFrame = item.layout.avatarRect
+        var contentViewFrame = item.layout.containerRect
+        if self.gx_isEditing {
+            avatarViewFrame.origin.x += GXMessagesHoverAvatarTableView.GXEditViewWidth
+            contentViewFrame.origin.x += GXMessagesHoverAvatarTableView.GXEditViewWidth
+        }
         if item.data.gx_messageType == .redPacket {
             self.bubble = GXMessagesBubbleFactory.messagesRedPacketBubble(status: item.data.gx_messageStatus)
         }
@@ -188,11 +214,11 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, NSCopying {
             self.messageBubbleImageView.image = self.bubble?.messageOngoingBubbleImage
             self.messageBubbleImageView.highlightedImage = self.bubble?.messageOngoingBubbleHighlightedImage
         }
-        self.messageBubbleContainerView.frame = item.layout.containerRect
+        self.messageBubbleContainerView.frame = contentViewFrame
         
         if item.data.gx_isShowAvatar {
             self.messageAvatarButton.isHidden = false
-            self.messageAvatarButton.frame = item.layout.avatarRect
+            self.messageAvatarButton.frame = avatarViewFrame
             if item.avatar?.avatarImage == nil {
                 self.messageAvatarButton.setImage(item.avatar?.avatarPlaceholderImage, for: .normal)
             }
@@ -257,18 +283,9 @@ extension GXMessagesBaseCell {
     }
     
     open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let pan = gestureRecognizer as? UIPanGestureRecognizer {
+        if gestureRecognizer is UIPanGestureRecognizer {
+            if self.isEditing { return true }
             guard self.item?.data.gx_messageSendStatus != .failure else { return false }
-            if self.isEditing {
-                return false
-            }
-            let translation = pan.translation(in: pan.view)
-            if abs(translation.y) > abs(translation.x) {
-                return false
-            }
-            if let table = self.superview as? GXMessagesHoverAvatarTableView {
-                return !table.isDecelerating
-            }
         }
         return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
@@ -293,7 +310,12 @@ private extension GXMessagesBaseCell {
     
     @objc func panGestureRecognizer(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard !self.isEditing else { return }
-
+        if let table = self.superview as? GXMessagesHoverAvatarTableView {
+            if table.isDecelerating || table.isDecelerating || table.isDragging {
+                return
+            }
+        }
+        
         switch gestureRecognizer.state {
         case .began:
             self.panStateBegan()

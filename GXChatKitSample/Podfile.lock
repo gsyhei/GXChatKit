@@ -1,10 +1,9 @@
 PODS:
   - FPSLabel (1.0.1)
   - GXCategories (1.0.8)
-  - GXMessagesHoverAvatarTableView (1.1.1):
+  - GXMessagesHoverAvatarTableView (1.1.6):
     - GXCategories
     - GXRefresh
-    - Reusable
   - GXRefresh (1.1.2)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
@@ -16,10 +15,11 @@ PODS:
 DEPENDENCIES:
   - FPSLabel
   - GXMessagesHoverAvatarTableView
+  - Reusable
   - YYText
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - FPSLabel
     - GXCategories
     - GXMessagesHoverAvatarTableView
@@ -30,11 +30,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   FPSLabel: a6386de76a8fa767102bcb2c18b7c605a3ac3d75
   GXCategories: ae5f99b606e64c88c67e635566d3456a896d837c
-  GXMessagesHoverAvatarTableView: 792be448a97050eeadefa21c8c546dbfd805af37
+  GXMessagesHoverAvatarTableView: c8512cf2de2df0ab82e2a880b68851de044e7988
   GXRefresh: d8c64ca667f1daad0f332cd6066023714fc0da6d
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 8e90fc43c6ee5141c27c71b8173055437c2012ca
+PODFILE CHECKSUM: 92d6a61b9811e58b0b85eecc358bb62fa5804186
 
 COCOAPODS: 1.11.3
