@@ -1,7 +1,7 @@
 PODS:
   - FPSLabel (1.0.1)
   - GXCategories (1.0.8)
-  - GXMessagesHoverAvatarTableView (1.1.6):
+  - GXMessagesHoverAvatarTableView (1.1.7):
     - GXCategories
     - GXRefresh
   - GXRefresh (1.1.2)
@@ -30,7 +30,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   FPSLabel: a6386de76a8fa767102bcb2c18b7c605a3ac3d75
   GXCategories: ae5f99b606e64c88c67e635566d3456a896d837c
-  GXMessagesHoverAvatarTableView: c8512cf2de2df0ab82e2a880b68851de044e7988
+  GXMessagesHoverAvatarTableView: 962afdc3bb8f26a3253a4af626a01953036c3012
   GXRefresh: d8c64ca667f1daad0f332cd6066023714fc0da6d
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
