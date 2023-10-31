@@ -58,7 +58,6 @@ class ViewController: UIViewController {
         self.tableView.register(cellType: GXMessagesReplyCell.self)
         
         self.tableView.register(headerFooterViewType: GXMessagesSectionHeader.self)
-        self.tableView.sectionHeaderHeight = 30.0
         //        self.tableView.addMessagesHeader {[weak self] in
         //            DispatchQueue.main.asyncAfter(deadline:DispatchTime.now() + 2.0) {
         //                self?.updateDatas()
