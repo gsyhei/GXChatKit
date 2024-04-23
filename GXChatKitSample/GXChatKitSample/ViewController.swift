@@ -455,7 +455,7 @@ class ViewController: UIViewController {
         data43.messageStatus = .receive
         data43.messageType = .reply
 
-        data43.messagesContentData = GXMessagesReplyContent(text: text, users: [user1, user2], replyData: data1)
+        data43.messagesContentData = GXMessagesReplyContent(text: text, users: [user1, user2], replyData: data44)
         let item43 = GXMessagesItemData(data: data43)
         item43.updateMessagesAvatar(image: UIImage(named: "avatar2"))
 

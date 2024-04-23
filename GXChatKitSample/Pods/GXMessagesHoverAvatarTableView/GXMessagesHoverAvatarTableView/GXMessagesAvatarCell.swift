@@ -13,6 +13,11 @@ open class GXMessagesAvatarCell: UITableViewCell {
     open lazy var gx_checkmarkIcon: UIImageView = {
         let imageView = UIImageView(image: self.gx_checkmarkImage(false), highlightedImage: self.gx_checkmarkImage(true))
         let left = (GXMessagesHoverAvatarTableView.GXEditViewWidth - 30)/2
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.shadowRadius = 4.0
+        imageView.layer.shadowOpacity = 0.8
+        imageView.layer.shadowOffset = .init(width: 1, height: 1)
+        imageView.layer.shadowColor = UIColor.white.cgColor
         imageView.frame = CGRect(x: left, y: 0, width: 30, height: 30)
         
         return imageView

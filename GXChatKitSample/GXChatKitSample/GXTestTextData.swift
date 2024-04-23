@@ -102,6 +102,7 @@ extension GXMessagesTestData: GXMessagesDataDelegate {
     public var gx_senderId: String {
         return self.avatarID
     }
+
 }
 
 struct GXTestUser {

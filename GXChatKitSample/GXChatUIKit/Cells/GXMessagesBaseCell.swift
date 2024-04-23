@@ -192,7 +192,7 @@ open class GXMessagesBaseCell: GXMessagesAvatarCellProtocol, Reusable, NSCopying
         
         var avatarViewFrame = item.layout.avatarRect
         var contentViewFrame = item.layout.containerRect
-        if self.gx_isEditing {
+        if self.gx_isEditing && self.item?.data.gx_messageStatus == .receive {
             avatarViewFrame.origin.x += GXMessagesHoverAvatarTableView.GXEditViewWidth
             contentViewFrame.origin.x += GXMessagesHoverAvatarTableView.GXEditViewWidth
         }
@@ -301,7 +301,8 @@ private extension GXMessagesBaseCell {
     
     @objc func longPressGestureRecognizer(_ gestureRecognizer: UILongPressGestureRecognizer) {
         guard !self.isEditing else { return }
-
+        guard self.isHighlighted else { return }
+        
         if gestureRecognizer.state == .began {
             self.generator.impactOccurred()
             self.delegate?.messagesCell(self, didLongPressAt: self.item)

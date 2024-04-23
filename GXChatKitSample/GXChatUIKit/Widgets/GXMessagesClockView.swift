@@ -73,7 +73,7 @@ public class GXMessagesClockView: UIView {
         animation.duration = duration
         animation.repeatCount = Float(CGFloat.greatestFiniteMagnitude)
         animation.isRemovedOnCompletion = false
-//        animation.delegate = self
+        animation.delegate = self
         
         return animation
     }
