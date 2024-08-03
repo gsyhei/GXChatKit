@@ -84,9 +84,9 @@ fileprivate extension GXMessagesAudioTrack {
         for index in 0..<count {
             let track = tracks[index]
             let maxTrackHeight = self.height - GXCHATC.audioMinHeight
-            let trackScale = maxTrackHeight / GXCHATC.audioTrackMaxVakue
-            let height = trackScale * CGFloat(track) + GXCHATC.audioMinHeight
-//            let height = CGFloat(track) * maxTrackHeight + GXCHATC.audioMinHeight
+//            let trackScale = maxTrackHeight / GXCHATC.audioTrackMaxVakue
+//            let height = trackScale * CGFloat(track) + GXCHATC.audioMinHeight
+            let height = CGFloat(track) * maxTrackHeight + GXCHATC.audioMinHeight
             let top = (self.height - height) * 0.5
             let width = GXCHATC.audioItemWidth
             let left = CGFloat(index) * (GXCHATC.audioSpacing + width)

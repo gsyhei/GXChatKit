@@ -180,17 +180,24 @@ public class GXMessagesAudioCell: GXMessagesBaseCell {
         guard let fileUrl = content.fileURL else { return }
 
         self.gx_downloadAudio(isLoading: true)
-        let asset = AVAsset(url: fileUrl)
-        GXUtilManager.gx_cutAudioTrackList(asset: asset, count: content.trackCount, height: GXCHATC.audioTrackMaxVakue) {[weak self] tracks in
-            guard let `self` = self else { return }
-//            DispatchQueue.main.asyncAfter(deadline: .now()) {
+        
+        DispatchQueue.global(qos: .default).async {
+            let tracks = GXUtilManager.gx_getSimplifiedWaveform(from: fileUrl, sampleCount: content.trackCount)
+            DispatchQueue.main.async {
                 self.gx_updateTrackView(tracks: tracks)
                 self.gx_downloadAudio(isLoading: false)
-//            }
+            }
         }
+            
+//        let asset = AVAsset(url: fileUrl)
+//        GXUtilManager.gx_cutAudioTrackList(asset: asset, count: content.trackCount, height: GXCHATC.audioTrackMaxVakue) {[weak self] tracks in
+//            guard let `self` = self else { return }
+//            self.gx_updateTrackView(tracks: tracks)
+//            self.gx_downloadAudio(isLoading: false)
+//        }
     }
     
-    public func gx_updateTrackView(tracks: [Int]? = nil) {
+    public func gx_updateTrackView(tracks: [Float]? = nil) {
         guard let content = self.item?.data.gx_messagesContent as? GXMessagesAudioContent else { return }
         if let letTracks = tracks {
             content.tracks = letTracks
