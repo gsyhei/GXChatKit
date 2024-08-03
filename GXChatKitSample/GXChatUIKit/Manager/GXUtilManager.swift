@@ -197,4 +197,69 @@ private extension GXUtilManager {
         return maxValue
     }
     
+    class func gx_getSimplifiedWaveform(from url: URL, sampleCount: Int) -> [Float]? {
+        let asset = AVAsset(url: url)
+        guard let assetTrack = asset.tracks(withMediaType: .audio).first else { return nil }
+        
+        let assetReader: AVAssetReader
+        do {
+            assetReader = try AVAssetReader(asset: asset)
+        } catch {
+            print("Error initializing asset reader: \(error)")
+            return nil
+        }
+        
+        let outputSettings: [String: Any] = [
+            AVFormatIDKey: Int(kAudioFormatLinearPCM),
+            AVSampleRateKey: 44100,
+            AVNumberOfChannelsKey: 1,
+            AVLinearPCMBitDepthKey: 16,
+            AVLinearPCMIsFloatKey: false,
+            AVLinearPCMIsBigEndianKey: false
+        ]
+        
+        let assetReaderOutput = AVAssetReaderTrackOutput(track: assetTrack, outputSettings: outputSettings)
+        assetReader.add(assetReaderOutput)
+        
+        assetReader.startReading()
+        
+        var audioSamples: [Float] = []
+        
+        while let sampleBuffer = assetReaderOutput.copyNextSampleBuffer() {
+            guard let blockBuffer = CMSampleBufferGetDataBuffer(sampleBuffer) else { continue }
+            
+            var lengthAtOffset: Int = 0
+            var totalLength: Int = 0
+            var dataPointer: UnsafeMutablePointer<Int8>?
+            
+            CMBlockBufferGetDataPointer(blockBuffer, atOffset: 0, lengthAtOffsetOut: &lengthAtOffset, totalLengthOut: &totalLength, dataPointerOut: &dataPointer)
+            
+            let sampleCount = totalLength / MemoryLayout<Int16>.size
+            let buffer = UnsafeBufferPointer(start: UnsafePointer<Int16>(OpaquePointer(dataPointer)), count: sampleCount)
+            
+            for sample in buffer {
+                audioSamples.append(Float(sample) / Float(Int16.max))
+            }
+        }
+        
+        guard !audioSamples.isEmpty else { return nil }
+        
+        // 计算采样步长
+        let step = max(audioSamples.count / sampleCount, 1)
+        
+        // 取样并归一化
+        var simplifiedSamples = [Float]()
+        for i in stride(from: 0, to: audioSamples.count, by: step) {
+            let segment = audioSamples[i..<min(i + step, audioSamples.count)]
+            let rms = sqrt(segment.map { $0 * $0 }.reduce(0, +) / Float(segment.count))
+            simplifiedSamples.append(rms)
+        }
+        
+        // 归一化到0-1范围
+        guard let maxSample = simplifiedSamples.max(), maxSample > 0 else { return nil }
+        let normalizedSamples = simplifiedSamples.map { $0 / maxSample }
+        
+        return normalizedSamples
+    }
+    
 }
