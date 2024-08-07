@@ -123,26 +123,22 @@ extension GXMessagesMenuAnimationDelegate: UIViewControllerTransitioningDelegate
 extension GXMessagesMenuAnimationDelegate {
     func presentViewAnimation(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let toVC = transitionContext.viewController(forKey: .to) as? GXMessagesCellPreviewController else { return }
-        toVC.view.alpha = 0.0
-        toVC.preview.isHidden = true
         transitionContext.containerView.addSubview(toVC.view)
         
-        guard let preview = self.bubbleView?.snapshotView(afterScreenUpdates: false) else { return }
-        preview.frame = toVC.originalRect
-        preview.transform = self.transform ?? .identity
-        transitionContext.containerView.addSubview(preview)
+        toVC.backgroudView.alpha = 0.0
+        toVC.preview.frame = toVC.originalRect
+        toVC.preview.transform = self.transform ?? .identity
+        toVC.tableView.transform = .init(scaleX: 0.1, y: 0.1)
+        self.bubbleView?.isHidden = true
+
         var transform: CGAffineTransform = .identity
         transform = transform.translatedBy(x: 0, y: (toVC.currentRect.minY - toVC.originalRect.minY))
-        self.bubbleView?.isHidden = true
         
-        toVC.tableView.transform = .init(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: self.transitionDuration(using: transitionContext)) {
+            toVC.backgroudView.alpha = 1.0
             toVC.tableView.transform = .identity
-            preview.transform = transform
-            toVC.view.alpha = 1.0
+            toVC.preview.transform = transform
         } completion: { (finished) in
-            preview.removeFromSuperview()
-            toVC.preview.isHidden = false
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }

@@ -30,7 +30,7 @@ public class GXMessagesCellPreviewController: UIViewController {
         return animationDelegate
     }()
     
-    private lazy var backgroudView: UIVisualEffectView = {
+    public lazy var backgroudView: UIVisualEffectView = {
         let blurEffect: UIBlurEffect = UIBlurEffect(style: .light)
         let view = UIVisualEffectView(effect: blurEffect)
         view.frame = self.view.bounds
@@ -164,20 +164,31 @@ extension GXMessagesCellPreviewController: UIGestureRecognizerDelegate {
         let bottomHeight = tableHeight + self.lineSpacing * 2
         let safeAreaInsets = self.view.currentWindow()?.safeAreaInsets ?? .zero
         let bottomTop = self.view.frame.height - bottomHeight - safeAreaInsets.bottom
-        let allHeight = bottomHeight + self.currentRect.height
+        let allHeight = bottomHeight + self.originalRect.height
         let viewHeight = self.view.frame.height - safeAreaInsets.top - safeAreaInsets.bottom
-        if self.originalRect.maxY > bottomTop {
+
+        var tableTop: CGFloat = 0
+        if allHeight < viewHeight {
             self.currentRect = self.originalRect
-            self.currentRect.origin.y = bottomTop - self.originalRect.height
-        }
-        else if allHeight < viewHeight && self.originalRect.minY < safeAreaInsets.top {
-            self.currentRect = self.originalRect
-            self.currentRect.origin.y = safeAreaInsets.top
+            if self.originalRect.minY < safeAreaInsets.top {
+                self.currentRect.origin.y = safeAreaInsets.top
+            }
+            else if self.originalRect.maxY > bottomTop {
+                self.currentRect.origin.y = bottomTop - self.originalRect.height
+            }
+            tableTop = self.currentRect.maxY + self.lineSpacing - 4.0
         }
         else {
             self.currentRect = self.originalRect
+            if viewHeight > self.originalRect.height {
+                self.currentRect.origin.y = safeAreaInsets.top
+            }
+            else {
+                self.currentRect.origin.y = self.view.frame.height - self.originalRect.height - safeAreaInsets.bottom
+            }
+            tableTop = bottomTop
         }
-        let tableTop = self.currentRect.maxY + self.lineSpacing - 4.0
+        
         let hookWidth = GXCHATC.bubbleLeadingInsets.left - GXCHATC.bubbleLeadingInsets.right
         if self.messageData.gx_messageStatus == .send {
             let left = self.originalRect.maxX - self.tableWidth - hookWidth
