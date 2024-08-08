@@ -9,7 +9,7 @@ import UIKit
 import Reusable
 
 public class GXMessagesCellPreviewController: UIViewController {
-    private let lineSpacing: CGFloat = 10.0
+    private let lineSpacing: CGFloat = 6.0
     private let headerHeight: CGFloat = 8.0
     private let tableWidth: CGFloat = SCREEN_WIDTH/2
     private let itemHeight: CGFloat = 44.0
@@ -176,7 +176,7 @@ extension GXMessagesCellPreviewController: UIGestureRecognizerDelegate {
             else if self.originalRect.maxY > bottomTop {
                 self.currentRect.origin.y = bottomTop - self.originalRect.height
             }
-            tableTop = self.currentRect.maxY + self.lineSpacing - 4.0
+            tableTop = self.currentRect.maxY + self.lineSpacing
         }
         else {
             self.currentRect = self.originalRect
