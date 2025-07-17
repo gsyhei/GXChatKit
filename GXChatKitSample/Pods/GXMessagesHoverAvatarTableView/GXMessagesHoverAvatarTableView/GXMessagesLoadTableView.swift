@@ -23,9 +23,9 @@ open class GXMessagesLoadTableView: UITableView {
             imageView.image = image
             imageView.clipsToBounds = true
             if #available(iOS 13.0, *) {
-                imageView.contentScaleFactor =  self.window?.windowScene?.screen.scale ?? 2.0
+                imageView.contentScaleFactor = self.window?.windowScene?.screen.scale ?? 2.0
             } else {
-                imageView.contentScaleFactor =  UIScreen.main.scale
+                imageView.contentScaleFactor = UIScreen.main.scale
             }
             self.backgroundView = imageView
             self.backgroundView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
